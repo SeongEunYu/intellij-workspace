@@ -1,0 +1,757 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.argonet.r2rims.core.mapper.FundingCntcMapper">
+
+  <sql id="pageHeader">SELECT * FROM ( SELECT * FROM (</sql>
+  <sql id="pageFooter"><![CDATA[) WHERE RN  <=  (#{ps} + #{ct})) a  WHERE a.RN > #{ps}]]></sql>
+  <sql id="nvlifnull"><if test="_databaseId == 'oracle' ">NVL</if><if test="_databaseId == 'mysql' ">IFNULL</if></sql>
+  <sql id="prefixToDate"><if test="_databaseId == 'oracle' ">TO_DATE(</if><if test="_databaseId == 'mysql' ">STR_TO_DATE(</if></sql>
+  <sql id="postfixToDate"><if test="_databaseId == 'oracle' ">, 'YYYY-MM-DD')</if><if test="_databaseId == 'mysql' ">, '%Y-%m-%d')</if></sql>
+  <sql id="sysdateNow"><if test="_databaseId == 'oracle' ">SYSDATE</if><if test="_databaseId == 'mysql' ">now()</if></sql>
+
+	<select id="findOverallList" resultType="kr.co.argonet.r2rims.core.vo.FundingVo">
+		SELECT
+			TA.project_id erpId,
+			TA.start_date rschCmcmYm,
+			TA.end_date rschEndYm,
+			TA.project_name rschSbjtNm,
+			TA.project_code agcSbjtNo,
+			DECODE(TA.prjno, null, TA.project_code, TA.prjno) sbjtNo,
+			cust_name rsrcctSpptAgcNm,
+			TA.project_status_code apprDvsCd,
+			TA.project_pmnum userId,
+			TO_DATE(TA.last_update_date, 'YYYYMMDD') modDate
+		FROM CBO_PA_CONTRACT_MST_NOTE_V TA
+		<where>
+			TA.project_id IS NOT NULL
+			AND	TA.last_update_date >= #{startDate}
+			<if test='endDate != null and endDate != ""'>
+			<![CDATA[
+			AND	TA.last_update_date <= #{endDate}
+			]]>
+			</if>
+			<if test='is_completed != null and is_completed != ""'>
+			AND TA.is_completed = #{is_completed}
+			</if>
+			<if test='project_code != null and project_code != ""'>
+			AND TA.project_code = #{project_code}
+			</if>
+			<if test='project_name != null and project_name != ""'>
+			AND REGEXP_REPLACE(LOWER(TA.project_name),'[^a-z,A-Z,0-9,ㄱ-ㅎ,가-힣]','') LIKE '%'||REGEXP_REPLACE(LOWER(#{project_name}),'[^a-z,A-Z,0-9,ㄱ-ㅎ,가-힣]','')||'%'
+			</if>
+			<if test='project_status_code != null and project_status_code != ""'>
+			AND TA.project_status_code = #{project_status_code}
+			</if>
+			<if test='project_pm != null and project_pm != ""'>
+			AND TA.project_pm = #{project_pm}
+			</if>
+			<if test='project_pmnum != null and project_pmnum != ""'>
+			AND TA.project_pmnum = #{project_pmnum}
+			</if>
+		</where>
+	</select>
+	<select id="findTaskList" resultType="kr.co.argonet.r2rims.core.vo.FundingVo">
+		SELECT 
+			TA.task_id erpId, 
+			TA.start_date rschCmcmYm, 
+			TA.end_date rschEndYm, 
+			TB.project_name rschSbjtNm, 
+			TC.project_code agcSbjtNo, 
+			DECODE(TC.prjno, null, TC.project_code, TC.prjno) sbjtNo,
+			TC.cust_name rsrcctSpptAgcNm,
+			TA.project_status_code apprDvsCd, 
+			TO_DATE(TA.last_update_date, 'YYYYMMDD') modDate 
+		FROM 
+			CBO_PA_TASK_CON_MST_NOTE_V TA 
+			LEFT OUTER JOIN CBO_PA_TASK_BUDGET_NOTE_V TB ON TB.task_id = TA.task_id
+			LEFT OUTER JOIN CBO_PA_CONTRACT_MST_NOTE_V TC ON TC.project_id=TA.project_id 
+		<where>
+			TA.task_id IS NOT NULL 
+			AND TA.task_num != '0Z' AND TA.task_num != 'OZ' 
+			AND	TA.last_update_date >= #{startDate} 
+			<if test='endDate != null and endDate != ""'>
+			<![CDATA[
+			AND	TA.last_update_date <= #{endDate}
+			]]>
+			</if>
+			<if test='is_completed != null and is_completed != ""'>
+			AND TA.is_completed = #{is_completed}
+			</if>
+			<if test='project_code != null and project_code != ""'>
+			AND TC.project_code = #{project_code}
+			</if>
+			<if test='project_name != null and project_name != ""'>
+			AND REGEXP_REPLACE(LOWER(TB.project_name),'[^a-z,A-Z,0-9,ㄱ-ㅎ,가-힣]','') LIKE '%'||REGEXP_REPLACE(LOWER(#{project_name}),'[^a-z,A-Z,0-9,ㄱ-ㅎ,가-힣]','')||'%'
+			</if>
+			<if test='project_status_code != null and project_status_code != ""'>
+			AND TA.project_status_code = #{project_status_code}
+			</if>
+			<if test='task_manager != null and task_manager != ""'>
+			AND TA.task_manager = #{task_manager}
+			</if>
+		</where>
+	</select>
+		
+	<select id="findOverallFunding" resultType="kr.co.argonet.r2rims.core.vo.FundingVo">
+		SELECT 
+			project_id erp_id,
+			project_code agc_sbjt_no,
+			DECODE(TA.prjno, null, TA.project_code, TA.prjno) sbjt_no,
+			project_name rsch_sbjt_nm,
+			SUBSTR(start_date,0,6) rsch_cmcm_ym,
+			SUBSTR(end_date,0,6) rsch_end_ym,
+			SUBSTR(start_date,0,4) rsch_cmcm_year,
+			SUBSTR(end_date,0,4) rsch_end_year,
+			SUBSTR(start_date,5,2) rsch_cmcm_month,
+			SUBSTR(end_date,5,2) rsch_end_month,
+			cust_name rsrcct_sppt_agc_nm,
+           	class_category cpt_gov_offic_nm,
+			funds_support rsrcct_sppt_dvs_cd,
+			business_name biz_nm,
+			research_part rsch_sbjt_stdy_sphe_cd,
+			DECODE(attribute5, '다년도', '1', '단년도', '2', null) mny_yr_sbjt_yn, 
+			project_status_code apprDvsCd, 
+			project_pm korNm, 
+			project_pmnum user_id 
+		FROM CBO_PA_CONTRACT_MST_NOTE_V TA
+		WHERE 
+			TA.project_id IS NOT NULL 
+			AND TA.project_id = #{erpId}
+	</select>
+	<select id="findOverallFundingParti" resultType="kr.co.argonet.r2rims.core.vo.FundingPartiVo">
+		SELECT * 
+		FROM 
+			(
+			SELECT 
+				header_id seq_parti, 
+				SUBSTRB(person_name, 0, 29) prtcpnt_nm, 
+				employee_number prtcpnt_id,
+				org blng_agc_nm,
+				DECODE(labor_type, '연구책임자', '1', '공동참여자', '2', '연구보조원', '3', '서브책임자', '4', null) tpi_dvs_cd,
+				SUBSTR(start_date, 0, 6) tpi_stt_ym,
+				SUBSTR(end_date, 0, 6) tpi_end_ym,
+				SUBSTR(start_date, 0, 4) tpi_stt_year,
+				SUBSTR(end_date, 0, 4) tpi_end_year,
+				SUBSTR(start_date, 5, 2) tpi_stt_month,
+				SUBSTR(end_date, 5, 2) tpi_end_month,
+				TO_DATE(creation_date, 'YYYYMMDD') reg_date, 
+				RANK() OVER(PARTITION BY employee_number ORDER BY creation_date DESC, header_id DESC) RN 
+			FROM 
+				CBO_PA_LABOR_NOTE_V 
+			WHERE 
+				project_id IS NOT NULL 
+				AND project_id = #{erpId}
+			) 
+		WHERE RN=1 
+		ORDER BY prtcpnt_nm, prtcpnt_id 
+	</select>
+	<select id="findOverallFundingDetail" resultType="kr.co.argonet.r2rims.core.vo.FundingDetailVo">
+		SELECT 
+			TA.contract_id erp_id,
+			TA.contract_year rsrcct_cont_yr,
+			TA.cur_rnd_amount tot_rsrcct,
+			TA.rnd_amount prty_rsrcct,
+			TA.overhead_amount indrfee,
+			TA.in_fund sclgrnd_corr_fund,
+			TA.out_fund schout_corr_fund,
+			TA.labor_sch asst_rschr_cnt,
+			TO_DATE(TA.creation_date, 'YYYYMMDD') reg_date,
+			TO_DATE(TA.last_update_date, 'YYYYMMDD') mod_date,
+			TA.budget_amount budgetAmount 
+		FROM CBO_PA_BUDGET_NOTE_V TA
+		WHERE
+			TA.project_id IS NOT NULL
+			AND	TA.project_id = #{erpId}
+	</select>
+
+	<select id="findTaskFunding" resultType="kr.co.argonet.r2rims.core.vo.FundingVo">
+		SELECT
+			TA.task_id erp_id,
+			(SELECT project_name FROM CBO_PA_TASK_BUDGET_NOTE_V WHERE task_id = TA.task_id) rsch_sbjt_nm,
+			SUBSTR(TA.start_date, 0, 6) rsch_cmcm_ym,
+			SUBSTR(TA.end_date, 0, 6) rsch_end_ym,
+			SUBSTR(TA.start_date,0,4) rsch_cmcm_year,
+			SUBSTR(TA.end_date,0,4) rsch_end_year,
+			SUBSTR(TA.start_date,5,2) rsch_cmcm_month,
+			SUBSTR(TA.end_date,5,2) rsch_end_month,
+			TB.project_code agc_sbjt_no, 
+			DECODE(TB.prjno, null, TB.project_code, TB.prjno) sbjt_no, 
+			TB.cust_name rsrcct_sppt_agc_nm, 
+			TB.funds_support rsrcct_sppt_dvs_cd, 
+			TB.business_name biz_nm, 
+			TB.research_part rsch_sbjt_stdy_sphe_cd, 
+			DECODE(TB.attribute5, '다년도', '1', '단년도', '2', null) mny_yr_sbjt_yn, 
+			TB.class_category cpt_gov_offic_nm, 
+			TA.project_status_code apprDvsCd, 
+			TA.task_manager korNm, 
+			TA.task_manager_emp_no user_id, 
+			TA.task_num taskNum 
+		FROM 
+			CBO_PA_TASK_CON_MST_NOTE_V TA 
+			LEFT JOIN CBO_PA_CONTRACT_MST_NOTE_V TB ON TA.project_code = TB.project_code 
+		WHERE 
+			TA.task_id IS NOT NULL
+			AND	TA.task_id = #{erpId}
+			<if test='project_code != null and project_code != ""'>
+			AND TB.project_code = #{project_code}
+			</if>
+	</select>
+	<select id="findTaskFundingParti" resultType="kr.co.argonet.r2rims.core.vo.FundingPartiVo">
+		SELECT *
+		FROM
+			(
+			SELECT
+				header_id seq_parti,
+				SUBSTRB(person_name, 0, 29) prtcpnt_nm,
+				employee_number prtcpnt_id,
+				org blng_agc_nm,
+				DECODE(labor_type, '연구책임자', '1', '공동참여자', '2', '연구보조원', '3', '서브책임자', '4', null) tpi_dvs_cd,
+				SUBSTR(start_date,0,6) tpi_stt_ym,
+				SUBSTR(end_date,0,6) tpi_end_ym,
+				SUBSTR(start_date,0,4) tpi_stt_year,
+				SUBSTR(end_date,0,4) tpi_end_year,
+				SUBSTR(start_date,5,2) tpi_stt_month,
+				SUBSTR(end_date,5,2) tpi_end_month,
+				TO_DATE(creation_date, 'YYYYMMDD') reg_date,
+				RANK() OVER(PARTITION BY employee_number ORDER BY creation_date DESC, header_id DESC) RN
+			FROM
+				CBO_PA_TASK_LABOR_NOTE_V
+			WHERE
+				task_id IS NOT NULL
+				AND	task_id = #{erpId}
+			)
+		WHERE RN=1
+		ORDER BY prtcpnt_nm, prtcpnt_id
+	</select>
+	<select id="findTaskFundingDetail" resultType="kr.co.argonet.r2rims.core.vo.FundingDetailVo">
+		SELECT
+			TA.task_id erp_id,
+			(SELECT contract_year FROM CBO_PA_BUDGET_NOTE_V WHERE project_id = TA.project_id GROUP BY contract_year) rsrcct_cont_yr,
+			TA.row_cost tot_rsrcct
+		FROM
+			CBO_PA_TASK_BUDGET_NOTE_V TA
+		WHERE
+			TA.task_id IS NOT NULL
+			AND	TA.task_id = #{erpId}
+	</select>
+
+	<update id="updateOverallStatus">
+		UPDATE CBO_PA_CONTRACT_MST_NOTE_V
+		SET is_completed = 'Y'
+		WHERE project_id IN
+		<foreach item="erpId" collection="erpIds" open="(" close=")" separator=",">
+			#{erpId}
+		</foreach>
+	</update>
+	<update id="updateTaskStatus">
+		UPDATE CBO_PA_TASK_CON_MST_NOTE_V
+		SET is_completed = 'Y'
+		WHERE task_id IN
+		<foreach item="erpId" collection="erpIds" open="(" close=")" separator=",">
+			#{erpId}
+		</foreach>
+	</update>
+
+	<select id="findFunding" resultType="kr.co.argonet.r2rims.core.vo.FundingVo">
+		SELECT TA.*
+		FROM RI_FUNDING TA
+		WHERE 1 = 1
+		AND   nvl(TA.del_dvs_cd, 'N') != 'Y'
+		AND	  TA.ERP_ID = #{erp_id}
+		AND   TA.OVERALL_FLAG = DECODE(#{gubun},'TOT','T','TASK', 'S','T')
+	</select>
+	<select id="findFundingParti" resultType="kr.co.argonet.r2rims.core.vo.FundingPartiVo">
+		SELECT TA.*
+		FROM RI_FUNDING_PARTI TA
+		WHERE 1 = 1
+		AND   nvl(TA.del_dvs_cd, 'N') != 'Y'
+		AND	  TA.funding_id = (select funding_id from ri_funding where erp_id =   #{erp_id} AND   nvl(del_dvs_cd, 'N') != 'Y' AND overall_flag = DECODE(#{gubun},'TOT','T','TASK', 'S','T')   )
+		ORDER BY PRTCPNT_NM ASC
+	</select>
+	<select id="findFundingDetail" resultType="kr.co.argonet.r2rims.core.vo.FundingDetailVo">
+		SELECT TA.*
+		FROM RI_FUNDING_DETAIL TA
+		WHERE 1 = 1
+		AND   nvl(TA.del_dvs_cd, 'N') != 'Y'
+		AND	  TA.funding_id = (select funding_id from ri_funding where erp_id =   #{erp_id} AND   nvl(del_dvs_cd, 'N') != 'Y' AND overall_flag = DECODE(#{gubun},'TOT','T','TASK', 'S','T')   )
+	</select>
+
+
+	<!--
+	<insert id="addFunding">
+		INSERT INTO
+			RI_FUNDING
+			(
+			funding_id, 		user_id, 				rsch_cmcm_ym, 			rsch_end_ym, 		rsrcct_sppt_dvs_cd,
+			rsch_sbjt_nm, 		sbjt_no, 				rsrcct_sppt_agc_nm, 	biz_nm, 			rsch_sbjt_stdy_sphe_cd,
+			mny_yr_sbjt_yn, 	blng_univ_cd, 			blng_univ_nm, 			cpt_gov_offic_nm, 	reg_user_id,
+			reg_date, 			mod_user_id, 			mod_date ,				 	agc_sbjt_no,
+			overall_flag,		erp_id
+			)
+		VALUES
+			(
+			<if test="_databaseId == 'oracle' ">SEQ_RI_FUNDING.NEXTVAL,</if>, 		#{sess_user.USER_ID}, 	#{rsch_cmcm_ym}, 		#{rsch_end_ym}, 		#{rsrcct_sppt_dvs_cd},
+			#{rsch_sbjt_nm}, 	DECODE(#{sbjt_no}, '', 'TEMP-'||#{funding_id},	#{sbjt_no}),	#{rsrcct_sppt_agc_nm}, 	#{biz_nm}, 			#{rsch_sbjt_stdy_sphe_cd},
+			#{mny_yr_sbjt_yn}, 	#{blng_univ_cd}, 		#{blng_univ_nm}, 		#{cpt_gov_offic_nm},	#{login_user},
+			SYSDATE, 			#{login_user},			SYSDATE , 				 #{agc_sbjt_no},
+			#{overall_flag},				#{erp_id}
+			)
+	</insert>
+	<insert id="addFundingParti">
+		INSERT INTO
+			RI_FUNDING_PARTI
+			(
+			funding_id, seq_parti, prtcpnt_id, prtcpnt_nm, tpi_dvs_cd,
+			blng_agc_nm, tpi_rate, reg_user_id,
+			reg_date, mod_user_id, mod_date, tpi_stt_ym, tpi_end_ym,
+			pcn_rschr_reg_no, erp_id
+			)
+		VALUES
+			(
+			#{funding_id}, ((SELECT NVL(MAX(seq_parti), 0) seq_parti FROM RI_FUNDING_PARTI WHERE funding_id = #{funding_id})+1), #{prtcpnt_id}, #{prtcpnt_nm}, #{tpi_dvs_cd},
+			#{blng_agc_nm}, #{tpi_rate}, #{sitter_id},
+			SYSDATE, #{sitter_id}, SYSDATE, #{tpi_stt_ym}, #{tpi_end_ym},
+			#{pcn_rschr_reg_no},#{header_id}
+			)
+	</insert>
+	<insert id="addFundingDetail">
+		INSERT INTO
+			RI_FUNDING_DETAIL
+			(
+			funding_id, seq_funding, rsrcct_cont_yr, tot_rsrcct, prty_rsrcct,
+			indrfee, sclgrnd_corr_fund, schout_corr_fund,	asso_rschr_cnt, asst_rschr_cnt,
+			reg_user_id, reg_date, mod_user_id, mod_date , erp_id
+		<if test='appr_dvs_cd != null and appr_dvs_cd != ""'>
+		<isNotNull property="appr_dvs_cd" >
+			<isNotEmpty property="appr_dvs_cd">
+				, appr_dvs_cd,	appr_rtrn_cncl_rsn_cntn
+				<isEqual property="appr_dvs_cd" compareValue="3">
+				, appr_date
+				</isEqual>
+				<isEqual property="appr_dvs_cd" compareValue="4">
+				 , appr_date
+				</isEqual>
+				<isEqual property="appr_dvs_cd" compareValue="5">
+				 , appr_cncl_date
+				</isEqual>
+			</isNotEmpty>
+		</isNotNull>
+			)
+		VALUES
+			(
+			#{funding_id}, ((SELECT NVL(MAX(seq_funding), 0) seq_funding FROM RI_FUNDING_DETAIL WHERE funding_id = #{funding_id})+1),	#{rsrcct_cont_yr}, #{tot_rsrcct},	#{prty_rsrcct},
+			#{indrfee}, #{sclgrnd_corr_fund}, #{schout_corr_fund},	#{asso_rschr_cnt}, #{asst_rschr_cnt},
+			#{sitter_id}, SYSDATE, #{sitter_id}, SYSDATE, #{contract_id}
+		<isNotNull property="appr_dvs_cd" >
+			<isNotEmpty property="appr_dvs_cd">
+				, #{appr_dvs_cd}, #{appr_rtrn_cncl_rsn_cntn}
+				<isEqual property="appr_dvs_cd" compareValue="3">
+				, SYSDATE
+				</isEqual>
+				<isEqual property="appr_dvs_cd" compareValue="4">
+				, SYSDATE
+				</isEqual>
+				<isEqual property="appr_dvs_cd" compareValue="5">
+				, SYSDATE
+				</isEqual>
+			</isNotEmpty>
+		</isNotNull>
+			)
+	</insert>
+
+
+	<update id="modifyFunding" parameterClass="map">
+		<![CDATA[
+		UPDATE
+			RI_FUNDING
+		SET
+			rsch_cmcm_ym 			= #rsch_cmcm_ym#,
+			rsch_end_ym 			= #rsch_end_ym#,
+			rsrcct_sppt_dvs_cd 		= #rsrcct_sppt_dvs_cd#,
+			rsch_sbjt_nm 			= #rsch_sbjt_nm#,
+			sbjt_no 				= DECODE(#sbjt_no#, '', 'TEMP-'||#funding_id#,	#sbjt_no#),
+			rsrcct_sppt_agc_nm 		= #rsrcct_sppt_agc_nm#,
+			biz_nm 					= #biz_nm#,
+			rsch_sbjt_stdy_sphe_cd 	= #rsch_sbjt_stdy_sphe_cd#,
+			mny_yr_sbjt_yn 			= #mny_yr_sbjt_yn#,
+			cpt_gov_offic_nm		= #cpt_gov_offic_nm#,
+			blng_univ_cd			= #blng_univ_cd#,
+			mod_user_id 			= #login_user#,
+			mod_date 				= SYSDATE ,
+			appr_rtrn_cncl_rsn_cntn	= #appr_rtrn_cncl_rsn_cntn#,
+			agc_sbjt_no				= #agc_sbjt_no#,
+			is_fixed				= #is_fixed#
+		]]>
+			<isNotEmpty property="overall_flag">
+			  ,overall_flag = #overall_flag#
+			</isNotEmpty>
+		WHERE
+			funding_id = #funding_id#
+	</update>
+
+	<update id="removeParti" parameterClass="map">
+		<![CDATA[
+		DELETE  RI_FUNDING_PARTI WHERE funding_id = #funding_id#
+		]]>
+	</update>
+
+	<update id="removeDetail" parameterClass="map">
+		<![CDATA[
+		DELETE RI_FUNDING_DETAIL WHERE funding_id = #funding_id#
+		]]>
+	</update>
+
+	<update id="modifyParti" parameterClass="map">
+		<![CDATA[
+		UPDATE
+			RI_FUNDING_PARTI
+		SET
+			prtcpnt_id = #prtcpnt_id#,
+			prtcpnt_nm = #prtcpnt_nm#,
+			tpi_dvs_cd = #tpi_dvs_cd#,
+			blng_agc_nm = #blng_agc_nm#,
+			tpi_rate = #tpi_rate#,
+			del_dvs_cd = 'N',
+			mod_user_id = #sitter_id#,
+			mod_date = SYSDATE,
+			tpi_stt_ym = #tpi_stt_ym#,
+			tpi_end_ym = #tpi_end_ym#,
+			pcn_rschr_reg_no = #pcn_rschr_reg_no#
+		WHERE
+			funding_id = #funding_id# AND
+			seq_parti = #seq_parti#
+		]]>
+	</update>
+
+	<update id="modifyDetail" parameterClass="map">
+		<![CDATA[
+		UPDATE
+			RI_FUNDING_DETAIL
+		SET
+			rsrcct_cont_yr 			= #rsrcct_cont_yr#,
+			tot_rsrcct 				= #tot_rsrcct#,
+			prty_rsrcct 			= #prty_rsrcct#,
+			indrfee 				= #indrfee#,
+			sclgrnd_corr_fund 		= #sclgrnd_corr_fund#,
+			schout_corr_fund 		= #schout_corr_fund#,
+			del_dvs_cd				= 'N',
+			asso_rschr_cnt 			= #asso_rschr_cnt#,
+			asst_rschr_cnt 			= #asst_rschr_cnt#,
+			mod_user_id 			= #sitter_id#,
+			mod_date 				= SYSDATE
+		]]>
+		<isNotNull property="appr_rtrn_cncl_rsn_cntn" >
+			<isNotEmpty property="appr_rtrn_cncl_rsn_cntn">
+				, appr_rtrn_cncl_rsn_cntn = #appr_rtrn_cncl_rsn_cntn#
+			</isNotEmpty>
+		</isNotNull>
+		<isNotNull property="appr_dvs_cd" >
+			<isNotEmpty property="appr_dvs_cd">
+				, appr_dvs_cd = #appr_dvs_cd#
+				<isEqual property="appr_dvs_cd" compareValue="1">
+				, appr_date = NULL
+				, appr_cncl_date = NULL
+				</isEqual>
+				<isEqual property="appr_dvs_cd" compareValue="2">
+				, appr_date = NULL
+				, appr_cncl_date = NULL
+				</isEqual>
+				<isEqual property="appr_dvs_cd" compareValue="3">
+				, appr_date = SYSDATE
+				, appr_cncl_date = NULL
+				</isEqual>
+				<isEqual property="appr_dvs_cd" compareValue="4">
+				, appr_date = SYSDATE
+				, appr_cncl_date = NULL
+				</isEqual>
+				<isEqual property="appr_dvs_cd" compareValue="5">
+				, appr_date = NULL
+				, appr_cncl_date = SYSDATE
+				</isEqual>
+			</isNotEmpty>
+		</isNotNull>
+		<![CDATA[
+		WHERE
+			funding_id = #funding_id# AND
+			seq_funding = #seq_funding#
+		]]>
+	</update>
+	-->
+
+	<select id="findContractMstNoteVByPorjectId" resultType="kr.co.argonet.r2rims.erp.vo.CboPaContractMstNoteVo">
+		select * from CBO_PA_CONTRACT_MST_NOTE_V where PROJECT_ID = #{projectId ,jdbcType=VARCHAR}
+	</select>
+
+	<insert id="addCboPaContractMstNoteV">
+	    insert into CBO_PA_CONTRACT_MST_NOTE_V (
+									    		 ID,						 PROJECT_ID,				 PROJECT_CODE,
+												 PROJECT_PM,				 PRJNO,					     PROJECT_NAME,
+												 START_DATE,				 END_DATE,				     CUST_NAME,
+												 CLASS_CATEGORY,			 BUSINESS_NAME,			     ATTRIBUTE5,
+												 TECH_CATEGORY,			     TECH_CATEGORY_NAME,		 RESEARCH_PART,
+												 FUNDS_SUPPORT,				 PROJECT_STATUS_CODE,		 PROJECT_PMNUM,
+												 IS_COMPLETED, 				 CREATION_DATE,				 LAST_UPDATE_DATE
+	    	 								   )
+									    values(
+									    		SEQ_ERP_FUND.nextval,		 							#{projectId ,jdbcType=VARCHAR},								#{projectCode ,jdbcType=VARCHAR},
+									    		#{projectPm ,jdbcType=VARCHAR},				 			#{prjno ,jdbcType=VARCHAR},									#{projectName ,jdbcType=VARCHAR},
+									    		replace(#{startDate ,jdbcType=VARCHAR},'/',''),			replace(#{endDate ,jdbcType=VARCHAR},'/',''),				#{custName ,jdbcType=VARCHAR} ,
+									    		#{classCategory ,jdbcType=VARCHAR},			            #{businessName ,jdbcType=VARCHAR},			                #{attribute5 ,jdbcType=VARCHAR},
+									    		#{techCategory ,jdbcType=VARCHAR},			            #{techCategoryName ,jdbcType=VARCHAR},		                #{researchPart ,jdbcType=VARCHAR},
+									    		#{fundsSupport ,jdbcType=VARCHAR},			            #{projectStatusCode ,jdbcType=VARCHAR},		                #{projectPmnum ,jdbcType=VARCHAR},
+									    		'N',						                            #{creationDate ,jdbcType=VARCHAR},			                #{lastUpdateDate ,jdbcType=VARCHAR}
+									          )
+	</insert>
+
+	<update id="updateCboPaContractMstNoteV">
+	    update CBO_PA_CONTRACT_MST_NOTE_V
+	      <set>
+	              PROJECT_CODE			= #{projectCode ,jdbcType=VARCHAR}
+				 ,PROJECT_PM			= #{projectPm ,jdbcType=VARCHAR}
+				 ,PRJNO					= #{prjno ,jdbcType=VARCHAR}
+				 ,PROJECT_NAME          = #{projectName ,jdbcType=VARCHAR}
+				 ,START_DATE			= replace(#{startDate ,jdbcType=VARCHAR},'/','')
+				 ,END_DATE			    = replace(#{endDate ,jdbcType=VARCHAR},'/','')
+				 ,CUST_NAME             = #{custName ,jdbcType=VARCHAR}
+				 ,CLASS_CATEGORY		= #{classCategory ,jdbcType=VARCHAR}
+				 ,BUSINESS_NAME			= #{businessName ,jdbcType=VARCHAR}
+				 ,ATTRIBUTE5            = #{attribute5 ,jdbcType=VARCHAR}
+				 ,TECH_CATEGORY			= #{techCategory ,jdbcType=VARCHAR}
+				 ,TECH_CATEGORY_NAME	= #{techCategoryName ,jdbcType=VARCHAR}
+				 ,RESEARCH_PART			= #{researchPart ,jdbcType=VARCHAR}
+				 ,FUNDS_SUPPORT			= #{fundsSupport ,jdbcType=VARCHAR}
+				 ,PROJECT_STATUS_CODE	= #{projectStatusCode ,jdbcType=VARCHAR}
+				 ,PROJECT_PMNUM		    = #{projectPmnum ,jdbcType=VARCHAR}
+				 ,CREATION_DATE			= #{creationDate ,jdbcType=VARCHAR}
+				 ,LAST_UPDATE_DATE      = #{lastUpdateDate ,jdbcType=VARCHAR}
+				 ,IS_COMPLETED 			= case when IS_COMPLETED = 'N' then 'N' else 'U' end
+	      </set>
+	      where PROJECT_ID = #{projectId ,jdbcType=VARCHAR}
+	</update>
+
+	<select id="findLaborNoteVByHeaderId" resultType="kr.co.argonet.r2rims.erp.vo.CboPaLaborNoteVo">
+		select * from CBO_PA_LABOR_NOTE_V where HEADER_ID = #{headerId, jdbcType=VARCHAR}
+	</select>
+
+	<insert id="addCboPaLaborNoteV">
+	    insert into CBO_PA_LABOR_NOTE_V (
+										 ID,
+										 HEADER_ID,						PROJECT_ID,					PERSON_NAME,
+										 EMPLOYEE_NUMBER,				LABOR_TYPE,					ORG,
+										 GRADE,							SCHOLARSHIP,				CHECK_FLAG,
+										 INVITED_RATE,					START_DATE,					END_DATE,
+										 CREATION_DATE,					LAST_UPDATE_DATE,			IS_COMPLETED
+							    	   )
+							    values(
+							    		 (select max(ID) from CBO_PA_CONTRACT_MST_NOTE_V where  PROJECT_ID = #{projectId, jdbcType=VARCHAR}),
+										 #{headerId, jdbcType=VARCHAR},					#{projectId, jdbcType=VARCHAR},								#{personName, jdbcType=VARCHAR},
+										 #{employeeNumber, jdbcType=VARCHAR},			#{laborType, jdbcType=VARCHAR},								#{org, jdbcType=VARCHAR},
+										 #{grade, jdbcType=VARCHAR},					#{scholarship, jdbcType=VARCHAR},							#{checkFlag, jdbcType=VARCHAR},
+										 #{invitedRate, jdbcType=VARCHAR},				replace(#{startDate, jdbcType=VARCHAR},'/',''),				replace(#{endDate, jdbcType=VARCHAR},'/',''),
+										 #{creationDate, jdbcType=VARCHAR},				#{lastUpdateDate, jdbcType=VARCHAR},		'N'
+							    	  )
+	</insert>
+
+	<update id="updateCboPaLaborNoteV">
+	    update CBO_PA_LABOR_NOTE_V
+	    	<set>
+				 PROJECT_ID			=	#{projectId, jdbcType=VARCHAR}
+				,PERSON_NAME		=	#{personName, jdbcType=VARCHAR}
+				,EMPLOYEE_NUMBER	=	#{employeeNumber, jdbcType=VARCHAR}
+				,LABOR_TYPE			=	#{laborType, jdbcType=VARCHAR}
+				,ORG				=	#{org, jdbcType=VARCHAR}
+				,GRADE				=	#{grade, jdbcType=VARCHAR}
+				,SCHOLARSHIP		=	#{scholarship, jdbcType=VARCHAR}
+				,CHECK_FLAG			=	#{checkFlag, jdbcType=VARCHAR}
+				,INVITED_RATE		=	#{invitedRate, jdbcType=VARCHAR}
+				,START_DATE			=	replace(#{startDate, jdbcType=VARCHAR},'/','')
+				,END_DATE			=	replace(#{endDate, jdbcType=VARCHAR},'/','')
+				,CREATION_DATE		=	#{creationDate, jdbcType=VARCHAR}
+				,LAST_UPDATE_DATE	=	#{lastUpdateDate, jdbcType=VARCHAR}
+				,IS_COMPLETED 		=	case when IS_COMPLETED = 'N' then 'N' else 'U' end
+	    	</set>
+	    where HEADER_ID = #{headerId, jdbcType=VARCHAR}
+	</update>
+
+	<select id="findBudgetNoteVByContractId" resultType="kr.co.argonet.r2rims.erp.vo.CboPaLaborNoteVo">
+		select * from CBO_PA_BUDGET_NOTE_V where CONTRACT_ID = #{contractId , jdbcType=VARCHAR}
+	</select>
+
+	<insert id="addCboPaBudgetNoteV">
+	    insert into CBO_PA_BUDGET_NOTE_V (
+								    		 ID,
+								    		 CONTRACT_ID,				PROJECT_ID,					CONTRACT_YEAR,
+								    		 CUR_RND_AMOUNT,			RND_AMOUNT,					OVERHEAD_AMOUNT,
+								    		 IN_FUND,					OUT_FUND,					LABOR_SCH,
+											 BUDGET_AMOUNT,				CREATION_DATE,				LAST_UPDATE_DATE,
+											 IS_COMPLETED
+								    	   )
+								    values(
+								    		 (select max(ID) from CBO_PA_CONTRACT_MST_NOTE_V where  PROJECT_ID = #{projectId, jdbcType=VARCHAR}),
+								    		 #{contractId, jdbcType=VARCHAR},			#{projectId, jdbcType=VARCHAR},				#{contractYear, jdbcType=VARCHAR},
+								    		 #{curRndAmount, jdbcType=VARCHAR},			#{rndAmount, jdbcType=VARCHAR},				#{overheadAmount, jdbcType=VARCHAR},
+								    		 #{inFund, jdbcType=VARCHAR},				#{outFund, jdbcType=VARCHAR},				#{laborSch, jdbcType=VARCHAR},
+											 #{budgetAmount, jdbcType=VARCHAR},			#{creationDate, jdbcType=VARCHAR},			#{lastUpdateDate, jdbcType=VARCHAR},
+											 'N'
+								    	  )
+	</insert>
+
+	<update id="updateCboPaBudgetNoteV">
+	    update CBO_PA_BUDGET_NOTE_V
+	    	<set>
+				 PROJECT_ID			=	#{projectId, jdbcType=VARCHAR}
+				,CONTRACT_YEAR		=	#{contractYear, jdbcType=VARCHAR}
+				,CUR_RND_AMOUNT		=	#{curRndAmount, jdbcType=VARCHAR}
+				,RND_AMOUNT			=	#{rndAmount, jdbcType=VARCHAR}
+				,OVERHEAD_AMOUNT	=	#{overheadAmount, jdbcType=VARCHAR}
+				,IN_FUND			=	#{inFund, jdbcType=VARCHAR}
+				,OUT_FUND			=	#{outFund, jdbcType=VARCHAR}
+				,LABOR_SCH			=	#{laborSch, jdbcType=VARCHAR}
+				,BUDGET_AMOUNT		=	#{budgetAmount, jdbcType=VARCHAR}
+				,CREATION_DATE		=	#{creationDate, jdbcType=VARCHAR}
+				,LAST_UPDATE_DATE	=	#{lastUpdateDate, jdbcType=VARCHAR}
+				,IS_COMPLETED		=	case when IS_COMPLETED = 'N' then 'N' else 'U' end
+	    	</set>
+	     where CONTRACT_ID = #{contractId , jdbcType=VARCHAR}
+	</update>
+
+	<select id="findTaskConMstNoteVByTaskId" resultType="kr.co.argonet.r2rims.erp.vo.CboPaTaskConMstNoteVo">
+		select * from CBO_PA_TASK_CON_MST_NOTE_V where TASK_ID = #{taskId , jdbcType=VARCHAR}
+	</select>
+
+	<insert id="addCboPaTaskConMstNoteV">
+	    insert into CBO_PA_TASK_CON_MST_NOTE_V (
+												 ID,						PROJECT_ID,					TASK_ID,
+												 PROJECT_CODE,				TASK_NUM,					TASK_MANAGER,
+												 TASK_NAME,					TASK_MANAGER_EMP_NO,		PROJECT_STATUS_CODE,
+												 START_DATE,				END_DATE,					CREATE_DATE,
+												 LAST_UPDATE_DATE,			IS_COMPLETED
+									    	   )
+									    values(
+									    		SEQ_ERP_FUND.nextval,								#{projectId, jdbcType=VARCHAR},					#{taskId, jdbcType=VARCHAR},
+												#{projectCode, jdbcType=VARCHAR},					#{taskNum, jdbcType=VARCHAR},					#{taskManager, jdbcType=VARCHAR},
+												#{taskName, jdbcType=VARCHAR},						#{taskManagerEmpNo, jdbcType=VARCHAR},			#{projectStatusCode, jdbcType=VARCHAR},
+												replace(#{startDate , jdbcType=VARCHAR},'/',''),	replace(#{endDate , jdbcType=VARCHAR},'/',''),	#{createDate, jdbcType=VARCHAR},
+												#{lastUpdateDate, jdbcType=VARCHAR},				'N'
+									    	  )
+	</insert>
+
+	<update id="updateCboPaTaskConMstNoteV">
+	    update CBO_PA_TASK_CON_MST_NOTE_V
+	       <set>
+			 PROJECT_ID			    =	#{projectId, jdbcType=VARCHAR}
+			,PROJECT_CODE		    =	#{projectCode, jdbcType=VARCHAR}
+			,TASK_NUM			    =	#{taskNum, jdbcType=VARCHAR}
+			,TASK_MANAGER		    =	#{taskManager, jdbcType=VARCHAR}
+			,TASK_NAME			    =	#{taskName, jdbcType=VARCHAR}
+			,TASK_MANAGER_EMP_NO 	=   #{taskManagerEmpNo, jdbcType=VARCHAR}
+			,PROJECT_STATUS_CODE	=   #{projectStatusCode, jdbcType=VARCHAR}
+			,START_DATE			    =	replace(#{startDate , jdbcType=VARCHAR},'/','')
+			,END_DATE			    =	replace(#{endDate , jdbcType=VARCHAR},'/','')
+			,CREATE_DATE		    =	#{createDate, jdbcType=VARCHAR}
+			,LAST_UPDATE_DATE	    =	#{lastUpdateDate, jdbcType=VARCHAR}
+			,IS_COMPLETED		    =	case when IS_COMPLETED = 'N' then 'N' else 'U' end
+	       </set>
+	     where TASK_ID = #{taskId , jdbcType=VARCHAR}
+	</update>
+
+	<select id="findTaskLaborNoteVByHeaderId" resultType="kr.co.argonet.r2rims.erp.vo.CboPaTaskLaborNoteVo">
+		select * from CBO_PA_TASK_LABOR_NOTE_V where HEADER_ID = #{headerId, jdbcType=VARCHAR}
+	</select>
+
+	<insert id="addCboPaTaskLaborNoteV">
+	    insert into CBO_PA_TASK_LABOR_NOTE_V (
+												 ID,
+												 HEADER_ID,						PROJECT_ID,					TASK_ID,
+												 PERSON_NAME,					EMPLOYEE_NUMBER,			LABOR_TYPE,
+												 ORG,							GRADE,						SCHOLARSHIP,
+												 CHECK_FLAG,					INVITED_RATE,				START_DATE,
+												 END_DATE,						CREATION_DATE,				LAST_UPDATE_DATE,
+												 IS_COMPLETED
+									    	   )
+									    values(
+									    		 (select max(ID) from CBO_PA_TASK_CON_MST_NOTE_V where TASK_ID = #{taskId, jdbcType=VARCHAR}),
+												 #{headerId, jdbcType=VARCHAR},						#{projectId, jdbcType=VARCHAR},						#{taskId, jdbcType=VARCHAR},
+												 #{personName, jdbcType=VARCHAR},					#{employeeNumber, jdbcType=VARCHAR},				#{laborType, jdbcType=VARCHAR},
+												 #{org, jdbcType=VARCHAR},							#{grade, jdbcType=VARCHAR},							#{scholarship, jdbcType=VARCHAR},
+												 #{checkFlag, jdbcType=VARCHAR},					#{invitedRate, jdbcType=VARCHAR},					replace(#{startDate, jdbcType=VARCHAR},'/',''),
+												 replace(#{endDate, jdbcType=VARCHAR},'/',''),		#{creationDate, jdbcType=VARCHAR},					#{lastUpdateDate, jdbcType=VARCHAR},
+												 'N'
+									    	  )
+	</insert>
+
+	<update id="updateCboPaTaskLaborNoteV">
+	    update CBO_PA_TASK_LABOR_NOTE_V
+	        <set>
+				 PROJECT_ID			=	#{projectId, jdbcType=VARCHAR}
+				,TASK_ID			=	#{taskId, jdbcType=VARCHAR}
+				,PERSON_NAME		=	#{personName, jdbcType=VARCHAR}
+				,EMPLOYEE_NUMBER	=	#{employeeNumber, jdbcType=VARCHAR}
+				,LABOR_TYPE			=	#{laborType, jdbcType=VARCHAR}
+				,ORG				=	#{org, jdbcType=VARCHAR}
+				,GRADE				=	#{grade, jdbcType=VARCHAR}
+				,SCHOLARSHIP		=	#{scholarship, jdbcType=VARCHAR}
+				,CHECK_FLAG			=	#{checkFlag, jdbcType=VARCHAR}
+				,INVITED_RATE		=	#{invitedRate, jdbcType=VARCHAR}
+				,START_DATE			=	replace(#{startDate, jdbcType=VARCHAR},'/','')
+				,END_DATE			=	replace(#{endDate, jdbcType=VARCHAR},'/','')
+				,CREATION_DATE		=	#{creationDate, jdbcType=VARCHAR}
+				,LAST_UPDATE_DATE	=	#{lastUpdateDate, jdbcType=VARCHAR}
+				,IS_COMPLETED 		=	case when IS_COMPLETED = 'N' then 'N' else 'U' end
+	        </set>
+	       where HEADER_ID = #{headerId, jdbcType=VARCHAR}
+	</update>
+
+	<select id="findTaskBudgetNoteVByTaskId" resultType="kr.co.argonet.r2rims.erp.vo.CboPaTaskBudgetNoteVo">
+		select * from CBO_PA_TASK_BUDGET_NOTE_V where TASK_ID = #{taskId, jdbcType=VARCHAR}
+	</select>
+
+	<insert id="addCboPaTaskBudgetNoteV">
+	    insert into CBO_PA_TASK_BUDGET_NOTE_V (
+								    			ID,
+								    		  	PROJECT_ID,				TASK_ID,					PROJECT_CODE,
+												TASK_NUMBER,			PROJECT_NAME,				START_DATE,
+												END_DATE,				TASK_MANAGER,				ROW_COST,
+												LABOR_PROF,				LABOR_SCH,					IS_COMPLETED,
+												REG_DATE,				MOD_DATE
+								    	   	  )
+								      values(
+								    			(select max(ID) from CBO_PA_TASK_CON_MST_NOTE_V where TASK_ID = #{taskId, jdbcType=VARCHAR}),
+								    		  	#{projectId, jdbcType=VARCHAR},			#{taskId, jdbcType=VARCHAR},					#{projectCode, jdbcType=VARCHAR},
+												#{taskNumber, jdbcType=VARCHAR},		#{projectName, jdbcType=VARCHAR},				#{startDate, jdbcType=VARCHAR},
+												#{endDate, jdbcType=VARCHAR},			#{taskManager, jdbcType=VARCHAR},				#{rowCost, jdbcType=VARCHAR},
+												#{laborProf, jdbcType=VARCHAR},			#{laborSch, jdbcType=VARCHAR},					'N',
+												SYSDATE,				SYSDATE
+								    	     )
+	</insert>
+
+	<update id="updateCboPaTaskBudgetNoteV">
+	    update CBO_PA_TASK_BUDGET_NOTE_V
+	         <set>
+				 PROJECT_ID               =  #{projectId, jdbcType=VARCHAR}
+				,PROJECT_CODE             =  #{projectCode, jdbcType=VARCHAR}
+				,TASK_NUMBER              =  #{taskNumber, jdbcType=VARCHAR}
+				,PROJECT_NAME             =  #{projectName, jdbcType=VARCHAR}
+				,START_DATE               =  #{startDate, jdbcType=VARCHAR}
+				,END_DATE                 =  #{endDate, jdbcType=VARCHAR}
+				,TASK_MANAGER             =  #{taskManager, jdbcType=VARCHAR}
+				,ROW_COST                 =  #{rowCost, jdbcType=VARCHAR}
+				,LABOR_PROF               =  #{laborProf, jdbcType=VARCHAR}
+				,LABOR_SCH                =  #{laborSch, jdbcType=VARCHAR}
+				,IS_COMPLETED             =  case when IS_COMPLETED = 'N' then 'N' else 'U' end
+				,MOD_DATE		    	  =  SYSDATE
+	         </set>
+	      where TASK_ID = #{taskId, jdbcType=VARCHAR}
+	</update>
+
+	<select id="findTaskIdByProjectNameIsNull" resultType="java.lang.String">
+		select DISTINCT TA.TASK_ID from CBO_PA_TASK_CON_MST_NOTE_V TA
+		left outer join CBO_PA_TASK_BUDGET_NOTE_V TB on TB.TASK_ID = TA.TASK_ID
+		left outer join CBO_PA_CONTRACT_MST_NOTE_V TC on TC.PROJECT_ID = TA.PROJECT_ID
+		where TA.task_id IS NOT NULL
+	  	 and TA.TASK_NUM != '0Z' and TA.TASK_NUM != 'OZ'
+		 and TC.PROJECT_STATUS_CODE =  'APPROVED'
+         and TB.PROJECT_NAME is null
+	</select>
+
+</mapper>

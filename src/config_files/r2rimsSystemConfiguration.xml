@@ -1,0 +1,322 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+    <comment/>
+    <!--  Institution  -->
+    <entry key="inst">CAU</entry>
+    <entry key="inst.name">중앙대학교</entry>
+    <entry key="inst.city">Seoul</entry>
+    <entry key="inst.address">84 Heukseok-ro, Dongjak-gu</entry>
+    <entry key="inst.country">Republic of KOREA</entry>
+    <entry key="inst.postcode">06974</entry>
+    <entry key="inst.blng.agc.name">중앙대학교</entry>
+    <entry key="inst.blng.agc.code">06974</entry>
+    <entry key="inst.abrv">CAU</entry>
+    <entry key="inst.name.eng">CAU</entry>
+    <entry key="inst.name.eng.full">Chung-ang University</entry>
+    <entry key="inst.address.kor">서울특별시 동작구 흑석로 84</entry>
+    <entry key="inst.portal.url">http://rss.bwise.kr/rims/index/login.do</entry>
+
+    <entry key="system.admin.email">webmaster@cau.ac.kr</entry>
+    <entry key="system.admin.telno">02-820-6193</entry>
+
+    <!-- Mail Server -->
+    <entry key="mail.server">smtp.gmail.com</entry>
+    <entry key="mail.server.port">465</entry>
+    <entry key="mail.server.username">asdf</entry>
+    <entry key="mail.server.password">asdf</entry>
+    <!--<entry key="mail.server.username">rims</entry>-->
+    <entry key="mail.from.address">학술정보원 주제정보서비스팀;cau@gmail.com</entry>
+    <!--<entry key="mail.server.password">main1234</entry>-->
+    <!--<entry key="mail.from.address">학술정보개발팀;rims@kaist.ac.kr</entry>-->
+    <entry key="mail.smtp.socketFactory.port">465</entry>
+    <entry key="mail.smtp.socketFactory.class">javax.net.ssl.SSLSocketFactory</entry>
+    <entry key="mail.include.bcc.from.address">N</entry>
+
+    <!-- Navigation  -->
+    <entry key="navi.tabSize">10</entry>
+    <entry key="image.maxsize">1000</entry>
+    <entry key="navi.img.prevTab">/images/previous.gif</entry>
+    <entry key="navi.img.firstTab">/images/first.gif</entry>
+    <entry key="navi.img.width">15</entry>
+    <entry key="navi.img.height">15</entry>
+    <entry key="navi.img.nextTab">/images/next.gif</entry>
+    <entry key="navi.img.lastTab">/images/end.gif</entry>
+    <entry key="navi.listSize">10</entry>
+
+    <!-- Encoding used OS -->
+    <entry key="os.encoding">utf-8</entry>
+
+    <!-- File -->
+    <entry key="upload.file.path">/data/upload</entry>
+    <entry key="upload.file.maxsize">10000000</entry>
+    <entry key="upload.file.encoding">UTF-8</entry>
+    <entry key="download.file.url">http://143.248.103.115:8080/rims/servlet/download.do?fileid=</entry>
+    <entry key="resume.file.path">/data/upload/resume/</entry>
+    <entry key="file.download.allow.ip">143.248.118.80;143.248.118.33</entry>
+
+    <!-- Authority -->
+    <!-- <entry key="researcher.author.id">1</entry> -->
+    <entry key="researcher.author.id">17</entry>
+    <entry key="student.author.id">2</entry>
+
+    <!-- MainPage -->
+    <entry key="main.maxCount">5</entry>
+    <entry key="main.top.notice.service.at">Y</entry>
+
+    <!-- <entry key="user.intro.page"><![CDATA[/main/main.do?gubun=M]]></entry> -->
+    <entry key="user.intro.page"><![CDATA[/share/user/main.do]]></entry>
+    <entry key="dept.mgt.intro.page"><![CDATA[/main/main.do?gubun=M]]></entry>
+    <entry key="dept.nomgt.intro.page"><![CDATA[/main/main.do?gubun=M]]></entry>
+    <entry key="college.mgt.intro.page"><![CDATA[/main/main.do?gubun=M]]></entry>
+    <entry key="college.nomgt.intro.page"><![CDATA[/index/goAsRIMS.do?gubun=M]]></entry>
+    <entry key="admin.mgt.intro.page"><![CDATA[/main/main.do?gubun=M]]></entry>
+    <entry key="admin.nomgt.intro.page"><![CDATA[/main/main.do?gubun=M]]></entry>
+
+    <!-- DHTMLX 관련 -->
+    <entry key="dhtmlx.skin">terrace</entry>
+    <!--
+    <entry key="dhtmlx.skin">material</entry>
+     -->
+    <entry key="dhtmlx.grid.pagingSkin">bricks</entry>
+
+    <!-- Extract  -->
+    <entry key="article.extract.target">VIEW</entry>
+    <entry key="article.extract.scale">INT_RESULT</entry> <!-- INT_RESULT or RI_ARTICLE -->
+
+    <!-- RI_ARTICLE Table ABST_CNTN Column - DATA_TYPE -->
+    <entry key="article.abstract.datatype">CLOB</entry> <!-- or VARCHAR2 -->
+    <entry key="article.author.prtcpnt.name.lang">en</entry>
+
+    <entry key="article.solr.url">http://solr:8983/solr/rss_article</entry>
+
+    <!--<entry key="article.solr.url">http://work.argonet.co.kr:48983/solr/kaist_article</entry>-->
+    <entry key="article.pblcday.input.at">N</entry>
+    <entry key="article.merge.by.ut.at">N</entry>
+    <entry key="article.find.eid.by.doi.at">Y</entry>
+    <entry key="article.parti.posinm.at">Y</entry>
+    <entry key="conference.parti.posinm.at">Y</entry>
+
+    <entry key="out.edit.type">popup</entry>
+
+    <!-- Default Language en or ko or ja -->
+    <entry key="default.language">ko</entry>
+
+    <!--  Use Google Scholar Link -->
+    <entry key="exrims.google.use">Y</entry>
+
+    <!-- API Key from Contact System -->
+    <entry key="scopus.search.api.key">28ec2e3acaac741e01675acf785bed11</entry>
+    <entry key="scopus.search.view.url">http://www.scopus.com/inward/record.url?partnerID=HzOxMe3b</entry>
+
+    <entry key="kci.manage.at">N</entry>
+    <entry key="kci.open.api.key">99159000</entry>
+    <entry key="kci.search.view.url">https://www.kci.go.kr/kciportal/ci/sereArticleSearch/ciSereArtiView.kci</entry>
+
+    <entry key="wos.amr.username"></entry>
+    <entry key="wos.amr.password"></entry>
+    <entry key="wos.webservice.token">CAU_HG:Welcome@1</entry>
+    <entry key="wos.webservice.level">PREMIUM</entry> <!-- wos webservice level (LITE or PREMIUM) -->
+    <!--
+    <entry key="wos.amr.external.url">http://research.skku.edu/api/timescited</entry>
+     -->
+    <entry key="s2journal.api.url">http://s2journal.bwise.kr:8081/api/v1</entry>
+    <entry key="s2journal.api.key">81dcbf3137b5bef9251dbbff059b3d138602dab75dc338f17b1aee614ff35b4a</entry>
+    <entry key="s2journal.page.url">https://s2journal.bwise.kr/api/v1</entry>
+
+    <!-- IR set code -->
+    <entry key="inst.repo.name">KOASAS</entry>
+    <entry key="inst.repo.set.code.article">ART</entry>
+    <entry key="inst.repo.set.code.conference">CONF</entry>
+    <entry key="inst.repo.set.code.patent">PAT</entry>
+    <entry key="inst.repo.contributor.format">full_name</entry> <!-- 저자명 포맷 full_name : fullName > abbrName , all_name : abbrName[fullName]  -->
+
+
+    <!-- Solr search -->
+
+    <entry key="search.solr.url">http://solr:8983/solr/rss_researcher</entry>
+
+    <!--<entry key="search.solr.url">http://143.248.118.21:8983/solr/kaist_researcher</entry>-->
+    <entry key="search.solr.proximity">5</entry>
+
+    <!-- Sync Uri -->
+    <entry key="sync.user.uri">/sync/user.do</entry>
+    <entry key="sync.dept.uri">/sync/dept.do</entry>
+    <entry key="sync.patent.uri">/sync/patent.do</entry>
+    <!--
+    <entry key="sync.techtrans.uri">/sync/techtrans.do</entry>
+     -->
+    <entry key="sync.article.at">N</entry>
+    <entry key="sync.article.uri">/sync/articleNo.do</entry>
+    <entry key="sync.activity.uri">/sync/activity.do</entry>
+    <entry key="sync.award.uri">/sync/award.do</entry>
+    <entry key="sync.career.uri">/sync/career.do</entry>
+    <entry key="sync.degree.uri">/sync/degree.do</entry>
+    <entry key="sync.license.uri">/sync/license.do</entry>
+    <entry key="sync.funding.uri">/sync/funding.do</entry>
+
+    <!-- Schedule  -->
+    <!-- Researcher -->
+    <entry key="cron.sync.user.at">N</entry>
+    <entry key="cron.sync.user">0 0 04 * * ?</entry>
+    <!-- Funding -->
+    <entry key="cron.sync.funding.at">N</entry>
+    <entry key="cron.sync.funding">0 0 02 * * ?</entry>
+
+    <entry key="cron.sync.funding.byDate.at">N</entry>
+    <entry key="cron.sync.funding.byDate">0 0 02 * * ?</entry>
+
+    <entry key="cron.rawdata.update.at">N</entry>
+    <entry key="cron.rawdata.update">0 0 4 30 * ?</entry>
+
+    <entry key="cron.articleParti.blncAgcNm.update.at">N</entry>
+    <entry key="cron.articleParti.blncAgcNm.update">0 0 4 30 * ?</entry>
+
+    <!-- WOS Tc Update -->
+    <entry key="cron.tc.update.wos.at">N</entry>
+    <entry key="cron.tc.update.wos">0 30 04 * * SAT</entry>
+    <!-- SCOPUS Tc Update -->
+    <entry key="cron.tc.update.scopus.at">N</entry>
+    <entry key="cron.tc.update.scopus">0 30 03 * * SUN</entry>
+    <!-- KCI Tc Update -->
+    <entry key="cron.tc.update.kci.at">N</entry>
+    <entry key="cron.tc.update.kci">0 30 04 * * SUN</entry>
+
+    <!-- cron 실행여부 -->
+    <entry key="cron.urp.sync.dept.at">N</entry>
+    <entry key="cron.urp.sync.patent.at">N</entry>
+    <entry key="cron.urp.sync.techtrans.at">N</entry>
+    <entry key="cron.urp.sync.funding.at">N</entry>
+    <entry key="cron.urp.sync.articleNo.at">N</entry>
+
+    <!-- cron 실행주기 -->
+    <entry key="cron.import.data.sjr">0 30 1 29 * ?</entry>
+    <entry key="cron.urp.sync.dept">0 20 3 30 * ?</entry>
+    <entry key="cron.urp.sync.patent">0 30 3 30 * ?</entry>
+    <entry key="cron.urp.sync.techtrans">0 40 3 30 * ?</entry>
+    <entry key="cron.urp.sync.funding">0 50 3 30 * ?</entry>
+    <entry key="cron.urp.sync.articleNo">0 0 4 30 * ?</entry>
+
+    <!-- Solution Name Setting  -->
+    <entry key="system.abbr">RIMS</entry>
+    <entry key="system.full">Researcher Information Management System</entry>
+    <entry key="system.exr.name">ExRIMS</entry>
+    <entry key="system.rims.name">RIMS</entry>
+    <entry key="system.arms.name">AsRIMS</entry>
+    <entry key="system.srch.name">유사분야 연구자검색</entry>
+    <entry key="system.srch.uri">http://rais.yu.ac.kr/rims/search/similrResearcher.do</entry>
+    <entry key="system.ugas.name">대학정보공시 분석</entry>
+    <entry key="system.ugas.uri">http://rais.yu.ac.kr/ca</entry>
+
+    <!-- Title -->
+    <entry key="system.rims.jsp.title">연구업적관리시스템</entry>
+    <entry key="system.arms.jsp.title">연구논문분석서비스</entry>
+
+    <entry key="system.rss.jsp.title">Research Support System</entry>
+
+    <!-- Image -->
+    <entry key="shortcut.icon">favicon_kaist.gif</entry> <!-- contextPath/images/shortcout.icon.file        -->
+    <entry key="logo.image">logo_kaist.png</entry>         <!-- contextPath/images/common/shortcout.icon.file -->
+    <entry key="user.default.profile.image">/images/common/profile_img01.png</entry>
+
+    <!-- Url -->
+    <!--
+    <entry key="system.url">http://143.248.103.115:8080</entry>
+     -->
+    <!--<entry key="system.url">http://localhost:8080/rims/index/login.do</entry>
+    <entry key="proxy.url">http://localhost:8080/rims</entry>-->
+    <entry key="system.url">http://rss.bwise.kr/rims/index/login.do</entry>
+    <entry key="proxy.url">http://rss.bwise.kr/rims</entry>
+
+    <!-- IP Range -->
+    <entry key="mngr.perm.ip.class">143.248.;0:0:0:;127.0.0.;172.28.11.</entry>
+
+    <!-- Login Page -->
+    <entry key="login.page.used.at">Y</entry>
+
+    <!-- KRI Contact -->
+    <entry key="kri.frm.action">http://www.kri.go.kr/kri/ra/cm/sso/wisesso_pop_api_utf8.jsp</entry>
+
+    <!-- article -->
+    <entry key="modifiy.show.mngno">N</entry>
+
+    <!-- analysis serach year range (default : 년단위, 6월기준 : half) -->
+    <entry key="analysis.search.dpet.field">name</entry> <!-- code(DEPT_CODE) or name(DEPT_KOR)  -->
+    <entry key="analysis.search.year.range">half</entry>
+    <entry key="analysis.patent.applStatus.used.at">N</entry>
+    <entry key="analysis.patent.applRegNtntNm.used.at">N</entry>
+    <entry key="analysis.exfund.used.at">N</entry>
+    <entry key="anlaysis.about.dept.filter">Y</entry>
+    <entry key="anlaysis.user.dept.field">GROUP_DEPT</entry>
+    <entry key="anlaysis.user.college.field">GROUP_CLG</entry>
+    <entry key="anlaysis.user.default.image">/images/analysis/common/anonymous_profile.png</entry>
+
+    <!-- Patent -->
+    <entry key="patent.appl.reg.ntn.cd">2000</entry>
+
+    <!-- RI_CODE_RES_AREA solr url -->
+    <!--<entry key="code.res.area.solr.url">http://143.248.118.21:8983/solr/code_res_area</entry>-->
+    <!--<entry key="code.res.area.solr.url">http://localhost:8983/solr/code_res_area</entry>-->
+
+    <!-- IR Researcher Profile Image View Check 2017.12.15 by hojkim -->
+    <entry key="inst.repository.ip.address">143.248.118.80</entry>
+
+    <!--  RIMS Discovery 2017.12.28 by wanki  -->
+    <entry key="discovery.service.at">Y</entry>
+    <!--<entry key="dis.code.usr.solr.url">http://143.248.118.21:8983/solr/kaist_user</entry>
+    <entry key="dis.code.art.solr.url">http://143.248.118.21:8983/solr/kaist_article</entry>
+    <entry key="dis.code.fud.solr.url">http://143.248.118.21:8983/solr/kaist_funding</entry>
+    <entry key="dis.code.pat.solr.url">http://143.248.118.21:8983/solr/kaist_patent</entry>
+    <entry key="dis.code.con.solr.url">http://143.248.118.21:8983/solr/kaist_conference</entry>-->
+    <entry key="dis.code.usr.solr.url">http://solr:8983/solr/rss_user</entry>
+    <entry key="dis.code.art.solr.url">http://solr:8983/solr/rss_article</entry>
+    <entry key="dis.code.fud.solr.url">http://solr:8983/solr/rss_funding</entry>
+    <entry key="dis.code.pat.solr.url">http://solr:8983/solr/rss_patent</entry>
+    <entry key="dis.code.con.solr.url">http://solr:8983/solr/rss_conference</entry>
+    <entry key="dis.limit.ip">192.249.16~31;110.76.64~127;137.68.*;143.248.*;172.28.11.1~20</entry>
+    <entry key="dis.not.session.check.ip"></entry>
+
+    <!-- Log File Path -->
+    <entry key="log.file.path">/data/software/log</entry>
+
+    <entry key="export.research.plan">Y</entry>
+
+    <entry key="mail.use.art.at">Y</entry>
+    <entry key="mail.use.auth.at">Y</entry>
+    <entry key="mail.use.req.at">Y</entry>
+    <entry key="mail.use.lab.at">Y</entry>
+    <entry key="mail.use.degree.at">Y</entry>
+
+    <entry key="statistics.funding.reprsntAt_tpiRate.at">Y</entry>
+
+    <!-- oai-pmh allow ip setting -->
+    <entry key="api.oaipmh.ip"></entry>
+
+    <entry key="api.oaipmh.article.ip">127.0.0.1;125.138.104.25;125.138.104.26;172.28.11.1;172.28.11.2;172.28.11.3;172.28.11.4;172.28.11.5;172.28.11.6;172.28.11.7;172.28.11.8;172.28.11.9;172.28.11.10</entry>
+    <entry key="api.oaipmh.conference.ip">127.0.0.1;125.138.104.25;125.138.104.26;172.28.11.1;172.28.11.2;172.28.11.3;172.28.11.4;172.28.11.5;172.28.11.6;172.28.11.7;172.28.11.8;172.28.11.9;172.28.11.10</entry>
+    <entry key="api.oaipmh.book.ip">127.0.0.1;125.138.104.25;125.138.104.26;172.28.11.1;172.28.11.2;172.28.11.3;172.28.11.4;172.28.11.5;172.28.11.6;172.28.11.7;172.28.11.8;172.28.11.9;172.28.11.10</entry>
+    <entry key="api.oaipmh.funding.ip">127.0.0.1;125.138.104.25;125.138.104.26;172.28.11.1;172.28.11.2;172.28.11.3;172.28.11.4;172.28.11.5;172.28.11.6;172.28.11.7;172.28.11.8;172.28.11.9;172.28.11.10</entry>
+    <entry key="api.oaipmh.patent.ip">127.0.0.1;125.138.104.25;125.138.104.26;172.28.11.1;172.28.11.2;172.28.11.3;172.28.11.4;172.28.11.5;172.28.11.6;172.28.11.7;172.28.11.8;172.28.11.9;172.28.11.10</entry>
+    <entry key="api.oaipmh.researcher.ip">127.0.0.1;125.138.104.25;125.138.104.26;172.28.11.1;172.28.11.2;172.28.11.3;172.28.11.4;172.28.11.5;172.28.11.6;172.28.11.7;172.28.11.8;172.28.11.9;172.28.11.10</entry>
+
+    <entry key="api.oaipmh.article.limit.year"></entry>
+    <entry key="api.oaipmh.book.limit.year"></entry>
+    <entry key="api.oaipmh.conference.limit.year">2010</entry>
+    <entry key="api.oaipmh.funding.limit.year">201001</entry>
+    <entry key="api.oaipmh.patent.limit.year">2010</entry>
+
+    <entry key="api.oaipmh.article.limit.appr.code">3</entry>
+    <entry key="api.oaipmh.book.limit.appr.code">3</entry>
+    <entry key="api.oaipmh.conference.limit.appr.code">3</entry>
+    <entry key="api.oaipmh.funding.limit.appr.code">3</entry>
+    <entry key="api.oaipmh.patent.limit.appr.code">3</entry>
+
+    <entry key="iam.sso.client.id">RIMS</entry>
+    <entry key="iam.sso.client.secret">YWU3YWU5ZmFiMWZjNmI0MzUxOGI4YWVkMTkyOTM5ZjFhNDdlMTUxNWM4MTE4MDc0ZTBiNGRmOGY4N2E4NjBlMw==</entry>
+    <entry key="iam.sso.server.url">https://iam2.kaist.ac.kr/api/sso/commonLogin</entry>
+
+    <entry key="analysis.default.url">/analysis/institution/overview.do</entry>
+
+    <entry key="book.mkout.lang.cd">2020</entry>
+
+</properties>

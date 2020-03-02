@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.argonet.r2rims.erp.mapper.ErpDegreeMapper">
+
+  <sql id="pageHeader">SELECT * FROM ( SELECT * FROM (</sql>
+  <sql id="pageFooter"><![CDATA[) WHERE RN  <=  (#{ps} + #{ct})) a  WHERE a.RN > #{ps}]]></sql>
+  <sql id="nvlifnull"><if test="_databaseId == 'oracle' ">NVL</if><if test="_databaseId == 'mysql' ">IFNULL</if></sql>
+  <sql id="prefixToChar"><if test="_databaseId == 'oracle' ">TO_CHAR(</if><if test="_databaseId == 'mysql' ">DATE_FORMAT(</if></sql>
+  <sql id="postfixToCharYmd"><if test="_databaseId == 'oracle' ">, 'YYYYMMDD')</if><if test="_databaseId == 'mysql' ">, '%Y%m%d')</if></sql>
+  <sql id="postfixToCharY-m-d"><if test="_databaseId == 'oracle' ">, 'YYYY-MM-DD')</if><if test="_databaseId == 'mysql' ">, '%Y-%m-%d')</if></sql>
+  <sql id="prefixToDate"><if test="_databaseId == 'oracle' ">TO_DATE(</if><if test="_databaseId == 'mysql' ">STR_TO_DATE(</if></sql>
+  <sql id="postfixToDate"><if test="_databaseId == 'oracle' ">, 'YYYY-MM-DD')</if><if test="_databaseId == 'mysql' ">, '%Y-%m-%d')</if></sql>
+  <sql id="sysdateNow"><if test="_databaseId == 'oracle' ">SYSDATE</if><if test="_databaseId == 'mysql' ">now()</if></sql>
+
+  <select id="findByModDate" resultType="kr.co.argonet.r2rims.core.vo.DegreeVo">
+  <![CDATA[
+  	select HE.EMPLOYEE_NUMBER 					          as userId
+  	      ,HE.ATTENDANCE_ID   					          as srcId
+  	      ,HE.ESTABLISHMENT	  					          as dgrAcqsAgcNm
+  	      ,SUBSTR(HE.ATTENDED_START_DATE,1,6)	          as dgrSttYm
+  	      ,SUBSTR(HE.ATTENDED_END_DATE,1,6)		          as dgrAcqsYm
+  	      ,HE.ESTABLISHMENT_NATIONALITY			          as country
+  	      ,HE.MAJOR_NAME						          as dgrAcqsSbjtNm
+  	      ,'1'		                  					  as interfaceFlag
+  	      ,'ERP'						                  as src
+  	      ,'KRI_CO'						                  as ntntGubunA
+  	      ,'ERP_CO'						                  as ntntGubunB
+  	      ,(case when GRADUATE = '100' then '1'
+  	        else case when GRADUATE = '90' then '1'
+  	        else case when GRADUATE = '80' then '3'
+  	        else case when GRADUATE = '70' then '5'
+  	        else case when GRADUATE < '40' then '6'
+  	        else case when GRADUATE = '120' then '1'
+  	        else case when GRADUATE = '150' then '1'
+  	        else case when GRADUATE = '170' then '7'
+  	        else case when GRADUATE = '50' then '7'
+  	        else '' end end end end end end end end end ) as acqsDgrDvsCd
+  	]]>
+  	 from CBO_HR_ESTABLISHMENT_V HE
+   	 where LAST_UPDATE_DATE <![CDATA[ >= ]]> #{lastHarvestDate, jdbcType=VARCHAR}
+  </select>
+
+  <select id="findByUserId" resultType="kr.co.argonet.r2rims.core.vo.DegreeVo">
+  <![CDATA[
+  	select HE.EMPLOYEE_NUMBER 					          as userId
+  	      ,HE.ATTENDANCE_ID   					          as srcId
+  	      ,HE.ESTABLISHMENT	  					          as dgrAcqsAgcNm
+  	      ,SUBSTR(HE.ATTENDED_START_DATE,1,6)	          as dgrSttYm
+  	      ,SUBSTR(HE.ATTENDED_END_DATE,1,6)		          as dgrAcqsYm
+  	      ,HE.ESTABLISHMENT_NATIONALITY			          as country
+  	      ,HE.MAJOR_NAME						          as dgrAcqsSbjtNm
+  	      ,'1'							                  as interfaceFlag
+  	      ,'ERP'						                  as src
+  	      ,'KRI_CO'						                  as ntntGubunA
+  	      ,'ERP_CO'						                  as ntntGubunB
+  	      ,(case when GRADUATE = '100' then '1'
+  	        else case when GRADUATE = '90' then '1'
+  	        else case when GRADUATE = '80' then '3'
+  	        else case when GRADUATE = '70' then '5'
+  	        else case when GRADUATE < '40' then '6'
+  	        else case when GRADUATE = '120' then '1'
+  	        else case when GRADUATE = '150' then '1'
+  	        else case when GRADUATE = '170' then '7'
+  	        else case when GRADUATE = '50' then '7'
+  	        else '' end end end end end end end end end ) as acqsDgrDvsCd
+  	 from CBO_HR_ESTABLISHMENT_V HE
+  	]]>
+  	where EMPLOYEE_NUMBER = #{userId, jdbcType=VARCHAR}
+  </select>
+
+
+</mapper>

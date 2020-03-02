@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<MedaData>
+	<inputData>
+		<key>00000001</key>
+		<apiCode>articleSearch</apiCode>
+		<title>컴퓨터</title>
+	</inputData>
+	<outputData>
+		<result>
+			<total>2794</total>
+		</result>
+		<record>
+			<journalInfo>
+				<journal-name>Journal of Rhinology</journal-name>
+				<publisher-name>대한비과학회</publisher-name>
+				<pub-year>1995</pub-year>
+				<volume>2</volume>
+				<issue>2</issue>
+			</journalInfo>
+			<articleInfo article-id="ART002019111">
+				<article-categories>이비인후과학</article-categories>
+				<title-group>
+					<article-title><![CDATA[술전 부비동 전산화 단층촬영소견과 비내시경 수술소견과의 비교연구]]></article-title>
+					<article-title><![CDATA[Comparison of the Findings by Ostiomeatal Unit Computerized Tomography and Intraoperative Nasal Endoscopy in Patients with Chronic Paranasal Sinusitis]]></article-title>
+				</title-group>
+				<author-group>
+					<author>한창준(인하대학교 의과대학 이비인후과학교실)</author>
+					<author>장태영(인하대학교병원 의과대학 이비인후과학교실)</author>
+				</author-group>
+				<fpage>124</fpage>
+				<lpage>129</lpage>
+				<doi />
+				<citation-count>0</citation-count>
+				<url><![CDATA[https://www.kci.go.kr/kciportal/ci/sereArticleSearch/ciSereArtiView.kci?sereArticleSearchBean.artiId=ART002019111]]></url>
+			</articleInfo>
+		</record>
+		<record>
+			<journalInfo>
+				<journal-name>대한임상검사과학회지</journal-name>
+				<publisher-name>대한임상검사과학회</publisher-name>
+				<pub-year>1996</pub-year>
+				<volume>28</volume>
+				<issue>1</issue>
+			</journalInfo>
+			<articleInfo article-id="ART001955347">
+				<article-categories>기타자연과학</article-categories>
+				<title-group>
+					<article-title><![CDATA[Design of Computer System in the Blood Bank by Foxpro program]]></article-title>
+					<article-title />
+					<article-title><![CDATA[폭스프로 프로그램에 의한 혈액은행 전산화 시스템의 구현]]></article-title>
+				</title-group>
+				<author-group>
+					<author>오종빈(인하대학교병원 전산팀)</author>
+					<author>김권철(인하대학교병원 임상병리과)</author>
+					<author>이은정(인하대학교병원 임상병리과)</author>
+					<author>김미정(인하대학교병원 임상병리과)</author>
+					<author>김운영(인하대학교병원 임상병리과)</author>
+					<author>이명권(인하대학교병원 임상병리과)</author>
+					<author>이명권(인하대학교병원 임상병리과)</author>
+				</author-group>
+				<fpage>195</fpage>
+				<lpage>202</lpage>
+				<doi />
+				<citation-count>0</citation-count>
+				<url><![CDATA[https://www.kci.go.kr/kciportal/ci/sereArticleSearch/ciSereArtiView.kci?sereArticleSearchBean.artiId=ART001955347]]></url>
+			</articleInfo>
+		</record>
+		<record>
+			<journalInfo>
+				<journal-name>Journal of the Korean Magnetic Resonance Society
+				</journal-name>
+				<publisher-name>한국자기공명학회</publisher-name>
+				<pub-year>1999</pub-year>
+				<volume>3</volume>
+				<issue>1</issue>
+			</journalInfo>
+			<articleInfo article-id="ART001068598">
+				<article-categories>화학</article-categories>
+				<title-group>
+					<article-title><![CDATA[Computer-Aided Crafting of Pulse Shapes for Broadband Heteronuclear Decoupling in the presence of Homonuclear Coupling]]></article-title>
+				</title-group>
+				<author-group>
+					<author>이창재(선문대학교)</author>
+				</author-group>
+				<fpage>36</fpage>
+				<lpage>43</lpage>
+				<doi />
+				<citation-count>0</citation-count>
+				<url><![CDATA[https://www.kci.go.kr/kciportal/ci/sereArticleSearch/ciSereArtiView.kci?sereArticleSearchBean.artiId=ART001068598]]></url>
+			</articleInfo>
+		</record>
+		<record>
+			<journalInfo>
+				<journal-name>Korean Journal of Pediatrics</journal-name>
+				<publisher-name>대한소아과학회</publisher-name>
+				<pub-year>2000</pub-year>
+				<volume>43</volume>
+				<issue>7</issue>
+			</journalInfo>
+			<articleInfo article-id="ART001016087">
+				<article-categories>소아과학</article-categories>
+				<title-group>
+					<article-title><![CDATA[A Study on the Field and Future Course of Child Care Counselling Using  Personal Computer Communication]]></article-title>
+					<article-title><![CDATA[PC통신 육아상담을 통해 살펴본 육아상담 분야 및  방향에 대한 연구]]></article-title>
+				</title-group>
+				<author-group>
+					<author>채영숙(전주예수병원)</author>
+					<author>장영택(전주예수병원)</author>
+				</author-group>
+				<fpage>889</fpage>
+				<lpage>896</lpage>
+				<doi />
+				<citation-count>0</citation-count>
+				<url><![CDATA[https://www.kci.go.kr/kciportal/ci/sereArticleSearch/ciSereArtiView.kci?sereArticleSearchBean.artiId=ART001016087]]></url>
+			</articleInfo>
+		</record>
+		<record>
+			<journalInfo>
+				<journal-name>대한임상검사과학회지</journal-name>
+				<publisher-name>대한임상검사과학회</publisher-name>
+				<pub-year>2000</pub-year>
+				<volume>32</volume>
+				<issue>3</issue>
+			</journalInfo>
+			<articleInfo article-id="ART001954620">
+				<article-categories>기타자연과학</article-categories>
+				<title-group>
+					<article-title><![CDATA[CAT(Computer Adaptive Test) 시스템 구축을 위한 문항반응이론(IRT)의 문항분석 비교연구]]></article-title>
+					<article-title />
+					<article-title><![CDATA[A Comparative Study of Item Analysis by Item Response Theory Based for Initiating CAT(Computer Adaptive Test) System]]></article-title>
+				</title-group>
+				<author-group>
+					<author>이창규(고려대학교병설 보건대학 임상병리과)</author>
+					<author>이승관(고려대학교병설 보건대학 임상병리과)</author>
+					<author>조경진(고려대학교병설 보건대학 임상병리과)</author>
+					<author>이은일(고려대학교 의과대학 예뱡의학교실)</author>
+					<author>이숙자(고려대학교 간호학과)</author>
+					<author>박은숙(고려대학교 간호학과)</author>
+					<author>박영주(고려대학교 간호학과)</author>
+				</author-group>
+				<fpage>326</fpage>
+				<lpage>336</lpage>
+				<doi />
+				<citation-count>0</citation-count>
+				<url><![CDATA[https://www.kci.go.kr/kciportal/ci/sereArticleSearch/ciSereArtiView.kci?sereArticleSearchBean.artiId=ART001954620]]></url>
+			</articleInfo>
+		</record>
+		<record>
+			<journalInfo>
+				<journal-name>인문학논총</journal-name>
+				<publisher-name>인문과학연구소</publisher-name>
+				<pub-year>2001</pub-year>
+				<volume>3</volume>
+				<issue />
+			</journalInfo>
+			<articleInfo article-id="ART001342385">
+				<article-categories>기타인문학</article-categories>
+				<title-group>
+					<article-title><![CDATA[An Empirical Study on Using Computer and Internet of Students and Teachers]]></article-title>
+					<article-title><![CDATA[교육관련 집단의 정보화 수용에 관한 연구]]></article-title>
+				</title-group>
+				<author-group>
+					<author>김희복(경성대학교)</author>
+				</author-group>
+				<fpage>363</fpage>
+				<lpage>390</lpage>
+				<doi />
+				<citation-count>1</citation-count>
+				<url><![CDATA[https://www.kci.go.kr/kciportal/ci/sereArticleSearch/ciSereArtiView.kci?sereArticleSearchBean.artiId=ART001342385]]></url>
+			</articleInfo>
+		</record>
+		<record>
+			<journalInfo>
+				<journal-name>상하수도학회지</journal-name>
+				<publisher-name>대한상하수도학회</publisher-name>
+				<pub-year>2001</pub-year>
+				<volume>15</volume>
+				<issue>2</issue>
+			</journalInfo>
+			<articleInfo article-id="ART000894079">
+				<article-categories>상하수도공학</article-categories>
+				<title-group>
+					<article-title><![CDATA[Respirometer와 computer model을 이용한 수원시 하수 특성 분석]]></article-title>
+					<article-title />
+				</title-group>
+				<author-group>
+					<author>이병희(경기대학교)</author>
+				</author-group>
+				<fpage>140</fpage>
+				<lpage>146</lpage>
+				<doi />
+				<citation-count>0</citation-count>
+				<url><![CDATA[https://www.kci.go.kr/kciportal/ci/sereArticleSearch/ciSereArtiView.kci?sereArticleSearchBean.artiId=ART000894079]]></url>
+			</articleInfo>
+		</record>
+		<record>
+			<journalInfo>
+				<journal-name>Korean Journal of Pediatrics</journal-name>
+				<publisher-name>대한소아과학회</publisher-name>
+				<pub-year>2001</pub-year>
+				<volume>44</volume>
+				<issue>5</issue>
+			</journalInfo>
+			<articleInfo article-id="ART000894328">
+				<article-categories>소아과학</article-categories>
+				<title-group>
+					<article-title><![CDATA[The Usefulness of Emergency Brain Computerized Tomography in Children with First Seizures]]></article-title>
+					<article-title><![CDATA[첫 경련 환아들에서 응급 뇌 전산화 단층 촬영의 유용성]]></article-title>
+				</title-group>
+				<author-group>
+					<author>박현경(한양대학교)</author>
+					<author>설인준(한양대학교)</author>
+				</author-group>
+				<fpage>562</fpage>
+				<lpage>568</lpage>
+				<doi />
+				<citation-count>0</citation-count>
+				<url><![CDATA[https://www.kci.go.kr/kciportal/ci/sereArticleSearch/ciSereArtiView.kci?sereArticleSearchBean.artiId=ART000894328]]></url>
+			</articleInfo>
+		</record>
+		<record>
+			<journalInfo>
+				<journal-name>대한물리치료학회지</journal-name>
+				<publisher-name>대한물리치료학회</publisher-name>
+				<pub-year>2001</pub-year>
+				<volume>13</volume>
+				<issue>2</issue>
+			</journalInfo>
+			<articleInfo article-id="ART001332805">
+				<article-categories>기타물리치료학</article-categories>
+				<title-group>
+					<article-title><![CDATA[원적외선 최적화 방사유도 알고리즘과 프로그래밍]]></article-title>
+					<article-title><![CDATA[and computerize programming to induce optimized Far-infrared radiation]]></article-title>
+				</title-group>
+				<author-group>
+					<author>김재윤(대구대학교 대학원 재활과학과 물리치료)</author>
+					<author>박돈목(강동대학교)</author>
+					<author>박영한(국립청주과학대학 물리치료과)</author>
+					<author>박래준(대구대학교)</author>
+				</author-group>
+				<fpage>257</fpage>
+				<lpage>264</lpage>
+				<doi />
+				<citation-count>1</citation-count>
+				<url><![CDATA[https://www.kci.go.kr/kciportal/ci/sereArticleSearch/ciSereArtiView.kci?sereArticleSearchBean.artiId=ART001332805]]></url>
+			</articleInfo>
+		</record>
+		<record>
+			<journalInfo>
+				<journal-name>韓國醫史學會誌</journal-name>
+				<publisher-name>한국의사학회</publisher-name>
+				<pub-year>2001</pub-year>
+				<volume>14</volume>
+				<issue>1</issue>
+			</journalInfo>
+			<articleInfo article-id="ART001523702">
+				<article-categories>의사학</article-categories>
+				<title-group>
+					<article-title><![CDATA[The computerized management of the original text for the database of 『Hyangyakjipseongbang』]]></article-title>
+					<article-title><![CDATA[『鄕藥集成方』의 데이터베이스 구축을 위한 원문의 전산처리]]></article-title>
+				</title-group>
+				<author-group>
+					<author>강연석(원광대학교)</author>
+				</author-group>
+				<fpage>3</fpage>
+				<lpage>15</lpage>
+				<doi />
+				<citation-count>3</citation-count>
+				<url><![CDATA[https://www.kci.go.kr/kciportal/ci/sereArticleSearch/ciSereArtiView.kci?sereArticleSearchBean.artiId=ART001523702]]></url>
+			</articleInfo>
+		</record>
+	</outputData>
+</MedaData>

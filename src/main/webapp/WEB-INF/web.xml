@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app id="WebApp_ID" version="2.5" metadata-complete="true"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee"
+	xmlns:jsp="http://java.sun.com/xml/ns/javaee/jsp" xmlns:web="http://java.sun.com/xml/ns/javaee"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+	<display-name>webapp</display-name>
+
+	<context-param>
+		<param-name>webAppRootKey</param-name>
+		<param-value>r2rims.kaist</param-value>
+	</context-param>
+
+	<!-- fusionchart config file location -->
+	<context-param>
+		<param-name>fusionchartConfigLocation</param-name>
+		<param-value>file:/data/software/config/r2rims_rss_test/fusioncharts_export.properties</param-value>
+	</context-param>
+
+	<!-- logbackconfig listener -->
+	<context-param>
+		<param-name>logbackConfigLocation</param-name>
+		<!--localhost-->
+		<!--
+		<param-value>file:/Users/lhj/Documents/workspace_config/s2rims/kaist/config/logback.xml</param-value>
+		-->
+		<!--KAIST-->
+		<!--
+		-->
+		<param-value>file:/data/software/config/r2rims_rss_test/logback.xml</param-value>
+
+	</context-param>
+	<listener>
+      <listener-class>ch.qos.logback.ext.spring.web.LogbackConfigListener</listener-class>
+    </listener>
+
+	<session-config>  <!--  10 minutes -->
+	  <session-timeout>30</session-timeout>
+	</session-config>
+
+	<!-- spring context listener -->
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>/WEB-INF/classes/config/spring/context-root.xml</param-value>
+	</context-param>
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+
+	<servlet>
+		<servlet-name>webapp</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>webapp</servlet-name>
+		<url-pattern>*.do</url-pattern>
+	</servlet-mapping>
+
+	<!-- DHTMLX Excel Download -->
+	<servlet>
+		<servlet-name>ExcelGenerator</servlet-name>
+		<servlet-class>com.dhtmlx.ExcelGenerator</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ExcelGenerator</servlet-name>
+		<url-pattern>/servlet/xlsGenerate.do</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>fileDown</servlet-name>
+		<servlet-class>kr.co.argonet.r2rims.core.servlets.FileDownloadServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>fileDown</servlet-name>
+		<url-pattern>/servlet/download.do</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>resume</servlet-name>
+		<servlet-class>kr.co.argonet.r2rims.core.servlets.KaistResumeExportServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>resume</servlet-name>
+		<url-pattern>/servlet/resume.do</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>imageView</servlet-name>
+		<servlet-class>kr.co.argonet.r2rims.core.servlets.ImageViewServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>imageView</servlet-name>
+		<url-pattern>/servlet/image/*</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<display-name>FCExporter</display-name>
+		<servlet-name>FCExporter</servlet-name>
+		<servlet-class>com.fusioncharts.exporter.servlet.FCExporter</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>FCExporter</servlet-name>
+		<url-pattern>/servlet/FCExporter/*</url-pattern>
+	</servlet-mapping>
+
+	<!-- encoding filter -->
+	<filter>
+		<filter-name>Encoding Filter</filter-name>
+		<filter-class>kr.co.argonet.r2rims.filter.EncodingFilter</filter-class>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>Encoding Filter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>Encoding Filter</filter-name>
+		<url-pattern>*.jsp</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>Encoding Filter</filter-name>
+		<url-pattern>*.do</url-pattern>
+	</filter-mapping>
+
+	<!-- sitemesh filter -->
+	<filter>
+		<filter-name>sitemesh</filter-name>
+		<filter-class>com.opensymphony.module.sitemesh.filter.PageFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>sitemesh</filter-name>
+		<url-pattern>*.do</url-pattern>
+	</filter-mapping>
+
+	<!-- 이렇게 필터를 등록하고 -->
+	<!--
+	<filter>
+		<filter-name>httpHeaderSecurity</filter-name>
+		<filter-class>org.apache.catalina.filters.HttpHeaderSecurityFilter</filter-class>
+		<init-param>
+			<param-name>hstsMaxAgeSeconds</param-name>
+			<param-value>31536000</param-value>
+		</init-param>
+		<init-param>
+			<param-name>antiClickJackingEnabled</param-name>
+			<param-value>true</param-value>
+		</init-param>
+		<init-param>
+			<param-name>antiClickJackingOption</param-name>
+			<param-value>SAMEORIGIN</param-value>
+		</init-param>
+	</filter>
+
+
+	<filter-mapping>
+		<filter-name>httpHeaderSecurity</filter-name>
+		<url-pattern>/*</url-pattern>
+		<dispatcher>REQUEST</dispatcher>
+	</filter-mapping>
+
+	-->
+	<!-- custom tag library -->
+	<jsp-config>
+		<taglib>
+			<taglib-uri>/spring</taglib-uri>
+			<taglib-location>/WEB-INF/tld/spring.tld</taglib-location>
+		</taglib>
+		<taglib>
+			<taglib-uri>http://java.sun.com/jsp/jstl/fmt</taglib-uri>
+			<taglib-location>/WEB-INF/tld/fmt.tld</taglib-location>
+		</taglib>
+		<taglib>
+			<taglib-uri>http://java.sun.com/jsp/jstl/fn</taglib-uri>
+			<taglib-location>/WEB-INF/tld/fn.tld</taglib-location>
+		</taglib>
+		<taglib>
+			<taglib-uri>http://java.sun.com/jsp/jstl/c</taglib-uri>
+			<taglib-location>/WEB-INF/tld/c.tld</taglib-location>
+		</taglib>
+		<taglib>
+			<taglib-uri>http://frameworks.com/ui</taglib-uri>
+			<taglib-location>/WEB-INF/tld/ui.tld</taglib-location>
+		</taglib>
+		<taglib>
+			<taglib-uri>http://jakarta.apache.org/taglibs/string-1.1</taglib-uri>
+			<taglib-location>/WEB-INF/tld/string.tld</taglib-location>
+		</taglib>
+		<taglib>
+			<taglib-uri>http://www.argonet.co.kr/rims</taglib-uri>
+			<taglib-location>/WEB-INF/tld/rims.tld</taglib-location>
+		</taglib>
+		<taglib>
+			<taglib-uri>http://www.fusioncharts.com/jsp/core</taglib-uri>
+			<taglib-location>/WEB-INF/tld/fusioncharts.tld</taglib-location>
+		</taglib>
+	</jsp-config>
+
+	<!-- Error Page Setting -->
+	<error-page>
+		<error-code>400</error-code>
+		<location>/error.do</location>
+	</error-page>
+	<error-page>
+		<error-code>404</error-code>
+		<location>/error.do</location>
+	</error-page>
+	<error-page>
+		<error-code>403</error-code>
+		<location>/error.do</location>
+	</error-page>
+	<error-page>
+		<error-code>500</error-code>
+		<location>/error.do</location>
+	</error-page>
+	<error-page>
+		<error-code>501</error-code>
+		<location>/error.do</location>
+	</error-page>
+	<error-page>
+		<error-code>503</error-code>
+		<location>/error.do</location>
+	</error-page>
+	<error-page>
+		<error-code>505</error-code>
+		<location>/error.do</location>
+	</error-page>
+	<!--
+	<error-page><error-code>401</error-code><location>/error.do</location></error-page>
+	<error-page><error-code>402</error-code><location>/error.do</location></error-page>
+	<error-page><error-code>405</error-code><location>/error.do</location></error-page>
+	<error-page><error-code>406</error-code><location>/error.do</location></error-page>
+	<error-page><error-code>407</error-code><location>/error.do</location></error-page>
+	<error-page><error-code>408</error-code><location>/error.do</location></error-page>
+	<error-page><error-code>409</error-code><location>/error.do</location></error-page>
+	<error-page><error-code>410</error-code><location>/error.do</location></error-page>
+	<error-page><error-code>411</error-code><location>/error.do</location></error-page>
+	<error-page><error-code>412</error-code><location>/error.do</location></error-page>
+	<error-page><error-code>413</error-code><location>/error.do</location></error-page>
+	<error-page><error-code>414</error-code><location>/error.do</location></error-page>
+	<error-page><error-code>415</error-code><location>/error.do</location></error-page>
+	<error-page><error-code>502</error-code><location>/error.do</location></error-page>
+	<error-page><error-code>504</error-code><location>/error.do</location></error-page>
+	<error-page><exception-type>java.lang.Throwable</exception-type><location>/error.do</location></error-page>
+	-->
+
+	<!-- welcome file setting -->
+	<welcome-file-list>
+		<welcome-file>index.html</welcome-file>
+		<welcome-file>index.htm</welcome-file>
+		<welcome-file>index.jsp</welcome-file>
+	</welcome-file-list>
+</web-app>

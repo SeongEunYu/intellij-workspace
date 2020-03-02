@@ -1,0 +1,314 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.argonet.r2rims.erp.mapper.ErpUserMapper">
+
+  <sql id="pageHeader">SELECT * FROM ( SELECT * FROM (</sql>
+  <sql id="pageFooter"><![CDATA[) WHERE RN  <=  (#{ps} + #{ct})) a  WHERE a.RN > #{ps}]]></sql>
+  <sql id="nvlifnull"><if test="_databaseId == 'oracle' ">NVL</if><if test="_databaseId == 'mysql' ">IFNULL</if></sql>
+  <sql id="prefixToChar"><if test="_databaseId == 'oracle' ">TO_CHAR(</if><if test="_databaseId == 'mysql' ">DATE_FORMAT(</if></sql>
+  <sql id="postfixToCharYmd"><if test="_databaseId == 'oracle' ">, 'YYYYMMDD')</if><if test="_databaseId == 'mysql' ">, '%Y%m%d')</if></sql>
+  <sql id="postfixToCharY-m-d"><if test="_databaseId == 'oracle' ">, 'YYYY-MM-DD')</if><if test="_databaseId == 'mysql' ">, '%Y-%m-%d')</if></sql>
+  <sql id="prefixToDate"><if test="_databaseId == 'oracle' ">TO_DATE(</if><if test="_databaseId == 'mysql' ">STR_TO_DATE(</if></sql>
+  <sql id="postfixToDate"><if test="_databaseId == 'oracle' ">, 'YYYY-MM-DD')</if><if test="_databaseId == 'mysql' ">, '%Y-%m-%d')</if></sql>
+  <sql id="sysdateNow"><if test="_databaseId == 'oracle' ">SYSDATE</if><if test="_databaseId == 'mysql' ">now()</if></sql>
+
+
+  <select id="findUserByGubunAndModDate" resultType="kr.co.argonet.r2rims.core.vo.UserVo">
+		select
+		    NAME_AC				                                               as KOR_NM
+		   ,FIRST_NAME			                                               as FIRST_NAME
+		   ,LAST_NAME			                                               as LAST_NAME
+		   ,EMAIL_ADDR			                                               as EMAL_ADDR
+	       ,(case when SUBSTR(REPLACE(EBS_START_DATE,'/',''),1,8) = '47121231' then ''
+	         else SUBSTR(REPLACE(EBS_START_DATE,'/',''),1,8) end)              as APTM_DATE
+	       ,(case when SUBSTR(REPLACE(EBS_START_DATE,'/',''),1,8) = '47121231' then ''
+	         else SUBSTR(REPLACE(EBS_START_DATE,'/',''),1,8) end)              as FTF_FIRST_APTM_DATE
+	       ,(case when SUBSTR(REPLACE(EBS_END_DATE,'/',''),1,8)  = '47121231' then ''
+	         else SUBSTR(REPLACE(EBS_END_DATE,'/',''),1,8) end)                as RETR_DATE
+		   ,SUBSTR(REPLACE(BIRTHDATE,'/',''),1,8)                              as BIRTH_DT
+		   ,DECODE(SEX,'M','1','F','2')                                        as SEX_DVS_CD
+		   ,REPLACE(BUSN_PHONE, 'N/A', '')			                           as OFC_TELNO
+		   ,REPLACE(CELL_PHONE, 'N/A', '')		                               as HP_TELNO
+		   ,REPLACE(FAX_PHONE, 'N/A', '')                                      as FAX_NO
+		   ,KAIST_UID                              	                           as U_ID
+		   ,TRIM(EBS_ORGANIZATION_ID)  			                               as ORGAN_ID
+		   <if test='(gubun == null or gubun == "") or (gubun != null and gubun != "" and gubun != "S")'> <!-- 전임,비전임교직원 -->
+	       ,TRIM(EBS_ORG_NAME_KOR)					                           as DEPT_KOR
+		   ,TRIM(EBS_ORG_NAME_ENG)					                           as DEPT_ENG
+		   ,TRIM(EBS_ORGANIZATION_ID)  			                               as DEPT_CODE
+	       ,TRIM(EBS_ORG_NAME_KOR)					                           as GROUP_DEPT
+		   ,REPLACE(HOME_PHONE, 'N/A', '')                                     as HOME_TELNO
+		   ,REPLACE(POSTAL,'-','')                                             as HOME_ZIP_CODE
+		   ,SUBSTRB(ADDRESS1,1,100)                                            as HOME_ADDR1
+		   ,ADDRESS2                                                           as HOME_ADDR2
+		   ,SUBSTRB(TRIM(EBS_GRADE_NAME_KOR	),1,40)                            as GRADE1
+		   ,TRIM(EBS_GRADE_NAME_KOR)				                           as GRADE2
+		   ,TRIM(EBS_GRADE_LEVEL_KOR)				                           as POSI_NM
+		   ,EMPLOYEE_NUMBER                                                    as USER_ID
+	       ,(case when TRIM(EBS_USER_STATUS_KOR) = '재직' then '1'
+	              when TRIM(EBS_USER_STATUS_KOR) = '퇴직'  then '2'
+	         else '' end)	  					                           as HLDOF_YN
+		   ,(case when TRIM(EBS_PERSON_TYPE_KOR) = '전임직 교원' then 'M'
+		   	      when TRIM(EBS_PERSON_TYPE_KOR) = '전임직 직원' then 'M'
+		   	      when TRIM(EBS_PERSON_TYPE_KOR) = 'Teacher of full time position' then 'M'
+		   	 else 'U' end)						                           as GUBUN
+		   ,(case when TRIM(EBS_GRADE_LEVEL_KOR) = '교수' then '11'
+		          when TRIM(EBS_GRADE_LEVEL_KOR) = '부교수' then '12'
+		          when TRIM(EBS_GRADE_LEVEL_KOR) = '조교수' then '13'
+		          when TRIM(EBS_GRADE_LEVEL_KOR) = 'Assistant Professor' then '13'
+		     else '' end)				                               as POSI_CD
+		   ,(case when COUNTRY = 'KOR' then 'ko' else 'en' end )  as LANGUAGE_FLAG
+		   </if>
+		   <if test='gubun != null and gubun != "" and gubun == "S" '> <!-- 학생 -->
+	       ,TRIM(ACAD_EBS_ORG_NAME_KOR)					                       as DEPT_KOR
+		   ,TRIM(ACAD_EBS_ORG_NAME_ENG)					                       as DEPT_ENG
+		   ,TRIM(ACAD_EBS_ORG_ID)  			                               	   as DEPT_CODE
+	       ,TRIM(ACAD_EBS_ORG_NAME_KOR)					                       as GROUP_DEPT
+		   ,''                                     							   as HOME_TELNO
+		   ,''                                                                 as HOME_ZIP_CODE
+		   ,''                                                                 as HOME_ADDR1
+		   ,''                                                                 as HOME_ADDR2
+		   ,'학생'									                           as GRADE1
+		   ,(case when ACAD_PROG_CODE = '5' then '박사(박사)'
+		     else case when ACAD_PROG_CODE = '7' then  '박사(석박사통합)'
+		     else '박사' end end  )					                           as GRADE2
+		   ,'학생'				                           					   as POSI_NM
+		   ,STD_NO                                                    		   as USER_ID
+		   ,CONCAT('9', STU_STATUS_CODE)									   as HLDOF_YN
+		   ,'S'																   as GUBUN
+		   ,'99'								                               as POSI_CD
+		   ,(case when COUNTRY = 'KOR' then 'ko' else 'en' end )              as LANGUAGE_FLAG
+		   </if>
+		   ,(case when CAMPUS = 'D1' then '대전'
+		     else case when CAMPUS = 'D2' then 'ICC'
+		     else case when CAMPUS = 'SE' then '서울'
+		     else '' end end end ) 			  		                           as CAMPUS
+		   ,(select MAX(CODE_EBS) from K_NATION_MAP_EBS where CODE_PS = TA.COUNTRY) as COUNTRY
+		   ,'KAIST_DEPT' 													   as sbjtCdGubunA
+		   ,'KRI_DEPT' 														   as sbjtCdGubunB
+		   ,'KRI_CO' 														   as ntntGubunA
+		   ,'ERP_CO' 														   as ntntGubunB
+		from  PERSON_UID TA
+		<where>
+			<if test='(gubun == null or gubun == "") or (gubun != null and gubun != "" and gubun != "S")'> <!-- 전임,비전임교직원 검색조건 -->
+			  and (
+			  		EBS_PERSON_TYPE_KOR IN ('전임직 직원','전임직 교원','별정직','이전 사원', 'Teacher of full time position')
+			  		or EBS_PERSON_TYPE_KOR LIKE '%연구원'
+			  	  )
+			  and (
+			  		  EBS_GRADE_NAME_KOR = '명예교수'
+			       or EBS_GRADE_NAME_KOR = '외국인초빙교수'
+			       or EBS_GRADE_NAME_KOR = '전문특훈교수'
+			       or EBS_GRADE_NAME_KOR = '연구조교수'
+			       or EBS_GRADE_NAME_KOR = '전문연구원'
+			       or EBS_GRADE_NAME_KOR = '전문교수'
+			       or EBS_GRADE_NAME_KOR = '연구조교수(Research Fellow)'
+			       or EBS_GRADE_NAME_KOR = '외국인초빙 석좌교수'
+			       or EBS_GRADE_NAME_KOR = '연구원'
+			       or EBS_GRADE_NAME_KOR = '책임급위촉연구원'
+			       or EBS_GRADE_NAME_KOR = '대우교수'
+			       or EBS_GRADE_NAME_KOR = '부교수'
+			       or EBS_GRADE_NAME_KOR = '연구부교수'
+			       or EBS_GRADE_NAME_KOR = '전문선임연구원'
+			       or EBS_GRADE_NAME_KOR = '교수'
+			       or EBS_GRADE_NAME_KOR = '교수(정년후교수)'
+			       or EBS_GRADE_NAME_KOR = '책임연구원'
+			       or EBS_GRADE_NAME_KOR = '총장'
+			       or EBS_GRADE_NAME_KOR = '연구부교수(Research Fellow)'
+			       or EBS_GRADE_NAME_KOR = '연구교수(Research Fellow)'
+			       or EBS_GRADE_NAME_KOR = '초빙석좌교수'
+			       or EBS_GRADE_NAME_KOR = '선임연구원'
+			       or EBS_GRADE_NAME_KOR = '외국인초빙 조교수'
+			       or EBS_GRADE_NAME_KOR = '연구교수'
+			       or EBS_GRADE_NAME_KOR = '강의전담조교수'
+			       or EBS_GRADE_NAME_KOR = '초빙교수'
+			       or EBS_GRADE_NAME_KOR = '조교수'
+			       or EBS_GRADE_NAME_KOR = '연구교수(산학협력중점교수)'
+			       or EBS_GRADE_NAME_KOR = '연구부교수(산학협력중점교수)'
+			       or EBS_GRADE_NAME_KOR = '연구조교수(산학협력중점교수)'
+			  )
+			</if>
+			<if test='gubun != null and gubun != "" and gubun == "S" '>  <!-- 학생 검색조건 -->
+			  and (ACAD_PROG_CODE = '7' or ACAD_PROG_CODE = '5')
+			  and SUBSTR(REPLACE(PROG_EFFDT, '/',''),1,4) >= '2000'
+			</if>
+			and <include refid="prefixToChar"/>LASTUPDDTTM<include refid="postfixToCharYmd"/> <![CDATA[ >= ]]> #{lastHarvestDate, jdbcType=VARCHAR}
+		</where>
+
+  </select>
+
+  <select id="findByUserId" resultType="kr.co.argonet.r2rims.core.vo.UserVo">
+  	select  NAME_AC				                       as KOR_NM
+  	       ,EMPLOYEE_NUMBER							   as USER_ID
+	       ,(case when SUBSTR(REPLACE(EBS_START_DATE,'/',''),1,8) = '47121231' then ''
+	         else SUBSTR(REPLACE(EBS_START_DATE,'/',''),1,8) end)  as APTM_DATE
+	       ,(case when SUBSTR(REPLACE(EBS_END_DATE,'/',''),1,8)  = '47121231' then ''
+	         else SUBSTR(REPLACE(EBS_END_DATE,'/',''),1,8) end) as RETR_DATE
+	       ,(case when TRIM(EBS_USER_STATUS_KOR) = '재직' then '1'
+	         else case when TRIM(EBS_USER_STATUS_KOR) = '퇴직'  then '2'
+	         else '' end end)	  					   as HLDOF_YN
+  	from PERSON_UID  where EMPLOYEE_NUMBER = #{userId, jdbcType=VARCHAR}
+  </select>
+
+  <sql id="personUidCondition">
+  		<if test="keyword != null and keyword != ''">
+		and (
+				  USER_ID like CONCAT(CONCAT('%',#{keyword, jdbcType=VARCHAR}),'%')
+		  		or lower(KOR_NM) like CONCAT(CONCAT('%',lower(#{keyword, jdbcType=VARCHAR})),'%')
+		  		or lower(FIRST_NAME) like CONCAT(CONCAT('%',lower(#{keyword, jdbcType=VARCHAR})),'%')
+		  		or lower(LAST_NAME) like CONCAT(CONCAT('%',lower(#{keyword, jdbcType=VARCHAR})),'%')
+		  		or DEPT_KOR like CONCAT(CONCAT('%',#{keyword, jdbcType=VARCHAR}),'%')
+		  		or EMAL_ADDR like CONCAT(CONCAT('%',#{keyword, jdbcType=VARCHAR}),'%')
+		  		or OFC_TELNO like CONCAT(CONCAT('%',#{keyword, jdbcType=VARCHAR}),'%')
+	  		)
+  		</if>
+  		<if test="korNm != null and korNm != ''">
+  			and lower(KOR_NM) like CONCAT(CONCAT('%',lower(#{korNm, jdbcType=VARCHAR})),'%')
+  		</if>
+  		<if test="deptKor != null and deptKor != ''">
+  			and DEPT_KOR like CONCAT(CONCAT('%',#{deptKor, jdbcType=VARCHAR}),'%')
+  		</if>
+  		<if test="userId != null and userId != ''">
+  			and USER_ID like CONCAT(CONCAT('%',#{userId, jdbcType=VARCHAR}),'%')
+  		</if>
+  		<if test="engNm != null and engNm != ''">
+  			and CONCAT(CONCAT(LAST_NAME, ', '),lower(FIRST_NAME)) like CONCAT(CONCAT('%',lower(#{engNm, jdbcType=VARCHAR})),'%')
+  		</if>
+	    <if test="srchEmalAddr != null and srchEmalAddr != ''">
+			and EMAL_ADDR like CONCAT(CONCAT('%',#{srchEmalAddr}),'%')
+		</if>
+	  	<if test="grade != null and grade != ''">
+			and GRADE1 like CONCAT(CONCAT('%',#{grade}),'%')
+		</if>
+  </sql>
+
+  <select id="countByKeyword" resultType="int">
+	select count(*) as totaclCount
+	 from (
+		  	select case when (ACAD_PROG_CODE = '7' or ACAD_PROG_CODE = '5') and STU_STATUS_CODE = '0' and SUBSTR(REPLACE(PROG_EFFDT, '/',''),1,4) >= '2000' then STD_NO
+		  		     else <include refid="nvlifnull"/>(EMPLOYEE_NUMBER,STD_NO)   end  			as USER_ID
+		  	      ,NAME_AC										as KOR_NM
+			      ,FIRST_NAME			                        as FIRST_NAME
+			      ,LAST_NAME			                        as LAST_NAME
+		  	      ,case when (ACAD_PROG_CODE = '7' or ACAD_PROG_CODE = '5') and STU_STATUS_CODE = '0' and SUBSTR(REPLACE(PROG_EFFDT, '/',''),1,4) >= '2000' then TRIM(ACAD_EBS_ORG_NAME_KOR)
+		  	         else TRIM(EBS_ORG_NAME_KOR) end  				as DEPT_KOR
+		  	      ,case when (ACAD_PROG_CODE = '7' or ACAD_PROG_CODE = '5') and STU_STATUS_CODE = '0' and SUBSTR(REPLACE(PROG_EFFDT, '/',''),1,4) >= '2000' then '학생'
+		  	         else SUBSTRB(TRIM(EBS_GRADE_NAME_KOR	),1,40)   end  				as GRADE1
+		  	      ,EMAIL_ADDR									as EMAL_ADDR
+		  	      ,<include refid="nvlifnull"/>(REPLACE(BUSN_PHONE, 'N/A', ''),REPLACE(CELL_PHONE, 'N/A', '')) 				as OFC_TELNO
+			      ,(case when TRIM(EBS_USER_STATUS_KOR) = '재직' then '1'
+			        else case when TRIM(EBS_USER_STATUS_KOR) = '퇴직'  then '2'
+			        else '' end end)	  					   as HLDOF_YN
+              	  ,KAIST_UID                              		as USER_IDNTFR
+              	  ,STD_NO                                 		as STDNT_NO
+		  	from  PERSON_UID TA
+		    where  (TRIM(EBS_USER_STATUS_KOR) = '재직' or STU_STATUS_CODE = '0')
+		     and <include refid="nvlifnull"/>(EMPLOYEE_NUMBER,STD_NO) is not null
+		) TA
+	  <where>
+	  	<include refid="personUidCondition"/>
+	  </where>
+  </select>
+
+  <select id="findUserListByKeyword" resultType="kr.co.argonet.r2rims.core.vo.UserVo">
+  	 <if test="_databaseId == 'oracle' "><include refid="pageHeader"/></if>
+		select TA.*
+	      <if test="_databaseId == 'oracle' "> <!-- oracle paging column -->
+	      	,row_number()over(order by TA.KOR_NM ASC) AS RN
+	      </if>
+	 	from (
+		  	select case when (ACAD_PROG_CODE = '7' or ACAD_PROG_CODE = '5') and STU_STATUS_CODE = '0' and SUBSTR(REPLACE(PROG_EFFDT, '/',''),1,4) >= '2000' then STD_NO
+		  		     else <include refid="nvlifnull"/>(EMPLOYEE_NUMBER,STD_NO)   end  			as USER_ID
+		  	      ,NAME_AC										as KOR_NM
+			      ,FIRST_NAME			                        as FIRST_NAME
+			      ,LAST_NAME			                        as LAST_NAME
+		  	      ,case when (ACAD_PROG_CODE = '7' or ACAD_PROG_CODE = '5') and STU_STATUS_CODE = '0' and SUBSTR(REPLACE(PROG_EFFDT, '/',''),1,4) >= '2000' then TRIM(ACAD_EBS_ORG_NAME_KOR)
+		  	      else TRIM(EBS_ORG_NAME_KOR) end  				as DEPT_KOR
+		  	      ,case when (ACAD_PROG_CODE = '7' or ACAD_PROG_CODE = '5') and STU_STATUS_CODE = '0' and SUBSTR(REPLACE(PROG_EFFDT, '/',''),1,4) >= '2000' then '학생'
+		  	       else SUBSTRB(TRIM(EBS_GRADE_NAME_KOR	),1,40)   end  				as GRADE1
+			      ,(case when SUBSTR(REPLACE(EBS_START_DATE,'/',''),1,8) = '47121231' then ''
+			       else SUBSTR(REPLACE(EBS_START_DATE,'/',''),1,8) end)              as APTM_DATE
+		  	      ,EMAIL_ADDR									as EMAL_ADDR
+		  	      ,<include refid="nvlifnull"/>(REPLACE(BUSN_PHONE, 'N/A', ''),REPLACE(CELL_PHONE, 'N/A', ''))			as OFC_TELNO
+              	  ,KAIST_UID                              		as USER_IDNTFR
+              	  ,STD_NO                                 		as STDNT_NO
+		  	from  PERSON_UID TA
+		    where  (TRIM(EBS_USER_STATUS_KOR) = '재직' or STU_STATUS_CODE = '0')
+		     and <include refid="nvlifnull"/>(EMPLOYEE_NUMBER,STD_NO) is not null
+			) TA
+	  <where>
+	  	<include refid="personUidCondition"/>
+	  </where>
+	  <if test="_databaseId == 'mysql' ">order by TA.KOR_NM ASC LIMIT ${ps}, ${ct}</if> <!-- mysql paging -->
+	  <if test="_databaseId == 'oracle' "><include refid="pageFooter"/></if>
+  </select>
+
+  <select id="findRetireUser" resultType="kr.co.argonet.r2rims.core.vo.UserVo">
+		select
+		    NAME_AC				                                               as KOR_NM
+	       ,(case when SUBSTR(REPLACE(EBS_END_DATE,'/',''),1,8)  = '47121231' then ''
+	         else SUBSTR(REPLACE(EBS_END_DATE,'/',''),1,8) end)                as RETR_DATE
+		   <if test='(gubun == null or gubun == "") or (gubun != null and gubun != "" and gubun != "S")'>
+		   ,EMPLOYEE_NUMBER                                                    as USER_ID
+	       ,(case when TRIM(EBS_USER_STATUS_KOR) = '재직' then '1'
+	         else case when TRIM(EBS_USER_STATUS_KOR) = '퇴직'  then '2'
+	         else '' end end)	  					                           as HLDOF_YN
+	       </if>
+	       <if test='gubun != null and gubun != "" and gubun == "S" '>
+	       ,STD_NO                                                    		   as USER_ID
+ 		   ,CONCAT('9', STU_STATUS_CODE)									   as HLDOF_YN
+ 		   </if>
+		from  PERSON_UID TA
+		<where>
+		<if test='(gubun == null or gubun == "") or (gubun != null and gubun != "" and gubun != "S")'> <!-- 전임,비전임교직원 검색조건 -->
+			 (
+			  		EBS_PERSON_TYPE_KOR IN ('전임직 직원','전임직 교원','별정직','이전 사원', 'Teacher of full time position')
+			  		or EBS_PERSON_TYPE_KOR LIKE '%연구원'
+			  	  )
+			  and (
+			  		  EBS_GRADE_NAME_KOR = '명예교수'
+			       or EBS_GRADE_NAME_KOR = '외국인초빙교수'
+			       or EBS_GRADE_NAME_KOR = '전문특훈교수'
+			       or EBS_GRADE_NAME_KOR = '연구조교수'
+			       or EBS_GRADE_NAME_KOR = '전문연구원'
+			       or EBS_GRADE_NAME_KOR = '전문교수'
+			       or EBS_GRADE_NAME_KOR = '연구조교수(Research Fellow)'
+			       or EBS_GRADE_NAME_KOR = '외국인초빙 석좌교수'
+			       or EBS_GRADE_NAME_KOR = '연구원'
+			       or EBS_GRADE_NAME_KOR = '책임급위촉연구원'
+			       or EBS_GRADE_NAME_KOR = '대우교수'
+			       or EBS_GRADE_NAME_KOR = '부교수'
+			       or EBS_GRADE_NAME_KOR = '연구부교수'
+			       or EBS_GRADE_NAME_KOR = '전문선임연구원'
+			       or EBS_GRADE_NAME_KOR = '교수'
+			       or EBS_GRADE_NAME_KOR = '교수(정년후교수)'
+			       or EBS_GRADE_NAME_KOR = '책임연구원'
+			       or EBS_GRADE_NAME_KOR = '총장'
+			       or EBS_GRADE_NAME_KOR = '연구부교수(Research Fellow)'
+			       or EBS_GRADE_NAME_KOR = '연구교수(Research Fellow)'
+			       or EBS_GRADE_NAME_KOR = '초빙석좌교수'
+			       or EBS_GRADE_NAME_KOR = '선임연구원'
+			       or EBS_GRADE_NAME_KOR = '외국인초빙 조교수'
+			       or EBS_GRADE_NAME_KOR = '연구교수'
+			       or EBS_GRADE_NAME_KOR = '강의전담조교수'
+			       or EBS_GRADE_NAME_KOR = '초빙교수'
+			       or EBS_GRADE_NAME_KOR = '조교수'
+			       or EBS_GRADE_NAME_KOR = '연구교수(산학협력중점교수)'
+			       or EBS_GRADE_NAME_KOR = '연구부교수(산학협력중점교수)'
+			       or EBS_GRADE_NAME_KOR = '연구조교수(산학협력중점교수)'
+			  )
+			and EBS_USER_STATUS_KOR = '퇴직'
+			</if>
+			<if test='gubun != null and gubun != "" and gubun == "S" '>  <!-- 학생 검색조건 -->
+			  and (ACAD_PROG_CODE = '7' or ACAD_PROG_CODE = '5')
+			  and SUBSTR(REPLACE(PROG_EFFDT, '/',''),1,4) >= '2000'
+			  and STU_STATUS_CODE != '0'
+			</if>
+			<if test="lastHarvestDate != null and lastHarvestDate != ''">
+			  and <include refid="prefixToChar"/>LASTUPDDTTM<include refid="postfixToCharYmd"/> <![CDATA[ >= ]]> #{lastHarvestDate, jdbcType=VARCHAR}
+			</if>
+		</where>
+  </select>
+
+
+</mapper>

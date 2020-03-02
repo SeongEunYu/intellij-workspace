@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.argonet.r2rims.core.mapper.KriCntcMapper">
+
+	<sql id="pageHeader">SELECT * FROM ( SELECT * FROM (</sql>
+	<sql id="pageFooter"><![CDATA[) WHERE RN  <=  (#{ps} + #{ct})) a  WHERE a.RN > #{ps}]]></sql>
+	<sql id="nvlifnull"><if test="_databaseId == 'oracle' ">NVL</if><if test="_databaseId == 'mysql' ">IFNULL</if></sql>
+	<sql id="prefixToChar"><if test="_databaseId == 'oracle' ">TO_CHAR(</if><if test="_databaseId == 'mysql' ">DATE_FORMAT(</if></sql>
+	<sql id="postfixToCharYmd"><if test="_databaseId == 'oracle' ">, 'YYYYMMDD')</if><if test="_databaseId == 'mysql' ">, '%Y%m%d')</if></sql>
+	<sql id="postfixToCharY-m-d"><if test="_databaseId == 'oracle' ">, 'YYYY-MM-DD')</if><if test="_databaseId == 'mysql' ">, '%Y-%m-%d')</if></sql>
+    <sql id="prefixToDate"><if test="_databaseId == 'oracle' ">TO_DATE(</if><if test="_databaseId == 'mysql' ">STR_TO_DATE(</if></sql>
+    <sql id="postfixToDate"><if test="_databaseId == 'oracle' ">, 'YYYY-MM-DD')</if><if test="_databaseId == 'mysql' ">, '%Y-%m-%d')</if></sql>
+    <sql id="sysdateNow"><if test="_databaseId == 'oracle' ">SYSDATE</if><if test="_databaseId == 'mysql' ">now()</if></sql>
+
+	<sql id="nkrdd505Orderby">
+		order by
+		<choose>
+			<when test='orderby == "orgLangPprNm" '>TA.ORG_LANG_PPR_NM</when>
+			<when test='orderby == "pblcYm" '>RPAD(TA.PBLC_YM, 8, '0101')</when>
+			<when test='orderby == "scjnlNm" '>TA.SCJNL_NM</when>
+			<when test='orderby == "userId" '>RU.USER_ID</when>
+			<when test='orderby == "korNm" '>RU.KOR_NM</when>
+			<otherwise>RCV_DTTM</otherwise>
+		</choose>
+		<if test=" direct != null and direct == 'asc' ">ASC</if>
+		<if test=" direct == null or direct == 'des' ">DESC</if>
+	</sql>
+
+	<sql id="nkrdd505Condition">
+		<if test="insttAgcId != null and insttAgcId != ''">
+			and TA.AGC_ID != #{insttAgcId, jdbcType=VARCHAR}
+		</if>
+		<if test="maskTitle != null and maskTitle != ''">
+			and lower(TA.ORG_LANG_PPR_NM) like CONCAT('%', CONCAT(lower(#{maskTitle, jdbcType=VARCHAR}), '%') )
+		</if>
+	</sql>
+
+	<select id="countNkrdd505ByCond" resultType="int">
+		select count(*) as totalCount
+		from NKRDD505 TA
+		join RI_USER RU on (TA.RSCHR_REG_NO = RU.RSCHR_REG_NO)
+		<where>
+			<include refid="nkrdd505Condition"/>
+		</where>
+	</select>
+
+	<select id="findNkrdd505ListByCond" resultType="kr.co.argonet.r2rims.core.vo.ArticleVo">
+		<if test="_databaseId == 'oracle' "><include refid="pageHeader"/></if>
+		select TA.*
+		      <if test="_databaseId == 'oracle' "> <!-- oracle paging column -->
+		      	,row_number()over(<include refid="nkrdd505Orderby"/>) AS RN
+		      </if>
+		      ,RU.USER_ID as prtcpntId
+		      ,RU.KOR_NM
+		from NKRDD505 TA
+		join RI_USER RU on (TA.RSCHR_REG_NO = RU.RSCHR_REG_NO)
+		<where>
+			<include refid="nkrdd505Condition"/>
+		</where>
+		<include refid="nkrdd505Orderby"/>
+		<if test="_databaseId == 'mysql' ">LIMIT ${ps}, ${ct}</if> <!-- mysql paging -->
+		<if test="_databaseId == 'oracle' "><include refid="pageFooter"/></if>
+	</select>
+
+	<select id="findNkrdd505ByMngNo" resultType="kr.co.argonet.r2rims.core.vo.ArticleVo">
+		select TA.* from NKRDD505 TA where MNG_NO = #{mngNo, jdbcType=VARCHAR}
+	</select>
+
+	<select id="findNkrdd506ByMngNo" resultType="kr.co.argonet.r2rims.core.vo.ArticlePartiVo">
+		select TA.* from NKRDD506 TA where MNG_NO = #{mngNo, jdbcType=VARCHAR} order by TO_NUMBER(SEQ_NO)
+	</select>
+
+</mapper>

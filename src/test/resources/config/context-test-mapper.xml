@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:context="http://www.springframework.org/schema/context" xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
+        http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.2.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.2.xsd">
+
+	<context:component-scan base-package="kr.co.argonet.r2rims">
+		<context:include-filter type="annotation"
+			expression="org.springframework.stereotype.Controller" />
+		<context:include-filter type="annotation"
+			expression="org.springframework.stereotype.Service" />
+		<context:include-filter type="annotation"
+			expression="org.springframework.stereotype.Repository" />
+	</context:component-scan>
+
+
+	<bean id="vendorProperties"
+		class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+		<property name="properties">
+			<props>
+				<prop key="SQL Server">sqlserver</prop>
+				<prop key="HSQL">hsql</prop>
+				<prop key="Oracle">oracle</prop>
+				<prop key="MySQL">mysql</prop>
+			</props>
+		</property>
+	</bean>
+
+	<bean id="databaseIdProvider" class="org.apache.ibatis.mapping.VendorDatabaseIdProvider">
+		<property name="properties" ref="vendorProperties" />
+	</bean>
+
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="databaseIdProvider" ref="databaseIdProvider" />
+		<property name="configLocation" value="classpath:config/mapper/mybatis-config-base.xml" />
+		<property name="mapperLocations">
+			<list>
+				<value>classpath*:kr/co/argonet/r2rims/core/mapper/*Mapper.xml</value>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate" destroy-method="clearCache">
+	  <constructor-arg index="0" ref="sqlSessionFactory" />
+	</bean>
+
+	<!-- scan for mappers and let them be autowired-->
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<property name="basePackage" value="kr.co.argonet.r2rims.core" />
+		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
+	</bean>
+
+	<bean id="erpSqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="erpDataSource" />
+		<property name="databaseIdProvider" ref="databaseIdProvider" />
+		<property name="configLocation" value="classpath:config/mapper/mybatis-config-base.xml" />
+		<property name="mapperLocations">
+			<list>
+				<value>classpath*:kr/co/argonet/r2rims/erp/mapper/*Mapper.xml</value>
+			</list>
+		</property>
+	</bean>
+
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<property name="basePackage" value="kr.co.argonet.r2rims.erp" />
+		<property name="annotationClass" value="kr.co.argonet.r2rims.core.annotation.ErpMapperScan" />
+		<property name="sqlSessionFactoryBeanName" value="erpSqlSessionFactory"/>
+	</bean>
+
+	<!-- pms -->
+	<bean id="pmsSqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="pmsDataSource" />
+		<property name="databaseIdProvider" ref="databaseIdProvider" />
+		<property name="configLocation" value="classpath:config/mapper/mybatis-config-base.xml" />
+		<property name="mapperLocations">
+			<list>
+				<value>classpath*:kr/co/argonet/r2rims/pms/mapper/*Mapper.xml</value>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="pmsSqlSession" class="org.mybatis.spring.SqlSessionTemplate" destroy-method="clearCache">
+	  <constructor-arg index="0" ref="pmsSqlSessionFactory" />
+	</bean>
+
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<property name="basePackage" value="kr.co.argonet.r2rims.pms" />
+		<property name="annotationClass" value="kr.co.argonet.r2rims.core.annotation.PmsMapperScan" />
+		<property name="sqlSessionFactoryBeanName" value="pmsSqlSessionFactory"/>
+	</bean>
+
+	<bean id="scholarSqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="scholarDataSource" />
+		<property name="databaseIdProvider" ref="databaseIdProvider" />
+		<property name="configLocation" value="classpath:config/mapper/mybatis-config-base.xml" />
+		<property name="mapperLocations">
+			<list>
+				<value>classpath*:kr/co/argonet/r2rims/scholar/mapper/*Mapper.xml</value>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="scholarSqlSession" class="org.mybatis.spring.SqlSessionTemplate" destroy-method="clearCache">
+	  <constructor-arg index="0" ref="scholarSqlSessionFactory" />
+	</bean>
+
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<property name="basePackage" value="kr.co.argonet.r2rims.scholar" />
+		<property name="sqlSessionFactoryBeanName" value="scholarSqlSessionFactory"/>
+	</bean>
+
+
+</beans>

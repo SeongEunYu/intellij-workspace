@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:context="http://www.springframework.org/schema/context" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
+        http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.2.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.2.xsd
+        http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-4.2.xsd">
+
+	<!-- localhost -->
+	<!--
+	<util:properties id="rims_cfg" location="file:/Users/lhj/Documents/workspace_config/s2rims/kaist/config/rims_kaist.cfg" />
+	-->
+	<!-- RSS -->
+   	<util:properties id="rims_cfg" location="file:/data/software/config/r2rims_rss_test/rims_rss.cfg" />
+ 	<context:property-placeholder properties-ref="rims_cfg"/>
+
+	<!-- localhost -->
+	<bean id="localDataSource" class="org.apache.commons.dbcp.BasicDataSource">
+		<property name="driverClassName" value="#{rims_cfg['mysql.driver']}"/>
+		<property name="url" value="#{rims_cfg['local.db.url']}"/>
+		<property name="username" value="#{rims_cfg['local.db.username']}"/>
+		<property name="password" value="#{rims_cfg['local.db.password']}"/>
+		<property name="maxActive" value="30"/>
+		<property name="maxIdle" value="10"/>
+		<property name="maxWait" value="10000"/>
+		<property name="defaultAutoCommit" value="true"/>
+		<property name="validationQuery" value="select 1 from dual"/>
+		<property name="testWhileIdle" value="true"/>
+		<property name="timeBetweenEvictionRunsMillis" value="7200000"/>
+	</bean>
+
+	<!-- gotit -->
+	<bean id="gotitDataSource" class="org.apache.commons.dbcp.BasicDataSource">
+		<property name="driverClassName" value="#{rims_cfg['mysql.driver']}"/>
+		<property name="url" value="#{rims_cfg['gotit.db.url']}"/>
+		<property name="username" value="#{rims_cfg['gotit.db.username']}"/>
+		<property name="password" value="#{rims_cfg['gotit.db.password']}"/>
+		<property name="maxActive" value="30"/>
+		<property name="maxIdle" value="10"/>
+		<property name="maxWait" value="10000"/>
+		<property name="defaultAutoCommit" value="true"/>
+		<property name="validationQuery" value="select 1 from dual"/>
+		<property name="testWhileIdle" value="true"/>
+		<property name="timeBetweenEvictionRunsMillis" value="7200000"/>
+	</bean>
+
+ 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
+	  <property name="driverClassName" value="#{rims_cfg['mysql.driver']}"/>
+	  <property name="url" value="#{rims_cfg['db.url']}"/>
+	  <property name="username" value="#{rims_cfg['db.username']}"/>
+	  <property name="password" value="#{rims_cfg['db.password']}"/>
+	  <property name="maxActive" value="30"/>
+	  <property name="maxIdle" value="10"/>
+	  <property name="maxWait" value="10000"/>
+	  <property name="defaultAutoCommit" value="true"/>
+	  <property name="validationQuery" value="select 1 from dual"/>
+	  <property name="testWhileIdle" value="true"/>
+	  <property name="timeBetweenEvictionRunsMillis" value="7200000"/>
+	</bean>
+
+ 	<bean id="erpDataSource" class="org.apache.commons.dbcp.BasicDataSource">
+	  <property name="driverClassName" value="#{rims_cfg['db.driver']}"/>
+	  <property name="url" value="#{rims_cfg['erp.db.url']}"/>
+	  <property name="username" value="#{rims_cfg['erp.db.username']}"/>
+	  <property name="password" value="#{rims_cfg['erp.db.password']}"/>
+	  <property name="maxActive" value="30"/>
+	  <property name="maxIdle" value="10"/>
+	  <property name="maxWait" value="10000"/>
+	  <property name="defaultAutoCommit" value="true"/>
+	  <property name="validationQuery" value="select 1 from dual"/>
+	  <property name="testWhileIdle" value="true"/>
+	  <property name="timeBetweenEvictionRunsMillis" value="7200000"/>
+	</bean>
+
+ 	<bean id="pmsDataSource" class="org.apache.commons.dbcp.BasicDataSource">
+	  <property name="driverClassName" value="#{rims_cfg['mysql.driver']}"/>
+	  <property name="url" value="#{rims_cfg['pat.db.url']}"/>
+	  <property name="username" value="#{rims_cfg['pat.db.username']}"/>
+	  <property name="password" value="#{rims_cfg['pat.db.password']}"/>
+	  <!--
+	  <property name="password" value="#ppmsno1"/>
+	   -->
+	  <property name="maxActive" value="30"/>
+	  <property name="maxIdle" value="10"/>
+	  <property name="maxWait" value="10000"/>
+	  <property name="defaultAutoCommit" value="true"/>
+	  <property name="validationQuery" value="select 1 from dual"/>
+	  <property name="testWhileIdle" value="true"/>
+	  <property name="timeBetweenEvictionRunsMillis" value="7200000"/>
+	</bean>
+
+ 	<bean id="scholarDataSource" class="org.apache.commons.dbcp.BasicDataSource">
+	  <property name="driverClassName" value="#{rims_cfg['sybase.driver']}"/>
+	  <property name="url" value="#{rims_cfg['scholar.db.url']}"/>
+	  <property name="connectionProperties" value="charset=eucksc;" />
+	  <property name="username" value="#{rims_cfg['scholar.db.username']}"/>
+	  <property name="password" value="#{rims_cfg['scholar.db.password']}"/>
+	  <property name="maxActive" value="30"/>
+	  <property name="maxIdle" value="10"/>
+	  <property name="maxWait" value="10000"/>
+	  <property name="defaultAutoCommit" value="true"/>
+	  <property name="validationQuery" value="select 1"/>
+	  <property name="testWhileIdle" value="true"/>
+	  <property name="timeBetweenEvictionRunsMillis" value="7200000"/>
+	</bean>
+
+
+
+</beans>

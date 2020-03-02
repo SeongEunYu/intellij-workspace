@@ -1,0 +1,1149 @@
+--------------------------------------------------------
+--  DDL for Table ER_ARTICLE
+--------------------------------------------------------
+  CREATE TABLE "ER_ARTICLE"
+   (
+   	"SOURC_IDNTFC_NO" VARCHAR2(20 BYTE),
+	"PBLCATE_TYPE" VARCHAR2(20 BYTE),
+	"ARTICLE_TTL" VARCHAR2(500 BYTE),
+	"PLSCMPN_NM" VARCHAR2(200 BYTE),
+	"LANG" VARCHAR2(20 BYTE),
+	"DOC_TYPE" VARCHAR2(100 BYTE),
+	"ADIT_KWRD" VARCHAR2(3000 BYTE),
+	"AUTHR_KWRD" VARCHAR2(3000 BYTE),
+	"PBLSHR_NM" VARCHAR2(100 BYTE),
+	"PBLSHR_CITY" VARCHAR2(100 BYTE),
+	"PBLSHR_ADRES" VARCHAR2(200 BYTE),
+	"TC" NUMBER(11,0),
+	"TC_DATE" DATE,
+	"ISSN" VARCHAR2(20 BYTE),
+	"ARTICLE_ABRV" VARCHAR2(30 BYTE),
+	"ISO_ARTICLE_ABRV" VARCHAR2(200 BYTE),
+	"PBLCATE_DATE" VARCHAR2(50 BYTE),
+	"PBLCATE_YEAR" VARCHAR2(10 BYTE),
+	"VLM" VARCHAR2(50 BYTE),
+	"ISSUE" VARCHAR2(50 BYTE),
+	"BEGIN_PAGE" VARCHAR2(20 BYTE),
+	"END_PAGE" VARCHAR2(20 BYTE),
+	"DOI" VARCHAR2(100 BYTE),
+	"SUBJCT_CTGRY" VARCHAR2(1000 BYTE),
+	"ARTICLE_DELY_NO" VARCHAR2(100 BYTE),
+	"RPNT_ADRES" VARCHAR2(500 BYTE),
+	"EMAIL_ADRES" VARCHAR2(1000 BYTE),
+	"TR_PC" VARCHAR2(50 BYTE),
+	"RE_IF" VARCHAR2(10 BYTE),
+	"RE_DATE" DATE,
+	"RE_USER" VARCHAR2(20 BYTE),
+	"DPLCT_SOURC_IDNTFC_NO" VARCHAR2(20 BYTE),
+	"ARTL_TIMEP" VARCHAR2(4 BYTE),
+	"STATUS" CHAR(1 BYTE) DEFAULT 'I',
+	"REGDATE" DATE,
+	"MIG_COMPLETED" CHAR(1 BYTE) DEFAULT 'N',
+	"MIG_USER" VARCHAR2(20 BYTE),
+	"MIG_DATE" DATE,
+	"IS_APPROVAL" CHAR(1 BYTE),
+	"TR_PD" CHAR(2 BYTE),
+	"ARTICLE_ID" NUMBER(11,0),
+	"ABSTRCT" CLOB,
+	"ISBN" VARCHAR2(200 BYTE),
+	"CFRNC_NM" VARCHAR2(400 BYTE),
+	"CFRNC_DATE" VARCHAR2(400 BYTE),
+	"CFRNC_LOC" VARCHAR2(400 BYTE),
+	"CFRNC_CD" VARCHAR2(400 BYTE),
+	"RE_PC" VARCHAR2(10 BYTE),
+	"RE_LA" VARCHAR2(10 BYTE),
+	"SOURC_DVSN_CD" VARCHAR2(20 BYTE),
+	"VA_DATE" DATE,
+	"VA_USER" VARCHAR2(20 BYTE),
+	"FU" VARCHAR2(1000 BYTE),
+	"WOS_CTGRY" VARCHAR2(1000 BYTE)
+   )TABLESPACE "RIMS";
+--------------------------------------------------------
+--  DDL for Table ER_ARTICLE_ADRES
+--------------------------------------------------------
+
+  CREATE TABLE "ER_ARTICLE_ADRES"
+   (
+   	"SOURC_IDNTFC_NO" VARCHAR2(20 BYTE),
+	"ADRES_SEQ" NUMBER(4,0),
+	"AUTHOR" VARCHAR2(4000 BYTE),
+	"ADDRESS" CLOB,
+	"ADD1" VARCHAR2(1000 BYTE),
+	"ADD2" VARCHAR2(1000 BYTE),
+	"ADD3" VARCHAR2(100 BYTE),
+	"RE_INST" VARCHAR2(500 BYTE),
+	"RE_DEPT" VARCHAR2(500 BYTE),
+	"RE_COUNTRY" VARCHAR2(50 BYTE),
+	"RE_DATE" DATE,
+	"RE_USER" VARCHAR2(20 BYTE),
+	"ARTICLE_ID" NUMBER(11,0),
+	"VA_USER" VARCHAR2(20 BYTE),
+	"VA_DATE" DATE
+   )TABLESPACE "RIMS";
+
+--------------------------------------------------------
+--  DDL for Table ER_ARTICLE_AUTHR
+--------------------------------------------------------
+  CREATE TABLE "ER_ARTICLE_AUTHR"
+   (
+   	"SOURC_IDNTFC_NO" VARCHAR2(20 BYTE),
+	"AUTHR_SEQ" NUMBER(4,0),
+	"AUTHR_ABRV" VARCHAR2(50 BYTE),
+	"AUTHR_NM" VARCHAR2(50 BYTE),
+	"RE_PERNO" VARCHAR2(20 BYTE),
+	"RE_DATE" DATE,
+	"RE_USER" VARCHAR2(20 BYTE),
+	"MIG_COMPLETED" CHAR(1 BYTE) DEFAULT 'Y',
+	"IS_APPROVAL" CHAR(1 BYTE) DEFAULT 'N',
+	"ARTICLE_ID" NUMBER(11,0),
+	"VA_DATE" DATE,
+	"VA_USER" VARCHAR2(20 BYTE),
+	"AUTHR_ORDER" NUMBER(11,0),
+	"TPI_DVS_CD" VARCHAR2(20 BYTE),
+	"ORCID" VARCHAR2(50 BYTE),
+	"RID" VARCHAR2(50 BYTE)
+   )TABLESPACE "RIMS";
+
+--------------------------------------------------------
+--  DDL for Table ER_ARTICLE_AUTHR_ADRES
+--------------------------------------------------------
+  CREATE TABLE "ER_ARTICLE_AUTHR_ADRES"
+   (
+    "SOURC_IDNTFC_NO" VARCHAR2(20 BYTE),
+	"AUTHR_SEQ" NUMBER(4,0),
+	"ADRES_SEQ" NUMBER(4,0),
+	"ARTICLE_ID" NUMBER(11,0)
+   )TABLESPACE "RIMS";
+
+--------------------------------------------------------
+--  DDL for Table ER_ARTICLE_CTGRY
+--------------------------------------------------------
+  CREATE TABLE "ER_ARTICLE_CTGRY"
+   (
+    "SOURC_IDNTFC_NO" VARCHAR2(20 BYTE),
+	"SUBJCT_CTGRY" VARCHAR2(100 BYTE),
+	"ARTICLE_ID" NUMBER(11,0)
+   )TABLESPACE "RIMS";
+
+--------------------------------------------------------
+--  DDL for Table ER_ARTICLE_REFER
+--------------------------------------------------------
+  CREATE TABLE "ER_ARTICLE_REFER"
+   (
+    "SOURC_IDNTFC_NO" VARCHAR2(20 BYTE),
+	"REFER_SEQ" NUMBER(6,0),
+	"AUTHOR" VARCHAR2(20 BYTE),
+	"PBLCATE_YEAR" VARCHAR2(4 BYTE),
+	"PLSCMPN_NM" VARCHAR2(200 BYTE),
+	"VLM" VARCHAR2(20 BYTE),
+	"BEGIN_PAGE" VARCHAR2(20 BYTE),
+	"END_PAGE" VARCHAR2(20 BYTE),
+	"DOI" VARCHAR2(100 BYTE),
+	"RE_DATE" DATE,
+	"RE_USER" VARCHAR2(20 BYTE),
+	"RD_REF" VARCHAR2(4000 BYTE),
+	"ARTICLE_ID" NUMBER(11,0),
+	"VA_DATE" DATE,
+	"VA_USER" VARCHAR2(20 BYTE)
+   )TABLESPACE "RIMS";
+
+--------------------------------------------------------
+--  DDL for Table ER_ARTICLE_TC
+--------------------------------------------------------
+  CREATE TABLE "ER_ARTICLE_TC"
+   (
+    "ID" NUMBER(11,0),
+	"SOURC_IDNTFC_NO" VARCHAR2(20 BYTE),
+	"TC" NUMBER(11,0),
+	"TC_DATE" DATE,
+	"ARTICLE_ID" NUMBER(11,0)
+   )TABLESPACE "RIMS";
+
+--------------------------------------------------------
+--  DDL for Table INT_RESULT
+--------------------------------------------------------
+  CREATE TABLE "INT_RESULT"
+   (
+    "RESULT_ID" NUMBER(11,0),
+	"PERNO" VARCHAR2(20 BYTE),
+	"NAME_KOR" VARCHAR2(150 BYTE),
+	"NAME_ENG" VARCHAR2(150 BYTE),
+	"DEPT" VARCHAR2(200 BYTE),
+	"RE_LA" VARCHAR2(5 BYTE),
+	"RE_PC" VARCHAR2(5 BYTE),
+	"ARTICLE_TTL" VARCHAR2(500 BYTE),
+	"PLSCMPN_NM" VARCHAR2(200 BYTE),
+	"RY" VARCHAR2(10 BYTE),
+	"PBLCATE_YEAR" VARCHAR2(10 BYTE),
+	"PBLCATE_DATE" VARCHAR2(20 BYTE),
+	"VLM" VARCHAR2(20 BYTE),
+	"ISSUE" VARCHAR2(20 BYTE),
+	"BEGIN_PAGE" VARCHAR2(20 BYTE),
+	"END_PAGE" VARCHAR2(20 BYTE),
+	"DOI" VARCHAR2(100 BYTE),
+	"ISSN" VARCHAR2(20 BYTE),
+	"PBLSHR_NM" VARCHAR2(100 BYTE),
+	"PBLSHR_CITY" VARCHAR2(50 BYTE),
+	"LANG" VARCHAR2(20 BYTE),
+	"AUTHR_NM" VARCHAR2(1000 BYTE),
+	"ISSCI" CHAR(1 BYTE),
+	"ISSCIE" CHAR(1 BYTE),
+	"ISSSCI" CHAR(1 BYTE),
+	"ISAHCI" CHAR(1 BYTE),
+	"ISSCOPUS" CHAR(1 BYTE),
+	"ISKCI" CHAR(1 BYTE),
+	"ISETC" CHAR(1 BYTE),
+	"AUTONE" CHAR(1 BYTE),
+	"AUTMAIN" CHAR(1 BYTE),
+	"AUTCR" CHAR(1 BYTE),
+	"AUTCO" CHAR(1 BYTE),
+	"AUTCOUNT" NUMBER(11,0),
+	"AUTORDER" NUMBER(11,0),
+	"RPNT_ADRES" VARCHAR2(500 BYTE),
+	"EMAIL_ADRES" VARCHAR2(500 BYTE),
+	"JT" VARCHAR2(20 BYTE) DEFAULT '1',
+	"PBLCATE_TYPE" VARCHAR2(20 BYTE) DEFAULT 'J',
+	"DOC_TYPE" VARCHAR2(100 BYTE) DEFAULT 'ARTICLE',
+	"KCI_GUBUN" CHAR(1 BYTE),
+	"RES_AREA" VARCHAR2(20 BYTE),
+	"STATUS" CHAR(1 BYTE) DEFAULT 'I',
+	"REGDATE" DATE,
+	"REVDATE" DATE,
+	"EXPDATE" DATE,
+	"RIMS_ID" VARCHAR2(20 BYTE),
+	"SOURC_DVSN_CD" VARCHAR2(20 BYTE),
+	"SCP_TC" NUMBER(11,0),
+	"WOS_TC" NUMBER(11,0),
+	"WOS_IDNTFC_NO" VARCHAR2(20 BYTE),
+	"SCP_IDNTFC_NO" VARCHAR2(20 BYTE),
+	"ABSTRCT" CLOB
+   )TABLESPACE "RIMS";
+
+--------------------------------------------------------
+--  DDL for Table RD_HISTORY
+--------------------------------------------------------
+  CREATE TABLE "RD_HISTORY"
+   (
+    "ID" NUMBER(11,0),
+	"GUBUN" VARCHAR2(10 BYTE),
+	"REGDATE" DATE,
+	"TITLE" VARCHAR2(400 BYTE),
+	"QUERY" VARCHAR2(400 BYTE),
+	"TOT_COUNT" NUMBER(11,0),
+	"DUP_COUNT" NUMBER(11,0),
+	"INS_COUNT" NUMBER(11,0),
+	"ERR_COUNT" NUMBER(11,0),
+	"IMP_FILE" VARCHAR2(400 BYTE),
+	"FORMAT" VARCHAR2(100 BYTE),
+	"YEAR" VARCHAR2(8 BYTE),
+	"EDITION" VARCHAR2(10 BYTE),
+	"STATUS" VARCHAR2(10 BYTE),
+	"ERROR_LOG" VARCHAR2(4000 BYTE)
+   )TABLESPACE "RIMS";
+
+--------------------------------------------------------
+--  DDL for Table RD_IMP_HISTORY
+--------------------------------------------------------
+  CREATE TABLE "RD_IMP_HISTORY"
+   (
+    "ID" NUMBER(11,0),
+	"HISTORY_ID" NUMBER(11,0),
+	"UT" VARCHAR2(100 BYTE),
+	"STATUS" CHAR(1 BYTE),
+	"DB_TYPE" VARCHAR2(10 BYTE),
+	"FORMAT" VARCHAR2(20 BYTE),
+	"RAWDATA" CLOB,
+	"RAWDATA_XML" CLOB,
+	"REGDATE" DATE,
+	"ISTRANSFORMED" CHAR(1 BYTE)
+   )TABLESPACE "RIMS";
+
+--------------------------------------------------------
+--  DDL for Table COM_ORG_ALIAS
+--------------------------------------------------------
+
+  CREATE TABLE "COM_ORG_ALIAS"
+   (
+   	"ID" NUMBER(11,0),
+	"GUBUN" VARCHAR2(20 BYTE),
+	"ORG_NAME" VARCHAR2(255 BYTE),
+	"ORG_ALIAS" VARCHAR2(255 BYTE),
+	"STATUS" CHAR(1 BYTE) DEFAULT 'I',
+	"COUNTRY" VARCHAR2(50 BYTE),
+	"REMARK" VARCHAR2(200 BYTE),
+	"TEMP_COUNT" NUMBER(21,0) DEFAULT '0',
+	"REGDATE" DATE,
+	"CHGDATE" DATE
+   ) TABLESPACE "RIMS";
+
+
+--------------------------------------------------------
+--  DDL for Index PK_ER_ARTICLE
+--------------------------------------------------------
+  CREATE UNIQUE INDEX "PK_ER_ARTICLE" ON "ER_ARTICLE" ("ARTICLE_ID") TABLESPACE "RIMS";
+--------------------------------------------------------
+--  DDL for Index IDX_ER_ARTICLE_1
+--------------------------------------------------------
+  CREATE UNIQUE INDEX "IDX_ER_ARTICLE_1" ON "ER_ARTICLE" ("SOURC_IDNTFC_NO", "MIG_COMPLETED") TABLESPACE "RIMS";
+--------------------------------------------------------
+--  DDL for Index IDX_WOS_ADD_ADD1
+--------------------------------------------------------
+  CREATE INDEX "IDX_WOS_ADD_ADD1" ON "ER_ARTICLE_ADRES" ("ADD1") TABLESPACE "RIMS";
+--------------------------------------------------------
+--  DDL for Index IDX_WOS_ADD_UT
+--------------------------------------------------------
+  CREATE INDEX "IDX_WOS_ADD_UT" ON "ER_ARTICLE_ADRES" ("SOURC_IDNTFC_NO", "ADRES_SEQ", "RE_INST", "RE_DEPT") TABLESPACE "RIMS";
+--------------------------------------------------------
+--  DDL for Index PK_ER_ARTICLE_ADRES
+--------------------------------------------------------
+  CREATE UNIQUE INDEX "PK_ER_ARTICLE_ADRES" ON "ER_ARTICLE_ADRES" ("ARTICLE_ID", "ADRES_SEQ")TABLESPACE "RIMS";
+--------------------------------------------------------
+--  DDL for Index IDX_WOS_AUT_AF
+--------------------------------------------------------
+  CREATE INDEX "IDX_WOS_AUT_AF" ON "ER_ARTICLE_AUTHR" ("AUTHR_NM")TABLESPACE "RIMS";
+--------------------------------------------------------
+--  DDL for Index IDX_WOS_AUT_AU
+--------------------------------------------------------
+  CREATE INDEX "IDX_WOS_AUT_AU" ON "ER_ARTICLE_AUTHR" ("AUTHR_ABRV")TABLESPACE "RIMS";
+--------------------------------------------------------
+--  DDL for Index PK_ER_ARTICLE_AUTHR
+--------------------------------------------------------
+  CREATE UNIQUE INDEX "PK_ER_ARTICLE_AUTHR" ON "ER_ARTICLE_AUTHR" ("ARTICLE_ID", "AUTHR_SEQ")TABLESPACE "RIMS";
+--------------------------------------------------------
+--  DDL for Index PK_ER_ARTICLE_AUTHR_ADRES
+--------------------------------------------------------
+  CREATE UNIQUE INDEX "PK_ER_ARTICLE_AUTHR_ADRES" ON "ER_ARTICLE_AUTHR_ADRES" ("AUTHR_SEQ", "ADRES_SEQ", "ARTICLE_ID")TABLESPACE "RIMS";
+--------------------------------------------------------
+--  DDL for Index PK_ER_ARTICLE_CTGRY
+--------------------------------------------------------
+ -- CREATE UNIQUE INDEX "PK_ER_ARTICLE_CTGRY" ON "ER_ARTICLE_CTGRY" ("SUBJCT_CTGRY", "ARTICLE_ID")TABLESPACE "RIMS";
+--------------------------------------------------------
+--  DDL for Index PK_ER_ARTICLE_REFER
+--------------------------------------------------------
+ -- CREATE UNIQUE INDEX "PK_ER_ARTICLE_REFER" ON "ER_ARTICLE_REFER" ("REFER_SEQ", "ARTICLE_ID")TABLESPACE "RIMS";
+--------------------------------------------------------
+--  DDL for Index PK_ER_ARTICLE_TC
+--------------------------------------------------------
+ --CREATE UNIQUE INDEX "PK_ER_ARTICLE_TC" ON "ER_ARTICLE_TC" ("ID", "ARTICLE_ID")TABLESPACE "RIMS";
+--------------------------------------------------------
+--  DDL for Index IDX_INT_RESULT_ID
+--------------------------------------------------------
+  CREATE INDEX "IDX_INT_RESULT_ID" ON "INT_RESULT" ("RESULT_ID", "PERNO")TABLESPACE "RIMS";
+--------------------------------------------------------
+--  DDL for Index PK_RD_HISTORY
+--------------------------------------------------------
+  CREATE UNIQUE INDEX "PK_RD_HISTORY" ON "RD_HISTORY" ("ID")TABLESPACE "RIMS";
+--------------------------------------------------------
+--  DDL for Index IDX_RD_IMP_HISTORY
+--------------------------------------------------------
+  CREATE UNIQUE INDEX "IDX_RD_IMP_HISTORY" ON "RD_IMP_HISTORY" ("HISTORY_ID", "UT", "STATUS", "ID")TABLESPACE "RIMS";
+--------------------------------------------------------
+--  DDL for Index PK_RD_IMP_HISTORY
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "PK_RD_IMP_HISTORY" ON "RD_IMP_HISTORY" ("ID")TABLESPACE "RIMS";
+--------------------------------------------------------
+--  DDL for Index PK_COM_ORG_ALIAS
+--------------------------------------------------------
+  CREATE UNIQUE INDEX "PK_COM_ORG_ALIAS" ON "COM_ORG_ALIAS" ("ID") ;
+--------------------------------------------------------
+--  Constraints for Table ER_ARTICLE_CTGRY
+--------------------------------------------------------
+  --ALTER TABLE "ER_ARTICLE_CTGRY" ADD CONSTRAINT "PK_ER_ARTICLE_CTGRY" PRIMARY KEY ("SUBJCT_CTGRY", "ARTICLE_ID") ENABLE;
+  --ALTER TABLE "ER_ARTICLE_CTGRY" MODIFY ("ARTICLE_ID" NOT NULL ENABLE);
+  --ALTER TABLE "ER_ARTICLE_CTGRY" MODIFY ("SUBJCT_CTGRY" NOT NULL ENABLE);
+--------------------------------------------------------
+--  Constraints for Table ER_ARTICLE_AUTHR_ADRES
+--------------------------------------------------------
+  ALTER TABLE "ER_ARTICLE_AUTHR_ADRES" ADD CONSTRAINT "PK_ER_ARTICLE_AUTHR_ADRES" PRIMARY KEY ("AUTHR_SEQ", "ADRES_SEQ", "ARTICLE_ID") ENABLE;
+  ALTER TABLE "ER_ARTICLE_AUTHR_ADRES" MODIFY ("ARTICLE_ID" NOT NULL ENABLE);
+  ALTER TABLE "ER_ARTICLE_AUTHR_ADRES" MODIFY ("ADRES_SEQ" NOT NULL ENABLE);
+  ALTER TABLE "ER_ARTICLE_AUTHR_ADRES" MODIFY ("AUTHR_SEQ" NOT NULL ENABLE);
+--------------------------------------------------------
+--  Constraints for Table ER_ARTICLE
+--------------------------------------------------------
+  ALTER TABLE "ER_ARTICLE" ADD CONSTRAINT "PK_ER_ARTICLE" PRIMARY KEY ("ARTICLE_ID") ENABLE;
+  ALTER TABLE "ER_ARTICLE" MODIFY ("ARTICLE_ID" NOT NULL ENABLE);
+--------------------------------------------------------
+--  Constraints for Table ER_ARTICLE_AUTHR
+--------------------------------------------------------
+  ALTER TABLE "ER_ARTICLE_AUTHR" ADD CONSTRAINT "PK_ER_ARTICLE_AUTHR" PRIMARY KEY ("ARTICLE_ID", "AUTHR_SEQ") ENABLE;
+  ALTER TABLE "ER_ARTICLE_AUTHR" MODIFY ("ARTICLE_ID" NOT NULL ENABLE);
+  --ALTER TABLE "ER_ARTICLE_AUTHR" MODIFY ("AUTHR_NM" NOT NULL ENABLE);
+  --ALTER TABLE "ER_ARTICLE_AUTHR" MODIFY ("AUTHR_ABRV" NOT NULL ENABLE);
+  ALTER TABLE "ER_ARTICLE_AUTHR" MODIFY ("AUTHR_SEQ" NOT NULL ENABLE);
+--------------------------------------------------------
+--  Constraints for Table ER_ARTICLE_ADRES
+--------------------------------------------------------
+  ALTER TABLE "ER_ARTICLE_ADRES" ADD CONSTRAINT "PK_ER_ARTICLE_ADRES" PRIMARY KEY ("ARTICLE_ID", "ADRES_SEQ") ENABLE;
+  ALTER TABLE "ER_ARTICLE_ADRES" MODIFY ("ARTICLE_ID" NOT NULL ENABLE);
+  ALTER TABLE "ER_ARTICLE_ADRES" MODIFY ("ADRES_SEQ" NOT NULL ENABLE);
+--------------------------------------------------------
+--  Constraints for Table ER_ARTICLE_REFER
+--------------------------------------------------------
+  --ALTER TABLE "ER_ARTICLE_REFER" ADD CONSTRAINT "PK_ER_ARTICLE_REFER" PRIMARY KEY ("REFER_SEQ", "ARTICLE_ID") ENABLE;
+  --ALTER TABLE "ER_ARTICLE_REFER" MODIFY ("ARTICLE_ID" NOT NULL ENABLE);
+  --ALTER TABLE "ER_ARTICLE_REFER" MODIFY ("REFER_SEQ" NOT NULL ENABLE);
+--------------------------------------------------------
+--  Constraints for Table ER_ARTICLE_TC
+--------------------------------------------------------
+  --ALTER TABLE "ER_ARTICLE_TC" ADD CONSTRAINT "PK_ER_ARTICLE_TC" PRIMARY KEY ("ID", "ARTICLE_ID") ENABLE;
+  --ALTER TABLE "ER_ARTICLE_TC" MODIFY ("ARTICLE_ID" NOT NULL ENABLE);
+  --ALTER TABLE "ER_ARTICLE_TC" MODIFY ("SOURC_IDNTFC_NO" NOT NULL ENABLE);
+  --ALTER TABLE "ER_ARTICLE_TC" MODIFY ("ID" NOT NULL ENABLE);
+--------------------------------------------------------
+--  Constraints for Table INT_RESULT
+--------------------------------------------------------
+  ALTER TABLE "INT_RESULT" ADD CONSTRAINT "PK_INT_RESULT" PRIMARY KEY ("RESULT_ID") ENABLE;
+  ALTER TABLE "INT_RESULT" MODIFY ("RESULT_ID" NOT NULL ENABLE);
+--------------------------------------------------------
+--  Constraints for Table RD_HISTORY
+--------------------------------------------------------
+  ALTER TABLE "RD_HISTORY" ADD CONSTRAINT "PK_RD_HISTORY" PRIMARY KEY ("ID") ENABLE;
+  ALTER TABLE "RD_HISTORY" MODIFY ("ID" NOT NULL ENABLE);
+--------------------------------------------------------
+--  Constraints for Table RD_IMP_HISTORY
+--------------------------------------------------------
+  ALTER TABLE "RD_IMP_HISTORY" ADD CONSTRAINT "PK_RD_IMP_HISTORY" PRIMARY KEY ("ID") ENABLE;
+  ALTER TABLE "RD_IMP_HISTORY" MODIFY ("ID" NOT NULL ENABLE);
+--------------------------------------------------------
+--  Constraints for Table COM_ORG_ALIAS
+--------------------------------------------------------
+
+  ALTER TABLE "COM_ORG_ALIAS" ADD CONSTRAINT "PK_COM_ORG_ALIAS" PRIMARY KEY ("ID") ENABLE;
+  ALTER TABLE "COM_ORG_ALIAS" MODIFY ("TEMP_COUNT" NOT NULL ENABLE);
+  ALTER TABLE "COM_ORG_ALIAS" MODIFY ("ID" NOT NULL ENABLE);
+
+  alter table "RI_USER" add("NAME_1" VARCHAR2(100 BYTE));
+  alter table "RI_USER" add("NAME_2" VARCHAR2(100 BYTE));
+  alter table "RI_USER" add("NAME_3" VARCHAR2(100 BYTE));
+  alter table "RI_USER" add("AUTHOR_ALIAS" VARCHAR2(2000 BYTE));
+
+ --CREATE UNIQUE INDEX "PK_ER_ARTICLE_AUTHR" ON "ER_ARTICLE_AUTHR" ("ARTICLE_ID", "AUTHR_SEQ") TABLESPACE "RIMS" ;
+
+--------------------------------------------------------
+--  TRUNCATE TABLE
+--------------------------------------------------------
+  TRUNCATE TABLE ER_ARTICLE_AUTHR_ADRES;
+  TRUNCATE TABLE ER_ARTICLE_AUTHR;
+  TRUNCATE TABLE ER_ARTICLE_ADRES;
+  TRUNCATE TABLE ER_ARTICLE;
+  TRUNCATE TABLE ER_ARTICLE_CTGRY;
+  TRUNCATE TABLE ER_ARTICLE_REFER;
+  TRUNCATE TABLE ER_ARTICLE_TC;
+  TRUNCATE TABLE INT_RESULT;
+  TRUNCATE TABLE RD_HISTORY;
+  TRUNCATE TABLE RD_IMP_HISTORY;
+  TRUNCATE TABLE COM_ORG_ALIAS;
+
+  select MAX(ARTICLE_ID) from ER_ARTICLE;
+
+  CREATE SEQUENCE  "SEQ_ER_ARTICLE"  MINVALUE 1 MAXVALUE 999999999999999999999999999 INCREMENT BY 1 START WITH 65731 CACHE 20 NOORDER  NOCYCLE ;
+
+
+  select MAX(ID) from RD_IMP_HISTORY;
+
+  CREATE SEQUENCE  "SEQ_RD_IMP_HISTORY"  MINVALUE 1 MAXVALUE 999999999999999999999999999 INCREMENT BY 1 START WITH 138747 CACHE 20 NOORDER  NOCYCLE ;
+
+
+  Insert into RIMS_CONFIG (GUBUN,CODE_DESC,CODE_VALUE,CODE_DISP,CODE_ORDER,CODE_NAME,IS_USE,CODE_DISP_ENG) values ('AMR','UsrCustomerID','UsrCustomerID','395d0a69a77a4892902e43d8987013d5',5,'UsrCustomerID','N','395d0a69a77a4892902e43d8987013d5');
+
+  select MAX(RESULT_ID) from INT_RESULT;
+
+  CREATE SEQUENCE  "SEQ_INT_RESULT"  MINVALUE 1 MAXVALUE 999999999999999999999999999 INCREMENT BY 1 START WITH 40877 CACHE 20 NOORDER  NOCYCLE ;
+
+  alter table "INT_RESULT" add("EXRIMS_ID" NUMBER(11,0)); /* ER_ARTICLE 테이블 ID  */
+
+  alter table "RI_ARTICLE" add("DOC_TYPE" VARCHAR2(50 BYTE)); /* DocType 정보  */
+
+  alter table "RI_ARTICLE" add("INSTT_RSLT_AT" CHAR(1 BYTE)); /* 기관성과여부  */
+
+  alter table RI_ARTICLE_PARTI MODIFY("BLNG_AGC_NM" VARCHAR2(300 BYTE)); /* 사이즈 조정 150 -> 300 */
+
+
+update DEPT_CLG_MAP TA
+  set
+      TA.CLG_CODE = (select CODE_VALUE from RI_CODE where GUBUN = '2030' and CODE_DISP = TA.CLG_NM)
+;
+
+update DEPT_CLG_MAP TA
+  set
+      TA.CLG_NM = (select CODE_DISP from RI_CODE where GUBUN = '2030' and  CODE_VALUE = TA.CLG_CODE)
+;
+
+update RI_USER  TA
+  set
+     TA.CLG_CD = (select CODE_VALUE from RI_CODE where GUBUN = '2030' and CODE_DISP = TA.CLG_NM)
+ where GUBUN = 'M'
+;
+
+delete from RI_CODE where GUBUN = '2030';
+commit;
+Insert into RI_CODE (GUBUN,DISP_ORDER,CODE_VALUE,ID,IS_USED,CODE_DISP,CODE_DISP_ENG,PROPERTY) values ('2030',1,'A000000',SEQ_RI_CODE.nextval,'N','총장실','총장실',null);
+Insert into RI_CODE (GUBUN,DISP_ORDER,CODE_VALUE,ID,IS_USED,CODE_DISP,CODE_DISP_ENG,PROPERTY) values ('2030',2,'C010000',SEQ_RI_CODE.nextval,'Y','문과대학','COLLEGE OF LIBERAL ARTS',null);
+Insert into RI_CODE (GUBUN,DISP_ORDER,CODE_VALUE,ID,IS_USED,CODE_DISP,CODE_DISP_ENG,PROPERTY) values ('2030',3,'C020000',SEQ_RI_CODE.nextval,'Y','이과대학','COLLEGE OF NATURAL SCIENCES',null);
+Insert into RI_CODE (GUBUN,DISP_ORDER,CODE_VALUE,ID,IS_USED,CODE_DISP,CODE_DISP_ENG,PROPERTY) values ('2030',4,'C030000',SEQ_RI_CODE.nextval,'Y','공과대학','COLLEGE OF ENGINEERING',null);
+Insert into RI_CODE (GUBUN,DISP_ORDER,CODE_VALUE,ID,IS_USED,CODE_DISP,CODE_DISP_ENG,PROPERTY) values ('2030',5,'C040000',SEQ_RI_CODE.nextval,'Y','법과대학','COLLEGE OF LAW',null);
+Insert into RI_CODE (GUBUN,DISP_ORDER,CODE_VALUE,ID,IS_USED,CODE_DISP,CODE_DISP_ENG,PROPERTY) values ('2030',6,'C050000',SEQ_RI_CODE.nextval,'Y','정치행정대학','COLLEGE OF POLITICAL SCIENCE AND PUBLIC ADMINISTRATION',null);
+Insert into RI_CODE (GUBUN,DISP_ORDER,CODE_VALUE,ID,IS_USED,CODE_DISP,CODE_DISP_ENG,PROPERTY) values ('2030',7,'C060000',SEQ_RI_CODE.nextval,'Y','상경대학','COLLEGE OF BUSINESS AND ECONOMICS',null);
+Insert into RI_CODE (GUBUN,DISP_ORDER,CODE_VALUE,ID,IS_USED,CODE_DISP,CODE_DISP_ENG,PROPERTY) values ('2030',8,'C070000',SEQ_RI_CODE.nextval,'Y','의과대학','COLLEGE OF MEDICINE',null);
+Insert into RI_CODE (GUBUN,DISP_ORDER,CODE_VALUE,ID,IS_USED,CODE_DISP,CODE_DISP_ENG,PROPERTY) values ('2030',8,'C080000',SEQ_RI_CODE.nextval,'Y','약학대학','COLLEGE OF PHARMACY',null);
+Insert into RI_CODE (GUBUN,DISP_ORDER,CODE_VALUE,ID,IS_USED,CODE_DISP,CODE_DISP_ENG,PROPERTY) values ('2030',9,'C090000',SEQ_RI_CODE.nextval,'Y','자연자원대학','COLLEGE OF NATURAL RESOURCES',null);
+Insert into RI_CODE (GUBUN,DISP_ORDER,CODE_VALUE,ID,IS_USED,CODE_DISP,CODE_DISP_ENG,PROPERTY) values ('2030',10,'C100000',SEQ_RI_CODE.nextval,'Y','생활과학대학','COLLEGE OF HUMAN ECOLOGY & KINESIOLOGY',null);
+Insert into RI_CODE (GUBUN,DISP_ORDER,CODE_VALUE,ID,IS_USED,CODE_DISP,CODE_DISP_ENG,PROPERTY) values ('2030',11,'C110000',SEQ_RI_CODE.nextval,'Y','사범대학','COLLEGE OF EDUCATION',null);
+Insert into RI_CODE (GUBUN,DISP_ORDER,CODE_VALUE,ID,IS_USED,CODE_DISP,CODE_DISP_ENG,PROPERTY) values ('2030',12,'C120000',SEQ_RI_CODE.nextval,'N','조형대학','조형대학',null);
+Insert into RI_CODE (GUBUN,DISP_ORDER,CODE_VALUE,ID,IS_USED,CODE_DISP,CODE_DISP_ENG,PROPERTY) values ('2030',13,'C130000',SEQ_RI_CODE.nextval,'Y','음악대학','COLLEGE OF MUSIC',null);
+Insert into RI_CODE (GUBUN,DISP_ORDER,CODE_VALUE,ID,IS_USED,CODE_DISP,CODE_DISP_ENG,PROPERTY) values ('2030',14,'C160000',SEQ_RI_CODE.nextval,'N','섬유패션학부','섬유패션학부',null);
+Insert into RI_CODE (GUBUN,DISP_ORDER,CODE_VALUE,ID,IS_USED,CODE_DISP,CODE_DISP_ENG,PROPERTY) values ('2030',15,'C180000',SEQ_RI_CODE.nextval,'Y','생명공학부','SCHOOL OF BIOTECHNOLOGY',null);
+Insert into RI_CODE (GUBUN,DISP_ORDER,CODE_VALUE,ID,IS_USED,CODE_DISP,CODE_DISP_ENG,PROPERTY) values ('2030',16,'C220000',SEQ_RI_CODE.nextval,'Y','기초교육대학','COLLEGE OF BASIC STUDIES',null);
+Insert into RI_CODE (GUBUN,DISP_ORDER,CODE_VALUE,ID,IS_USED,CODE_DISP,CODE_DISP_ENG,PROPERTY) values ('2030',17,'C240000',SEQ_RI_CODE.nextval,'Y','건축학부','SCHOOL OF ARCHITECTURE',null);
+Insert into RI_CODE (GUBUN,DISP_ORDER,CODE_VALUE,ID,IS_USED,CODE_DISP,CODE_DISP_ENG,PROPERTY) values ('2030',18,'C260000',SEQ_RI_CODE.nextval,'Y','디자인미술대학','COLLEGE OF DESIGN & ART',null);
+Insert into RI_CODE (GUBUN,DISP_ORDER,CODE_VALUE,ID,IS_USED,CODE_DISP,CODE_DISP_ENG,PROPERTY) values ('2030',19,'C270000',SEQ_RI_CODE.nextval,'Y','경영대학','SCHOOL OF BUSINESS',null);
+Insert into RI_CODE (GUBUN,DISP_ORDER,CODE_VALUE,ID,IS_USED,CODE_DISP,CODE_DISP_ENG,PROPERTY) values ('2030',21,'E000002',SEQ_RI_CODE.nextval,'Y','전문대학원','전문대학원',null);
+Insert into RI_CODE (GUBUN,DISP_ORDER,CODE_VALUE,ID,IS_USED,CODE_DISP,CODE_DISP_ENG,PROPERTY) values ('2030',21,'E000003',SEQ_RI_CODE.nextval,'Y','특수대학원','특수대학원',null);
+Insert into RI_CODE (GUBUN,DISP_ORDER,CODE_VALUE,ID,IS_USED,CODE_DISP,CODE_DISP_ENG,PROPERTY) values ('2030',21,'E300000',SEQ_RI_CODE.nextval,'Y','환경보건대학원','GRADUATE SCHOOL OF ENVIRONMENT & PUBLIC HEALTH STUDIES',null);
+Insert into RI_CODE (GUBUN,DISP_ORDER,CODE_VALUE,ID,IS_USED,CODE_DISP,CODE_DISP_ENG,PROPERTY) values ('2030',22,'E500000',SEQ_RI_CODE.nextval,'N','교육대학원','교육대학원',null);
+Insert into RI_CODE (GUBUN,DISP_ORDER,CODE_VALUE,ID,IS_USED,CODE_DISP,CODE_DISP_ENG,PROPERTY) values ('2030',23,'EE00000',SEQ_RI_CODE.nextval,'N','법학전문대학원','법학전문대학원',null);
+Insert into RI_CODE (GUBUN,DISP_ORDER,CODE_VALUE,ID,IS_USED,CODE_DISP,CODE_DISP_ENG,PROPERTY) values ('2030',24,'EJ00000',SEQ_RI_CODE.nextval,'Y','박정희새마을대학원','Park Chung Hee School of Policy and Saemaul',null);
+
+
+alter table "RI_PATENT" add("KOASAS_ID" VARCHAR2(100 BYTE)); /* KOASAS_ID 정보  */
+alter table "RI_PATENT" add("KOA_FLAG" CHAR(1 BYTE)); /* KOA_FLAG 정보  */
+alter table "RI_PATENT" add("KOA_UPDATE_DATE" DATE); /* KOA_UPDATE_DATE 정보  */
+
+alter table "RI_PATENT" add("APPL_REG_NTN_NM" VARCHAR2(200 BYTE)); /* KOA_UPDATE_DATE 정보  */
+alter table "RI_PATENT" add("APPL_STATUS" VARCHAR2(20 BYTE)); /* KOA_UPDATE_DATE 정보  */
+alter table "RI_PATENT" add("INVN_STTEMNT_DATE" VARCHAR2(10 BYTE)); /* KOASAS_ID 정보  */
+alter table "RI_PATENT" add("INVN_CONFM_DATE" VARCHAR2(10 BYTE)); /* KOASAS_ID 정보  */
+
+"ERR_COUNT" NUMBER(11,0),
+alter table "RI_USER" add("DSPACE_FLAG" CHAR(1 BYTE) default 'N'); /* KOA_FLAG 정보  */
+alter table "RI_USER" add("DSPACE_MOD_DATE" DATE); /* KOA_UPDATE_DATE 정보  */
+
+/* KCI 데이터 관려 컬럼 추가 된 것... KAIST 에 적용 필요 */
+alter table "RD_HISTORY" add("ERR_COUNT" NUMBER(11,0)); /* KOA_UPDATE_DATE 정보  */
+alter table "ER_ARTICLE_AUTHR" add("KCI_AUTHR_ID" VARCHAR2(50 BYTE)); /* KOA_UPDATE_DATE 정보  */
+alter table "INT_RESULT" add("KCI_IDNTFC_NO" VARCHAR2(20 BYTE)); /* KOA_UPDATE_DATE 정보  */
+alter table "INT_RESULT" add("EXRIMS_ID" NUMBER(11,0)); /* KOA_UPDATE_DATE 정보  */
+alter table "INT_RESULT" add("KCI_TC" NUMBER(11,0)); /* KOA_UPDATE_DATE 정보  */
+
+alter table "RI_ARTICLE" add("FUNDING_YN" CHAR(1 BYTE) default 'Y'); /* KOA_UPDATE_DATE 정보  */
+
+alter table "RI_ARTICLE" add("KCI_IF" VARCHAR2(20 BYTE)); /* KOA_UPDATE_DATE 정보  */
+
+alter table "RI_ARTICLE" add("MOD_DATE_BAK" date); /* KOA_UPDATE_DATE 정보  */
+
+alter table "RI_TECHTRANS" add("TECH_TRANSR_CD" VARCHAR2(10 BYTE)); /* KOASAS_ID 정보  */
+alter table "RI_TECHTRANS" add("TECH_TRANSR_CORP_CD" VARCHAR2(10 BYTE)); /* KOASAS_ID 정보  */
+
+alter table "URP_ARTICLE_RAWDATA" add("INTEGRATED_BLNG_ACG_NM" VARCHAR2(1000 BYTE)); /* KOASAS_ID 정보  */
+
+,TA.SCJNL_DVS_CD               = TB.SCJNL_DVS_CD
+,TA.OVRS_EXCLNC_SCJNL_PBLC_YN  = TB.OVRS_EXCLNC_SCJNL_PBLC_YN
+,TA.KRF_REG_PBLC_YN            = TB.KRF_REG_PBLC_YN
+,TA.SCJNL_NM                   = TB.SCJNL_NM
+,TA.PBLC_PLC_NM                = TB.PBLC_PLC_NM
+,TA.PBLC_NTN_CD                = TB.PBLC_NTN_CD
+,TA.ISSN_NO                    = TB.ISSN_NO
+,TA.APPLY_YM                   = TB.APPLY_YM
+,TA.WPBLC_YM                   = TB.WPBLC_YM
+,TA.PBLC_YM                    = TB.PBLC_YM
+,TA.ISSUE                      = TB.ISSUE
+,TA.VOLUME                     = TB.VOLUME
+,TA.STT_PAGE                   = TB.STT_PAGE
+,TA.END_PAGE                   = TB.END_PAGE
+,TA.ORG_LANG_PPR_NM            = TB.ORG_LANG_PPR_NM
+,TA.DIFF_LANG_PPR_NM           = TB.DIFF_LANG_PPR_NM
+,TA.TOTAL_ATHR_CNT             = TB.TOTAL_ATHR_CNT
+,TA.PPR_LANG_DVS_CD            = TB.PPR_LANG_DVS_CD
+,TA.IMPCT_FCTR                 = TB.IMPCT_FCTR
+,TA.IMPCT_FCTR_USR             = TB.IMPCT_FCTR_USR
+,TA.TC                         = TB.TC
+,TA.TC_DATE                    = TB.TC_DATE
+,TA.DOI                        = TB.DOI
+,TA.RSRCHACPS_STDY_SPHE_CD     = TB.RSRCHACPS_STDY_SPHE_CD
+,TA.SBJT_NO                    = TB.SBJT_NO
+,TA.IRB_NO                     = TB.IRB_NO
+,TA.APPR_DATE                  = TB.APPR_DATE
+,TA.APPR_DVS_CD                = TB.APPR_DVS_CD
+,TA.APPR_CNCL_DATE             = TB.APPR_CNCL_DATE
+,TA.APPR_RTRN_CNCL_RSN_CNTN    = TB.APPR_RTRN_CNCL_RSN_CNTN
+,TA.VRFC_DVS_CD                = TB.VRFC_DVS_CD
+,TA.VRFC_DATE                  = TB.VRFC_DATE
+,TA.VRFC_PPR_ID                = TB.VRFC_PPR_ID
+,TA.VRFC_SRC_DVS_CD            = TB.VRFC_SRC_DVS_CD
+,TA.DEL_DVS_CD                 = TB.DEL_DVS_CD
+,TA.ABST_CNTN_BAK              = TB.ABST_CNTN_BAK
+,TA.ID_SCI                     = TB.ID_SCI
+,TA.ID_SCOPUS                  = TB.ID_SCOPUS
+,TA.ID_KCI                     = TB.ID_KCI
+,TA.IMPCT_FCTR_USR_YEAR        = TB.IMPCT_FCTR_USR_YEAR
+,TA.INTERFACE_FLAG             = TB.INTERFACE_FLAG
+,TA.URL                        = TB.URL
+,TA.SBJT_ID                    = TB.SBJT_ID
+,TA.IS_OPEN_FILES              = TB.IS_OPEN_FILES
+,TA.KOA_FLAG                   = TB.KOA_FLAG
+,TA.KOA_UPDATE_DATE            = TB.KOA_UPDATE_DATE
+,TA.REG_USER_ID                = TB.REG_USER_ID
+,TA.REG_DATE                   = TB.REG_DATE
+,TA.MOD_USER_ID                = TB.MOD_USER_ID
+,TA.MOD_DATE                   = TB.MOD_DATE
+,TA.DOC_TYPE_CD                = TB.DOC_TYPE_CD
+,TA.SCP_TC                     = TB.SCP_TC
+,TA.SCP_TC_DATE                = TB.SCP_TC_DATE
+,TA.GS_TC                      = TB.GS_TC
+,TA.GS_TC_DATE                 = TB.GS_TC_DATE
+,TA.SJR                        = TB.SJR
+,TA.KEYWORD                    = TB.KEYWORD
+,TA.ATC_FLAG                   = TB.ATC_FLAG
+,TA.KOASAS_ID                  = TB.KOASAS_ID
+,TA.MNG_NO                     = TB.MNG_NO
+,TA.ONLINE_DATE                = TB.ONLINE_DATE
+,TA.SUB_DATE                   = TB.SUB_DATE
+,TA.FIX_DATE                   = TB.FIX_DATE
+,TA.ACK_CONTENTS               = TB.ACK_CONTENTS
+,TA.IS_MIG                     = TB.IS_MIG
+,TA.ACK_FLAG                   = TB.ACK_FLAG
+,TA.INSTT_RSLT_AT              = TB.INSTT_RSLT_AT
+,TA.DOC_TYPE                   = TB.DOC_TYPE
+,TA.KCI_TC                     = TB.KCI_TC
+,TA.KCI_TC_DATE                = TB.KCI_TC_DATE
+;
+
+
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22550, 'URP_REG_NTN_CD', 'R0575005', '2080', 'CN');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22551, 'URP_REG_NTN_CD', 'R0575006', '2080', 'EU');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22552, 'URP_REG_NTN_CD', 'R0575001', '2080', 'KO');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22553, 'URP_REG_NTN_CD', 'R0575002', '2080', 'PC');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22554, 'URP_REG_NTN_CD', 'R0575003', '2080', 'US');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22555, 'URP_REG_NTN_CD', 'R0575004', '2080', 'JP');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22556, 'URP_EG_NTN_CD', 'R0575099', '2080', 'ET');
+
+/*
+R0575001	한국 KO
+R0575002	PCT  PC
+R0575003	미국 US
+R0575004	일본 JP
+R0575005	중국 CN
+R0575006	유럽 EU
+R0575099	기타 ET
+*/
+
+'2080' -> 특허출원국
+
+insert into RI_CODE_INFO (ID, GUBUN, GUBUN_DESC) values (56,'2080','특허출원국');
+insert into RI_CODE (ID, GUBUN, CODE_VALUE, CODE_DISP, CODE_DISP_ENG, DISP_ORDER, IS_USED ) values (SEQ_RI_CODE.nextval, '2080', 'CN', '중국', 'China', 1, 'Y');
+insert into RI_CODE (ID, GUBUN, CODE_VALUE, CODE_DISP, CODE_DISP_ENG, DISP_ORDER, IS_USED ) values (SEQ_RI_CODE.nextval, '2080', 'EU', '유럽', 'Europe', 2, 'Y');
+insert into RI_CODE (ID, GUBUN, CODE_VALUE, CODE_DISP, CODE_DISP_ENG, DISP_ORDER, IS_USED ) values (SEQ_RI_CODE.nextval, '2080', 'KO', '대한민국', 'South Korea', 3, 'Y');
+insert into RI_CODE (ID, GUBUN, CODE_VALUE, CODE_DISP, CODE_DISP_ENG, DISP_ORDER, IS_USED ) values (SEQ_RI_CODE.nextval, '2080', 'US', '미국', 'United States', 4, 'Y');
+insert into RI_CODE (ID, GUBUN, CODE_VALUE, CODE_DISP, CODE_DISP_ENG, DISP_ORDER, IS_USED ) values (SEQ_RI_CODE.nextval, '2080', 'JP', '일본', 'Japan', 5, 'Y');
+insert into RI_CODE (ID, GUBUN, CODE_VALUE, CODE_DISP, CODE_DISP_ENG, DISP_ORDER, IS_USED ) values (SEQ_RI_CODE.nextval, '2080', 'PC', 'PCT', 'PCT', 6, 'Y');
+insert into RI_CODE (ID, GUBUN, CODE_VALUE, CODE_DISP, CODE_DISP_ENG, DISP_ORDER, IS_USED ) values (SEQ_RI_CODE.nextval, '2080', 'ET', '기타', 'Etc', 7, 'Y');
+
+
+select RP.*
+       ,( select CODEB from RI_CODE_MAP where GUBUNA = 'URP_REG_NTN_CD' and CODEA = RP.APPL_REG_NTN_CD) as NTN_CD
+from RI_PATENT RP;
+
+update RI_PATENT RP set RP.APPL_REG_NTN_CD = ( select CODEB from RI_CODE_MAP where GUBUNA = 'URP_REG_NTN_CD' and CODEA = RP.APPL_REG_NTN_CD);
+
+;
+
+
+
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22740, 'URP_ART_LANG_CD', 'R0266001', '2020', 'KOR');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22741, 'URP_ART_LANG_CD', 'R0266002', '2020', 'ENG');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22742, 'URP_ART_LANG_CD', 'R0266003', '2020', 'JAP');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22743, 'URP_ART_LANG_CD', 'R0266004', '2020', 'FRE');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22744, 'URP_ART_LANG_CD', 'R0266005', '2020', 'GER');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22745, 'URP_ART_LANG_CD', 'R0266006', '2020', 'CHI');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22746, 'URP_ART_LANG_CD', 'R0266007', '2020', 'GRE');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22747, 'URP_ART_LANG_CD', 'R0266008', '2020', 'HIN');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22748, 'URP_ART_LANG_CD', 'R0266009', '2020', 'HUN');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22749, 'URP_ART_LANG_CD', 'R0266010', '2020', 'ITA');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22750, 'URP_ART_LANG_CD', 'R0266011', '2020', 'LAT');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22751, 'URP_ART_LANG_CD', 'R0266012', '2020', 'MAL');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22752, 'URP_ART_LANG_CD', 'R0266013', '2020', 'UKR');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22753, 'URP_ART_LANG_CD', 'R0266014', '2020', 'POR');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22754, 'URP_ART_LANG_CD', 'R0266015', '2020', 'RUM');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22755, 'URP_ART_LANG_CD', 'R0266016', '2020', 'RUS');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22756, 'URP_ART_LANG_CD', 'R0266017', '2020', 'SWA');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22757, 'URP_ART_LANG_CD', 'R0266018', '2020', 'SPA');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22758, 'URP_ART_LANG_CD', 'R0266019', '2020', 'SWE');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22759, 'URP_ART_LANG_CD', 'R0266020', '2020', 'THI');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22760, 'URP_ART_LANG_CD', 'R0266021', '2020', 'TUR');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22761, 'URP_ART_LANG_CD', 'R0266022', '2020', 'VIE');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22762, 'URP_ART_LANG_CD', 'R0266023', '2020', 'MUL');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22763, 'URP_ART_LANG_CD', 'R0266024', '2020', 'UND');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22764, 'URP_ART_LANG_CD', 'R0266025', '2020', 'SAN');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22765, 'URP_ART_LANG_CD', 'R0266026', '2020', 'HAN');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22766, 'URP_ART_LANG_CD', 'R0266027', '2020', 'YUG');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22767, 'URP_ART_LANG_CD', 'R0266028', '2020', 'IRA');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22768, 'URP_ART_LANG_CD', 'R0266029', '2020', 'IND');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22769, 'URP_ART_LANG_CD', 'R0266030', '2020', 'MON');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22770, 'URP_ART_LANG_CD', 'R0266031', '2020', 'FIN');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22771, 'URP_ART_LANG_CD', 'R0266032', '2020', 'EGY');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22772, 'URP_ART_LANG_CD', 'R0266033', '2020', 'DUT');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22773, 'URP_ART_LANG_CD', 'R0266034', '2020', 'DAN');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22774, 'URP_ART_LANG_CD', 'R0266035', '2020', 'CZE');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22775, 'URP_ART_LANG_CD', 'R0266036', '2020', 'ARA');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22776, 'URP_ART_LANG_CD', 'R0266037', '2020', 'POL');
+
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22781, 'URP_OVRS_SCJNL_CD', 'R0254001', '1380', '1');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22782, 'URP_OVRS_SCJNL_CD', 'R0254004', '1380', '3');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22783, 'URP_OVRS_SCJNL_CD', 'R0254002', '1380', '2');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22784, 'URP_OVRS_SCJNL_CD', 'R0254003', '1380', '4');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22785, 'URP_OVRS_SCJNL_CD', 'R0254005', '1380', '6');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22786, 'URP_OVRS_SCJNL_CD', 'R0254018', '1380', '5');
+
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22787, 'URP_ART_KRF_REG', 'R0254007', '1390', '1');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22788, 'URP_ART_KRF_REG', 'R0254008', '1390', '2');
+
+update RI_CODE set Is_Used = 'N' where GUBUN = '1390' and code_value = '3';
+update RI_CODE set CODE_DISP = '학진등재(후보)', CODE_DISP_ENG = '학진등재(후보)' where GUBUN = '1390' and code_value = '2';
+
+update RI_CODE set Is_Used = 'Y' where GUBUN = '1380' and code_value = '5';
+insert into RI_CODE (ID, GUBUN, CODE_VALUE, CODE_DISP, CODE_DISP_ENG, DISP_ORDER, IS_USED ) values (SEQ_RI_CODE.nextval, '1380', '6', 'Index Medicus', 'Index Medicus', 6, 'Y');
+
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22557, 'URP_ART_NTN_CD', 'C0031199', '2000', 'GH');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22558, 'URP_ART_NTN_CD', 'C0031185', '2000', 'AA');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22559, 'URP_ART_NTN_CD', 'C0031211', '2000', 'AE');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22560, 'URP_ART_NTN_CD', 'C0031186', '2000', 'AF');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22561, 'URP_ART_NTN_CD', 'C0031072', '2000', 'AG');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22562, 'URP_ART_NTN_CD', 'C0031188', '2000', 'AI');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22563, 'URP_ART_NTN_CD', 'C0031016', '2000', 'AN');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22564, 'URP_ART_NTN_CD', 'C0031191', '2000', 'AO');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22565, 'URP_ART_NTN_CD', 'C0031143', '2000', 'AR');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22566, 'URP_ART_NTN_CD', 'C0031238', '2000', 'AT');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22567, 'URP_ART_NTN_CD', 'C0031110', '2000', 'AU');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22568, 'URP_ART_NTN_CD', 'C0031012', '2000', 'AW');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22569, 'URP_ART_NTN_CD', 'C0031187', '2000', 'AZ');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22570, 'URP_ART_NTN_CD', 'C0031138', '2000', 'BA');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22571, 'URP_ART_NTN_CD', 'C0031086', '2000', 'BB');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22572, 'URP_ART_NTN_CD', 'C0031216', '2000', 'BD');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22573, 'URP_ART_NTN_CD', 'C0031114', '2000', 'BE');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22574, 'URP_ART_NTN_CD', 'C0031084', '2000', 'BF');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22575, 'URP_ART_NTN_CD', 'C0031152', '2000', 'BG');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22576, 'URP_ART_NTN_CD', 'C0031060', '2000', 'BH');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22577, 'URP_ART_NTN_CD', 'C0031077', '2000', 'BL');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22578, 'URP_ART_NTN_CD', 'C0031082', '2000', 'BO');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22579, 'URP_ART_NTN_CD', 'C0031217', '2000', 'BS');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22580, 'URP_ART_NTN_CD', 'C0031064', '2000', 'BS');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22581, 'URP_ART_NTN_CD', 'C0031163', '2000', 'BT');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22582, 'URP_ART_NTN_CD', 'C0031102', '2000', 'BU');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22583, 'URP_ART_NTN_CD', 'C0031162', '2000', 'BX');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22584, 'URP_ART_NTN_CD', 'C0031232', '2000', 'CA');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22585, 'URP_ART_NTN_CD', 'C0031169', '2000', 'CB');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22586, 'URP_ART_NTN_CD', 'C0031160', '2000', 'CC');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22587, 'URP_ART_NTN_CD', 'C0031234', '2000', 'CD');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22588, 'URP_ART_NTN_CD', 'C0031155', '2000', 'CE');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22589, 'URP_ART_NTN_CD', 'C0031231', '2000', 'CF');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22590, 'URP_ART_NTN_CD', 'C0031161', '2000', 'CH');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22591, 'URP_ART_NTN_CD', 'C0031256', '2000', 'CI');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22592, 'URP_ART_NTN_CD', 'C0031071', '2000', 'CK');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22593, 'URP_ART_NTN_CD', 'C0031073', '2000', 'CL');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22594, 'URP_ART_NTN_CD', 'C0031197', '2000', 'CM');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22595, 'URP_ART_NTN_CD', 'C0031066', '2000', 'CN');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22596, 'URP_ART_NTN_CD', 'C0031085', '2000', 'CR');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22597, 'URP_ART_NTN_CD', 'C0031107', '2000', 'CS');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22598, 'URP_ART_NTN_CD', 'C0031181', '2000', 'CT');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22599, 'URP_ART_NTN_CD', 'C0031083', '2000', 'CU');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22600, 'URP_ART_NTN_CD', 'C0031236', '2000', 'CX');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22601, 'URP_ART_NTN_CD', 'C0031180', '2000', 'CY');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22602, 'URP_ART_NTN_CD', 'C0031120', '2000', 'DK');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22603, 'URP_ART_NTN_CD', 'C0031092', '2000', 'DQ');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22604, 'URP_ART_NTN_CD', 'C0031079', '2000', 'DR');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22605, 'URP_ART_NTN_CD', 'C0031200', '2000', 'EA');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22606, 'URP_ART_NTN_CD', 'C0031237', '2000', 'EG');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22607, 'URP_ART_NTN_CD', 'C0031184', '2000', 'ER');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22608, 'URP_ART_NTN_CD', 'C0031089', '2000', 'ER');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22609, 'URP_ART_NTN_CD', 'C0031075', '2000', 'ES');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22610, 'URP_ART_NTN_CD', 'C0031196', '2000', 'ET');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22611, 'URP_ART_NTN_CD', 'C0031125', '2000', 'FI');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22612, 'URP_ART_NTN_CD', 'C0031242', '2000', 'FJ');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22613, 'URP_ART_NTN_CD', 'C0031109', '2000', 'FR');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22614, 'URP_ART_NTN_CD', 'C0031025', '2000', 'FT');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22615, 'URP_ART_NTN_CD', 'C0031088', '2000', 'GD');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22616, 'URP_ART_NTN_CD', 'C0031099', '2000', 'GE');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22617, 'URP_ART_NTN_CD', 'C0031062', '2000', 'GL');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22618, 'URP_ART_NTN_CD', 'C0031233', '2000', 'GO');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22619, 'URP_ART_NTN_CD', 'C0031121', '2000', 'GR');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22620, 'URP_ART_NTN_CD', 'C0031174', '2000', 'GS');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22621, 'URP_ART_NTN_CD', 'C0031090', '2000', 'GT');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22622, 'URP_ART_NTN_CD', 'C0031167', '2000', 'GU');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22623, 'URP_ART_NTN_CD', 'C0031005', '2000', 'GV');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22624, 'URP_ART_NTN_CD', 'C0031009', '2000', 'GY');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22625, 'URP_ART_NTN_CD', 'C0031157', '2000', 'HK');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22626, 'URP_ART_NTN_CD', 'C0031087', '2000', 'HO');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22627, 'URP_ART_NTN_CD', 'C0031091', '2000', 'HT');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22628, 'URP_ART_NTN_CD', 'C0031101', '2000', 'HU');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22629, 'URP_ART_NTN_CD', 'C0031129', '2000', 'IC');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22630, 'URP_ART_NTN_CD', 'C0031128', '2000', 'IE');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22631, 'URP_ART_NTN_CD', 'C0031154', '2000', 'II');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22632, 'URP_ART_NTN_CD', 'C0031171', '2000', 'IO');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22633, 'URP_ART_NTN_CD', 'C0031137', '2000', 'IQ');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22634, 'URP_ART_NTN_CD', 'C0031136', '2000', 'IR');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22635, 'URP_ART_NTN_CD', 'C0031141', '2000', 'IS');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22636, 'URP_ART_NTN_CD', 'C0031116', '2000', 'IT');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22637, 'URP_ART_NTN_CD', 'C0031159', '2000', 'JA');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22638, 'URP_ART_NTN_CD', 'C0031081', '2000', 'JM');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22639, 'URP_ART_NTN_CD', 'C0031133', '2000', 'JO');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22640, 'URP_ART_NTN_CD', 'C0031201', '2000', 'KE');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22641, 'URP_ART_NTN_CD', 'C0031246', '2000', 'KI');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22642, 'URP_ART_NTN_CD', 'C0031252', '2000', 'KN');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22643, 'URP_ART_NTN_CD', 'C0031145', '2000', 'KO');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22644, 'URP_ART_NTN_CD', 'C0031132', '2000', 'KU');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22645, 'URP_ART_NTN_CD', 'C0031106', '2000', 'KZ');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22646, 'URP_ART_NTN_CD', 'C0031149', '2000', 'LA');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22647, 'URP_ART_NTN_CD', 'C0031228', '2000', 'LB');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22648, 'URP_ART_NTN_CD', 'C0031097', '2000', 'LC');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22649, 'URP_ART_NTN_CD', 'C0031139', '2000', 'LE');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22650, 'URP_ART_NTN_CD', 'C0031048', '2000', 'LH');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22651, 'URP_ART_NTN_CD', 'C0031176', '2000', 'LI');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22652, 'URP_ART_NTN_CD', 'C0031227', '2000', 'LO');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22653, 'URP_ART_NTN_CD', 'C0031047', '2000', 'LU');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22654, 'URP_ART_NTN_CD', 'C0031177', '2000', 'LV');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22655, 'URP_ART_NTN_CD', 'C0031207', '2000', 'LY');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22656, 'URP_ART_NTN_CD', 'C0031124', '2000', 'MA');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22657, 'URP_ART_NTN_CD', 'C0031123', '2000', 'MC');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22658, 'URP_ART_NTN_CD', 'C0031225', '2000', 'MG');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22659, 'URP_ART_NTN_CD', 'C0031223', '2000', 'ML');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22660, 'URP_ART_NTN_CD', 'C0031219', '2000', 'MM');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22661, 'URP_ART_NTN_CD', 'C0031165', '2000', 'MO');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22662, 'URP_ART_NTN_CD', 'C0031164', '2000', 'MP');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22663, 'URP_ART_NTN_CD', 'C0031209', '2000', 'MR');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22664, 'URP_ART_NTN_CD', 'C0031222', '2000', 'MU');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22665, 'URP_ART_NTN_CD', 'C0031175', '2000', 'MV');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22666, 'URP_ART_NTN_CD', 'C0031224', '2000', 'MW');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22667, 'URP_ART_NTN_CD', 'C0031069', '2000', 'MX');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22668, 'URP_ART_NTN_CD', 'C0031146', '2000', 'MY');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22669, 'URP_ART_NTN_CD', 'C0031220', '2000', 'MZ');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22670, 'URP_ART_NTN_CD', 'C0031113', '2000', 'NE');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22671, 'URP_ART_NTN_CD', 'C0031229', '2000', 'NG');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22672, 'URP_ART_NTN_CD', 'C0031112', '2000', 'NO');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22673, 'URP_ART_NTN_CD', 'C0031170', '2000', 'NP');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22674, 'URP_ART_NTN_CD', 'C0031096', '2000', 'NQ');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22675, 'URP_ART_NTN_CD', 'C0031193', '2000', 'NR');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22676, 'URP_ART_NTN_CD', 'C0031015', '2000', 'NU');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22677, 'URP_ART_NTN_CD', 'C0031239', '2000', 'NZ');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22678, 'URP_ART_NTN_CD', 'C0031142', '2000', 'OM');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22679, 'URP_ART_NTN_CD', 'C0031076', '2000', 'PE');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22680, 'URP_ART_NTN_CD', 'C0031151', '2000', 'PH');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22681, 'URP_ART_NTN_CD', 'C0031153', '2000', 'PK');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22682, 'URP_ART_NTN_CD', 'C0031100', '2000', 'PL');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22683, 'URP_ART_NTN_CD', 'C0031070', '2000', 'PN');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22684, 'URP_ART_NTN_CD', 'C0031126', '2000', 'PO');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22685, 'URP_ART_NTN_CD', 'C0031243', '2000', 'PP');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22686, 'URP_ART_NTN_CD', 'C0031094', '2000', 'PR');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22687, 'URP_ART_NTN_CD', 'C0031257', '2000', 'PS');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22688, 'URP_ART_NTN_CD', 'C0031080', '2000', 'PY');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22689, 'URP_ART_NTN_CD', 'C0031140', '2000', 'QA');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22690, 'URP_ART_NTN_CD', 'C0031235', '2000', 'RH');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22691, 'URP_ART_NTN_CD', 'C0031103', '2000', 'RM');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22692, 'URP_ART_NTN_CD', 'C0031104', '2000', 'RU');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22693, 'URP_ART_NTN_CD', 'C0031226', '2000', 'RW');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22694, 'URP_ART_NTN_CD', 'C0031190', '2000', 'SA');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22695, 'URP_ART_NTN_CD', 'C0031249', '2000', 'SB');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22696, 'URP_ART_NTN_CD', 'C0031253', '2000', 'SC');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22697, 'URP_ART_NTN_CD', 'C0031212', '2000', 'SG');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22698, 'URP_ART_NTN_CD', 'C0031158', '2000', 'SI');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22699, 'URP_ART_NTN_CD', 'C0031203', '2000', 'SJ');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22700, 'URP_ART_NTN_CD', 'C0031189', '2000', 'SK');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22701, 'URP_ART_NTN_CD', 'C0031011', '2000', 'SL');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22702, 'URP_ART_NTN_CD', 'C0031001', '2000', 'SM');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22703, 'URP_ART_NTN_CD', 'C0031208', '2000', 'SO');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22704, 'URP_ART_NTN_CD', 'C0031115', '2000', 'SP');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22705, 'URP_ART_NTN_CD', 'C0031206', '2000', 'SQ');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22706, 'URP_ART_NTN_CD', 'C0031093', '2000', 'SR');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22707, 'URP_ART_NTN_CD', 'C0031131', '2000', 'SU');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22708, 'URP_ART_NTN_CD', 'C0031130', '2000', 'SV');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22709, 'URP_ART_NTN_CD', 'C0031111', '2000', 'SW');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22710, 'URP_ART_NTN_CD', 'C0031144', '2000', 'SY');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22711, 'URP_ART_NTN_CD', 'C0031119', '2000', 'SZ');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22712, 'URP_ART_NTN_CD', 'C0031179', '2000', 'TA');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22713, 'URP_ART_NTN_CD', 'C0031038', '2000', 'TG');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22714, 'URP_ART_NTN_CD', 'C0031147', '2000', 'TH');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22715, 'URP_ART_NTN_CD', 'C0031213', '2000', 'TI');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22716, 'URP_ART_NTN_CD', 'C0031178', '2000', 'TM');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22717, 'URP_ART_NTN_CD', 'C0031245', '2000', 'TO');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22718, 'URP_ART_NTN_CD', 'C0031098', '2000', 'TR');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22719, 'URP_ART_NTN_CD', 'C0031118', '2000', 'TU');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22720, 'URP_ART_NTN_CD', 'C0031244', '2000', 'TV');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22721, 'URP_ART_NTN_CD', 'C0031230', '2000', 'TZ');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22722, 'URP_ART_NTN_CD', 'C0031205', '2000', 'UA');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22723, 'URP_ART_NTN_CD', 'C0031198', '2000', 'UG');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22724, 'URP_ART_NTN_CD', 'C0031183', '2000', 'UI');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22725, 'URP_ART_NTN_CD', 'C0031108', '2000', 'UK');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22726, 'URP_ART_NTN_CD', 'C0031148', '2000', 'UM');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22727, 'URP_ART_NTN_CD', 'C0031065', '2000', 'US');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22728, 'URP_ART_NTN_CD', 'C0031078', '2000', 'UY');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22729, 'URP_ART_NTN_CD', 'C0031105', '2000', 'UZ');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22730, 'URP_ART_NTN_CD', 'C0031122', '2000', 'VC');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22731, 'URP_ART_NTN_CD', 'C0031074', '2000', 'VE');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22732, 'URP_ART_NTN_CD', 'C0031095', '2000', 'VG');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22733, 'URP_ART_NTN_CD', 'C0031150', '2000', 'VN');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22734, 'URP_ART_NTN_CD', 'C0031240', '2000', 'VU');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22735, 'URP_ART_NTN_CD', 'C0031250', '2000', 'WS');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22736, 'URP_ART_NTN_CD', 'C0031134', '2000', 'YE');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22737, 'URP_ART_NTN_CD', 'C0031182', '2000', 'YU');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22738, 'URP_ART_NTN_CD', 'C0031192', '2000', 'ZA');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22739, 'URP_ART_NTN_CD', 'C0031251', '2000', 'ZZ');
+
+
+DELETE RI_CODE_MAP where ID in (22777, 22778, 22779, 22780);
+select MAX(ID) + 1 FROM RI_CODE_MAP;
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22777, 'URP_ART_SCJNL_CD', 'C0000001', '1100', '1');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22778, 'URP_ART_SCJNL_CD', 'C0000002', '1100', '2');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22779, 'URP_ART_SCJNL_CD', 'C0000003', '1100', '3');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22780, 'URP_ART_SCJNL_CD', 'C0000004', '1100', '4');
+insert into RI_CODE_MAP (ID, GUBUNA, CODEA, GUBUNB, CODEB) values ( 22789, 'URP_ART_SCJNL_CD', 'C0000007', '1100', '6');
+
+update RI_CODE set IS_USED = 'Y', DISP_ORDER = 25  where GUBUN = '1100' and code_value = '2';
+update RI_CODE set IS_USED = 'Y' where GUBUN = '1100' and code_value = '4';
+update RI_CODE set IS_USED = 'Y' where GUBUN = '1100' and code_value = '5';
+update RI_CODE set CODE_DISP = '국제저명학술지(SCI급)' where GUBUN = '1100' and code_value = '1';
+update RI_CODE set CODE_DISP = '국제일반(SCOPUS)학술지'   where GUBUN = '1100' and code_value = '6';
+update RI_CODE set CODE_DISP = '국내저명학술지(KCI)' where GUBUN = '1100' and code_value = '3';
+
+update RI_CODE set DISP_ORDER = 60  where GUBUN = '1380' and code_value = '6';
+
+update RI_ARTICLE set  OVRS_EXCLNC_SCJNL_PBLC_YN = '5' where article_id = '11594';
+
+
+/* 발명_신고_일자 INVT_STTEMNT_DATE
+ * 발명_승인_일자 INVN_CONFM_DATE
+ */
+alter table "RI_PATENT" add("INVT_STTEMNT_DATE" VARCHAR2(10 BYTE)); /* KOASAS_ID 정보  */
+alter table "RI_PATENT" add("INVT_CONFM_DATE" VARCHAR2(10 BYTE)); /* KOASAS_ID 정보  */
+
+
+UPDATE RI_CODE_TRANS SET CODE_DISP = '학(부)과별로 계약된 기술이전 건수 및 금액을 연도별로 제공하는 페이지입니다. <br/>Chart와 Data표로 제공되며 결과 값을 엑셀로 반출하실 수 있습니다.' WHERE GUBUN='ASRIMS_DESC' and CODE_VALUE='researcher.page.patent.desc';
+UPDATE RI_CODE_TRANS SET CODE_DISP = '교수님의 계약된 기술이전 건수 및 금액을 연도별로 제공하는 페이지입니다. <br/>Chart와 Data 표로 제공되며 결과 값을 엑셀로 반출하실 수 있습니다.<br/>필드 제목을 클릭하시면 선택된 필드별로 정렬하여 실적을 보실 수 있습니다.' WHERE GUBUN='ASRIMS_DESC' and CODE_VALUE='researcher.page.techtrans.desc';
+
+
+
+
+Insert into RI_CODE_TRANS (GUBUN,CODE_VALUE,CODE_DISP,DISP_ORDER,IS_USED,KRI_DISP,CODE_DISP_ENG) values ('ASRIMS_DESC','researcher.page.patent.desc','학(부)과별로 계약된 기술이전 건수 및 금액을 연도별로 제공하는 페이지입니다. <br/>Chart와 Data표로 제공되며 결과 값을 엑셀로 반출하실 수 있습니다.',0,'Y',null,'학(부)과별로 계약된 기술이전 건수 및 금액을 연도별로 제공하는 페이지입니다. <br/>Chart와 Data표로 제공되며 결과 값을 엑셀로 반출하실 수 있습니다.');
+Insert into RI_CODE_TRANS (GUBUN,CODE_VALUE,CODE_DISP,DISP_ORDER,IS_USED,KRI_DISP,CODE_DISP_ENG) values ('ASRIMS_DESC','researcher.page.techtrans.desc','교수님의 계약된 기술이전 건수 및 금액을 연도별로 제공하는 페이지입니다. <br/>Chart와 Data 표로 제공되며 결과 값을 엑셀로 반출하실 수 있습니다.<br/>필드 제목을 클릭하시면 선택된 필드별로 정렬하여 실적을 보실 수 있습니다.',0,'Y',null,'교수님의 계약된 기술이전 건수 및 금액을 연도별로 제공하는 페이지입니다. <br/>Chart와 Data 표로 제공되며 결과 값을 엑셀로 반출하실 수 있습니다.<br/>필드 제목을 클릭하시면 선택된 필드별로 정렬하여 실적을 보실 수 있습니다.');
+
+
+alter table "DEPT_CLG_MAP" add("SERS_SE" VARCHAR2(10 BYTE)); /* 계열구분  자연:NTR, 인문사회:SCT */
+
+
+-- 재수정
+UPDATE RI_CODE_TRANS SET CODE_DISP = '우리 대학 소속 교원의 연도별 WoS, Scopus, KCI DB에서 검증된 논문 건수를 제공하는 페이지입니다. ' WHERE GUBUN='ASRIMS_DESC' and CODE_VALUE='researcher.page.publications.desc';
+UPDATE RI_CODE_TRANS SET CODE_DISP = 'YU-RAIS는 WoS, Scopus, KCI DB에서 검증된 논문 실적을 분석하여 차트, 그래프 등 시각화된 형태로 제공하는 <br/>분석시스템입니다. 우리 대학 소속 교원의 연도별 논문 건수 및 학술지 분야별 IF 등의 현황을 확인하실 수 있습니다.' WHERE GUBUN='ASRIMS_DESC' and CODE_VALUE='researcher.page.overview.desc';
+UPDATE RI_CODE_TRANS SET CODE_DISP = 'Keyword Cloud는 교수님 논문의 요약 및 키워드에서 자주 사용되는 단어의 빈도와 중요도를 분석하여 제공하는 페이지입니다.' WHERE GUBUN='ASRIMS_DESC' and CODE_VALUE='researcher.page.keyword_cloud.desc';
+UPDATE RI_CODE_TRANS SET CODE_DISP = '교수님의 연도별 논문건수를 제공하는 페이지입니다. Chart와 Data표로 제공되며 결과값을 엑셀로 반출 가능합니다. 필드 제목을 클릭하시면 선택된 필드별로 정렬하여 실적을 보실 수 있습니다.' WHERE GUBUN='ASRIMS_DESC' and CODE_VALUE='researcher.page.publications.desc';
+UPDATE RI_CODE_TRANS SET CODE_DISP = '교수님의 연구분야와 유사 연구를 수행하는 연구자 중 공동연구 수행 연구자 목록입니다.' WHERE GUBUN='ASRIMS_DESC' and CODE_VALUE='researcher.page.similar_coauthor.desc';
+UPDATE RI_CODE_TRANS SET CODE_DISP = '교수님의 연구분야와 유사 연구를 수행하는 연구자 중 공동연구 미수행 연구자 목록입니다.' WHERE GUBUN='ASRIMS_DESC' and CODE_VALUE='researcher.page.similar_noncoauthor.desc';
+UPDATE RI_CODE_TRANS SET CODE_DISP = '교수님의 논문이 게재된 학술지 현황을 제공하는 페이지입니다. 학술지명 옆의 숫자는 게재된 논문 수입니다. 실적기간 변경 시 해당 기간에 게재된 학술지 현황으로 변경됩니다. ' WHERE GUBUN='ASRIMS_DESC' and CODE_VALUE='researcher.page.frequented_journals.desc';
+
+
+UPDATE RI_CODE_TRANS SET CODE_DISP = 'YU-RAIS는 WoS, Scopus, KCI DB에서 검증된 논문 실적을 분석하여 차트, 그래프 등 시각화된 형태로 제공하는 <br/>분석시스템입니다. Department메뉴에서는 해당 학(부)과 소속 교원의 연도별 논문건수, 피인용 현황, 공동연구 현황 등을 확인하실 수 있습니다. ' WHERE GUBUN='ASRIMS_DESC' and CODE_VALUE='department.page.overview.desc';
+UPDATE RI_CODE_TRANS SET CODE_DISP = '학(부)과별 WoS, Scopus, KCI DB에서 최근에 검증된 논문 목록을 제공하는 페이지입니다. 논문 제목을 클릭하시면 상세 페이지를 확인 하실 수 있습니다.' WHERE GUBUN='ASRIMS_DESC' and CODE_VALUE='department.page.latest_article.desc';
+UPDATE RI_CODE_TRANS SET CODE_DISP = '논문 실적을 기반으로 교원의 학(부)과 간 연구 네트워크 정보를 보여 주는 페이지입니다. 원의 크기는 학(부)과 간 공동 논문 수에 따라 달라지며 숫자는 학과 간 공동저자 논문 수를 의미합니다. 마우스로 학(부)과 원을 클릭하시면 관련 논문 목록을 보실 수 있습니다.' WHERE GUBUN='ASRIMS_DESC' and CODE_VALUE='department.page.coauthor_network_dept.desc';"
+UPDATE RI_CODE_TRANS SET CODE_DISP = '논문 실적을 기반으로 교원의 학(부)과 내 연구 네트워크 정보를 보여 주는 페이지입니다. 학(부)과 내 연구자간의 공동 논문 수에 따라 선의 굵기가 달라지며 숫자는 공동저자 논문수를 의미합니다. 마우스로 연구자의 위치를 이동할 수 있으며, 하단 체크 기능으로 선택한 연구자로만 제한하여 보실 수 있습니다.' WHERE GUBUN='ASRIMS_DESC' and CODE_VALUE='department.page.coauthor_network_samedept.desc';
+UPDATE RI_CODE_TRANS SET CODE_DISP = '학(부)과 소속 교원의 연도별 H-index를 제공하는 페이지입니다. ' WHERE GUBUN='ASRIMS_DESC' and CODE_VALUE='department.page.hindex_comp.desc';
+UPDATE RI_CODE_TRANS SET CODE_DISP = '학(부)과 소속 교원의 게재 학술지에 대한 분야별 연구동향을 제공하는 페이지입니다. 학술지의 분야에 따른 연도별 학(부)과 게재 논문 수를 제공하며 체크 박스 선택 시 분야별로 논문 건수를 확인하실 수 있습니다.' WHERE GUBUN='ASRIMS_DESC' and CODE_VALUE='department.page.subject_trends.desc';
+UPDATE RI_CODE_TRANS SET CODE_DISP = '학(부)과별로 가장 많이 게재된 학술지 목록을 제공하는 페이지입니다. 학술지명 옆의 숫자는 게재된 논문 수입니다. 실적기간 변경 시 해당 기간에 게재된 학술지 현황으로 변경됩니다.' WHERE GUBUN='ASRIMS_DESC' and CODE_VALUE='department.page.frequented_journal.desc';
+
+UPDATE RI_CODE_TRANS SET CODE_DISP = 'YU-RAIS는 WoS, Scopus, KCI DB에서 검증된 논문 실적을 분석하여 차트, 그래프 등 시각화된 형태로 제공하는 분석시스템입니다. Department메뉴에서는 해당 학(부)과 소속 교원의 연도별 논문건수, 피인용 현황, 공동연구 현황 등을 확인하실 수 있습니다. ' WHERE GUBUN='ASRIMS_DESC' and CODE_VALUE='college.page.overview.desc';
+UPDATE RI_CODE_TRANS SET CODE_DISP = '단과대학별 소속 교원의 WoS, Scopus, KCI DB에서 최근에 검증된 논문 목록을 제공하는 페이지입니다. 논문 제목을 클릭하시면 상세 페이지를 확인 하실 수 있습니다.' WHERE GUBUN='ASRIMS_DESC' and CODE_VALUE='college.page.latest_article.desc';
+--UPDATE RI_CODE_TRANS SET CODE_DISP = '단과대학 소속 교원의 연도 및 색인별 H-index를 제공하는 페이지입니다. ' WHERE GUBUN='ASRIMS_DESC' and CODE_VALUE='college.page.hindex.desc';
+Insert into RI_CODE_TRANS (GUBUN,CODE_VALUE,CODE_DISP,DISP_ORDER,IS_USED,KRI_DISP,CODE_DISP_ENG) values ('ASRIMS_DESC','college.page.hindex.desc','단과대학 소속 교원의 연도 및 색인별 H-index를 제공하는 페이지입니다. ',0,'Y',null,'단과대학 소속 교원의 연도 및 색인별 H-index를 제공하는 페이지입니다. ');
+UPDATE RI_CODE_TRANS SET CODE_DISP = '단과대학내 학(부)과별 논문의 Chart와 Data 표를 제공하는 페이지입니다. 체크 박스를 선택하시면 체크된 학(부)과만을 비교하여 제공되며 엑셀로 반출 하실 수 있습니다.' WHERE GUBUN='ASRIMS_DESC' and CODE_VALUE='college.page.publications_comp.desc';
+UPDATE RI_CODE_TRANS SET CODE_DISP = '단과대학내 학(부)과별 Impact Factor 평균값을 제공하는 페이지입니다. 체크 박스를 선택하시면 체크된 학(부)과만을 비교하여 제공되며 엑셀로 반출 하실 수 있습니다. ' WHERE GUBUN='ASRIMS_DESC' and CODE_VALUE='college.page.impactfactor_comp.desc';
+UPDATE RI_CODE_TRANS SET CODE_DISP = '단과대학내 학(부)과별 평균 피인용횟수를 제공하는 페이지입니다. 체크 박스를 선택하시면 체크된 학(부)과만을 비교하여 제공되며 엑셀로 반출 하실 수 있습니다.' WHERE GUBUN='ASRIMS_DESC' and CODE_VALUE='college.page.citation_comp.desc';
+UPDATE RI_CODE_TRANS SET CODE_DISP = '단과대학내 학(부)과별 공동 연구현황을 제공하는 페이지입니다. 두 개의 원을 연결하는 선은 학과간 공동 논문수를 의미하며 마우스로 학(부)과 위치를 이동할 수 있습니다. ' WHERE GUBUN='ASRIMS_DESC' and CODE_VALUE='college.page.coauthor_network.desc';
+
+
+UPDATE RI_CODE_TRANS SET CODE_DISP = '학(부)과 소속 교원의 H-index를 제공하는 페이지입니다. 목록수 전체를 선택하시면 해당 학(부)과 소속 전체 교원의 H-index를 확인 및 엑셀로 반출 하실 수 있습니다.' WHERE GUBUN='ASRIMS_DESC' and CODE_VALUE='institution.page.hindex.desc';
+UPDATE RI_CODE_TRANS SET CODE_DISP = '학(부)과 소속 교원의 연도별 논문 건수를 제공하는 페이지입니다. 목록수 전체를 선택하시면 대상학(부)과 전체 교원의 논문 실적을 확인 및 엑셀로 반출하실 수 있습니다. 필드 제목을 클릭하시면 선택된 필드별로 정렬하여 실적을 보실 수 있습니다.' WHERE GUBUN='ASRIMS_DESC' and CODE_VALUE='institution.page.article.desc';
+UPDATE RI_CODE_TRANS SET CODE_DISP = '학(부)과 소속 교원 논문의 피인용수 정보를 제공하는 페이지입니다. 목록수 전체를 선택하시면 대상학(부)과 소속 교원의 논문 피인용수를 확인하실 수 있습니다.' WHERE GUBUN='ASRIMS_DESC' and CODE_VALUE='institution.page.citation.desc';
+UPDATE RI_CODE_TRANS SET CODE_DISP = '학(부)과 소속 교원의 논문수를 Chart와 Data표를 제공하는 페이지입니다. 체크 박스를 선택하시면 체크된 학(부)과만을 비교하여 제공되며 엑셀로 반출 하실 수 있습니다.' WHERE GUBUN='ASRIMS_DESC' and CODE_VALUE='institution.page.numberofarticle.desc';
+
+
+-- 처음 요청
+UPDATE RI_CODE_TRANS SET CODE_DISP = 'YU-RAIS는 WoS, Scopus, KCI DB에서 검증된 논문 실적을 분석하여 차트, 그래프 등 시각화된 형태로 제공하는 <br/>분석시스템입니다. 우리 대학 소속 교원의 연도별 논문 건수 및 학술지 분야별 IF 등의 현황을 확인하실 수 있습니다.' WHERE GUBUN='ASRIMS_DESC' and CODE_VALUE='aboutsci.page.overview.desc';
+UPDATE RI_CODE_TRANS SET CODE_DISP = 'WoS, Scopus, KCI DB에서 최근에 검증된 논문 목록을 제공하는 페이지입니다. <br/> 논문 제목을 클릭하시면 상세 페이지를 확인 하실 수 있습니다. ' WHERE GUBUN='ASRIMS_DESC' and CODE_VALUE='aboutsci.page.latest_article.desc';
+UPDATE RI_CODE_TRANS SET CODE_DISP = '우리 대학 소속 교원의 투고 저널에 대한 주제별 연구동향을 제공하는 페이지입니다. <br/>저널의 주제에 따른 연도별 투고 논문 수를 제공하며 체크 박스 선택 시 주제별로 논문 건수를 확인하실 수 있습니다.' WHERE GUBUN='ASRIMS_DESC' and CODE_VALUE='aboutsci.page.subject_trends.desc';"
+UPDATE RI_CODE_TRANS SET CODE_DISP = 'JCR의 주제별 impact factor의 상위순위백분율을 제공하는 페이지입니다.' WHERE GUBUN='ASRIMS_DESC' and CODE_VALUE='aboutsci.page.jcr_ranking.desc';
+UPDATE RI_CODE_TRANS SET CODE_DISP = '우리 대학 소속 교원이 가장 많이 게재한 학술지 순위를 20개까지 제공하는 페이지입니다. <br/>학술지명 옆의 숫자는 게재된 논문 수입니다. 실적기간 변경 시 해당 기간에 게재된 학술지 현황으로 변경됩니다.' WHERE GUBUN='ASRIMS_DESC' and CODE_VALUE='aboutsci.page.journal_dept.desc';"
+
+UPDATE RI_CODE_TRANS SET CODE_DISP = 'YU-RAIS is a system which analyzes articles in RIMS. It provides various visualization of RIMS data using graphs and charts. You can see statistics visually such as your publications’ trends, h-index, and citation numbers by year. Only data ' WHERE GUBUN='ASRIMS_DESC' and CODE_VALUE='researcher.page.overview.desc';
+UPDATE RI_CODE_TRANS SET CODE_DISP = 'This page shows a cloud of the researcher’s main article keywords. The size of each keyword varies by its frequency in use in his or her articles.' WHERE GUBUN='ASRIMS_DESC' and CODE_VALUE='researcher.page.keyword_cloud.desc';
+UPDATE RI_CODE_TRANS SET CODE_DISP = 'This page shows the researcher’s article quantity trends by year. You can change the year range you want to see. When you click the ‘Export’ button, you can download a graph or chart of what you see. Chart' WHERE GUBUN='ASRIMS_DESC' and CODE_VALUE='researcher.page.publications.desc';
+UPDATE RI_CODE_TRANS SET CODE_DISP = '교수님의 연도별 H-index를 제공하는 페이지입니다. <br/>H-index는 예를 들면 지정한 실적기간동안 해당 색인에 게재된 논문이 20편이며<br/>H-index가 8이라면, 총 20편의 논문 중 피인용이 8번 이상된 논문이 8편임을 의미합니다.' WHERE GUBUN='ASRIMS_DESC' and CODE_VALUE='researcher.page.hindex.desc';
+UPDATE RI_CODE_TRANS SET CODE_DISP = '교수님의 논문중 피인용된 논문과 피인용되지 않은 논문의 현황을 제공하는 페이지입니다. ' WHERE GUBUN='ASRIMS_DESC' and CODE_VALUE='researcher.page.cited_uncited.desc';
+UPDATE RI_CODE_TRANS SET CODE_DISP = '교수님의 논문 실적을 기반으로 교내외 연구자 네트워크 정보를 보여 주는 페이지입니다. <br/>원의 크기는 공동 논문 수에 따라 달라지며 숫자는 공동저자 논문 수를 의미합니다. <br/>마우스로 연구자 원을 클릭하시면 관련 논문 목록을 보실 수 있습니다.' WHERE GUBUN='ASRIMS_DESC' and CODE_VALUE='researcher.page.coauthor_network.desc';
+UPDATE RI_CODE_TRANS SET CODE_DISP = 'Coauthors : 교수님의 연구분야와 유사 연구를 수행하는 연구자 중 공동연구 수행 연구자 목록입니다.' WHERE GUBUN='ASRIMS_DESC' and CODE_VALUE='researcher.page.similar_coauthor.desc';
+UPDATE RI_CODE_TRANS SET CODE_DISP = 'Non-coautiors : 교수님의 연구분야와 유사 연구를 수행하는 연구자 중 공동연구 미수행 연구자 목록입니다.' WHERE GUBUN='ASRIMS_DESC' and CODE_VALUE='researcher.page.similar_noncoauthor.desc';
+UPDATE RI_CODE_TRANS SET CODE_DISP = '학(부)과별로 공개된 특허 건수를 연도별로 제공하는 페이지입니다. <br/>Chart와 Data표로 제공되며 결과 값을 엑셀로 반출하실 수 있습니다.' WHERE GUBUN='ASRIMS_DESC' and CODE_VALUE='researcher.page.frequented_journals.desc';
+
+UPDATE RI_CODE_TRANS SET CODE_DISP = '학(부)과별로 계약된 기술이전 건수 및 금액을 연도별로 제공하는 페이지입니다. <br/>Chart와 Data표로 제공되며 결과 값을 엑셀로 반출하실 수 있습니다.' WHERE GUBUN='ASRIMS_DESC' and CODE_VALUE='researcher.page.patent.desc';
+UPDATE RI_CODE_TRANS SET CODE_DISP = '교수님의 계약된 기술이전 건수 및 금액을 연도별로 제공하는 페이지입니다. Chart와 Data 표로 제공되며 결과 값을 엑셀로 반출하실 수 있습니다. 필드 제목을 클릭하시면 선택된 필드별로 정렬하여 실적을 보실 수 있습니다.' WHERE GUBUN='ASRIMS_DESC' and CODE_VALUE='researcher.page.techtrans.desc';
+
+Insert into RI_CODE_TRANS (GUBUN,CODE_VALUE,CODE_DISP,DISP_ORDER,IS_USED,KRI_DISP,CODE_DISP_ENG) values ('ASRIMS_DESC','researcher.page.patent.desc','학(부)과별로 계약된 기술이전 건수 및 금액을 연도별로 제공하는 페이지입니다. <br/>Chart와 Data표로 제공되며 결과 값을 엑셀로 반출하실 수 있습니다.',0,'Y',null,'학(부)과별로 계약된 기술이전 건수 및 금액을 연도별로 제공하는 페이지입니다. <br/>Chart와 Data표로 제공되며 결과 값을 엑셀로 반출하실 수 있습니다.');
+Insert into RI_CODE_TRANS (GUBUN,CODE_VALUE,CODE_DISP,DISP_ORDER,IS_USED,KRI_DISP,CODE_DISP_ENG) values ('ASRIMS_DESC','researcher.page.techtrans.desc','교수님의 계약된 기술이전 건수 및 금액을 연도별로 제공하는 페이지입니다. <br/>Chart와 Data 표로 제공되며 결과 값을 엑셀로 반출하실 수 있습니다.<br/>필드 제목을 클릭하시면 선택된 필드별로 정렬하여 실적을 보실 수 있습니다.',0,'Y',null,'교수님의 계약된 기술이전 건수 및 금액을 연도별로 제공하는 페이지입니다. <br/>Chart와 Data 표로 제공되며 결과 값을 엑셀로 반출하실 수 있습니다.<br/>필드 제목을 클릭하시면 선택된 필드별로 정렬하여 실적을 보실 수 있습니다.');
+
+UPDATE RI_CODE_TRANS SET CODE_DISP = '학(부)과별 소속 교원의 논문건수 실적을 상위 20위 까지 제공하는 페이지입니다. <br/>목록수 전체를 선택하시면 해당 학(부)과 소속 전체 교원의 논문 실적을 확인 및 엑셀로 반출 하실 수 있습니다.' WHERE GUBUN='ASRIMS_DESC' and CODE_VALUE='department.page.overview.desc';
+UPDATE RI_CODE_TRANS SET CODE_DISP = '학(부)과별 논문 중 피인용횟수가 높은 상위 20위 까지의 논문정보를 제공하는 페이지입니다. <br/>목록수 전체를 선택하시면 해당 학(부)과 소속 교원의 전체 논문 피인용횟수를 확인하실 수 있습니다.' WHERE GUBUN='ASRIMS_DESC' and CODE_VALUE='department.page.latest_article.desc';
+UPDATE RI_CODE_TRANS SET CODE_DISP = '논문 실적을 기반으로 연구자의 학(부)과 간 연구 네트워크 정보를 보여 주는 페이지입니다. <br/>원의 크기는 학(부)과 간 공동 논문 수에 따라 달라지며 숫자는 학과 간 공동저자 논문 수를 의미합니다. 마우스로 학(부)과 원을 클릭하시면 관련 논문 목록을 보실 수 있습니다.' WHERE GUBUN='ASRIMS_DESC' and CODE_VALUE='department.page.coauthor_network_dept.desc';"
+UPDATE RI_CODE_TRANS SET CODE_DISP = '논문 실적을 기반으로 연구자의 학(부)과 내 연구 네트워크 정보를 보여 주는 페이지입니다. <br/>학(부)과 내 연구자간의 공동 논문 수에 따라 선의 굵기가 달라지며 숫자는 공동저자 논문수를 의미합니다. 마우스로 연구자의 위치를 이동할 수 있으며, 하단 체크 기능으로 선택한 연구자로만 제한하여 보실 수 있습니다.' WHERE GUBUN='ASRIMS_DESC' and CODE_VALUE='department.page.coauthor_network_samedept.desc';
+UPDATE RI_CODE_TRANS SET CODE_DISP = '학(부)과 소속 교원의 연도별 논문 건수를 제공하는 페이지입니다.  체크박스 선택시 선택된 교원으로 제한하여 실적을 비교하실 수 있습니다. Chart와 Data 표로 제공되며 결과값을 엑셀로 반출 가능 합니다. 필드 제목을 클릭하시면 선택된 필드별로 정렬하여 실적을 보실 수 있습니다.' WHERE GUBUN='ASRIMS_DESC' and CODE_VALUE='department.page.publications_comp.desc';
+UPDATE RI_CODE_TRANS SET CODE_DISP = '학(부)과 소속 교원의 연도별 Impact Factor 평균값을 제공하는 페이지입니다. 체크박스 선택시 선택된 교원으로 제한하여 실적을 비교하실 수 있습니다. Chart와 Data 표로 제공되며 결과값을 엑셀로 반출 가능 합니다. 필드 제목을 클릭하시면 선택된 필드별로 정렬하여 실적을 보실 수 있습니다.' WHERE GUBUN='ASRIMS_DESC' and CODE_VALUE='department.page.impactfactor_comp.desc';
+UPDATE RI_CODE_TRANS SET CODE_DISP = '학(부)과별로 공개된 특허 건수를 연도별로 제공하는 페이지입니다. <br/>Chart와 Data표로 제공되며 결과 값을 엑셀로 반출하실 수 있습니다.' WHERE GUBUN='ASRIMS_DESC' and CODE_VALUE='department.page.citation_comp.desc';
+UPDATE RI_CODE_TRANS SET CODE_DISP = '학(부)과별로 계약된 기술이전 건수 및 금액을 연도별로 제공하는 페이지입니다. <br/>Chart와 Data표로 제공되며 결과 값을 엑셀로 반출하실 수 있습니다.' WHERE GUBUN='ASRIMS_DESC' and CODE_VALUE='department.page.hindex_comp.desc';
+UPDATE RI_CODE_TRANS SET CODE_DISP = '학(부)과 소속 교원의 투고 저널에 대한 주제별 연구동향을 제공하는 페이지입니다. <br/>저널의 주제에 따른 연도별 학과 투고 논문 수를 제공하며 체크 박스 선택 시 주제별로 논문 건수를 확인하실 수 있습니다.' WHERE GUBUN='ASRIMS_DESC' and CODE_VALUE='department.page.subject_trends.desc';
+UPDATE RI_CODE_TRANS SET CODE_DISP = '학(부)과별로 가장 많이 게재된 학술지 순위를 20개까지 제공하는 페이지입니다. <br/> 학술지명 옆의 숫자는 게재된 논문 수입니다. 실적기간 변경 시 해당 기간에 게재된 학술지 현황으로 변경됩니다.' WHERE GUBUN='ASRIMS_DESC' and CODE_VALUE='department.page.frequented_journal.desc';
+
+UPDATE RI_CODE_TRANS SET CODE_DISP = '학(부)과별로 공개된 특허 건수를 연도별로 제공하는 페이지입니다. <br/> Chart와 Data 표로 제공되며 결과 값을 엑셀로 반출하실 수 있습니다. 필드 제목을 클릭하시면 선택된 필드별로 정렬하여 실적을 보실 수 있습니다.' WHERE GUBUN='ASRIMS_DESC' and CODE_VALUE='department.page.patent.desc';
+UPDATE RI_CODE_TRANS SET CODE_DISP = '학(부)과별로 계약된 기술이전 건수 및 금액을 연도별로 제공하는 페이지입니다. <br/> Chart와 Data 표로 제공되며 결과 값을 엑셀로 반출하실 수 있습니다. 필드 제목을 클릭하시면 선택된 필드별로 정렬하여 실적을 보실 수 있습니다.' WHERE GUBUN='ASRIMS_DESC' and CODE_VALUE='department.page.techtrans.desc';
+
+Insert into RI_CODE_TRANS (GUBUN,CODE_VALUE,CODE_DISP,DISP_ORDER,IS_USED,KRI_DISP,CODE_DISP_ENG) values ('ASRIMS_DESC','department.page.patent.desc','학(부)과별로 공개된 특허 건수를 연도별로 제공하는 페이지입니다. <br/> Chart와 Data 표로 제공되며 결과 값을 엑셀로 반출하실 수 있습니다. 필드 제목을 클릭하시면 선택된 필드별로 정렬하여 실적을 보실 수 있습니다.',0,'Y',null,'');
+Insert into RI_CODE_TRANS (GUBUN,CODE_VALUE,CODE_DISP,DISP_ORDER,IS_USED,KRI_DISP,CODE_DISP_ENG) values ('ASRIMS_DESC','department.page.techtrans.desc','학(부)과별로 계약된 기술이전 건수 및 금액을 연도별로 제공하는 페이지입니다. <br/> Chart와 Data 표로 제공되며 결과 값을 엑셀로 반출하실 수 있습니다. 필드 제목을 클릭하시면 선택된 필드별로 정렬하여 실적을 보실 수 있습니다.',0,'Y',null,'');
+
+
+UPDATE RI_CODE_TRANS SET CODE_DISP = '학(부)과별 소속 교원의 H-index를 상위 20위까지 제공하는 페이지입니다. 목록수 전체를 선택하시면 해당 학(부)과 소속 전체 교원의 H-index를 확인 및 엑셀로 반출 하실 수 있습니다.' WHERE GUBUN='ASRIMS_DESC' and CODE_VALUE='college.page.overview.desc';"
+UPDATE RI_CODE_TRANS SET CODE_DISP = '학(부)과별 소속 교원의 논문건수 실적을 상위 20위 까지 제공하는 페이지입니다. 목록수 전체를 선택하시면 해당 학(부)과 소속 전체 교원의 논문 실적을 확인 및 엑셀로 반출 하실 수 있습니다.' WHERE GUBUN='ASRIMS_DESC' and CODE_VALUE='college.page.latest_article.desc';"
+UPDATE RI_CODE_TRANS SET CODE_DISP = '학(부)과별 논문 중 피인용횟수가 높은 상위 20위 까지의 논문정보를 제공하는 페이지입니다. 목록수 전체를 선택하시면 해당 학(부)과 소속 교원의 전체 논문 피인용횟수를 확인하실 수 있습니다.' WHERE GUBUN='ASRIMS_DESC' and CODE_VALUE='';"
+UPDATE RI_CODE_TRANS SET CODE_DISP = '학(부)과별 논문의 Chart와 Data 표를 제공하는 페이지입니다. 체크 박스를 선택하시면 체크된 학(부)과만을 비교하여 제공되며 엑셀로 반출 하실 수 있습니다.' WHERE GUBUN='ASRIMS_DESC' and CODE_VALUE='college.page.publications_comp.desc';"
+UPDATE RI_CODE_TRANS SET CODE_DISP = '학(부)과별 Impact Factor 평균값을 제공하는 페이지입니다. 체크 박스를 선택하시면 체크된 학(부)과만을 비교하여 제공되며 엑셀로 반출 하실 수 있습니다. ' WHERE GUBUN='ASRIMS_DESC' and CODE_VALUE='college.page.impactfactor_comp.desc';"
+UPDATE RI_CODE_TRANS SET CODE_DISP = '학(부)과별 평균 피인용횟수를 제공하는 페이지입니다. 체크 박스를 선택하시면 체크된 학(부)과만을 비교하여 제공되며 엑셀로 반출 하실 수 있습니다.' WHERE GUBUN='ASRIMS_DESC' and CODE_VALUE='college.page.citation_comp.desc';"
+UPDATE RI_CODE_TRANS SET CODE_DISP = '학(부)과별 공동 연구현황을 제공하는 페이지입니다. 두 개의 원을 연결하는 선은 학과간 공동 논문수를 의미하며 마우스로 학(부)과 위치를 이동할 수 있습니다. ' WHERE GUBUN='ASRIMS_DESC' and CODE_VALUE='college.page.coauthor_network.desc';"
+
+UPDATE RI_CODE_TRANS SET CODE_DISP = '학(부)과별로 공개된 특허 건수를 연도별로 제공하는 페이지입니다. Chart와 Data표로 제공되며 결과 값을 엑셀로 반출하실 수 있습니다.' WHERE GUBUN='ASRIMS_DESC' and CODE_VALUE='college.page.patents.desc';"
+UPDATE RI_CODE_TRANS SET CODE_DISP = '학(부)과별로 계약된 기술이전 건수 및 금액을 연도별로 제공하는 페이지입니다. Chart와 Data표로 제공되며 결과 값을 엑셀로 반출하실 수 있습니다.' WHERE GUBUN='ASRIMS_DESC' and CODE_VALUE='college.page.techtrans.desc';
+
+Insert into RI_CODE_TRANS (GUBUN,CODE_VALUE,CODE_DISP,DISP_ORDER,IS_USED,KRI_DISP,CODE_DISP_ENG) values ('ASRIMS_DESC','college.page.patent.desc','학(부)과별로 공개된 특허 건수를 연도별로 제공하는 페이지입니다. Chart와 Data표로 제공되며 결과 값을 엑셀로 반출하실 수 있습니다.',0,'Y',null,'');
+Insert into RI_CODE_TRANS (GUBUN,CODE_VALUE,CODE_DISP,DISP_ORDER,IS_USED,KRI_DISP,CODE_DISP_ENG) values ('ASRIMS_DESC','college.page.techtrans.desc','학(부)과별로 계약된 기술이전 건수 및 금액을 연도별로 제공하는 페이지입니다. Chart와 Data표로 제공되며 결과 값을 엑셀로 반출하실 수 있습니다.',0,'Y',null,'');
+
+
+UPDATE RI_CODE_TRANS SET CODE_DISP = '학(부)과별 소속 교원의 H-index를 상위 20위까지 제공하는 페이지입니다. 목록수 전체를 선택하시면 해당 학(부)과 소속 전체 교원의 H-index를 확인 및 엑셀로 반출 하실 수 있습니다.' WHERE GUBUN='ASRIMS_DESC' and CODE_VALUE='institution.page.hindex.desc';
+UPDATE RI_CODE_TRANS SET CODE_DISP = '학(부)과별 소속 교원의 논문건수 실적을 상위 20위 까지 제공하는 페이지입니다. 목록수 전체를 선택하시면 해당 학(부)과 소속 전체 교원의 논문 실적을 확인 및 엑셀로 반출 하실 수 있습니다.' WHERE GUBUN='ASRIMS_DESC' and CODE_VALUE='institution.page.article.desc';
+UPDATE RI_CODE_TRANS SET CODE_DISP = '학(부)과별 논문 중 피인용횟수가 높은 상위 20위 까지의 논문정보를 제공하는 페이지입니다. 목록수 전체를 선택하시면 해당 학(부)과 소속 교원의 전체 논문 피인용횟수를 확인하실 수 있습니다.' WHERE GUBUN='ASRIMS_DESC' and CODE_VALUE='institution.page.citation.desc';
+UPDATE RI_CODE_TRANS SET CODE_DISP = '학(부)과별 논문의 Chart와 Data 표를 제공하는 페이지입니다. 체크 박스를 선택하시면 체크된 학(부)과만을 비교하여 제공되며 엑셀로 반출 하실 수 있습니다.' WHERE GUBUN='ASRIMS_DESC' and CODE_VALUE='institution.page.numberofarticle.desc';
+UPDATE RI_CODE_TRANS SET CODE_DISP = '학(부)과별 Impact Factor 평균값을 제공하는 페이지입니다. 체크 박스를 선택하시면 체크된 학(부)과만을 비교하여 제공되며 엑셀로 반출 하실 수 있습니다. ' WHERE GUBUN='ASRIMS_DESC' and CODE_VALUE='institution.page.impactfactor.desc';
+UPDATE RI_CODE_TRANS SET CODE_DISP = '학(부)과별 평균 피인용횟수를 제공하는 페이지입니다. 체크 박스를 선택하시면 체크된 학(부)과만을 비교하여 제공되며 엑셀로 반출 하실 수 있습니다.' WHERE GUBUN='ASRIMS_DESC' and CODE_VALUE='institution.page.citation.desc';
+UPDATE RI_CODE_TRANS SET CODE_DISP = '학(부)과별 공동 연구현황을 제공하는 페이지입니다. 두 개의 원을 연결하는 선은 학과간 공동 논문수를 의미하며 마우스로 학(부)과 위치를 이동할 수 있습니다. Connection 숫자를 변경하여 공동연구 논문 수를 제한하실 수 있습니다' WHERE GUBUN='ASRIMS_DESC' and CODE_VALUE='institution.page.coauthor.desc';
+
+UPDATE RI_CODE_TRANS SET CODE_DISP = '학(부)과별로 공개된 특허 건수를 연도별로 제공하는 페이지입니다. Chart와 Data표로 제공되며 결과 값을 엑셀로 반출하실 수 있습니다.' WHERE GUBUN='ASRIMS_DESC' and CODE_VALUE='institution.page.patents.desc';
+UPDATE RI_CODE_TRANS SET CODE_DISP = '학(부)과별로 계약된 기술이전 건수 및 금액을 연도별로 제공하는 페이지입니다. Chart와 Data표로 제공되며 결과 값을 엑셀로 반출하실 수 있습니다.' WHERE GUBUN='ASRIMS_DESC' and CODE_VALUE='institution.page.techtrans.desc';
+
+Insert into RI_CODE_TRANS (GUBUN,CODE_VALUE,CODE_DISP,DISP_ORDER,IS_USED,KRI_DISP,CODE_DISP_ENG) values ('ASRIMS_DESC','institution.page.patent.desc','학(부)과별로 공개된 특허 건수를 연도별로 제공하는 페이지입니다. Chart와 Data표로 제공되며 결과 값을 엑셀로 반출하실 수 있습니다.',0,'Y',null,'');
+Insert into RI_CODE_TRANS (GUBUN,CODE_VALUE,CODE_DISP,DISP_ORDER,IS_USED,KRI_DISP,CODE_DISP_ENG) values ('ASRIMS_DESC','institution.page.techtrans.desc','학(부)과별로 계약된 기술이전 건수 및 금액을 연도별로 제공하는 페이지입니다. Chart와 Data표로 제공되며 결과 값을 엑셀로 반출하실 수 있습니다.',0,'Y',null,'');
+
+
+
+-- 재수정(27일 요청건)
+Insert into RI_CODE_TRANS (GUBUN,CODE_VALUE,CODE_DISP,DISP_ORDER,IS_USED,KRI_DISP,CODE_DISP_ENG) values ('ASRIMS_DESC','aboutsci.page.publications.desc','우리 대학 소속 전임교원의 연도별 논문건수 제공하는 페이지입니다. 학술지의 색인과 실적기간을 구분하여 조회할 수 있으며, 학술지가 2개 이상의 색인에 포함된 경우 중복으로 산정되었습니다. ',0,'Y',null,'');
+UPDATE RI_CODE_TRANS SET CODE_DISP = 'JCR의 분야별 impact factor의 상위순위백분율을 제공하는 페이지입니다.' WHERE GUBUN='ASRIMS_DESC' and CODE_VALUE='aboutsci.page.jcr_ranking.desc';
+UPDATE RI_CODE_TRANS SET CODE_DISP = '우리 대학 소속 교원이 가장 많이 게재한 학술지를 20위까지 제공하는 페이지입니다. <br/>학술지명 옆의 숫자는 게재된 논문 수입니다. 실적기간 변경 시 해당 기간에 게재된 학술지 현황으로 변경됩니다.' WHERE GUBUN='ASRIMS_DESC' and CODE_VALUE='aboutsci.page.journal_dept.desc';"
+UPDATE RI_CODE_TRANS SET CODE_DISP = 'YU-RAIS는 WoS, Scopus, KCI DB에서 검증된 교수님의 논문 실적을 분석하여 차트, 그래프 등 시각화된 형태로 제공하는 분석시스템입니다. ' WHERE GUBUN='ASRIMS_DESC' and CODE_VALUE='researcher.page.overview.desc';
+UPDATE RI_CODE_TRANS SET CODE_DISP = '교수님의 연도별 논문건수를 제공하는 페이지입니다. Chart와 Data로 제공되며 결과값을 엑셀로 반출 가능합니다.' WHERE GUBUN='ASRIMS_DESC' and CODE_VALUE='researcher.page.publications.desc';
+UPDATE RI_CODE_TRANS SET CODE_DISP = '교수님의 연도별 H-index를 제공하는 페이지입니다. H-index는 예를 들면 지정한 실적기간동안 해당 색인에 게재된 논문이 20편이며 H-index가 8이라면, 총 20편의 논문 중 8번 이상 피인용된 논문이 8편임을 의미합니다.' WHERE GUBUN='ASRIMS_DESC' and CODE_VALUE='researcher.page.hindex.desc';
+UPDATE RI_CODE_TRANS SET CODE_DISP = '교수님의 연구분야와 유사 연구를 수행하는 교내연구자 중 공동연구를 수행하고 있는 연구자 목록입니다.' WHERE GUBUN='ASRIMS_DESC' and CODE_VALUE='researcher.page.similar_coauthor.desc';
+UPDATE RI_CODE_TRANS SET CODE_DISP = '교수님의 연구분야와 유사 연구를 수행하는 교내연구자 중 공동연구를 수행하고 있지 않은 연구자 목록입니다.' WHERE GUBUN='ASRIMS_DESC' and CODE_VALUE='researcher.page.similar_noncoauthor.desc';
+UPDATE RI_CODE_TRANS SET CODE_DISP = '교수님의 논문이 게재된 학술지 현황을 제공하는 페이지입니다. 학술지명 옆의 숫자는 게재된 논문 수입니다. 실적기간 변경 시 해당 기간에 게재된 학술지 현황으로 변경됩니다. ' WHERE GUBUN='ASRIMS_DESC' and CODE_VALUE='researcher.page.frequented_journals.desc';
+UPDATE RI_CODE_TRANS SET CODE_DISP = '교수님의 공개된 특허출원 현황을 제공하는 페이지입니다. 결과 값을 엑셀로 반출하실 수 있습니다.' WHERE GUBUN='ASRIMS_DESC' and CODE_VALUE='researcher.page.patent.desc';
+UPDATE RI_CODE_TRANS SET CODE_DISP = '교수님의 계약된 기술이전 건수 및 금액을 연도별로 제공하는 페이지입니다. Chart와 Data로 제공되며 결과 값을 엑셀로 반출하실 수 있습니다.' WHERE GUBUN='ASRIMS_DESC' and CODE_VALUE='researcher.page.techtrans.desc';
+
+
+UPDATE RI_CODE_TRANS SET CODE_DISP = '학(부)과 소속 교원의 연도별 논문 건수를 제공하는 페이지입니다. 체크박스 선택시 선택된 교원으로 제한하여 실적을 비교하실 수 있습니다. Chart와 Dat로 제공되며 결과값을 엑셀로 반출 가능 합니다. 필드 제목을 클릭하시면 선택된 필드별로 정렬하여 실적을 보실 수 있습니다.' WHERE GUBUN='ASRIMS_DESC' and CODE_VALUE='department.page.publications_comp.desc';
+UPDATE RI_CODE_TRANS SET CODE_DISP = '학(부)과 소속 교원의 연도별 Impact Factor 평균값을 제공하는 페이지입니다. 체크박스 선택시 선택된 교원으로 제한하여 실적을 비교하실 수 있습니다. Chart와 Data로 제공되며 결과값을 엑셀로 반출 가능 합니다. 필드 제목을 클릭하시면 선택된 필드별로 정렬하여 실적을 보실 수 있습니다.' WHERE GUBUN='ASRIMS_DESC' and CODE_VALUE='department.page.impactfactor_comp.desc';
+UPDATE RI_CODE_TRANS SET CODE_DISP = '학(부)과별 소속 교원의 논문중 피인용된 논문과 피인용되지 않은 논문의 현황을 제공하는 페이지입니다.' WHERE GUBUN='ASRIMS_DESC' and CODE_VALUE='department.page.citation_comp.desc';
+UPDATE RI_CODE_TRANS SET CODE_DISP = '학(부)과별로 공개된 특허 건수를 연도별로 제공하는 페이지입니다. Chart와 Data로 제공되며 결과 값을 엑셀로 반출하실 수 있습니다. ' WHERE GUBUN='ASRIMS_DESC' and CODE_VALUE='department.page.patent.desc';
+UPDATE RI_CODE_TRANS SET CODE_DISP = '학(부)과별로 계약된 기술이전 건수 및 금액을 연도별로 제공하는 페이지입니다. Chart와 Data로 제공되며 결과 값을 엑셀로 반출하실 수 있습니다. ' WHERE GUBUN='ASRIMS_DESC' and CODE_VALUE='department.page.techtrans.desc';
+
+UPDATE RI_CODE_TRANS SET CODE_DISP = 'YU-RAIS는 WoS, Scopus, KCI DB에서 검증된 논문 실적을 분석하여 차트, 그래프 등 시각화된 형태로 제공하는 분석시스템입니다. College메뉴에서는 해당 단과대학 소속 교원의 연도별 논문건수, 피인용 현황, 공동연구 현황 등을 확인하실 수 있습니다. ' WHERE GUBUN='ASRIMS_DESC' and CODE_VALUE='college.page.overview.desc';
+UPDATE RI_CODE_TRANS SET CODE_DISP = '단과대학 소속 교원의 WoS, Scopus, KCI DB에서 최근에 검증된 논문 목록을 제공하는 페이지입니다. 논문 제목을 클릭하시면 상세 페이지를 확인 하실 수 있습니다.' WHERE GUBUN='ASRIMS_DESC' and CODE_VALUE='college.page.latest_article.desc';
+UPDATE RI_CODE_TRANS SET CODE_DISP = '단과대학 소속 학(부)과별 논문의 Chart와 Data를 제공하는 페이지입니다. 체크 박스를 선택하시면 체크된 학(부)과만을 비교하여 제공되며 엑셀로 반출 하실 수 있습니다.' WHERE GUBUN='ASRIMS_DESC' and CODE_VALUE='college.page.publications_comp.desc';
+UPDATE RI_CODE_TRANS SET CODE_DISP = '단과대학별 소속 교원의 연도 및 색인별 H-index를 제공하는 페이지입니다.' WHERE GUBUN='ASRIMS_DESC' and CODE_VALUE='college.page.hindex.desc';
+UPDATE RI_CODE_TRANS SET CODE_DISP = '학(부)과별로 공개된 특허 건수를 연도별로 제공하는 페이지입니다.' WHERE GUBUN='ASRIMS_DESC' and CODE_VALUE='college.page.patent.desc';"
+UPDATE RI_CODE_TRANS SET CODE_DISP = '학(부)과별로 계약된 기술이전 건수 및 금액을 연도별로 제공하는 페이지입니다. ' WHERE GUBUN='ASRIMS_DESC' and CODE_VALUE='college.page.techtrans.desc';
+
+
+UPDATE RI_CODE_TRANS SET CODE_DISP = '학(부)과별 소속 교원의 H-index를 제공하는 페이지입니다. 목록수 전체를 선택하시면 해당 학(부)과 소속 전체 교원의 H-index를 확인 및 엑셀로 반출 하실 수 있습니다.' WHERE GUBUN='ASRIMS_DESC' and CODE_VALUE='institution.page.hindex.desc';
+UPDATE RI_CODE_TRANS SET CODE_DISP = '학(부)과별 소속 교원의 연도별 논문 건수를 제공하는 페이지입니다. 목록수 전체를 선택하시면 해당 학(부)과 전체 교원의 논문 실적을 확인 및 엑셀로 반출하실 수 있습니다. 필드 제목을 클릭하시면 선택된 필드별로 정렬하여 실적을 보실 수 있습니다.' WHERE GUBUN='ASRIMS_DESC' and CODE_VALUE='institution.page.article.desc';
+UPDATE RI_CODE_TRANS SET CODE_DISP = '학(부)과 소속 교원 논문의 피인용수 정보를 제공하는 페이지입니다. 목록수 전체를 선택하시면 대상학(부)과 소속 교원의 논문 피인용수를 확인하실 수 있습니다.' WHERE GUBUN='ASRIMS_DESC' and CODE_VALUE='institution.page.citation.desc';
+UPDATE RI_CODE_TRANS SET CODE_DISP = '학(부)과 소속 교원의 논문수를 Chart와 Data를 제공하는 페이지입니다. 체크 박스를 선택하시면 체크된 학(부)과만을 비교하여 제공되며 엑셀로 반출 하실 수 있습니다.' WHERE GUBUN='ASRIMS_DESC' and CODE_VALUE='institution.page.numberofarticle.desc';
+UPDATE RI_CODE_TRANS SET CODE_DISP = '학(부)과별 평균 피인용횟수를 제공하는 페이지입니다. 체크 박스를 선택하시면 체크된 학(부)과만을 비교하여 제공되며 엑셀로 반출 하실 수 있습니다.' WHERE GUBUN='ASRIMS_DESC' and CODE_VALUE='institution.page.citation.desc';
+UPDATE RI_CODE_TRANS SET CODE_DISP = '학(부)과별 공동연구현황을 제공하는 페이지입니다. 두 개의 원을 연결하는 선은 공동연구 논문수를 의미하며 마우스로 학(부)과 위치를 이동할 수 있습니다. Connection 숫자를 변경하여 공동연구 논문수를 제한하실 수 있습니다' WHERE GUBUN='ASRIMS_DESC' and CODE_VALUE='institution.page.coauthor.desc';
+UPDATE RI_CODE_TRANS SET CODE_DISP = '우리 대학의 공개된 특허출원 현황을 제공하는 페이지입니다. ' WHERE GUBUN='ASRIMS_DESC' and CODE_VALUE='institution.page.patent.desc';
+UPDATE RI_CODE_TRANS SET CODE_DISP = '우리 대학의 계약된 기술이전 건수 및 금액을 연도별로 제공하는 페이지입니다. ' WHERE GUBUN='ASRIMS_DESC' and CODE_VALUE='institution.page.techtrans.desc';
+
+alter table "DEPT_CLG_MAP" add("CLG_NM" VARCHAR2(200 BYTE));
+
+update RI_CODE set PROPERTY = 'SCT' where gubun = '2030' and CODE_VALUE = 'C280000' and id = '41315';
+update RI_CODE set PROPERTY = 'SCT' where gubun = '2030' and CODE_VALUE = 'C250000' and id = '41148';
+update DEPT_CLG_MAP set SERS_SE = 'SCT' where DEPT_CODE = 'C271100';
+update DEPT_CLG_MAP set SERS_SE = 'SCT', IS_USED = 'N', CLG_CODE = 'C010000' where DEPT_CODE = 'C011900';
+update DEPT_CLG_MAP set SERS_SE = 'SCT' where DEPT_CODE = 'C251100';
+update DEPT_CLG_MAP set SERS_SE = 'SCT', IS_USED = 'N', CLG_CODE = 'C120000' where DEPT_CODE = 'C121900';
+update DEPT_CLG_MAP set SERS_SE = 'SCT', IS_USED = 'N', CLG_CODE = 'C010000' where DEPT_CODE = 'C012000';
+update DEPT_CLG_MAP set SERS_SE = 'NRT' where DEPT_CODE = 'C281500';
+update DEPT_CLG_MAP set SERS_SE = 'NRT', IS_USED = 'N', CLG_CODE = 'C090000' where DEPT_CODE = 'C091200';
+update DEPT_CLG_MAP set SERS_SE = 'SCT' where DEPT_CODE = 'C053600';
+update DEPT_CLG_MAP set SERS_SE = 'NRT' where DEPT_CODE = 'C281200';
+update DEPT_CLG_MAP set SERS_SE = 'SCT', IS_USED = 'N', CLG_CODE = 'C160000' where DEPT_CODE = 'C161100';
+update DEPT_CLG_MAP set SERS_SE = 'SCT', IS_USED = 'N', CLG_CODE = 'C260000' where DEPT_CODE = 'C261500';
+update DEPT_CLG_MAP set SERS_SE = 'SCT' where DEPT_CODE = 'C281100';
+update DEPT_CLG_MAP set SERS_SE = 'NRT' where DEPT_CODE = 'C281600';
+update DEPT_CLG_MAP set SERS_SE = 'NRT' where DEPT_CODE = 'C281400';
+update DEPT_CLG_MAP set SERS_SE = 'NRT', IS_USED = 'N', CLG_CODE = 'C090000' where DEPT_CODE = 'C091400';
+update DEPT_CLG_MAP set SERS_SE = 'SCT' where DEPT_CODE = 'C016600';
+update DEPT_CLG_MAP set SERS_SE = 'SCT', IS_USED = 'N', CLG_CODE = 'C130000' where DEPT_CODE = 'C131700';
+update DEPT_CLG_MAP set SERS_SE = 'NRT' where DEPT_CODE = 'C281300';
+update DEPT_CLG_MAP set SERS_SE = 'NRT' where DEPT_CODE = 'C033400';
+update DEPT_CLG_MAP set SERS_SE = 'NRT', IS_USED = 'N', CLG_CODE = 'D000000' where DEPT_CODE = 'D000117';
+update DEPT_CLG_MAP set SERS_SE = 'SCT', IS_USED = 'N', CLG_CODE = 'C090000' where DEPT_CODE = 'C091700';
+update DEPT_CLG_MAP set SERS_SE = 'NRT', IS_USED = 'N', CLG_CODE = 'C020000' where DEPT_CODE = 'C021400';
+
+
+CREATE TABLE TMP_COM_ORG(
+	 ORG_NAME VARCHAR2(255)
+	,NEW_ORG_NAME VARCHAR2(255)
+);
+
+insert into TMP_COM_ORG (ORG_NAME, NEW_ORG_NAME)
+select ORG_NAME, NEW_ORG_NAME
+from (
+select COA.ORG_NAME
+     ,(select MIN(CODE_DISP) from RI_CODE where gubun = 'ORG' and CODE_DISP like COA.ORG_NAME || '%' and CODE_DISP like '%대학교%' and CODE_DISP not like '%캠퍼스')  as NEW_ORG_NAME
+from COM_ORG_ALIAS COA
+where COA.ORG_NAME like '%대%'
+group by ORG_NAME
+)
+where NEW_ORG_NAME is not null
+;
+
+
+merge into COM_ORG_ALIAS COA
+using (
+select ID, ORG_NAME, NEW_ORG_NAME
+from (
+select TA.ID, TA.ORG_NAME, TB.NEW_ORG_NAME
+from  COM_ORG_ALIAS TA
+left join TMP_COM_ORG TB on (TA.ORG_NAME = TB.ORG_NAME)
+where TA.ORG_NAME like '%대'
+)
+where NEW_ORG_NAME is not null
+) TC on (COA.ID = TC.ID )
+    WHEN MATCHED THEN
+		  UPDATE SET COA.ORG_NAME = TC.NEW_ORG_NAME
+
+;
+
+Insert into RI_CODE_TRANS (GUBUN,CODE_VALUE,CODE_DISP,DISP_ORDER,IS_USED,KRI_DISP,CODE_DISP_ENG)
+  values ('ART','ART_AUTHOR_DEPT','학(부)과',0,'Y',null,'Department');
+
+
+  alter table "COM_ORG_ALIAS" add("REG_USER_ID" VARCHAR2(20 BYTE)); 
+  alter table "COM_ORG_ALIAS" add("MOD_USER_ID" VARCHAR2(20 BYTE)); 
+  alter table "COM_ORG_ALIAS" add("MOD_DATE" DATE);
+  alter table "COM_ORG_ALIAS" add("REG_DATE" DATE);
+  
+  alter table "COM_ORG_ALIAS" drop("REGDATE");
+  alter table "COM_ORG_ALIAS" drop("CHGDATE");
+  

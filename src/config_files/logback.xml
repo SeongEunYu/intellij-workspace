@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+	<appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+		<!-- encoders are assigned the type ch.qos.logback.classic.encoder.PatternLayoutEncoder
+			by default -->
+		<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+			<pattern>▶ %-5level %d{HH:mm:ss.SSS} [%thread] %logger[%method:%line] - %msg%n</pattern>
+		</encoder>
+	</appender>
+
+    <appender name="consoleForLoginInterceptor" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <pattern>▷  %-5level %d{HH:mm:ss} %logger[%method:%line] - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+	<logger name="org.springframework" level="error"/>
+	<logger name="org.mybatis" level="error"/>
+	<logger name="org.apache.ibatis" level="error"/>
+	<logger name="net.sf.ehcache" level="error"/>
+	<logger name="liquibase" level="error"/>
+    <logger name="org.apache.http.wire" level="error"/>
+	
+	<root level="debug">
+	<appender-ref ref="console" />
+
+	</root>
+
+</configuration>

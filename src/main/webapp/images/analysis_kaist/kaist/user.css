@@ -1,0 +1,333 @@
+@charset "utf-8";
+/* CSS Document */
+.nav-container .item-secondary-title{
+display:block;
+cursor:default;
+z-index: 9999999;
+}
+.nav-container{
+position:relative;
+margin: 0 auto;
+z-index: 9999999;
+}
+.nav-container a, .nav-container li{
+float:left;
+display:block;
+}
+.nav-container ul{
+left:-10000px;
+position:absolute;
+}
+.nav-container, .nav-container ul{
+list-style:none;
+padding:0px;
+margin:0px;
+}
+.nav-container li a{
+float:none
+}
+.nav-container li{
+position:relative;
+}
+li:hover>ul{
+left:auto;
+}
+#nav-container ul {
+top:100%;
+}
+#nav-container ul li:hover>ul{
+top:0px;
+left:100%;
+}
+
+
+#nav-container div>#box1 a, #nav-container ul>#box1 a{	
+z-index:9999;
+width: 135px;
+height:35px;
+background: url(../../images/KOR/rims/box1.gif);
+background-repeat: no-repeat;
+}
+
+#nav-container div>#box1 a:hover, #nav-container ul>#box1 a:hover{	
+z-index:9999;
+width: 135px;
+height:35px;
+background: url(../../images/KOR/rims/box1_over.gif);
+background-repeat: no-repeat;
+}
+
+#nav-container div>#box2 a, #nav-container ul>#box2 a{	
+z-index:9999;
+width: 135px;
+height:28px;
+background: url(../../images/KOR/rims/box2.gif);
+background-repeat: no-repeat;
+}
+
+#nav-container div>#box2 a:hover, #nav-container ul>#box2 a:hover{	
+z-index:9999;
+width: 135px;
+height:28px;
+background: url(../../images/KOR/rims/box2_over.gif);
+background-repeat: no-repeat;
+}
+
+#nav-container div>#box3 a, #nav-container ul>#box3 a{	
+	position:static;
+width: 135px;
+height:28px;
+background: url(../../images/KOR/rims/box3.gif);
+background-repeat: no-repeat;
+}
+
+#nav-container div>#box3 a:hover, #nav-container ul>#box3 a:hover{	
+position:relative;
+width: 135px;
+height:28px;
+background: url(../../images/KOR/rims/box3_over.gif);
+background-repeat: no-repeat;
+}
+
+#nav-container div>#box4 a, #nav-container ul>#box4 a{	
+width: 135px;
+height:28px;
+background: url(../../images/KOR/rims/box4.gif);
+background-repeat: no-repeat;
+}
+
+#nav-container div>#box4 a:hover, #nav-container ul>#box4 a:hover{	
+width: 135px;
+height:28px;
+background: url(../../images/KOR/rims/box4_over.gif);
+background-repeat: no-repeat;
+}
+
+#nav-container div>#box5 a, #nav-container ul>#box5 a{	
+width: 135px;
+height:28px;
+background: url(../../images/KOR/rims/box5.gif);
+background-repeat: no-repeat;
+}
+
+#nav-container div>#box5 a:hover, #nav-container ul>#box5 a:hover{	
+width: 135px;
+height:28px;
+background: url(../../images/KOR/rims/box5_over.gif);
+background-repeat: no-repeat;
+}
+
+#nav-container div>#box6 a, #nav-container ul>#box6 a{	
+width: 135px;
+height:28px;
+background: url(../../images/KOR/rims/box6.gif);
+background-repeat: no-repeat;
+}
+
+#nav-container div>#box6 a:hover, #nav-container ul>#box6 a:hover{	
+width: 135px;
+height:28px;
+background: url(../../images/KOR/rims/box6_over.gif);
+background-repeat: no-repeat;
+}
+
+#nav-container div>#box7 a, #nav-container ul>#box7 a{	
+width: 135px;
+height:28px;
+background: url(../../images/KOR/rims/box7.gif);
+background-repeat: no-repeat;
+}
+
+#nav-container div>#box7 a:hover, #nav-container ul>#box7 a:hover{	
+width: 135px;
+height:28px;
+background: url(../../images/KOR/rims/box7_over.gif);
+background-repeat: no-repeat;
+}
+
+#nav-container div>#box8 a, #nav-container ul>#box8 a{	
+width: 135px;
+height:28px;
+background: url(../../images/KOR/rims/box8.gif);
+background-repeat: no-repeat;
+}
+
+#nav-container div>#box8 a:hover, #nav-container ul>#box8 a:hover{	
+width: 135px;
+height:28px;
+background: url(../../images/KOR/rims/box8_over.gif);
+background-repeat: no-repeat;
+}
+
+#nav-container div>#box9 a, #nav-container ul>#box9 a{	
+width: 135px;
+height:28px;
+background: url(../../images/KOR/rims/box9.gif);
+background-repeat: no-repeat;
+}
+
+#nav-container div>#box9 a:hover, #nav-container ul>#box9 a:hover{	
+width: 135px;
+height:28px;
+background: url(../../images/KOR/rims/box9_over.gif);
+background-repeat: no-repeat;
+}
+
+#nav-container div>#box10 a, #nav-container ul>#box10 a{	
+width: 135px;
+height:28px;
+background: url(../../images/KOR/rims/box10.gif);
+background-repeat: no-repeat;
+}
+
+#nav-container div>#box10 a:hover, #nav-container ul>#box10 a:hover{	
+width: 135px;
+height:28px;
+background: url(../../images/KOR/rims/box10_over.gif);
+background-repeat: no-repeat;
+}
+
+#nav-container div>#box11 a, #nav-container ul>#box11 a{	
+width: 135px;
+height:28px;
+background: url(../../images/KOR/rims/box11.gif);
+background-repeat: no-repeat;
+}
+
+#nav-container div>#box11 a:hover, #nav-container ul>#box11 a:hover{	
+width: 135px;
+height:28px;
+background: url(../../images/KOR/rims/box11_over.gif);
+background-repeat: no-repeat;
+}
+#nav-container div>#box12 a, #nav-container ul>#box12 a{	
+width: 135px;
+height:28px;
+background: url(../../images/KOR/rims/box12.gif);
+background-repeat: no-repeat;
+}
+
+#nav-container div>#box12 a:hover, #nav-container ul>#box12 a:hover{	
+width: 135px;
+height:28px;
+background: url(../../images/KOR/rims/box12_over.gif);
+background-repeat: no-repeat;
+}
+#nav-container div>#box14 a, #nav-container ul>#box14 a{	
+width: 135px;
+height:28px;
+background: url(../../images/KOR/rims/box14.gif);
+background-repeat: no-repeat;
+}
+
+#nav-container div>#box14 a:hover, #nav-container ul>#box14 a:hover{	
+width: 135px;
+height:28px;
+background: url(../../images/KOR/rims/box14_over.gif);
+background-repeat: no-repeat;
+}
+#nav-container div>#box15 a, #nav-container ul>#box15 a{	
+width: 135px;
+height: 28px;
+background: url(../../images/KOR/rims/box15.gif);
+background-repeat: no-repeat;
+}
+
+#nav-container div>#box15 a:hover, #nav-container ul>#box15 a:hover{	
+width: 135px;
+height:28px;
+background: url(../../images/KOR/rims/box15_over.gif);
+background-repeat: no-repeat;
+}
+#nav-container div>#box16 a, #nav-container ul>#box16 a{	
+width: 135px;
+height:28px;
+background: url(../../images/KOR/rims/box16.gif);
+background-repeat: no-repeat;
+}
+
+#nav-container div>#box16 a:hover, #nav-container ul>#box16 a:hover{	
+width: 135px;
+height:28px;
+background: url(../../images/KOR/rims/box16_over.gif);
+background-repeat: no-repeat;
+}
+#nav-container div>#box17 a, #nav-container ul>#box17 a{	
+width: 135px;
+height:35px;
+background: url(../../images/KOR/rims/box17.gif);
+background-repeat: no-repeat;
+}
+
+#nav-container div>#box17 a:hover, #nav-container ul>#box17 a:hover{	
+width: 135px;
+height:35px;
+background: url(../../images/KOR/rims/box17_over.gif);
+background-repeat: no-repeat;
+}
+#nav-container div>#box13 a, #nav-container ul>#box13 a{	
+width: 135px;
+height:28px;
+background: url(../../images/KOR/rims/box13.gif);
+background-repeat: no-repeat;
+}
+
+#nav-container div>#box13 a:hover, #nav-container ul>#box13 a:hover{	
+width: 135px;
+height:28px;
+background: url(../../images/KOR/rims/box13_over.gif);
+background-repeat: no-repeat;
+}
+
+#nav-container div>#sbox1 a, #nav-container ul>#sbox1 a{	
+width: 139px;
+height:28px;
+background: url(../../images/KOR/rims/top_2_box1.gif);
+background-repeat: no-repeat;
+}
+
+#nav-container div>#sbox1 a:hover, #nav-container ul>#sbox1 a:hover{	
+width: 139px;
+height:28px;
+background: url(../../images/KOR/rims/top_2_over1.gif);
+background-repeat: no-repeat;
+}
+#nav-container div>#sbox2 a, #nav-container ul>#sbox2 a{	
+width: 139px;
+height:35px;
+background: url(../../images/KOR/rims/top_2_box2.gif);
+background-repeat: no-repeat;
+}
+
+#nav-container div>#sbox2 a:hover, #nav-container ul>#sbox2 a:hover{	
+width: 139px;
+height:35px;
+background: url(../../images/KOR/rims/top_2_over2.gif);
+background-repeat: no-repeat;
+}
+#nav-container div>#sbox3 a, #nav-container ul>#sbox3 a{	
+width: 139px;
+height:35px;
+background: url(../../images/KOR/rims/top_2_box3.gif);
+background-repeat: no-repeat;
+}
+
+#nav-container div>#sbox3 a:hover, #nav-container ul>#sbox3 a:hover{	
+width: 139px;
+height:35px;
+background: url(../../images/KOR/rims/top_2_over3.gif);
+background-repeat: no-repeat;
+}
+#nav-container div>#sbox4 a, #nav-container ul>#sbox4 a{	
+width: 139px;
+height:28px;
+background: url(../../images/KOR/rims/top_2_box4.gif);
+background-repeat: no-repeat;
+}
+
+#nav-container div>#sbox4 a:hover, #nav-container ul>#sbox4 a:hover{	
+width: 139px;
+height:28px;
+background: url(../../images/KOR/rims/top_2_over4.gif);
+background-repeat: no-repeat;
+}

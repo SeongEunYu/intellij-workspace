@@ -1,0 +1,148 @@
+@charset "utf-8";
+@import url('https://fonts.googleapis.com/earlyaccess/nanumgothic.css');
+* {padding:0; margin:0;}
+body {width:100%; height: 100%;line-height:normal; font-size: 12px; font-family:Nanum Gothic, 나눔고딕, Malgun Gothic,맑은 고딕, Verdana,Arial, '돋움', Dotum;  color:#555;  }
+body, div, dl, dt, dd, ul, ol, menu, li, h1, h2, h3, h4, h5, h6, pre, form, fieldset, input, textarea, blockquote, th, td, p {
+	margin: 0px; padding: 0px; font-size: 12px; font-family:Nanum Gothic, 나눔고딕, Malgun Gothic,맑은 고딕, Verdana,Arial, '돋움', Dotum;
+}
+table { border-collapse: collapse; border-spacing: 0px;}
+/*   --- content_wrapper ---   */
+#content_wrapper {width:932px; height:auto; margin:auto; padding-bottom:50px; background:url('../images/KOR/common/bg-container.gif'); border-left:1px solid #d7d7d7; border-right:1px solid #d7d7d7;}
+#content_wrapper_sub {width:932px; height:760px; overflow-y:auto; overflow-x:hidden; margin:auto; padding-bottom:50px; border:0px solid red;}
+
+.link12 {vertical-align: middle;cursor: pointer;margin-top: -2px;}
+.link16 {vertical-align: middle;cursor: pointer;}
+.link20 {vertical-align: middle;cursor: pointer;}
+
+/* page_top */
+#page_top {width:100%; border-bottom:2px solid #5a595c; overflow:hidden; margin:0 0 5px 0; padding:5px 0 0 0;}
+.page_title {margin: 10px 0 0 0; float:left; color:#3f3f3f; font:bold 20px "Nanum Gothic", "나눔고딕", "Malgun Gothic","맑은 고딕", "Verdana","Arial", "돋움", "Dotum"; text-decoration:none;}
+.navi {float:right; padding:16px 0 0 0; color:#3f3f3f; font:normal 12px "Nanum Gothic", "나눔고딕", "Malgun Gothic","맑은 고딕", "Verdana","Arial", "돋움", "Dotum"; text-decoration:none;}
+.navi li {margin-left:3px;}
+.navi a:link {color:#3f3f3f; font:normal 12px "Nanum Gothic", "나눔고딕", "Malgun Gothic","맑은 고딕", "Verdana","Arial", "돋움", "Dotum"; text-decoration:none;}
+.navi a:visited {color:#3f3f3f; font:normal 12px "Nanum Gothic", "나눔고딕", "Malgun Gothic","맑은 고딕", "Verdana","Arial", "돋움", "Dotum"; text-decoration:none;}
+.navi a:active {color:#3f3f3f; font:normal 12px "Nanum Gothic", "나눔고딕", "Malgun Gothic","맑은 고딕", "Verdana","Arial", "돋움", "Dotum"; text-decoration:none;}
+.navi a:hover {color:#c63418; font:normal 12px "Nanum Gothic", "나눔고딕", "Malgun Gothic","맑은 고딕", "Verdana","Arial", "돋움", "Dotum"; text-decoration:none;}
+.navi .page a:link {color:#c63418; font:normal 12px "Nanum Gothic", "나눔고딕", "Malgun Gothic","맑은 고딕", "Verdana","Arial", "돋움", "Dotum"; text-decoration:none;}
+.navi .page a:visited {color:#c63418; font:normal 12px "Nanum Gothic", "나눔고딕", "Malgun Gothic","맑은 고딕", "Verdana","Arial", "돋움", "Dotum"; text-decoration:none;}
+.navi .page a:active {color:#c63418; font:normal 12px "Nanum Gothic", "나눔고딕", "Malgun Gothic","맑은 고딕", "Verdana","Arial", "돋움", "Dotum"; text-decoration:none;}
+.navi .page a:hover {color:#c63418; font:normal 12px "Nanum Gothic", "나눔고딕", "Malgun Gothic","맑은 고딕", "Verdana","Arial", "돋움", "Dotum"; text-decoration:none;}
+
+
+/* top_btnarea */
+.top_btnarea {width:100%; text-align:right; margin:10px 0 -5px 0;}
+
+
+/* Btn */
+.bring_btn{display:block; width:104px;  height:20px; background:url('../images/admin/button/bring_btn.gif') no-repeat; margin:0 0 0 828px;  position:absolute;}
+.mg_btn{display:block; width:111px;  height:20px; background:url('../images/admin/button/merge_btn.gif') no-repeat; margin:0 0 0 821px;  position:absolute;}
+
+
+/* top_toolbar */
+.top_toolbar {width:100%; height:27px; background: url(../images/KOR/outline/toptoolbar_bg.gif) repeat-x; border:1px solid #c4c4c4;
+			  color:#000000; font:bold 11px "Nanum Gothic", "나눔고딕", "Malgun Gothic","맑은 고딕", "Verdana","Arial", "돋움", "Dotum"; text-decoration:none;}
+.top_toolbar a:link {color:#000000; font:bold 11px "Nanum Gothic", "나눔고딕", "Malgun Gothic","맑은 고딕", "Verdana","Arial", "돋움", "Dotum"; text-decoration:none;}
+.top_toolbar_ttl {margin:5px 0 0 10px; float:left;}
+.top_toolbar_btn div {display:inline; margin-left:5px;}
+.top_toolbar_btn {margin:5px 10px 0 0; float:right;}
+.top_toolbar_btn div {display:inline; margin-left:5px;} /*margin-left:버튼사이간격*/
+
+
+/* table 스타일 1 */
+.sub_input_tb {width:100%; margin-top:-1px; border:1px solid #cacaca; background:#ffffff;}
+.sub_input_tb tr {height: 31px;}
+.sub_input_tb th {border-top:1px solid #cacaca; border-bottom:1px solid #cacaca; padding:3px 6px 3px 6px; text-align:right;}
+.sub_input_tb th.borderRight {border-right:1px solid #cacaca;}
+.sub_input_tb td {border-top:1px solid #cacaca; border-bottom:1px solid #cacaca; padding:3px 6px 3px 6px;}
+.sub_input_tb td.borderRight {border-right:1px solid #cacaca;}
+
+/* table 스타일 2 rims 입력폼 */
+.pfmc_input_tb {width:100%; margin-top:-1px; border:1px solid #cacaca; background:#ffffff;}
+.pfmc_input_tb th {border-top:1px solid #cacaca; border-bottom:1px solid #cacaca; padding:3px 6px 3px 6px; text-align:right;}
+.pfmc_input_tb th.borderRight {border-right:1px solid #cacaca;}
+.pfmc_input_tb td {border-top:1px solid #cacaca; border-bottom:1px solid #cacaca; padding:3px 6px 3px 6px;}
+.pfmc_input_tb td.borderRight {border-right:1px solid #cacaca;}
+.pfmc_input_tb .require {background: url("../images/KOR/common/ico_essential.png") no-repeat left top;}
+.pfmc_input_tb td .typeFile {border: solid 1px #b3bac4;font-size: 12px;padding: 2px;font-family: dotum, sans-serif;width: 600px; background-color:#fcfcfc;}
+
+.pfmc_input_tb .exText {color: #aaa; font-size: 11px;}
+
+/* ??? */
+.sub_list_tb{width:100%; border:1px solid #b5bbc6;}
+.sub_list_tb .ttl{
+	height:25px;
+	color:#3e3e3e; font:normal 11px 'Dotum'; text-decoration:none;
+	margin:0; padding:0 10px 0 10px;
+	background: url(../images/KOR/outline/submenu_center_bg.gif) repeat-x;
+}
+.sub_list_tb .ttl td{
+	background:url('../images/KOR/outline/submenu_line.gif') no-repeat;
+	border-bottom:1px solid #b5bbc6;
+}
+
+.sub_list_tb td.content{border-bottom:1px solid #b5bbc6; padding:3px 10px 3px 10px;}
+
+.bd1{border-left:1px solid #a2afc0;  border-bottom:1px solid #a2afc0;}
+.bd2{border-right:1px solid #a2afc0;  border-bottom:1px solid #a2afc0;}
+.bd3{border-left:1px solid #a2afc0; border-right:1px solid #a2afc0;  border-bottom:1px solid #a2afc0;}
+.bd4{border-bottom:1px solid #a2afc0;}
+
+.sub_basic_tb{width:100%; margin-top:40px;}
+.sub_basic_tb caption{padding-bottom:10px; text-align:left;}
+.sub_basic_tb th{background-color:#e8e9ed; border-top:2px solid #696f7d; border-bottom:2px solid #b3bac4; border-right:1px solid #b3bac4; padding:3px 0 3px 0;}
+.sub_basic_tb th.right{background-color:#e8e9ed; border-top:2px solid #696f7d; border-bottom:2px solid #b3bac4; border-right:0; padding:3px 0 3px 0;}
+.sub_basic_tb td{border-bottom:1px solid #b3bac4; padding:3px 10px 3px 10px; text-align:center;}
+
+.sub_basic2_tb{width:100%; margin:0px; }
+.sub_basic2_tb td{padding:3px 10px 3px 10px; border-bottom:1px solid #b3bac4;  text-align:center;}
+.sub_basic2_tb td.style{background-color:#dee0e6; border-top:2px solid #696f7d; border-bottom:2px solid #b3bac4; border-right:1px solid #b3bac4;}
+.sub_basic2_tb td.style_norightborder{background-color:#dee0e6; border-top:2px solid #696f7d; border-bottom:2px solid #b3bac4; border-right:0;}
+.sub_basic2_tb .btnimg{margin-top:-4px;}
+
+.sub_basic3_tb{width:100%; margin:0px; }
+.sub_basic3_tb td{padding:3px 10px 3px 10px; border-bottom:1px solid #b4bbc5;}
+.sub_basic3_tb td.style{background-color:#dee0e6; border-top:2px solid #696f7d; border-bottom:2px solid #b3bac4; border-right:1px solid #b3bac4;}
+.sub_basic3_tb td.style_norightborder{background-color:#dee0e6; border-top:2px solid #696f7d; border-bottom:2px solid #b3bac4; border-right:0;}
+.sub_basic3_tb .btnimg{margin-top:-4px;}
+
+.sub_basic4_tb{width:100%; margin:0px; border:1px solid #b4bbc5;}
+.sub_basic4_tb td{padding:3px 10px 3px 10px; border:1px solid #b4bbc5;}
+.sub_basic4_tb td.title{padding:3px 10px 3px 10px; background-color:#e6e9f0; font-weight:bold; text-align:right;}
+
+.sub_basic4_tb .btnimg{margin-top:-4px;}
+
+
+/* 통계페이지 탭 */
+.stats_tab{
+	cursor:pointer;
+}
+
+.stats_tab div{
+	float:left;
+	height:27px;
+}
+
+.stats_tab .outcenterbg{
+	background:url('../images/KOR/outline/subtab_out_c.gif') repeat-x;
+	padding:6px 30px 0 30px;
+	margin-bottom:-6px;
+}
+
+.stats_tab .overcenterbg{
+	background:url('../images/KOR/outline/subtab_over_c.gif') repeat-x;
+	font-weight:bold;
+	padding:6px 30px 0 30px;
+	margin-bottom:-6px;
+}
+
+/* 서브페이지 공지사항 박스*/ /* 14_08_07 추가 */
+.sub_notice-box {width:100%; background:#DCDCDC ; overflow:hidden; margin-bottom:5px;}
+.sub_notice-box .icon {width:36px; float:left; text-align:right; }
+.sub_notice-box .txt {width:879px; float:right; margin:15px 0 18px 0; color:#000000; font:normal 12px "Nanum Gothic", "나눔고딕", "Malgun Gothic","맑은 고딕", "Verdana","Arial", "돋움", "Dotum"; text-decoration:none;}
+
+/* 코멘트관리 table */ /* 14_08_07 추가 */
+.commtent_mgmt {width:100%; margin-top:-1px; border:1px solid #cacaca; background:#ffffff;}
+.commtent_mgmt td {border:1px solid #cacaca; padding:12px 15px 12px 15px; background:url('../images/KOR/comment/bg_arrow.png') 285px 21px no-repeat;}
+.commtent_mgmt td a:link {color:#3f3f3f; font:bold 15px "Nanum Gothic", "나눔고딕", "Malgun Gothic","맑은 고딕", "Verdana","Arial", "돋움", "Dotum"; text-decoration:none;}
+.commtent_mgmt td img {margin-right:15px;}
+.commtent_mgmt td:hover {background-color:#fcfcfc;}

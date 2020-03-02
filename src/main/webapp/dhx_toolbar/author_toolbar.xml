@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<toolbar>
+	<item id="clear"   type="button"   img="release.png"  imgdis="release_dis.png"  text="맵핑해제"  action="mappingClear" />
+	<item id="save"   type="button"   img="save2.png"  imgdis="save2_dis.png"  text="저장"  action="authorSave" />
+	<item id="sep1"   type="separator"/>
+	<item id="P"    type="button"   img="hold.png"   imgdis="hold_dis.png"   text="작업보류"  action="migstatusUpdate" />
+	<item id="E"   type="button"   img="exclude.png"  imgdis="exclude_dis.png"  text="작업제외"  action="migstatusUpdate" />
+	<item id="Y"  type="button"   img="complete.png" imgdis="complete.png" text="작업완료" action="migstatusUpdate" />
+</toolbar>

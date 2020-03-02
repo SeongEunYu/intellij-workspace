@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.argonet.r2rims.scholar.mapper.StudentMapper">
+
+  <sql id="pageHeader">SELECT * FROM ( SELECT * FROM (</sql>
+  <sql id="pageFooter"><![CDATA[) WHERE RN  <=  (#{ps} + #{ct})) a  WHERE a.RN > #{ps}]]></sql>
+
+  <sql id="stutendCondition">
+  	<if test='srchUserId != null and srchUserId != ""'>
+  		and TA.PROFSR_EMPNO = #{srchUserId, jdbcType=VARCHAR}
+  	</if>
+  	<if test='srchUserIds != null and srchUserIds.size != 0'>
+  		and TA.PROFSR_EMPNO IN ( <foreach collection="srchUserIds" item="userVo" separator=", ">#{userVo.userId, jdbcType=VARCHAR}</foreach> )
+  	</if>
+	<if test='srchDeptKor != null and srchDeptKor != ""'>
+  	    and TA.DEPT_KOR like '%' + #{srchDeptKor, jdbcType=VARCHAR} + '%'
+	</if>
+  	<if test='crseSeCode != null and crseSeCode != ""'>
+		and TA.CRSE_SE_CODE = #{crseSeCode, jdbcType=VARCHAR}
+  	</if>
+  	<if test='grdtnDate != null and grdtnDate != ""'>
+		and TA.GRDTN_DATE = #{grdtnDate, jdbcType=VARCHAR}
+  	</if>
+	<if test='sttDate != null and sttDate != ""'>
+		and substring(TA.GRDTN_DATE, 1, 4) <![CDATA[ >= ]]>#{sttDate, jdbcType=VARCHAR}
+	</if>
+	<if test='endDate != null and endDate != ""'>
+		and substring(TA.GRDTN_DATE, 1, 4) <![CDATA[ <= ]]>#{endDate, jdbcType=VARCHAR}
+	</if>
+	<if test="sknrgsStatus != null and sknrgsStatus != '' and  sknrgsStatus == 'grdtn' ">
+		and TA.SKNRGS_STATUS = '졸업'
+	</if>
+  </sql>
+
+  <sql id="scholarStudentViewAlias">
+		select convert(VARCHAR(20),prof_id)        as PROFSR_EMPNO
+		      ,convert(VARCHAR(50),student_no)      as STDNT_NO
+		      ,RTRIM(LTRIM(k_name))                         as STDNT_NM
+		      ,RTRIM(LTRIM(e_first_name))                   as STDNT_FIRST_NM
+		      ,RTRIM(LTRIM(e_last_name))                    as STDNT_LAST_NM
+		      ,RTRIM(LTRIM(detp_name))                      as DEPT_KOR
+		      ,(case when course_name = '박사과정' then '1'
+            		 when course_name = '석사과정' then '2'
+            		 when course_name = '학사과정' then '3'
+        		 	else '4'  end )                 as CRSE_SE_CODE
+        	  ,course_name							as CRSE_SE_NM
+		      ,status_name                          as SKNRGS_STATUS
+		      ,convert(char, graduate_date, 112)    as GRDTN_DATE
+		      ,teach_id                             as COACHING_SE
+		 from view_RIMS_student
+  </sql>
+
+  <select id="countBySearchVo" resultType="int">
+  	select count(*) as totalCount
+  	 from ( <include refid="scholarStudentViewAlias"/> ) TA
+	<where>
+		<include refid="stutendCondition"/>
+	</where>
+  </select>
+
+  <select id="findBySearchVo" resultType="kr.co.argonet.r2rims.scholar.vo.StudentVo">
+  	select TA.*
+  	 from (<include refid="scholarStudentViewAlias"/>) TA
+	<where>
+		<include refid="stutendCondition"/>
+	</where>
+	order by TA.GRDTN_DATE DESC
+  </select>
+
+</mapper>

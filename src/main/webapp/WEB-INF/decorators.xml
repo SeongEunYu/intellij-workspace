@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<decorators defaultdir="/WEB-INF/decorators">
+	<!-- Any urls that are excluded will never be decorated by Sitemesh -->
+	<excludes>
+		<pattern>*Ajax.do*</pattern>
+		<pattern>*Popup.do*</pattern>
+		<pattern>*Form.do*</pattern>
+		<pattern>*exportHtml.do*</pattern>
+		<pattern>*error.do*</pattern>
+		<pattern>*/search/similrResearcher.do*</pattern>
+		<pattern>*/index/*login.do*</pattern>
+		<pattern>*/index/*logout.do*</pattern>
+		<pattern>*/index/goRimsFromDiscovery.do*</pattern>
+		<pattern>*/kriCntc/kri.do</pattern>
+		<pattern>*/kriCntc/vrfc.do</pattern>
+		<pattern>*/dhxform/*</pattern>
+		<pattern>*/i18n/winhelp/*.do*</pattern>
+		<pattern>/index/sessionOut.do</pattern>
+		<pattern>*/user/main.do</pattern>
+	</excludes>
+
+<!--
+	<decorator name="basic" page="basicTemplate.jsp">
+		<pattern>*password-login/doView.do*</pattern>
+		<pattern>*password-login/doAction.do*</pattern>
+	</decorator>
+-->
+	<decorator name="analysis" page="analysis.jsp">
+		<pattern>*/analysis/*.do*</pattern>
+	</decorator>
+	<decorator name="share" page="share.jsp">
+		<pattern>*/share/*.do*</pattern>
+	</decorator>
+
+	<decorator name="main" page="default.jsp">
+		<pattern>*.do</pattern>
+	</decorator>
+
+
+</decorators>

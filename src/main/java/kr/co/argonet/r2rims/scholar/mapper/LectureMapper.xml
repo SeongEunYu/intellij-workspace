@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.argonet.r2rims.scholar.mapper.LectureMapper">
+
+  <sql id="pageHeader">SELECT * FROM ( SELECT * FROM (</sql>
+  <sql id="pageFooter"><![CDATA[) WHERE RN  <=  (#{ps} + #{ct})) a  WHERE a.RN > #{ps}]]></sql>
+  <sql id="nvlifnull"><if test="_databaseId == 'oracle' ">NVL</if><if test="_databaseId == 'mysql' ">IFNULL</if></sql>
+  <sql id="prefixToDate"><if test="_databaseId == 'oracle' ">TO_DATE(</if><if test="_databaseId == 'mysql' ">STR_TO_DATE(</if></sql>
+  <sql id="postfixToDate"><if test="_databaseId == 'oracle' ">, 'YYYY-MM-DD')</if><if test="_databaseId == 'mysql' ">, '%Y-%m-%d')</if></sql>
+  <sql id="sysdateNow"><if test="_databaseId == 'oracle' ">SYSDATE</if><if test="_databaseId == 'mysql' ">now()</if></sql>
+
+  <sql id="lectureOrderby">
+  	order by
+  	 <choose>
+  	 	<when test='orderby == "profsrNm"'>TA.PROFSR_NM</when>
+  	 	<when test='orderby == "estblYear"'>TA.ESTBL_YEAR</when>
+  	 	<when test='orderby == "estblSemstr"'>TA.ESTBL_SEMSTR</when>
+  	 	<when test='orderby == "estblDeptKor"'>TA.ESTBL_DEPT_KOR</when>
+  	 	<when test='orderby == "sbjectSe"'>TA.SBJECT_SE</when>
+  	 	<when test='orderby == "sbjectNmKor"'>TA.SBJECT_NM_KOR</when>
+  	 	<when test='orderby == "sbjectNmEng"'>TA.SBJECT_NM_ENG</when>
+  	 	<when test='orderby == "lctre"'>TA.LCTRE</when>
+  	 	<when test='orderby == "exper"'>TA.EXPER</when>
+  	 	<when test='orderby == "point"'>TA.POINT</when>
+  	 	<otherwise>TA.ESTBL_YEAR</otherwise>
+  	 </choose>
+	<if test=" direct != null and direct == 'asc' ">ASC</if>
+	<if test=" direct == null or direct == 'des' ">DESC</if>
+  </sql>
+
+  <sql id="lectureCondition">
+  	<if test='sttDate != null and sttDate != ""'>
+  		and TA.ESTBL_YEAR <![CDATA[ >= ]]> #{sttDate, jdbcType=VARCHAR}
+  	</if>
+  	<if test='endDate != null and endDate != ""'>
+  		and TA.ESTBL_YEAR <![CDATA[ <= ]]> #{endDate, jdbcType=VARCHAR}
+  	</if>
+  	<if test='srchUserNm != null and srchUserNm != ""'>
+  		<if test="_databaseId == 'oracle' or  _databaseId == 'mysql' ">
+	  		and TA.PROFSR_NM like CONCAT(CONCAT('%',#{srchUserNm, jdbcType=VARCHAR}),'%')
+  		</if>
+  		<if test="_databaseId == 'sybase' ">
+	  		and TA.PROFSR_NM like '%' + #{srchUserNm, jdbcType=VARCHAR} + '%'
+  		</if>
+  	</if>
+  	<if test='srchUserId != null and srchUserId != ""'>
+  		and TA.PROFSR_EMPNO = #{srchUserId, jdbcType=VARCHAR}
+  	</if>
+  	<if test='srchUserIds != null and srchUserIds.size != 0'>
+  		and TA.PROFSR_EMPNO IN ( <foreach collection="srchUserIds" item="userVo" separator=", ">#{userVo.userId, jdbcType=VARCHAR}</foreach> )
+  	</if>
+  	<if test='srchDeptKor != null and srchDeptKor != ""'>
+  		<if test="_databaseId == 'oracle' or  _databaseId == 'mysql' ">
+  			and TA.ESTBL_DEPT_KOR like CONCAT(CONCAT('%',#{srchDeptKor, jdbcType=VARCHAR}),'%')
+  		</if>
+  		<if test="_databaseId == 'sybase' ">
+	  		and TA.ESTBL_DEPT_KOR like '%' + #{srchDeptKor, jdbcType=VARCHAR} + '%'
+  		</if>
+  	</if>
+  	<if test='sbjectSe != null and sbjectSe != ""'>
+  		<if test="sbjectSe == 'research'">
+			and TA.SBJECT_SE IN ('개별연구', '논문연구', '졸업연구')
+  		</if>
+  		<if test="sbjectSe != 'research' and sbjectSe == 'resume' ">
+  			and TA.SBJECT_SE != '논문연구'
+  		</if>
+  		<if test="sbjectSe != 'research' and  sbjectSe != 'resume' ">
+  			and TA.SBJECT_SE = #{sbjectSe, jdbcType=VARCHAR}
+  		</if>
+  	</if>
+  	<if test='estblYear != null and estblYear != ""'>
+  		and TA.ESTBL_YEAR = #{estblYear, jdbcType=VARCHAR}
+  	</if>
+  	<if test='sbjectNm != null and sbjectNm != ""'>
+  		and (
+  				<if test="_databaseId == 'oracle' or  _databaseId == 'mysql' ">
+  					TA.SBJECT_NM_KOR like CONCAT(CONCAT('%',#{sbjectNm, jdbcType=VARCHAR}),'%') or TA.SBJECT_NM_ENG like CONCAT(CONCAT('%',#{sbjectNm, jdbcType=VARCHAR}),'%')
+  				</if>
+  				<if test="_databaseId == 'sybase' ">
+  					TA.SBJECT_NM_KOR like '%' + #{sbjectNm, jdbcType=VARCHAR} + '%' or TA.SBJECT_NM_ENG like '%' + #{sbjectNm, jdbcType=VARCHAR} + '%'
+  				</if>
+  		)
+  	</if>
+  </sql>
+
+  <sql id="scholarLectureViewAlias">
+		select convert(VARCHAR(20),prof_id)          as PROFSR_EMPNO
+		      ,prof_names       as PROFSR_NM
+		      ,convert(VARCHAR(10),lecture_year)     as ESTBL_YEAR
+		      ,lecture_term     as ESTBL_SEMSTR
+		      ,subject_no       as SBJECT_CODE
+		      ,lecture_class    as LCTRE_CLASS
+		      ,dept_name        as ESTBL_DEPT_KOR
+		      ,sub_title        as SBJECT_NM_KOR
+		      ,e_sub_title      as SBJECT_NM_ENG
+		      ,subject_type     as SBJECT_SE
+		      ,act_unit         as ACT_UNIT
+		      ,lecture          as LCTRE
+		      ,lab              as EXPER
+		      ,credit           as POINT
+		      ,l_current        as ATNLC_NMPR
+		      ,old_no           as SBJECT_NO
+		      ,english_lec      as ENG_LCTRE_AT
+		from scholar.dbo.view_RIMS_lecture
+  </sql>
+
+  <select id="countBySearchVo" resultType="int">
+  	select count(*) as totalCount
+  	 from (<include refid="scholarLectureViewAlias"/>) TA
+	 <where>
+	 	<include refid="lectureCondition"/>
+	 </where>
+  </select>
+
+  <select id="findBySearchVo" resultType="kr.co.argonet.r2rims.scholar.vo.LectureVo">
+  	select TA.*
+  	  from (<include refid="scholarLectureViewAlias"/>) TA
+	 <where>
+	 	<include refid="lectureCondition"/>
+	 </where>
+	 <include refid="lectureOrderby"/>
+  </select>
+
+</mapper>

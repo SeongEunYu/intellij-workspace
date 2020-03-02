@@ -1,0 +1,92 @@
+
+-- ORACLE 용   
+ CREATE OR REPLACE FORCE VIEW "VI_ARTICLE_AUTHORS" ("ARTICLE_ID", "AUTHORS", "AUTHORS_INFO") AS
+  SELECT ARTICLE_ID,
+    LISTAGG (NAME_DISP, ';') WITHIN GROUP (ORDER BY DISP_ORDER) AS AUTHORS,
+    LISTAGG (AUTHOR_INFO, ';') WITHIN GROUP (ORDER BY DISP_ORDER) AS AUTHORS_INFO
+  FROM
+    ( SELECT ROWNUM AS CNT,
+              A.*,
+             DECODE (A.PRTCPNT_FULL_NM, NULL,
+                     CASE WHEN  B.FIRST_NAME is null and B.FIRST_NAME is null  THEN  ''
+                      ELSE  B.LAST_NAME|| ', '|| B.FIRST_NAME
+                      END
+                    , A.PRTCPNT_FULL_NM) AS NAME_DISP
+            ,B.AUTHOR_INFO
+    FROM
+      ( SELECT DISTINCT ARTICLE_ID,
+        PRTCPNT_ID            AS USER_ID,
+        MAX (PRTCPNT_FULL_NM) AS PRTCPNT_FULL_NM,
+        MAX (DISP_ORDER)      AS DISP_ORDER
+      FROM RI_ARTICLE_PARTI
+      WHERE PRTCPNT_ID          IS NOT NULL
+      AND NVL (DEL_DVS_CD, 'N') != 'Y'
+      GROUP BY ARTICLE_ID,
+        PRTCPNT_ID
+      ) A,
+      (
+        select USER_ID, GUBUN, DEL_DVS_CD, FIRST_NAME, LAST_NAME, KOR_NM || ',' || USER_ID || ',' || POSI_NM || ',' || DEPT_KOR AS AUTHOR_INFO
+         from RI_USER
+      )B
+    WHERE A.USER_ID              = B.USER_ID
+    AND B.GUBUN                 IN ('M', 'U')
+    AND NVL (B.DEL_DVS_CD, 'N') <> 'Y'
+    AND B.GUBUN                 != 'S'
+    )
+  GROUP BY ARTICLE_ID;
+
+-- Mysql 용
+
+  CREATE VIEW `VI_USER_AUTHOR_INFO` AS
+  select USER_ID
+        ,GUBUN
+        ,DEL_DVS_CD
+        ,FIRST_NAME
+        ,LAST_NAME
+        ,CONCAT(CONCAT(CONCAT(CONCAT(CONCAT(CONCAT(KOR_NM , ',') , USER_ID) , ',') , POSI_NM), ',') , DEPT_KOR) AS AUTHOR_INFO 
+  from RI_USER   
+;  
+
+  CREATE VIEW `VI_ARTICLE_AUTHOR` AS
+  SELECT DISTINCT ARTICLE_ID,
+    PRTCPNT_ID           AS USER_ID,
+    MAX(PRTCPNT_FULL_NM) AS PRTCPNT_FULL_NM,
+    MAX(DISP_ORDER)      AS DISP_ORDER,
+    MAX(TPI_DVS_CD)      AS TPI_DVS_CD
+  FROM RI_ARTICLE_PARTI
+  WHERE PRTCPNT_ID          IS NOT NULL
+   AND IFNULL(DEL_DVS_CD, 'N') != 'Y'
+  GROUP BY ARTICLE_ID, PRTCPNT_ID
+  ORDER BY NULL
+;  
+
+   CREATE VIEW `VI_SOURCE_ARTICLE_AUTHOR` as
+   SELECT    TA.ARTICLE_ID,
+             TA.USER_ID,
+             TA.PRTCPNT_FULL_NM,
+             TA.DISP_ORDER,
+             TA.TPI_DVS_CD,
+             CASE WHEN TA.PRTCPNT_FULL_NM is null 
+                  THEN CASE WHEN  TB.FIRST_NAME is null THEN  ''
+                      	    ELSE  CONCAT(CONCAT(TB.LAST_NAME, ', '), TB.FIRST_NAME)
+                       END
+                  ELSE 
+                  	TA.PRTCPNT_FULL_NM
+                  END 
+             AS NAME_DISP
+            ,CONCAT(CONCAT(TB.AUTHOR_INFO, ','),TA.TPI_DVS_CD) as  AUTHOR_INFO      
+    FROM VI_ARTICLE_AUTHOR TA
+    left join VI_USER_AUTHOR_INFO TB on (TA.USER_ID = TB.USER_ID)    
+    WHERE TB.GUBUN IN ('M','U')
+	 AND IFNULL(TB.DEL_DVS_CD, 'N') <> 'Y'
+     AND TB.GUBUN != 'S' 
+;
+  
+  CREATE VIEW `VI_ARTICLE_AUTHORS` AS 
+  SELECT C.ARTICLE_ID,
+    GROUP_CONCAT(C.NAME_DISP SEPARATOR ';') AS AUTHORS,
+    GROUP_CONCAT(C.AUTHOR_INFO SEPARATOR ';') AS AUTHORS_INFO
+  FROM VI_SOURCE_ARTICLE_AUTHOR C
+  GROUP BY ARTICLE_ID
+  ORDER BY NULL
+  ;   

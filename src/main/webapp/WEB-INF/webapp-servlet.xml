@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:p="http://www.springframework.org/schema/p" xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.2.xsd
+		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.2.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.2.xsd">
+
+<!-- Application context definition for "springjspapp" DispatcherServlet. -->
+<!--
+	* serlvet.xml설정 규칙은 [serlvet이름]-servlet.xml로 설정한다.
+	serlvet이름은 web.xml의 <servlet> 설정된다.
+-->
+
+	<bean id="contentNegotiationManager" class="org.springframework.web.accept.ContentNegotiationManagerFactoryBean">
+	    <property name="favorPathExtension" value="false" />
+	</bean>
+
+	<mvc:annotation-driven conversion-service="conversionService">
+	    <mvc:message-converters>
+	        <bean class="org.springframework.http.converter.StringHttpMessageConverter"/>
+	        <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter"/>
+	    </mvc:message-converters>
+	</mvc:annotation-driven>
+
+	<!-- @RequestParam  String[] -> do comma split -> do not split setting  -->
+	<bean id="conversionService" class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
+		<property name="formatterRegistrars">
+			<bean class="kr.co.argonet.r2rims.util.CommonFormatterRegistrar"/>
+		</property>
+	</bean>
+
+	<context:component-scan base-package="kr.co.argonet.r2rims">
+		<context:include-filter type="annotation"
+			expression="org.springframework.stereotype.Controller" />
+		<context:include-filter type="annotation"
+			expression="org.springframework.stereotype.Service" />
+		<context:include-filter type="annotation"
+			expression="org.springframework.stereotype.Repository" />
+	</context:component-scan>
+
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/**" />
+			<bean class="kr.co.argonet.r2rims.core.interceptor.LocaleInterceptor"/>
+		</mvc:interceptor>
+		<mvc:interceptor>
+			<mvc:mapping path="/**"/>
+			<mvc:exclude-mapping path="/index/login.do"/>
+			<mvc:exclude-mapping path="/**Ajax.do"/>
+			<mvc:exclude-mapping path="/share/**"/>
+			<bean class="kr.co.argonet.r2rims.core.interceptor.KaistSessionInterceptor"/>
+		</mvc:interceptor>
+		<mvc:interceptor>
+			<mvc:mapping path="/**"/>
+			<mvc:exclude-mapping path="/index/login.do"/>
+			<mvc:exclude-mapping path="/**Ajax.do"/>
+			<mvc:exclude-mapping path="/share/**"/>
+			<bean class="kr.co.argonet.r2rims.core.interceptor.AuthorityInterceptor"/>
+		</mvc:interceptor>
+		<mvc:interceptor>
+			<mvc:mapping path="/**"/>
+			<mvc:exclude-mapping path="/index/login.do"/>
+			<mvc:exclude-mapping path="/main.do"/>
+			<mvc:exclude-mapping path="/**Ajax.do"/>
+			<mvc:exclude-mapping path="/share/**"/>
+			<bean class="kr.co.argonet.r2rims.core.interceptor.InfoPrtcAgreInterceptor"/>
+		</mvc:interceptor>
+		<mvc:interceptor>
+			<mvc:mapping path="/analysis/**"/>
+			<mvc:exclude-mapping path="/analysis/**Ajax.do"/>
+			<bean class="kr.co.argonet.r2rims.core.interceptor.AnalysisLogInterceptor" />
+		</mvc:interceptor>
+		<mvc:interceptor>
+			<mvc:mapping path="/share/**"/>
+			<mvc:exclude-mapping path="/share/api/**"/>
+			<bean class="kr.co.argonet.r2rims.core.interceptor.ShareSessionInterceptor" />
+		</mvc:interceptor>
+		<mvc:interceptor>
+			<mvc:mapping path="/**"/>
+			<bean id="webContentInterceptor" class="org.springframework.web.servlet.mvc.WebContentInterceptor">
+				<property name="cacheSeconds" value="0"/>
+			</bean>
+		</mvc:interceptor>
+	</mvc:interceptors>
+
+	<bean id="newRequestHandler"
+		class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping"
+		p:order="1" />
+
+	<!-- /CORE -->
+	<bean id="localeResolver" class="org.springframework.web.servlet.i18n.SessionLocaleResolver">
+		<property name="defaultLocale" value="ko" />
+	</bean>
+
+	<!-- / MessageSource
+	<bean id="localeChangeInterceptor" class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
+		<property name="paramName" value="lang" />
+	</bean>
+	-->
+
+	<bean id="xmlViewResolver" class="org.springframework.web.servlet.view.XmlViewResolver">
+		<property name="order" value="1"/>
+		<property name="location" value="/WEB-INF/classes/config/spring/spring-views.xml"/>
+	</bean>
+
+	<bean id ="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver" >
+		<!--  10 MB Max upload size -->
+		<property name="maxUploadSize" value="100000000"></property>
+		<property name="defaultEncoding" value="UTF-8"></property>
+	</bean>
+
+	<!--
+		veiw resolver 설정 - JSP View Resolver
+		1개의 xxx_servlet.xml에서는 1개의 viewResolver를 가진다.
+
+		JSP View Resolver 설정
+		- 0. JSP View Resolver class 설정
+		- 1. prefix 설정
+		- 2. suffix 설정(설정된 값을 제외하고 이름으로 해석한다. ex) suffix가 .jsp일 경우 menu.jsp의 경우 menu로 해석
+	-->
+	<bean id="viewResolver" class="kr.co.argonet.r2rims.core.resolver.CustomInternalResourceViewResolver">
+
+		<property name="proxyUrl" value="#{sysConf['proxy.url']}" />
+
+		<property name="viewClass">
+			<value>org.springframework.web.servlet.view.JstlView</value>
+		</property>
+		<property name="prefix">
+			<value>/WEB-INF/jsp/</value>
+		</property>
+		<property name="suffix">
+			<value>.jsp</value>
+		</property>
+		<property name="attributesMap">
+			<map>
+				<entry key="r2Conf" value-ref="r2Conf" />
+				<entry key="sysConf" value-ref="sysConf" />
+			</map>
+		</property>
+	</bean>
+
+</beans>

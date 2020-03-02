@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.argonet.r2rims.myRSS.mapper.MyRssMapper">
+
+  <sql id="pageHeader">SELECT * FROM ( SELECT * FROM (</sql>
+  <sql id="pageFooter"><![CDATA[) WHERE RN  <=  (#{ps} + #{ct})) a  WHERE a.RN > #{ps}]]></sql>
+  <sql id="nvlifnull"><if test="_databaseId == 'oracle' ">NVL</if><if test="_databaseId == 'mysql' ">IFNULL</if></sql>
+  <sql id="prefixToChar"><if test="_databaseId == 'oracle' ">TO_CHAR(</if><if test="_databaseId == 'mysql' ">DATE_FORMAT(</if></sql>
+  <sql id="postfixToCharYmd"><if test="_databaseId == 'oracle' ">, 'YYYYMMDD')</if><if test="_databaseId == 'mysql' ">, '%Y%m%d')</if></sql>
+  <sql id="postfixToCharY-m-d"><if test="_databaseId == 'oracle' ">, 'YYYY-MM-DD')</if><if test="_databaseId == 'mysql' ">, '%Y-%m-%d')</if></sql>
+  <sql id="prefixToDate"><if test="_databaseId == 'oracle' ">TO_DATE(</if><if test="_databaseId == 'mysql' ">STR_TO_DATE(</if></sql>
+  <sql id="postfixToDate"><if test="_databaseId == 'oracle' ">, 'YYYY-MM-DD')</if><if test="_databaseId == 'mysql' ">, '%Y-%m-%d')</if></sql>
+  <sql id="sysdateNow"><if test="_databaseId == 'oracle' ">SYSDATE</if><if test="_databaseId == 'mysql' ">now()</if></sql>
+
+
+  <select id="findFavorite" resultType="kr.co.argonet.r2rims.myRSS.vo.FavoriteVo">
+    <if test="_databaseId == 'oracle'">
+      select RF.TITLE, RF.SVCGRP, RF.REGDATE, RF.SOLUTION, RF.DATA_ID
+      from (select rownum as num, NO, TITLE, SVCGRP, REGDATE, SOLUTION, DATA_ID, USER_ID from common_auth.RSS_FAVORITE) RF
+      where RF.USER_ID = #{userId}
+      and RF.num <![CDATA[ > ]]> #{page}
+      and RF.num <![CDATA[ <= ]]> #{count}
+    </if>
+    <if test="_databaseId == 'mysql'">
+      select RF.TITLE, RF.SVCGRP, RF.REGDATE, RF.SOLUTION, RF.DATA_ID
+      from common_auth.RSS_FAVORITE RF
+      where RF.USER_ID = #{userId}
+      limit #{page}, #{count}
+    </if>
+  </select>
+
+  <select id="totalFavorite" resultType="int">
+    select count(1) from common_auth.RSS_FAVORITE where USER_ID = #{userId}
+  </select>
+
+</mapper>

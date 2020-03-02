@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<taglib xmlns="http://java.sun.com/xml/ns/j2ee"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee/web-jsptaglibrary_2_0.xsd" version="2.0">
+
+
+  <description>R2RIMS library</description>
+  <display-name>rims core</display-name>
+  <tlib-version>1.0</tlib-version>
+  <short-name>rims</short-name>
+  <uri>http://www.argonet.co.kr/rims</uri>
+
+<function>
+	<name>codeValue</name>
+	<function-class>kr.co.argonet.r2rims.core.tag.RimsCumstomTagUtil</function-class>
+	<function-signature>java.lang.String codeValue(java.lang.String, java.lang.String)</function-signature>
+</function>
+
+<function>
+	<name>makeCodeList</name>
+	<function-class>kr.co.argonet.r2rims.core.tag.RimsCumstomTagUtil</function-class>
+	<function-signature>java.lang.String makeCodeList(java.lang.String,  java.lang.Boolean, java.lang.Object)</function-signature>
+</function>
+
+<function>
+	<name>makeRating</name>
+	<function-class>kr.co.argonet.r2rims.core.tag.RimsCumstomTagUtil</function-class>
+	<function-signature>java.lang.String makeRating(java.lang.String,  java.lang.Object, java.lang.Integer)</function-signature>
+</function>
+
+<function>
+	<name>toDateFormatToken</name>
+	<function-class>kr.co.argonet.r2rims.core.tag.RimsCumstomTagUtil</function-class>
+	<function-signature>java.lang.String toDateFormatToken(java.lang.String, java.lang.String)</function-signature>
+</function>
+
+<function>
+	<name>toDateFormatHyphen</name>
+	<function-class>kr.co.argonet.r2rims.core.tag.RimsCumstomTagUtil</function-class>
+	<function-signature>java.lang.String toDateFormatHyphen(java.lang.String)</function-signature>
+</function>
+
+<function>
+	<name>makeYearList</name>
+	<function-class>kr.co.argonet.r2rims.core.tag.RimsCumstomTagUtil</function-class>
+	<function-signature>java.lang.String makeYearList(java.lang.Integer, java.lang.Object, java.lang.Boolean, java.lang.Boolean)</function-signature>
+</function>
+
+<function>
+	<name>makeMonthList</name>
+	<function-class>kr.co.argonet.r2rims.core.tag.RimsCumstomTagUtil</function-class>
+	<function-signature>java.lang.String makeMonthList(java.lang.Object, java.lang.Boolean)</function-signature>
+</function>
+
+<function>
+	<name>makeDayList</name>
+	<function-class>kr.co.argonet.r2rims.core.tag.RimsCumstomTagUtil</function-class>
+	<function-signature>java.lang.String makeDayList(java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Boolean)</function-signature>
+</function>
+
+
+<function>
+	<name>makeYearWithAddYearList</name>
+	<function-class>kr.co.argonet.r2rims.core.tag.RimsCumstomTagUtil</function-class>
+	<function-signature>java.lang.String makeYearList(java.lang.Integer, java.lang.Object, java.lang.Boolean, java.lang.Boolean, java.lang.Integer)</function-signature>
+</function>
+
+</taglib>
+
+
+
+
+
+
+
+

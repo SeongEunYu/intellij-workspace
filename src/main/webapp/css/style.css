@@ -1,0 +1,18 @@
+@charset "utf-8";
+
+/*   --- content_wrapper ---   */
+#content_wrapper_sub {width:100%; height:auto; margin:auto; overflow:hidden; border:0px solid red;}
+
+/* table 스타일 1 */
+.sub_input_tb {width:100%; border:1px solid #cacaca; background:#ffffff;}
+.sub_input_tb tr {height: 31px;}
+.sub_input_tb th {border-top:1px solid #cacaca; border-bottom:1px solid #cacaca; padding:3px 6px 3px 6px; text-align:right;}
+.sub_input_tb th.borderRight {border-right:1px solid #cacaca;}
+.sub_input_tb td {border-top:1px solid #cacaca; border-bottom:1px solid #cacaca; padding:3px 6px 3px 6px;}
+.sub_input_tb td.borderRight {border-right:1px solid #cacaca;}
+
+.sub_basic_tb{width:100%;}
+.sub_basic_tb caption{padding-bottom:10px; text-align:left;}
+.sub_basic_tb th{background-color:#e8e9ed; border-top:2px solid #696f7d; border-bottom:2px solid #b3bac4; border-right:1px solid #b3bac4; padding:3px 0 3px 0;}
+.sub_basic_tb th.right{background-color:#e8e9ed; border-top:2px solid #696f7d; border-bottom:2px solid #b3bac4; border-right:0; padding:3px 0 3px 0;}
+.sub_basic_tb td{border-bottom:1px solid #b3bac4; padding:3px 10px 3px 10px; text-align:center;}

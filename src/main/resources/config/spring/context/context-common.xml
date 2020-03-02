@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:context="http://www.springframework.org/schema/context" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
+        http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.2.xsd
+        http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.2.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.2.xsd">
+
+	<!-- annotation enabled -->
+	<context:annotation-config />
+	<!-- localhost -->
+	<!--
+	<util:properties id="r2Conf" location="file:/Users/lhj/Documents/workspace_config/s2rims/kaist/config/r2rimsConfiguration.properties" />
+	<util:properties id="sysConf" location="file:/Users/lhj/Documents/workspace_config/s2rims/kaist/config/r2rimsSystemConfiguration.xml" />
+	-->
+	<!-- KAIST -->
+	<util:properties id="r2Conf" location="file:/data/software/config/r2rims_rss_test/r2rimsConfiguration.properties" />
+	<util:properties id="sysConf" location="file:/data/software/config/r2rims_rss_test/r2rimsSystemConfiguration.xml" />
+	<context:property-placeholder properties-ref="sysConf" />
+
+	<bean id="accountService" class="kr.co.argonet.r2rims.kaist.account.AccountService" ></bean>
+	<bean id="syncActivity" class="kr.co.argonet.r2rims.sysCntc.syncrslt.module.SyncActivityService" ></bean>
+	<bean id="syncUser" class="kr.co.argonet.r2rims.sysCntc.syncrslt.module.SyncUserService" ></bean>
+	<bean id="syncLicense" class="kr.co.argonet.r2rims.sysCntc.syncrslt.module.SyncLicenseService" ></bean>
+	<bean id="syncDegree" class="kr.co.argonet.r2rims.sysCntc.syncrslt.module.SyncDegreeService" ></bean>
+	<bean id="syncCareer" class="kr.co.argonet.r2rims.sysCntc.syncrslt.module.SyncCareerService" ></bean>
+	<bean id="syncAward" class="kr.co.argonet.r2rims.sysCntc.syncrslt.module.SyncAwardService" ></bean>
+	<bean id="syncFunding" class="kr.co.argonet.r2rims.sysCntc.syncrslt.module.SyncFundingService" ></bean>
+	<bean id="syncPatent" class="kr.co.argonet.r2rims.sysCntc.syncrslt.module.SyncPatentService" ></bean>
+	<bean id="syncTechtrans" class="kr.co.argonet.r2rims.sysCntc.syncrslt.module.SyncTechtransService" ></bean>
+	<bean id="syncExhibition" class="kr.co.argonet.r2rims.sysCntc.syncrslt.module.SyncExhibitionService" ></bean>
+	<!-- Post Action -->
+	<bean id="articlePost" class="kr.co.argonet.r2rims.article.ArticlePostService"></bean>
+	<bean id="conferencePost" class="kr.co.argonet.r2rims.conference.ConferencePostService"></bean>
+	<bean id="bookPost" class="kr.co.argonet.r2rims.book.BookPostService"></bean>
+	<bean id="userPost" class="kr.co.argonet.r2rims.user.UserPostService"></bean>
+</beans>

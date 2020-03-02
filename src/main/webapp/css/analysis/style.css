@@ -1,0 +1,144 @@
+@charset "utf-8";
+
+
+*{margin:0; padding:0;}
+
+/* body, td, div, img, form 공통적용 */
+body {
+	width: 100%;
+	height: auto;
+	margin: 0;
+	padding: 0;
+	color:#474747;
+	font:normal 12px Tahoma, Arial, Helvetica, sans-serif;
+	text-decoration: none;
+	line-height: 18px;
+	SCROLLBAR-FACE-color: #d9d9d9;
+	SCROLLBAR-HIGHLIGHT-color: #d9d9d9;
+	SCROLLBAR-SHADOW-color: #d9d9d9;
+	SCROLLBAR-3DLIGHT-color: #ececec;
+	SCROLLBAR-ARROW-color: #999999;
+	SCROLLBAR-TRACK-color: #ececec;
+	SCROLLBAR-DARKSHADOW-color: #d9d9d9;
+	OVERFLOW-Y:SCROLL;
+	overflow-x:hidden;
+	word-break:break-all;
+}
+a:link {color:#474747; font:normal 12px Tahoma, Arial, Helvetica, sans-serif; text-decoration:none; line-height:18px;}
+a:visited {color:#474747; font:normal 12px Tahoma, Arial, Helvetica, sans-serif; text-decoration:none; line-height:18px;}
+a:active {color:#474747; font:normal 12px Tahoma, Arial, Helvetica, sans-serif; text-decoration:none; line-height:18px;}
+a:hover {color:#474747; font:normal 12px Tahoma, Arial, Helvetica, sans-serif; text-decoration:none; line-height:18px;}
+img {border:0; margin:0; padding:0;}
+form {margin:0;	padding:0;}
+div {margin:0; padding:0;}
+
+
+/* button태그 파이어폭스 적용시 */
+button::-moz-focus-inner {border:0; padding:0;}
+
+
+/* table 공통적용  */
+table {padding:0; border:0; border-spacing:0px;	border-collapse:collapse;}
+th, td {padding:0px; border-spacing:0px; border-collapse:collapse; line-height:18px;}
+td a:link {line-height:18px;}
+
+
+/* ul, li */
+ul, li {list-style:none; margin:0; padding:0;}
+li {list-style:none; margin:0; padding:0;}
+
+
+/* input, select box */
+input {height:19px;	border:1px solid #cccccc;}
+select {vertical-align:text-bottom;}
+
+
+/*****************   --- text style---   *****************/
+/* h1 */
+h1 {color:#4c4c4c; font:bold 22px "NanumGothic", "Century Gothic", "Malgun Gothic", "맑은 고딕", Dotum, Verdana, AppleGothic, Sans-serif; text-decoration:none; line-height:20px;}
+
+
+/* h2 */
+h2{
+	padding:0 0 0 17px;
+	color: #4c4c4c;
+	font:bold 16px  "NanumGothic", "나눔고딕", "Malgun Gothic", "맑은 고딕", "Century Gothic", Dotum, Verdana, AppleGothic, Sans-serif;
+	text-decoration: none;
+	line-height:20px;
+	background:url('../../images/layout/ico_pageh1.png') no-repeat;
+	background-position:0px 5px;
+}
+
+
+/* h3 */
+h3 {
+	padding:0 0 0 25px;
+	color:#ff7f00; font:bold 17px "NanumGothic", "나눔 고딕", "Century Gothic", Dotum, Verdana, AppleGothic, Sans-serif;
+	text-decoration:none;
+	line-height:20px;
+	background-image:url('../../images/layout/ico_bullet.png'); background-repeat:no-repeat; background-position:0 9px;
+}
+
+
+/* style_12pt */
+.style_12pt{
+	color: #0482ad;
+	font:normal 12px "NanumGothic","나눔고딕","Malgun Gothic", "맑은 고딕","Dotum";
+	text-decoration: none;
+	line-height:15px;
+	word-break:normal;
+}
+.style_12pt a:link{
+	color: #0482ad;
+	font:normal 12px "NanumGothic","나눔고딕","Malgun Gothic", "맑은 고딕","Dotum";
+	text-decoration: none;
+	line-height:15px;
+}
+.style_12pt a:visited{
+	color: #0482ad;
+	font:normal 12px "NanumGothic","나눔고딕","Malgun Gothic", "맑은 고딕","Dotum";
+	text-decoration: none;
+	line-height:15px;
+}
+.style_12pt a:active{
+	color: #0482ad;
+	font:normal 12px "NanumGothic","나눔고딕","Malgun Gothic", "맑은 고딕","Dotum";
+	text-decoration: none;
+	line-height:15px;
+}
+.style_12pt a:hover{
+	color: #0482ad;
+	font:normal 12px "NanumGothic","나눔고딕","Malgun Gothic", "맑은 고딕","Dotum";
+	TEXT-DECORATION: underline;
+	line-height:15px;
+}
+
+
+/* style_blur11pt */
+.style_blur11pt{
+	color: #888888;
+	font:normal 11px Tahoma, Arial, Helvetica, sans-serif;
+	text-decoration: none;
+	line-height:15px;
+}
+.style_blur11pt a:link{
+	color: #888888;
+	font:normal 11px Tahoma, Arial, Helvetica, sans-serif;
+	text-decoration: none;
+	line-height:15px;
+}
+.style_blur11pt a:visited{
+	color: #888888;
+	font:normal 11px Tahoma, Arial, Helvetica, sans-serif;
+	text-decoration: none;
+}
+.style_blur11pt a:active{
+	color: #888888;
+	font:normal 11px Tahoma, Arial, Helvetica, sans-serif;
+	text-decoration: none;
+}
+.style_blur11pt a:hover{
+	color: #888888;
+	font:normal 11px Tahoma, Arial, Helvetica, sans-serif;
+	TEXT-DECORATION: underline;
+}

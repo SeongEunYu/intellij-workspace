@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<toolbar>
+	<item id="s"    type="button"   img="recommend.png"   imgdis="recommend_dis.png"   text="시스템추천"   action="onLoadResearcher" />
+	<item id="sep2"   type="separator"/>
+	<item id="m"   type="button"   img="manage.png"  imgdis="manage_dis.png"  text="관리대상"  action="onLoadResearcher" />
+	<item id="sep3"   type="separator"/>
+	<item id="u"  type="button"   img="not_manage.png" imgdis="not_manage_dis.png" text="미관리대상" action="onLoadResearcher" />
+</toolbar>

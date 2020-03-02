@@ -1,0 +1,1728 @@
+BODY {
+	FONT-SIZE: 11px; FONT-FAMILY: tahoma, arial, verdana, arial; BACKGROUND: url(./img/bgPage.png) #ece9e2 repeat-y center 50%; TEXT-ALIGN: center; MARGIN: 0px
+}
+* HTML BODY {
+	FONT-SIZE: small
+}
+A {
+	COLOR: #345f8a; TEXT-DECORATION: none
+}
+A:link {
+	COLOR: #345f8a; TEXT-DECORATION: none
+}
+A:visited {
+	COLOR: #345f8a; TEXT-DECORATION: none
+}
+A:hover {
+	COLOR: #345f8a; TEXT-DECORATION: none
+}
+A:active {
+	COLOR: #345f8a; TEXT-DECORATION: none
+}
+A:focus {
+	COLOR: #345f8a; TEXT-DECORATION: none
+}
+FORM {
+	MARGIN: 0px
+}
+IMG {
+	BORDER-TOP-STYLE: none; BORDER-LEFT-STYLE: none; BORDER-BOTTOM-STYLE: none; BORDER-RIGHT-STYLE: none
+}
+P.jsInfo {
+	BORDER-TOP: red 2px solid; BORDER-RIGHT: red 2px solid; BORDER-BOTTOM: red 2px solid; PADDING-BOTTOM: 10px; PADDING-TOP: 10px; PADDING-LEFT: 10px; MARGIN: 10px; BORDER-LEFT: red 2px solid; PADDING-RIGHT: 10px; WIDTH: 930px
+}
+P.help {
+	FONT-SIZE: 8pt; COLOR: #686868; PADDING-BOTTOM: 5px; PADDING-TOP: 5px; PADDING-LEFT: 5px; MARGIN: 3px 0px 15px; PADDING-RIGHT: 5px
+}
+.h2RightAdd {
+	FONT-SIZE: 7.5pt; FLOAT: right; FONT-WEIGHT: normal; COLOR: #686868; PADDING-BOTTOM: 0px; PADDING-TOP: 6px; PADDING-LEFT: 0px; PADDING-RIGHT: 0px; WIDTH: 300px
+}
+.h2RightAdd IMG {
+	POSITION: relative; TOP: 2px
+}
+.h2RightAdd P.legend {
+	FLOAT: right; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; PADDING-RIGHT: 0px
+}
+.expertInfoHidden {
+	PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; DISPLAY: none; PADDING-RIGHT: 0px; VISIBILITY: hidden
+}
+.expertInfoVisible {
+	PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; CLEAR: both; MARGIN: 0px; DISPLAY: block; PADDING-RIGHT: 0px; VISIBILITY: visible
+}
+.clearFloat {
+	HEIGHT: 0px; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; CLEAR: both; MARGIN: 0px; DISPLAY: inline; PADDING-RIGHT: 0px; VISIBILITY: hidden
+}
+.clearLeft {
+	HEIGHT: 0px; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; CLEAR: left; MARGIN: 0px; DISPLAY: inline; PADDING-RIGHT: 0px; VISIBILITY: hidden
+}
+.clearRight {
+	HEIGHT: 0px; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; CLEAR: right; MARGIN: 0px; DISPLAY: inline; PADDING-RIGHT: 0px; VISIBILITY: hidden
+}
+.dynTextCut {
+	OVERFLOW: hidden; WHITE-SPACE: nowrap; TEXT-OVERFLOW: ellipsis
+}
+#mother {
+	BACKGROUND: url(./img/bgPage.png) repeat-y center 50%; PADDING-BOTTOM: 0px; TEXT-ALIGN: left; PADDING-TOP: 0px; PADDING-LEFT: 12px; MARGIN: auto; MIN-HEIGHT: 600px; PADDING-RIGHT: 0px; WIDTH: 990px
+}
+* HTML #mother {
+	HEIGHT: 600px
+}
+#header {
+	HEIGHT: 111px; VERTICAL-ALIGN: top; BACKGROUND: url(./SciVal%20Experts_files/top_bg.gif) no-repeat; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; PADDING-RIGHT: 0px; WIDTH: 932px
+}
+#mainArea {
+	BACKGROUND: url(./img/bgContent.png) repeat-x; PADDING-BOTTOM: 0px; PADDING-TOP: 20px; PADDING-LEFT: 30px; MARGIN: 0px; MIN-HEIGHT: 400px; PADDING-RIGHT: 25px; WIDTH: 923px
+}
+* HTML #mainArea {
+	HEIGHT: 400px
+}
+#footer {
+	FONT-SIZE: 7.5pt; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 30px 0px 0px; PADDING-RIGHT: 0px; WIDTH: 978px
+}
+#footer DIV.logo {
+	PADDING-BOTTOM: 15px; TEXT-ALIGN: right; PADDING-TOP: 0px; PADDING-LEFT: 0px; PADDING-RIGHT: 27px
+}
+#footer DIV.links {
+	BORDER-TOP: #1b3764 1px solid; PADDING-BOTTOM: 10px; PADDING-TOP: 5px; PADDING-LEFT: 30px; MARGIN: 0px; PADDING-RIGHT: 0px
+}
+#footer DIV.links SPAN {
+	COLOR: #1b3764; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 5px; PADDING-RIGHT: 5px
+}
+#footer DIV.links A {
+	COLOR: #1b3764
+}
+#footer DIV.links A:hover {
+	TEXT-DECORATION: underline
+}
+#skipNavigation {
+	FLOAT: left
+}
+#subHeader {
+	HEIGHT: 52px; BACKGROUND: url(./img/bgSubHeader.png) repeat-x; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; PADDING-RIGHT: 0px; WIDTH: 978px
+}
+#subHeader UL {
+	PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; PADDING-RIGHT: 0px
+}
+#subHeader UL LI {
+	LIST-STYLE-TYPE: none; FLOAT: left; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; PADDING-RIGHT: 0px
+}
+#smallNavig {
+	FONT-SIZE: 7.5pt; FLOAT: left; FONT-WEIGHT: bold; COLOR: #686868; PADDING-BOTTOM: 0px; PADDING-TOP: 35px; PADDING-LEFT: 30px; MARGIN: 0px; PADDING-RIGHT: 0px; WIDTH: 683px
+}
+#smallNavig A {
+	COLOR: #345f8a
+}
+#smallSearch {
+	HEIGHT: 27px; BACKGROUND: url(./img/bgSmallSearch.png) no-repeat 0px 5px; FLOAT: left; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; PADDING-RIGHT: 0px; WIDTH: 240px
+}
+#smallSearch INPUT#buttonSmallSearch {
+	FLOAT: left
+}
+#smallSearch INPUT#searchValSmall {
+	FLOAT: left
+}
+#searchValSmall {
+	BORDER-TOP-STYLE: none; FONT-SIZE: 8pt; BORDER-LEFT-STYLE: none; HEIGHT: 16px; BACKGROUND: none transparent scroll repeat 0% 0%; BORDER-BOTTOM-STYLE: none; COLOR: #000000; PADDING-BOTTOM: 0px; PADDING-TOP: 4px; BORDER-RIGHT-STYLE: none; PADDING-LEFT: 0px; MARGIN: 6px 5px 0px 10px; PADDING-RIGHT: 0px; WIDTH: 198px
+}
+.exampleStyle#searchValSmall {
+	COLOR: #686868; FONT-STYLE: italic
+}
+#buttonSmallSearch {
+	BORDER-TOP-STYLE: none; CURSOR: pointer; BORDER-LEFT-STYLE: none; HEIGHT: 22px; BACKGROUND: url(./img/buttonSmallSearch.png) no-repeat 0px 1px; BORDER-BOTTOM-STYLE: none; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; BORDER-RIGHT-STYLE: none; PADDING-LEFT: 0px; MARGIN: 4px 0px 0px; PADDING-RIGHT: 0px; WIDTH: 27px
+}
+#smallSearch UL {
+	HEIGHT: 23px; POSITION: relative; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; CLEAR: left; LEFT: 10px; MARGIN: 0px; TOP: 0px; PADDING-RIGHT: 0px
+}
+#smallSearch UL LI {
+	LIST-STYLE-TYPE: none; HEIGHT: 23px; FLOAT: left; COLOR: #345f8a; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; PADDING-RIGHT: 0px; WIDTH: 74px
+}
+#smallSearch UL LI INPUT {
+	BORDER-TOP-STYLE: none; CURSOR: pointer; FONT-SIZE: 7pt; BORDER-LEFT-STYLE: none; HEIGHT: 23px; BACKGROUND: none transparent scroll repeat 0% 0%; BORDER-BOTTOM-STYLE: none; COLOR: #345f8a; PADDING-BOTTOM: 0px; PADDING-TOP: 4px; BORDER-RIGHT-STYLE: none; PADDING-LEFT: 0px; MARGIN: 0px; PADDING-RIGHT: 0px; WIDTH: 74px
+}
+#smallSearch UL LI INPUT.sell {
+	CURSOR: default; BACKGROUND: url(./img/bgSmallSearchType.png) no-repeat 0px 0px
+}
+H1 {
+	FONT-SIZE: 18pt; FONT-WEIGHT: bold; COLOR: #7bb949; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px 0px 45px; PADDING-RIGHT: 0px
+}
+H1 P {
+	FONT-SIZE: 8pt; FONT-WEIGHT: bold; COLOR: #686868; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 5px 0px 0px; PADDING-RIGHT: 0px
+}
+H1.startPage {
+	MARGIN: 0px 0px 20px
+}
+H2 {
+	FONT-SIZE: 13pt; BORDER-BOTTOM: #9a9a9a 1px solid; FONT-WEIGHT: bold; COLOR: #7bb949; PADDING-BOTTOM: 11px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; PADDING-RIGHT: 0px
+}
+H3 {
+	FONT-SIZE: 8pt; FONT-WEIGHT: bold; COLOR: #6e6b63; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px 0px 5px 2px; PADDING-RIGHT: 0px
+}
+#leftArea {
+	BORDER-RIGHT: #9a9a9a 1px solid; FLOAT: left; PADDING-BOTTOM: 30px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; PADDING-RIGHT: 14px; WIDTH: 206px
+}
+#content {
+	POSITION: relative; FLOAT: left; PADDING-BOTTOM: 30px; PADDING-TOP: 0px; PADDING-LEFT: 15px; LEFT: -1px; MARGIN: 0px; MIN-HEIGHT: 400px; BORDER-LEFT: #9a9a9a 1px solid; PADDING-RIGHT: 0px; WIDTH: 685px
+}
+* HTML #content {
+	HEIGHT: 400px
+}
+#innerContentLeftArea {
+	FLOAT: left; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px 25px 0px 0px; PADDING-RIGHT: 0px; WIDTH: 450px
+}
+#innerContentRightArea {
+	FLOAT: left; WIDTH: 210px
+}
+.moreLink {
+	FONT-SIZE: 7.5pt; FLOAT: right; PADDING-BOTTOM: 0px; PADDING-TOP: 7px; PADDING-LEFT: 0px; PADDING-RIGHT: 0px
+}
+#innerContentOneArea {
+	FLOAT: left; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; PADDING-RIGHT: 0px; WIDTH: 685px
+}
+#navig {
+	PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px 0px 50px; PADDING-RIGHT: 0px
+}
+#navig UL {
+	PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; PADDING-RIGHT: 0px
+}
+#navig LI {
+	LIST-STYLE-TYPE: none; CURSOR: pointer; FONT-SIZE: 9pt; VERTICAL-ALIGN: middle; BORDER-BOTTOM: #7f7f7f 1px solid; FONT-WEIGHT: bold; COLOR: #345f8a; PADDING-BOTTOM: 5px; PADDING-TOP: 5px; PADDING-LEFT: 10px; MARGIN: 0px; PADDING-RIGHT: 5px
+}
+#navig LI.first {
+	FONT-SIZE: 13pt; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 10px; LINE-HEIGHT: 130%; PADDING-RIGHT: 5px
+}
+#navig LI.inside {
+	PADDING-LEFT: 20px
+}
+#navig LI.insideOff {
+	CURSOR: default; COLOR: #cccccc; PADDING-LEFT: 20px
+}
+#navig LI.sell {
+	BACKGROUND: url(./img/bgNavigSell.png) #1d3d6a repeat-x; COLOR: #ffffff; background-size: auto 100%
+}
+#navig LI.off {
+	CURSOR: default; COLOR: #cccccc
+}
+#navig LI A {
+	LIST-STYLE-TYPE: none; COLOR: #345f8a
+}
+#navig LI.sell A {
+	COLOR: #ffffff
+}
+#exportAllExpert SPAN {
+	BORDER-TOP: silver 1px solid; BORDER-RIGHT: silver 1px solid; BORDER-BOTTOM: silver 1px solid; PADDING-BOTTOM: 4px; PADDING-TOP: 6px; PADDING-LEFT: 3px; BORDER-LEFT: silver 1px solid; PADDING-RIGHT: 8px; -moz-box-shadow: 5px 5px 5px #888; -webkit-box-shadow: 5px 5px 5px #888; box-shadow: 5px 5px 5px #888
+}
+#metaInfos {
+	BORDER-TOP: #b2b2b2 1px solid; PADDING-BOTTOM: 0px; PADDING-TOP: 20px; PADDING-LEFT: 0px; MARGIN: 0px 0px 20px; PADDING-RIGHT: 0px
+}
+#metaInfos H3 {
+	FONT-SIZE: 10pt; COLOR: #5e5b52; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px 0px 30px; PADDING-RIGHT: 0px
+}
+#metaInfos DIV {
+	FONT-SIZE: 8pt; COLOR: #686868; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px 0px 5px; PADDING-RIGHT: 0px
+}
+#metaInfos P {
+	WORD-WRAP: break-word; FONT-SIZE: 8pt; COLOR: #444137; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px 0px 15px; PADDING-RIGHT: 0px
+}
+#metaInfos P.image {
+	OVERFLOW: hidden; MAX-HEIGHT: 250px; WIDTH: 205px
+}
+#metaInfos .bmeIcon {
+	POSITION: relative; TOP: 2px
+}
+#metaInfos DIV.trendBlank {
+	CURSOR: pointer; HEIGHT: 106px; BACKGROUND: url(./img/trendsBlank.png) no-repeat; WIDTH: 206px
+}
+#metaInfos DIV.networkBlank {
+	CURSOR: pointer; HEIGHT: 106px; BACKGROUND: url(./img/networkBlank.png) no-repeat; WIDTH: 206px
+}
+#metaInfos DIV.trendBlank P.text {
+	OVERFLOW: hidden; HEIGHT: 14px; POSITION: relative; FONT-WEIGHT: bold; COLOR: #ffffff; LEFT: 16px; TOP: 82px; WIDTH: 175px
+}
+#metaInfos DIV.networkBlank P.text {
+	OVERFLOW: hidden; HEIGHT: 14px; POSITION: relative; FONT-WEIGHT: bold; COLOR: #ffffff; LEFT: 16px; TOP: 82px; WIDTH: 175px
+}
+.loginFields {
+	WIDTH: 130px
+}
+.previewPanelInfos {
+	PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 30px 0px 0px; PADDING-RIGHT: 0px
+}
+.previewPanelInfos H2 {
+	MARGIN-BOTTOM: 10px
+}
+.previewPanelInfos DIV.trendBlank {
+	CURSOR: pointer; HEIGHT: 106px; BACKGROUND: url(./img/trendsBlank.png) no-repeat; WIDTH: 206px
+}
+.previewPanelInfos DIV.networkBlank {
+	CURSOR: pointer; HEIGHT: 106px; BACKGROUND: url(./img/networkBlank.png) no-repeat; WIDTH: 206px
+}
+.previewPanelInfos DIV.trendBlank P.text {
+	OVERFLOW: hidden; FONT-SIZE: 8pt; HEIGHT: 14px; POSITION: relative; FONT-WEIGHT: bold; COLOR: #ffffff; LEFT: 16px; TOP: 82px; WIDTH: 175px
+}
+.previewPanelInfos DIV.networkBlank P.text {
+	OVERFLOW: hidden; FONT-SIZE: 8pt; HEIGHT: 14px; POSITION: relative; FONT-WEIGHT: bold; COLOR: #ffffff; LEFT: 16px; TOP: 82px; WIDTH: 175px
+}
+.charList {
+	LIST-STYLE-TYPE: none; HEIGHT: 20px; BORDER-BOTTOM: #9a9a9a 0px solid; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px 0px 20px; PADDING-RIGHT: 0px
+}
+.charList LI {
+	CURSOR: pointer; FONT-SIZE: 9pt; HEIGHT: 17px; BACKGROUND: none transparent scroll repeat 0% 0%; FLOAT: left; FONT-WEIGHT: bold; PADDING-BOTTOM: 0px; PADDING-TOP: 3px; PADDING-LEFT: 5px; PADDING-RIGHT: 4px
+}
+.charList LI.selected {
+	BACKGROUND: #345f8a; COLOR: #ffffff
+}
+.charList LI.off {
+	CURSOR: default; COLOR: #cccccc
+}
+.expertListBig {
+	LIST-STYLE-TYPE: none; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px 0px 20px; PADDING-RIGHT: 0px; WIDTH: 100%
+}
+.expertListBig LI {
+	FONT-SIZE: 8pt; HEIGHT: 19px; BORDER-BOTTOM: #9a9a9a 1px solid; PADDING-BOTTOM: 1px; PADDING-TOP: 2px; PADDING-LEFT: 0px; CLEAR: left; MARGIN: 0px; PADDING-RIGHT: 0px
+}
+.expertListBig LI IMG {
+	POSITION: relative; MARGIN: 0px 3px 0px 0px; TOP: 2px
+}
+.withOrga LI {
+	HEIGHT: auto
+}
+.expertListBig LI DIV.name {
+	FLOAT: left; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 2px; MARGIN: 0px; PADDING-RIGHT: 0px; WIDTH: 362px
+}
+.expertListBig LI DIV.nameGrants {
+	FLOAT: left; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 2px; MARGIN: 0px; PADDING-RIGHT: 0px; WIDTH: 314px
+}
+.expertListBig LI DIV.nameHindex {
+	FLOAT: left; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 2px; MARGIN: 0px; PADDING-RIGHT: 0px; WIDTH: 314px
+}
+.expertListBig LI DIV.namePE {
+	FLOAT: left; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 2px; MARGIN: 0px; PADDING-RIGHT: 0px; WIDTH: 185px
+}
+.expertListBig LI DIV.nameGrantsHindex {
+	FLOAT: left; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 2px; MARGIN: 0px; PADDING-RIGHT: 0px; WIDTH: 266px
+}
+.expertListBig LI DIV.nameGrantsPE {
+	FLOAT: left; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 2px; MARGIN: 0px; PADDING-RIGHT: 0px; WIDTH: 185px
+}
+.expertListBig LI DIV.nameHindexPE {
+	FLOAT: left; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 2px; MARGIN: 0px; PADDING-RIGHT: 0px; WIDTH: 135px
+}
+.expertListBig LI DIV.nameGrantsHindexPE {
+	FLOAT: left; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 2px; MARGIN: 0px; PADDING-RIGHT: 0px; WIDTH: 120px
+}
+.special LI DIV.name {
+	WIDTH: 790px
+}
+.expertListBig LI DIV P {
+	COLOR: #686868; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px 0px 0px 17px; PADDING-RIGHT: 0px
+}
+.fulltextSearch LI DIV P {
+	MARGIN: 0px
+}
+.expertListBig LI DIV.pubs {
+	FLOAT: left; COLOR: #686868; PADDING-BOTTOM: 0px; TEXT-ALIGN: right; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; PADDING-RIGHT: 5px; WIDTH: 75px
+}
+.expertListBig LI DIV.pubs P {
+	POSITION: relative; MARGIN: 0px 0px 0px 8px; DISPLAY: inline; TOP: 5px
+}
+.expertListBig LI DIV.pubs IMG {
+	POSITION: relative; MARGIN: 0px 1px 0px 0px; TOP: -5px
+}
+.expertListBig LI DIV.grants {
+	FLOAT: left; COLOR: #686868; PADDING-BOTTOM: 0px; TEXT-ALIGN: right; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; PADDING-RIGHT: 2px; WIDTH: 48px
+}
+.expertListBig LI DIV.ResearchInterest {
+	HEIGHT: 18px; FLOAT: left; COLOR: #666666; PADDING-BOTTOM: 0px; TEXT-ALIGN: center; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; PADDING-RIGHT: 0px; WIDTH: 60px
+}
+.expertListBig LI DIV.AdditionalInformation {
+	HEIGHT: 18px; FLOAT: left; COLOR: #666666; PADDING-BOTTOM: 0px; TEXT-ALIGN: center; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; PADDING-RIGHT: 0px; WIDTH: 60px
+}
+.expertListBig LI DIV.ResearchInterest {
+	PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 10px; PADDING-RIGHT: 0px
+}
+.expertListBig LI DIV.hindex {
+	FLOAT: left; COLOR: #686868; PADDING-BOTTOM: 0px; TEXT-ALIGN: right; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; PADDING-RIGHT: 2px; WIDTH: 48px
+}
+.expertListBig LI.header {
+	HEIGHT: 15px; BORDER-BOTTOM: #b2b2b2 1px solid; PADDING-BOTTOM: 0px; PADDING-TOP: 3px; PADDING-LEFT: 0px; MARGIN: 0px; PADDING-RIGHT: 0px
+}
+.expertListBig LI.headerExpertCv {
+	HEIGHT: 25px
+}
+.expertListBig LI.header DIV {
+	FONT-SIZE: 7.5pt; COLOR: #686868
+}
+.expertListBig LI.headerExpertCv DIV {
+	FONT-SIZE: 7.5pt; COLOR: #686868
+}
+.expertListBig LI .publicList {
+	LIST-STYLE-TYPE: none; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; PADDING-RIGHT: 0px
+}
+.expertListBig LI .publicList LI {
+	BORDER-TOP-STYLE: none; FONT-SIZE: 8pt; BORDER-LEFT-STYLE: none; BORDER-BOTTOM-STYLE: none; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; BORDER-RIGHT-STYLE: none; PADDING-LEFT: 0px; MARGIN: 0px 0px 15px; LINE-HEIGHT: 150%; PADDING-RIGHT: 0px
+}
+.expertListBig LI .publicList LI A {
+	
+}
+.expertListBig LI .publicList LI SPAN {
+	FONT-WEIGHT: normal; COLOR: #686868
+}
+.expertListBig LI .publicList LI A IMG {
+	POSITION: relative; TOP: 2px
+}
+.smallList LI DIV {
+	WIDTH: 170px
+}
+.bigList LI DIV {
+	WIDTH: 640px
+}
+.entityOrgaList {
+	LIST-STYLE-TYPE: none; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px 0px 20px; PADDING-RIGHT: 0px
+}
+.conceptList {
+	LIST-STYLE-TYPE: none; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px 0px 20px; PADDING-RIGHT: 0px
+}
+.entityOrgaList LI {
+	CURSOR: default; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; MIN-HEIGHT: 15px; PADDING-RIGHT: 0px
+}
+.conceptList LI {
+	CURSOR: default; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; MIN-HEIGHT: 15px; PADDING-RIGHT: 0px
+}
+* HTML .entityOrgaList LI {
+	HEIGHT: 15px
+}
+* HTML .conceptList LI {
+	HEIGHT: 15px
+}
+.entityOrgaList LI IMG {
+	DISPLAY: inline
+}
+.conceptList LI IMG {
+	DISPLAY: inline
+}
+.conceptList LI IMG.chart {
+	HEIGHT: 8px; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 10px 0px 0px 2px; DISPLAY: inline; PADDING-RIGHT: 0px
+}
+.conceptList LI IMG.chart2 {
+	HEIGHT: 5px; POSITION: relative; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; LEFT: 17px; MARGIN: 0px; DISPLAY: block; TOP: -3px; PADDING-RIGHT: 0px
+}
+.conceptList LI P {
+	FONT-SIZE: 8pt; POSITION: absolute; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 2px 0px 0px 6px; DISPLAY: inline; PADDING-RIGHT: 0px; WIDTH: 179px
+}
+.entityOrgaList A SPAN {
+	FONT-SIZE: 10pt; FONT-WEIGHT: bold; COLOR: #7bb949; PADDING-BOTTOM: 0px; PADDING-LEFT: 10px; MARGIN: 0px
+}
+.entityOrgaList LI P {
+	FONT-SIZE: 8pt; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 2px 0px 0px 6px; DISPLAY: inline; PADDING-RIGHT: 0px; WIDTH: 179px
+}
+.entityOrgaList LI .entityHeader {
+	BORDER-BOTTOM: #7f7f7f 1px solid
+}
+.entityMetaPanel {
+	PADDING-TOP: 8px !important; MARGIN: 0px 0px 15px
+}
+.publicList {
+	LIST-STYLE-TYPE: none; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; PADDING-RIGHT: 0px
+}
+.publicList LI {
+	BORDER-TOP-STYLE: none; FONT-SIZE: 8pt; BORDER-LEFT-STYLE: none; BORDER-BOTTOM-STYLE: none; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; BORDER-RIGHT-STYLE: none; PADDING-LEFT: 0px; MARGIN: 0px 0px 15px; LINE-HEIGHT: 150%; PADDING-RIGHT: 0px
+}
+.publicList LI A {
+	
+}
+.publicList LI SPAN {
+	FONT-WEIGHT: normal; COLOR: #686868
+}
+.publicList LI A IMG {
+	POSITION: relative; TOP: 2px
+}
+DIV.pubHide {
+	DISPLAY: none; VISIBILITY: hidden
+}
+DIV.pubShow {
+	PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; CLEAR: both; MARGIN: 10px 0px 0px 18px; DISPLAY: block; LINE-HEIGHT: 130%; PADDING-RIGHT: 0px; VISIBILITY: visible
+}
+DIV.pubShow .info {
+	FONT-SIZE: 8pt; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px 0px 10px; PADDING-RIGHT: 0px
+}
+DIV.absHide {
+	BORDER-TOP: #9a9a9a 1px solid; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 2px 0px 0px; DISPLAY: block; PADDING-RIGHT: 0px; VISIBILITY: visible
+}
+DIV.fhHide {
+	PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 2px 0px 0px; DISPLAY: block; PADDING-RIGHT: 0px; VISIBILITY: visible
+}
+DIV.absShow {
+	BORDER-TOP: #9a9a9a 1px solid; BORDER-BOTTOM: #9a9a9a 1px solid; COLOR: #686868; PADDING-BOTTOM: 5px; PADDING-TOP: 5px; PADDING-LEFT: 0px; MARGIN: 2px 0px 0px; DISPLAY: block; LINE-HEIGHT: 150%; PADDING-RIGHT: 0px; VISIBILITY: visible
+}
+DIV.fhShow {
+	BORDER-TOP: #9a9a9a 1px solid; BORDER-BOTTOM: #9a9a9a 1px solid; COLOR: #686868; PADDING-BOTTOM: 5px; PADDING-TOP: 5px; PADDING-LEFT: 0px; MARGIN: 0px 0px 20px; DISPLAY: block; LINE-HEIGHT: 150%; PADDING-RIGHT: 0px; VISIBILITY: visible
+}
+DIV.absShow A {
+	BACKGROUND: url(./img/linkout.png) no-repeat 1px 4px; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 15px; PADDING-RIGHT: 0px
+}
+A.linkout IMG {
+	VERTICAL-ALIGN: 2px; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; PADDING-RIGHT: 3px
+}
+.fhShow DIV.ge {
+	FLOAT: left; COLOR: #000000; PADDING-BOTTOM: 15px; PADDING-TOP: 0px; PADDING-LEFT: 0px; PADDING-RIGHT: 0px; WIDTH: 530px
+}
+.fhShow DIV.gn {
+	FLOAT: left; COLOR: #000000; WIDTH: 150px
+}
+.fhShow DIV.gt {
+	FLOAT: left; COLOR: #000000; WIDTH: 380px
+}
+.fhShow DIV.ga {
+	FLOAT: left; COLOR: #000000; PADDING-BOTTOM: 0px; TEXT-ALIGN: right; PADDING-TOP: 0px; PADDING-LEFT: 0px; PADDING-RIGHT: 5px; WIDTH: 150px
+}
+.fhShow DIV.gs {
+	BORDER-TOP: #9a9a9a 1px solid; FLOAT: left; COLOR: #000000; PADDING-BOTTOM: 0px; TEXT-ALIGN: right; PADDING-TOP: 0px; PADDING-LEFT: 0px; PADDING-RIGHT: 5px; WIDTH: 150px
+}
+.fhShow P.grantPeople {
+	PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; PADDING-RIGHT: 0px
+}
+#startPageInfo {
+	FLOAT: right; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 7px 0px 160px; PADDING-RIGHT: 0px; WIDTH: 210px
+}
+#startPageInfo H2 {
+	MARGIN-BOTTOM: 0px
+}
+#startPageInfo IMG {
+	FLOAT: left; MARGIN: 10px 20px 0px
+}
+#startPageInfo P {
+	FONT-SIZE: 11px; MARGIN: 5px 0px 0px; LINE-HEIGHT: 150%
+}
+#startInfo {
+	FONT-SIZE: 10pt; FONT-WEIGHT: bold; COLOR: #686868; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px 0px 50px; LINE-HEIGHT: 180%; PADDING-RIGHT: 20px; WIDTH: 900px
+}
+.listContainerFirst {
+	FLOAT: left; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 30px 0px 0px; PADDING-RIGHT: 7px; WIDTH: 216px
+}
+.listContainer {
+	FLOAT: left; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 7px; MARGIN: 30px 0px 0px; PADDING-RIGHT: 0px; WIDTH: 216px
+}
+.orgaUnitList {
+	LIST-STYLE-TYPE: none; FLOAT: left; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px 0px 20px; PADDING-RIGHT: 0px; WIDTH: 100%
+}
+.orgaUnitList LI {
+	FONT-WEIGHT: normal; PADDING-BOTTOM: 0px; PADDING-TOP: 3px; PADDING-LEFT: 0px; MARGIN: 0px; PADDING-RIGHT: 5px
+}
+.orgaUnitList LI.firstSign {
+	BORDER-TOP: #9a9a9a 1px solid
+}
+.orgaUnitList LI TABLE {
+	BORDER-COLLAPSE: collapse; WIDTH: 100%
+}
+.orgaUnitList LI TABLE TD {
+	FONT-SIZE: 8pt; VERTICAL-ALIGN: top; PADDING-BOTTOM: 2px; PADDING-TOP: 1px; PADDING-LEFT: 2px; PADDING-RIGHT: 0px
+}
+.orgaUnitList LI TABLE TD.sign {
+	COLOR: #686868; WIDTH: 15px
+}
+.previewPanel {
+	PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px 0px 30px; PADDING-RIGHT: 0px; WIDTH: 210px
+}
+.previewPanelFloat {
+	FLOAT: left; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px 0px 30px 27px; PADDING-RIGHT: 0px; WIDTH: 210px
+}
+.previewPanelFloatR {
+	FLOAT: right; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px 0px 30px 27px; PADDING-RIGHT: 0px; WIDTH: 210px
+}
+.previewPanelFloatFirst {
+	FLOAT: left; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px 1px 30px 0px; PADDING-RIGHT: 0px; WIDTH: 210px
+}
+* HTML .previewPanelFloatFirst {
+	MARGIN: 0px 0px 30px
+}
+.previewPanelFloatRFirst {
+	FLOAT: right; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px 1px 30px 0px; PADDING-RIGHT: 0px; WIDTH: 210px
+}
+* HTML .previewPanelFloatRFirst {
+	MARGIN: 0px 0px 30px
+}
+#recentGrantsPreview P.info {
+	FONT-SIZE: 8pt; COLOR: #686868; PADDING-BOTTOM: 0px; FONT-STYLE: italic; PADDING-TOP: 10px; PADDING-LEFT: 0px; MARGIN: 0px; PADDING-RIGHT: 10px
+}
+#recentJournalsPreview P.info {
+	FONT-SIZE: 8pt; COLOR: #686868; PADDING-BOTTOM: 0px; FONT-STYLE: italic; PADDING-TOP: 10px; PADDING-LEFT: 0px; MARGIN: 0px; PADDING-RIGHT: 10px
+}
+#recentPubsPreview {
+	
+}
+#recentPubsPreview P.info {
+	FONT-SIZE: 8pt; COLOR: #686868; PADDING-BOTTOM: 0px; FONT-STYLE: italic; PADDING-TOP: 10px; PADDING-LEFT: 0px; MARGIN: 0px; PADDING-RIGHT: 10px
+}
+#pubList {
+	PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 10px 0px 0px; PADDING-RIGHT: 0px
+}
+#grantList {
+	PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 10px 0px 0px; PADDING-RIGHT: 0px
+}
+#pubList LI {
+	LIST-STYLE-TYPE: none; FONT-SIZE: 8pt; PADDING-BOTTOM: 15px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; LINE-HEIGHT: 150%; PADDING-RIGHT: 0px
+}
+#grantList LI {
+	LIST-STYLE-TYPE: none; FONT-SIZE: 8pt; PADDING-BOTTOM: 15px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; LINE-HEIGHT: 150%; PADDING-RIGHT: 0px
+}
+* HTML #pubList LI {
+	PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; PADDING-RIGHT: 0px
+}
+* HTML #grantList LI {
+	PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; PADDING-RIGHT: 0px
+}
+#pubList LI DIV {
+	FLOAT: left; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; PADDING-RIGHT: 0px
+}
+#grantList LI DIV {
+	FLOAT: left; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; PADDING-RIGHT: 0px
+}
+#pubList DIV.absHide {
+	BORDER-TOP: #9a9a9a 1px solid; HEIGHT: 1px; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 2px 0px 0px; DISPLAY: block; PADDING-RIGHT: 0px; VISIBILITY: visible
+}
+#grantList DIV.absHide {
+	BORDER-TOP: #9a9a9a 1px solid; HEIGHT: 1px; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 2px 0px 0px; DISPLAY: block; PADDING-RIGHT: 0px; VISIBILITY: visible
+}
+#pubList DIV.fhHide {
+	HEIGHT: 1px; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 2px 0px 0px; DISPLAY: block; PADDING-RIGHT: 0px; VISIBILITY: visible
+}
+#grantList DIV.fhHide {
+	HEIGHT: 1px; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 2px 0px 0px; DISPLAY: block; PADDING-RIGHT: 0px; VISIBILITY: visible
+}
+#pubList DIV.absShow {
+	BORDER-TOP: #9a9a9a 1px solid; BORDER-BOTTOM: #9a9a9a 1px solid; COLOR: #686868; PADDING-BOTTOM: 5px; PADDING-TOP: 5px; PADDING-LEFT: 0px; MARGIN: 2px 0px 0px; DISPLAY: block; LINE-HEIGHT: 150%; PADDING-RIGHT: 0px; VISIBILITY: visible
+}
+#grantList DIV.absShow {
+	BORDER-TOP: #9a9a9a 1px solid; BORDER-BOTTOM: #9a9a9a 1px solid; COLOR: #686868; PADDING-BOTTOM: 5px; PADDING-TOP: 5px; PADDING-LEFT: 0px; MARGIN: 2px 0px 0px; DISPLAY: block; LINE-HEIGHT: 150%; PADDING-RIGHT: 0px; VISIBILITY: visible
+}
+#pubList DIV.fhShow {
+	BORDER-BOTTOM: #9a9a9a 1px solid; COLOR: #686868; PADDING-BOTTOM: 5px; PADDING-TOP: 5px; PADDING-LEFT: 0px; MARGIN: 2px 0px 0px; DISPLAY: block; LINE-HEIGHT: 150%; PADDING-RIGHT: 0px; VISIBILITY: visible
+}
+#grantList DIV.fhShow {
+	BORDER-BOTTOM: #9a9a9a 1px solid; COLOR: #686868; PADDING-BOTTOM: 5px; PADDING-TOP: 5px; PADDING-LEFT: 0px; MARGIN: 2px 0px 0px; DISPLAY: block; LINE-HEIGHT: 150%; PADDING-RIGHT: 0px; VISIBILITY: visible
+}
+#pubList LI DIV P A {
+	FONT-WEIGHT: bold
+}
+#grantList LI DIV P A {
+	FONT-WEIGHT: bold
+}
+#pubList LI DIV DIV A {
+	FONT-WEIGHT: normal
+}
+#grantList LI DIV DIV A {
+	FONT-WEIGHT: normal
+}
+#pubList LI A IMG {
+	POSITION: relative; TOP: 2px
+}
+#grantList LI A IMG {
+	POSITION: relative; TOP: 2px
+}
+#pubList LI DIV.list {
+	FLOAT: left; FONT-WEIGHT: bold; WIDTH: 40px
+}
+#grantList LI DIV.list {
+	FLOAT: left; FONT-WEIGHT: bold; WIDTH: 40px
+}
+#pubList LI DIV.timesCited {
+	FLOAT: left; TEXT-ALIGN: right; WIDTH: 40px
+}
+#grantList LI DIV.timesCited {
+	FLOAT: left; TEXT-ALIGN: right; WIDTH: 40px
+}
+#pubList LI DIV INPUT {
+	POSITION: relative; LEFT: -3px
+}
+#grantList LI DIV INPUT {
+	POSITION: relative; LEFT: -3px
+}
+#pubList LI DIV SPAN {
+	FONT-WEIGHT: normal; COLOR: #686868
+}
+#grantList LI DIV SPAN {
+	FONT-WEIGHT: normal; COLOR: #686868
+}
+#pubList LI P {
+	PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; PADDING-RIGHT: 0px
+}
+#grantList LI P {
+	PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; PADDING-RIGHT: 0px
+}
+.pubmedDetail {
+	FONT-SIZE: 8pt
+}
+.pubmedDetail P {
+	PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; LINE-HEIGHT: 150%; PADDING-RIGHT: 0px
+}
+.pubmedDetail H2 {
+	FONT-SIZE: 13pt; BORDER-BOTTOM: #9a9a9a 1px solid; FONT-WEIGHT: bold; COLOR: #7bb949; PADDING-BOTTOM: 8px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 20px 0px 10px; PADDING-RIGHT: 0px
+}
+.pubmedDetail H4 {
+	FONT-SIZE: 13pt; FONT-WEIGHT: bold; COLOR: #345f8a; PADDING-BOTTOM: 8px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; PADDING-RIGHT: 0px
+}
+P#AuthorDisplay {
+	FONT-SIZE: 8pt; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; PADDING-RIGHT: 0px
+}
+P#EditorDisplay {
+	FONT-SIZE: 8pt; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; PADDING-RIGHT: 0px
+}
+P#pubMetas {
+	FONT-SIZE: 8pt; FONT-WEIGHT: normal; COLOR: #686868; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px 0px 30px; PADDING-RIGHT: 0px
+}
+P#abstract {
+	MARGIN: 15px 0px 0px
+}
+P#authors {
+	FONT-WEIGHT: bold; MARGIN: 0px 0px 30px
+}
+.pubmedDetail DIV#linkout {
+	FLOAT: right; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; PADDING-RIGHT: 0px
+}
+P#pubCita {
+	FONT-SIZE: 11px; FONT-WEIGHT: normal; COLOR: #9b9b9b; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px 0px 10px; PADDING-RIGHT: 0px
+}
+P#pubDetail {
+	FONT-SIZE: 11px; FONT-WEIGHT: normal; COLOR: #9b9b9b
+}
+#researchProfilePreview {
+	
+}
+#researchProfilePreview H2 P {
+	FONT-SIZE: 7.5pt; FONT-WEIGHT: normal; COLOR: #686868
+}
+.preview {
+	LIST-STYLE-TYPE: none; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 8px 0px 0px; PADDING-RIGHT: 0px
+}
+.preview LI P IMG {
+	POSITION: relative; MARGIN: 0px 3px 0px 0px; TOP: 0px
+}
+.orgaResProf {
+	FLOAT: left; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 10px 0px 40px 40px; PADDING-RIGHT: 0px; WIDTH: 200px
+}
+.orgaResProfFirst {
+	MARGIN: 10px 0px 40px
+}
+.expertNetworkList {
+	LIST-STYLE-TYPE: none; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 10px 0px 20px; PADDING-RIGHT: 0px; WIDTH: 100%
+}
+.expertNetworkList LI {
+	FONT-SIZE: 8pt; BORDER-BOTTOM: #9a9a9a 1px solid; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; CLEAR: left; MARGIN: 0px; PADDING-RIGHT: 0px
+}
+.expertNetworkList LI SPAN {
+	COLOR: #686868
+}
+.expertNetworkList LI DIV.name {
+	FLOAT: left; PADDING-BOTTOM: 0px; PADDING-TOP: 5px; PADDING-LEFT: 2px; MARGIN: 0px; PADDING-RIGHT: 3px; WIDTH: 145px
+}
+.expertNetworkListInt LI DIV.name {
+	HEIGHT: 30px; FLOAT: left; PADDING-BOTTOM: 0px; PADDING-TOP: 5px; PADDING-LEFT: 2px; MARGIN: 0px; PADDING-RIGHT: 3px; WIDTH: 145px
+}
+.expertNetworkList LI DIV.name IMG {
+	POSITION: relative; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; TOP: 2px; PADDING-RIGHT: 3px
+}
+.expertNetworkList LI DIV.depName {
+	HEIGHT: 20px; FLOAT: left; PADDING-BOTTOM: 0px; PADDING-TOP: 5px; PADDING-LEFT: 2px; MARGIN: 0px; PADDING-RIGHT: 0px; WIDTH: 168px
+}
+.expertNetworkList LI DIV.projName {
+	HEIGHT: 20px; FLOAT: left; PADDING-BOTTOM: 0px; PADDING-TOP: 5px; PADDING-LEFT: 2px; MARGIN: 0px; PADDING-RIGHT: 0px; WIDTH: 168px
+}
+.expertNetworkList LI DIV.projName IMG {
+	POSITION: relative; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; TOP: 2px; PADDING-RIGHT: 3px
+}
+.expertNetworkList LI DIV.name IMG.flag {
+	POSITION: relative; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; TOP: 0px; PADDING-RIGHT: 3px
+}
+.expertNetworkList LI DIV P {
+	COLOR: #686868; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px 0px 0px 17px; PADDING-RIGHT: 0px
+}
+.expertNetworkList LI DIV.pubs {
+	HEIGHT: 19px; FLOAT: left; COLOR: #686868; PADDING-BOTTOM: 0px; TEXT-ALIGN: right; PADDING-TOP: 6px; PADDING-LEFT: 0px; MARGIN: 0px; PADDING-RIGHT: 0px; WIDTH: 60px
+}
+.expertNetworkList LI DIV.coDocCount {
+	HEIGHT: 20px; FLOAT: left; COLOR: #686868; PADDING-BOTTOM: 0px; TEXT-ALIGN: right; PADDING-TOP: 5px; PADDING-LEFT: 0px; MARGIN: 0px; PADDING-RIGHT: 0px; WIDTH: 40px
+}
+.expertNetworkList LI DIV.doccount {
+	HEIGHT: 20px; FLOAT: left; COLOR: #686868; PADDING-BOTTOM: 0px; TEXT-ALIGN: right; PADDING-TOP: 5px; PADDING-LEFT: 0px; MARGIN: 0px; PADDING-RIGHT: 0px; WIDTH: 60px
+}
+.expertNetworkList LI DIV.projCount {
+	HEIGHT: 20px; FLOAT: left; COLOR: #686868; PADDING-BOTTOM: 0px; TEXT-ALIGN: right; PADDING-TOP: 5px; PADDING-LEFT: 0px; MARGIN: 0px; PADDING-RIGHT: 0px; WIDTH: 40px
+}
+.expertNetworkList LI DIV.pubs P {
+	MARGIN: 0px 0px 0px 8px; DISPLAY: inline
+}
+.expertNetworkList LI DIV.pubs IMG {
+	MARGIN: 0px 1px 0px 0px
+}
+.expertNetworkList LI.header {
+	BORDER-BOTTOM: #b2b2b2 1px solid; PADDING-BOTTOM: 2px; PADDING-TOP: 0px; PADDING-LEFT: 0px; PADDING-RIGHT: 0px
+}
+.expertNetworkList LI.header DIV.name {
+	FONT-SIZE: 9pt; HEIGHT: auto; FONT-WEIGHT: bold; COLOR: #000000; PADDING-BOTTOM: 3px; PADDING-TOP: 5px; PADDING-LEFT: 0px; PADDING-RIGHT: 0px
+}
+.expertNetworkList LI.header DIV.depName {
+	FONT-SIZE: 9pt; HEIGHT: auto; FONT-WEIGHT: bold; COLOR: #000000; PADDING-BOTTOM: 3px; PADDING-TOP: 5px; PADDING-LEFT: 0px; PADDING-RIGHT: 0px
+}
+.expertNetworkList LI.header DIV.pubs {
+	FONT-SIZE: 7.5pt; HEIGHT: auto; COLOR: #686868
+}
+.expertNetworkList LI.header DIV.coDocCount {
+	FONT-SIZE: 7.5pt; HEIGHT: auto; COLOR: #686868
+}
+.expertNetworkList LI.header DIV.projCount {
+	FONT-SIZE: 7.5pt; HEIGHT: auto; COLOR: #686868
+}
+.expertNetworkList LI.header DIV.doccount {
+	FONT-SIZE: 7.5pt; HEIGHT: auto; COLOR: #686868
+}
+.expertNetworkList LI.header DIV.depName {
+	WIDTH: 108px
+}
+.expertNetworkList LI.header DIV.coDocCount {
+	WIDTH: 100px
+}
+.expertNetworkList LI.header DIV.projCount {
+	WIDTH: 40px
+}
+.expertNetworkList LI DIV.bigList {
+	PADDING-BOTTOM: 3px; PADDING-TOP: 5px; PADDING-LEFT: 2px; PADDING-RIGHT: 0px; WIDTH: 620px
+}
+.expertNetworkList LI.header DIV.bigList {
+	PADDING-BOTTOM: 3px; PADDING-TOP: 5px; PADDING-LEFT: 2px; PADDING-RIGHT: 0px; WIDTH: 620px
+}
+.timesCitedUpdate LI DIV {
+	WIDTH: 600px
+}
+.expertNetworkList LI DIV.depBigList {
+	WIDTH: 640px
+}
+.expertNetworkList LI.header DIV.depBigList {
+	WIDTH: 580px
+}
+.expertNetworkList LI .publicList {
+	LIST-STYLE-TYPE: none; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; PADDING-RIGHT: 0px
+}
+.expertNetworkList LI .publicList LI {
+	BORDER-TOP-STYLE: none; FONT-SIZE: 8pt; BORDER-LEFT-STYLE: none; BORDER-BOTTOM-STYLE: none; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; BORDER-RIGHT-STYLE: none; PADDING-LEFT: 0px; MARGIN: 0px 0px 15px; LINE-HEIGHT: 150%; PADDING-RIGHT: 0px
+}
+.expertNetworkList LI .publicList LI A {
+	
+}
+.expertNetworkList LI .publicList LI SPAN {
+	FONT-WEIGHT: normal; COLOR: #686868
+}
+.expertNetworkList LI .publicList LI A IMG {
+	POSITION: relative; TOP: 2px
+}
+#expertSubNavig {
+	FONT-SIZE: 7.5pt; BORDER-BOTTOM: #9a9a9a 1px solid; COLOR: #686868; PADDING-BOTTOM: 3px; PADDING-TOP: 3px; PADDING-LEFT: 1px; PADDING-RIGHT: 0px
+}
+#expertSubNavig UL {
+	LIST-STYLE-TYPE: none; BORDER-TOP: #9a9a9a 1px solid; PADDING-BOTTOM: 0px; PADDING-TOP: 3px; PADDING-LEFT: 0px; MARGIN: 4px 0px 0px; PADDING-RIGHT: 0px
+}
+#expertSubNavig UL LI {
+	CURSOR: pointer; FONT-SIZE: 8pt; HEIGHT: 15px; BACKGROUND: none transparent scroll repeat 0% 0%; FLOAT: left; PADDING-BOTTOM: 0px; TEXT-ALIGN: center; PADDING-TOP: 2px; PADDING-LEFT: 0px; MARGIN: 0px; PADDING-RIGHT: 0px; WIDTH: 130px
+}
+#expertSubNavig UL LI.sell {
+	BACKGROUND: url(./img/bgSubNavig.png)
+}
+#expertSubNavig UL LI.sell A {
+	COLOR: #ffffff
+}
+#expertSubNavig UL LI.offline {
+	CURSOR: default
+}
+#standardSubNavig {
+	FONT-SIZE: 8pt; BORDER-BOTTOM: #9a9a9a 1px solid; COLOR: #686868; PADDING-BOTTOM: 3px; PADDING-TOP: 3px; PADDING-LEFT: 1px; PADDING-RIGHT: 0px
+}
+#standardSubNavig UL {
+	LIST-STYLE-TYPE: none; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; PADDING-RIGHT: 0px
+}
+#standardSubNavig UL LI {
+	CURSOR: pointer; FONT-SIZE: 8pt; HEIGHT: 15px; BACKGROUND: none transparent scroll repeat 0% 0%; FLOAT: left; PADDING-BOTTOM: 0px; TEXT-ALIGN: center; PADDING-TOP: 2px; PADDING-LEFT: 0px; MARGIN: 2px 10px 0px 0px; PADDING-RIGHT: 0px; WIDTH: 130px
+}
+#standardSubNavig UL LI.sell {
+	BACKGROUND: url(./img/bgSubNavig.png)
+}
+#standardSubNavig UL LI.sell A {
+	COLOR: #ffffff
+}
+#standardSubNavig UL LI.offline {
+	CURSOR: default
+}
+#standardSubNavig SELECT {
+	FONT-SIZE: 8pt; PADDING-BOTTOM: 3px; PADDING-TOP: 3px; PADDING-LEFT: 1px; PADDING-RIGHT: 0px
+}
+#standardSubNavig UL.paging {
+	LIST-STYLE-TYPE: none; BORDER-TOP: #9a9a9a 1px solid; POSITION: relative; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; TOP: 3px; PADDING-RIGHT: 0px
+}
+#standardSubNavig UL.paging LI {
+	CURSOR: pointer; FONT-SIZE: 9pt; HEIGHT: 18px; BACKGROUND: none transparent scroll repeat 0% 0%; FLOAT: left; FONT-WEIGHT: bold; PADDING-BOTTOM: 0px; PADDING-TOP: 3px; PADDING-LEFT: 5px; MARGIN: 0px; PADDING-RIGHT: 5px; WIDTH: auto
+}
+#standardSubNavig UL.paging LI.sell {
+	BACKGROUND: #345f8a; COLOR: #ffffff
+}
+#scss__conceptSearch {
+	BORDER-COLLAPSE: collapse; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; PADDING-RIGHT: 0px; WIDTH: 100%
+}
+#scss__conceptSearch TD {
+	VERTICAL-ALIGN: top; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; PADDING-RIGHT: 0px
+}
+#scss__conceptSearch TD.first {
+	PADDING-BOTTOM: 30px; PADDING-TOP: 0px; PADDING-LEFT: 0px; PADDING-RIGHT: 0px; WIDTH: 450px
+}
+#scss__conceptSearch TD.second {
+	PADDING-BOTTOM: 30px; PADDING-TOP: 0px; PADDING-LEFT: 30px; PADDING-RIGHT: 0px; WIDTH: 430px
+}
+.conceptListSearchConcept {
+	LIST-STYLE-TYPE: none; BORDER-TOP: #9a9a9a 1px solid; PADDING-BOTTOM: 20px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; PADDING-RIGHT: 0px; WIDTH: 100%
+}
+.conceptListSearchConcept LI {
+	CURSOR: pointer; FONT-SIZE: 8pt; BORDER-BOTTOM: #9a9a9a 1px solid; COLOR: #000000; PADDING-BOTTOM: 3px; PADDING-TOP: 5px; PADDING-LEFT: 10px; LINE-HEIGHT: 150%; PADDING-RIGHT: 10px
+}
+.conceptListSearchConcept P {
+	FONT-SIZE: 8pt; COLOR: #686868; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px 0px 5px; LINE-HEIGHT: 150%; PADDING-RIGHT: 0px
+}
+.fpList {
+	LIST-STYLE-TYPE: none; PADDING-BOTTOM: 25px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; PADDING-RIGHT: 0px
+}
+* HTML .fpList {
+	LIST-STYLE-TYPE: none; PADDING-BOTTOM: 25px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; PADDING-RIGHT: 0px
+}
+.fpList LI {
+	CURSOR: default; FONT-SIZE: 8pt; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; LINE-HEIGHT: 180%; PADDING-RIGHT: 0px; WIDTH: 430px
+}
+.fpList LI H1 {
+	FONT-SIZE: 8pt; FONT-WEIGHT: normal; COLOR: #000000; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; PADDING-RIGHT: 5px
+}
+.fpList LI IMG {
+	POSITION: relative; LEFT: 2px; TOP: 3px
+}
+.fpList LI INPUT {
+	BORDER-TOP-STYLE: none; CURSOR: pointer; FONT-SIZE: 7pt; BORDER-LEFT-STYLE: none; HEIGHT: 18px; BACKGROUND: url(./img/buttonAddRemove.png) no-repeat 0px 2px; BORDER-BOTTOM-STYLE: none; FLOAT: right; COLOR: #ffffff; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; BORDER-RIGHT-STYLE: none; PADDING-LEFT: 0px; MARGIN: 0px; PADDING-RIGHT: 0px; WIDTH: 49px
+}
+#scss__sources {
+	FONT-SIZE: 8pt; MARGIN: 5px 0px 20px
+}
+#scss__sources INPUT {
+	POSITION: relative; TOP: 2px
+}
+.semList {
+	LIST-STYLE-TYPE: none; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 10px 0px 0px; PADDING-RIGHT: 0px
+}
+.semList LI {
+	PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; PADDING-RIGHT: 0px
+}
+.semList LI H2 {
+	FONT-SIZE: 8pt; FONT-WEIGHT: bold; COLOR: #000000; PADDING-BOTTOM: 5px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; PADDING-RIGHT: 0px
+}
+.conceptListBig LI P {
+	CURSOR: pointer; FONT-SIZE: 8pt; POSITION: absolute; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 2px 0px 0px 6px; DISPLAY: inline; PADDING-RIGHT: 0px; WIDTH: 380px
+}
+.conceptListBig LI INPUT {
+	BORDER-TOP-STYLE: none; CURSOR: pointer; FONT-SIZE: 7pt; BORDER-LEFT-STYLE: none; HEIGHT: 16px; BACKGROUND: url(./img/buttonAddRemove.png) no-repeat 0px 0px; BORDER-BOTTOM-STYLE: none; POSITION: relative; FLOAT: right; COLOR: #ffffff; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; BORDER-RIGHT-STYLE: none; PADDING-LEFT: 0px; MARGIN: 0px; TOP: 5px; PADDING-RIGHT: 0px; WIDTH: 49px
+}
+.expertListSearch {
+	LIST-STYLE-TYPE: none; FLOAT: left; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px 0px 20px; PADDING-RIGHT: 0px; WIDTH: 450px
+}
+.expertListSearch LI DIV P {
+	MARGIN: 0px
+}
+.expertListSearch LI DIV SPAN {
+	COLOR: #686868; MARGIN: 0px; DISPLAY: block
+}
+.expertListSearchFirst {
+	MARGIN: 0px 23px 20px 0px
+}
+H1.fulltext {
+	MARGIN: 0px 0px 20px
+}
+#textAreaContainer {
+	FLOAT: left; WIDTH: 700px
+}
+#fulltextArea {
+	FONT-SIZE: 8pt; BORDER-TOP: #819cb7 1px solid; FONT-FAMILY: tahoma, arial, verdana, arial; BORDER-RIGHT: #819cb7 1px solid; BORDER-BOTTOM: #819cb7 1px solid; FLOAT: left; PADDING-BOTTOM: 5px; PADDING-TOP: 5px; PADDING-LEFT: 7px; BORDER-LEFT: #819cb7 1px solid; PADDING-RIGHT: 5px; WIDTH: 700px
+}
+.exampleStyle#fulltextArea {
+	COLOR: #686868; FONT-STYLE: italic
+}
+#categSelection {
+	FONT-SIZE: 8pt; POSITION: relative; FLOAT: right; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px 0px 0px 10px; TOP: -20px; PADDING-RIGHT: 0px; WIDTH: 195px
+}
+#categSelection H5 {
+	FONT-SIZE: 9pt; BORDER-BOTTOM: #9a9a9a 1px solid; FONT-WEIGHT: bold; COLOR: #7bb949; PADDING-BOTTOM: 7px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px 0px 7px; PADDING-RIGHT: 0px
+}
+#categSelection P {
+	FONT-SIZE: 8pt; COLOR: #686868; MARGIN: 0px 0px 7px
+}
+#categSelection INPUT {
+	POSITION: relative; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px 2px 7px 0px; TOP: 2px; PADDING-RIGHT: 0px
+}
+#scss__fulltextSearch {
+	BORDER-COLLAPSE: collapse; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; PADDING-RIGHT: 0px; WIDTH: 100%
+}
+#scss__fulltextSearch TD {
+	VERTICAL-ALIGN: top; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; PADDING-RIGHT: 0px
+}
+#scss__fulltextSearch TD H2 {
+	BORDER-TOP-STYLE: none; BORDER-LEFT-STYLE: none; BORDER-BOTTOM-STYLE: none; BORDER-RIGHT-STYLE: none
+}
+#scss__fulltextSearch TD H2.border {
+	BORDER-BOTTOM: #b2b2b2 1px solid
+}
+#scss__fulltextSearch TD.first {
+	PADDING-BOTTOM: 30px; PADDING-TOP: 0px; PADDING-LEFT: 0px; PADDING-RIGHT: 0px; WIDTH: 450px
+}
+#scss__fulltextSearch TD.second {
+	PADDING-BOTTOM: 30px; PADDING-TOP: 0px; PADDING-LEFT: 30px; PADDING-RIGHT: 0px; WIDTH: 430px
+}
+#fulltextSearch {
+	HEIGHT: 25px; FLOAT: left; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px 0px 50px; PADDING-RIGHT: 0px; WIDTH: 600px
+}
+#buttonFulltextSearch {
+	BORDER-TOP: #9a9a9a 1px solid; HEIGHT: 19px; FLOAT: left; PADDING-BOTTOM: 0px; TEXT-ALIGN: center; PADDING-TOP: 10px; PADDING-LEFT: 0px; MARGIN: 15px 0px 0px; PADDING-RIGHT: 0px; WIDTH: 100%
+}
+#fulltextSearch UL {
+	LIST-STYLE-TYPE: none; HEIGHT: 22px; POSITION: relative; FLOAT: left; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; LEFT: 10px; MARGIN: 0px; TOP: 0px; PADDING-RIGHT: 0px; WIDTH: 600px
+}
+#fulltextSearch UL LI {
+	CURSOR: pointer; FONT-SIZE: 7.5pt; HEIGHT: 23px; POSITION: relative; FLOAT: left; COLOR: #345f8a; PADDING-BOTTOM: 0px; TEXT-ALIGN: center; PADDING-TOP: 6px; PADDING-LEFT: 0px; TOP: -2px; PADDING-RIGHT: 0px; WIDTH: 110px
+}
+#fulltextSearch UL LI.sell {
+	CURSOR: default; BACKGROUND: url(./img/bgSearchType.png) no-repeat 0px 0px
+}
+.conceptListFulltext LI {
+	HEIGHT: 18px
+}
+.conceptListFulltext LI P {
+	FONT-SIZE: 8pt; POSITION: absolute; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 2px 0px 0px 6px; DISPLAY: inline; PADDING-RIGHT: 0px; WIDTH: 380px
+}
+.conceptListFulltext LI DIV.val {
+	FLOAT: left; WIDTH: 250px
+}
+.conceptListFulltext LI DIV.val P {
+	WIDTH: 250px
+}
+.conceptListFulltextNetwork LI DIV.val P {
+	WIDTH: 400px
+}
+.conceptListFulltext LI DIV.options {
+	FLOAT: left; WIDTH: 180px
+}
+.conceptListFulltext LI INPUT {
+	BORDER-TOP-STYLE: none; CURSOR: pointer; BORDER-LEFT-STYLE: none; BORDER-BOTTOM-STYLE: none; POSITION: relative; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; BORDER-RIGHT-STYLE: none; PADDING-LEFT: 0px; MARGIN: 0px; TOP: 2px; PADDING-RIGHT: 0px; WIDTH: 23px
+}
+.conceptListFulltext LI INPUT.remove {
+	BORDER-TOP-STYLE: none; CURSOR: pointer; FONT-SIZE: 7pt; BORDER-LEFT-STYLE: none; HEIGHT: 18px; BACKGROUND: url(./img/buttonAddRemove.png) no-repeat 0px 2px; BORDER-BOTTOM-STYLE: none; FLOAT: right; COLOR: #ffffff; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; BORDER-RIGHT-STYLE: none; PADDING-LEFT: 0px; MARGIN: 0px; PADDING-RIGHT: 0px; WIDTH: 49px
+}
+.conceptListFulltext LI DIV.options INPUT.rank {
+	BORDER-TOP-STYLE: none; CURSOR: pointer; BORDER-LEFT-STYLE: none; BORDER-BOTTOM-STYLE: none; POSITION: relative; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; BORDER-RIGHT-STYLE: none; PADDING-LEFT: 0px; MARGIN: 0px; TOP: 1px; PADDING-RIGHT: 0px
+}
+.conceptListFulltext LI.header {
+	FONT-SIZE: 7.5pt; HEIGHT: 15px; BORDER-BOTTOM: #b2b2b2 1px solid; COLOR: #686868; PADDING-BOTTOM: 0px; PADDING-TOP: 3px; PADDING-LEFT: 0px; MARGIN: 0px; PADDING-RIGHT: 0px
+}
+.conceptListFulltext LI.header DIV.name {
+	FLOAT: right; PADDING-BOTTOM: 0px; TEXT-ALIGN: right; PADDING-TOP: 0px; PADDING-LEFT: 0px; PADDING-RIGHT: 5px; WIDTH: 240px
+}
+.conceptListFulltext LI.header DIV.options {
+	FLOAT: right; WIDTH: 180px
+}
+.conceptListFulltext LI .networkInfo {
+	FONT-SIZE: 8pt
+}
+.conceptListFulltext LI DIV.networkOptions {
+	FLOAT: left; TEXT-ALIGN: right; WIDTH: 180px
+}
+.conceptListFulltext LI DIV.networkOptions INPUT {
+	POSITION: relative; TOP: 6px
+}
+#infoImg {
+	POSITION: relative; TOP: 3px
+}
+#cv .resultHeader {
+	FLOAT: right; PADDING-BOTTOM: 0px; PADDING-TOP: 4px; PADDING-LEFT: 0px; MARGIN: 0px; PADDING-RIGHT: 0px
+}
+#cv H4 {
+	COLOR: #686868; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 40px 0px 10px; PADDING-RIGHT: 0px
+}
+#cv H5 {
+	PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 20px 0px 10px; PADDING-RIGHT: 0px
+}
+#cv H5 SPAN {
+	FONT-SIZE: 8pt; FONT-WEIGHT: normal; COLOR: #686868
+}
+#cv SPAN.comment {
+	FONT-WEIGHT: normal; COLOR: #686868
+}
+#cv P {
+	FONT-SIZE: 8pt; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; PADDING-RIGHT: 0px
+}
+#cv P.info {
+	FONT-SIZE: 8pt; COLOR: #686868; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px 0px 0px 400px; PADDING-RIGHT: 0px
+}
+#cv TEXTAREA {
+	FONT-SIZE: 9pt; FONT-FAMILY: arial, verdana, helvetica
+}
+#cv .textfieldSmall {
+	WIDTH: 70px
+}
+#cv .textfieldMedium {
+	WIDTH: 200px
+}
+#cv .textfieldLarge {
+	WIDTH: 400px
+}
+#cv .textareaSmall {
+	HEIGHT: 50px; WIDTH: 500px
+}
+#cv .textareaMedium {
+	HEIGHT: 100px; WIDTH: 500px
+}
+#cv .textareaLarge {
+	HEIGHT: 200px; WIDTH: 500px
+}
+#cv .editCvLink {
+	CURSOR: pointer
+}
+.shortestPath {
+	BORDER-TOP: #9a9a9a 1px solid; BACKGROUND: #eeeeee; BORDER-BOTTOM: #9a9a9a 1px solid; PADDING-BOTTOM: 5px; PADDING-TOP: 5px; PADDING-LEFT: 5px; MARGIN: 0px 0px 20px; PADDING-RIGHT: 5px
+}
+.shortestPath UL {
+	LIST-STYLE-TYPE: none; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; PADDING-RIGHT: 0px
+}
+.shortestPath LI {
+	FONT-SIZE: 8pt; DISPLAY: inline
+}
+.shortestPath A IMG {
+	VERTICAL-ALIGN: 0px
+}
+.shortestPath IMG {
+	VERTICAL-ALIGN: 3px
+}
+#endnoteAdd {
+	FONT-SIZE: 8pt; HEIGHT: 16px; POSITION: relative; LEFT: -3px; MARGIN: 0px 0px 20px; WIDTH: 300px
+}
+#endnoteAdd INPUT {
+	POSITION: relative; MARGIN: 0px; TOP: 2px
+}
+#endnoteAdd IMG {
+	BORDER-TOP-STYLE: none; BORDER-LEFT-STYLE: none; BORDER-BOTTOM-STYLE: none; POSITION: relative; BORDER-RIGHT-STYLE: none; MARGIN: 0px 5px 0px 0px; TOP: 2px
+}
+#searchExportAdd {
+	FONT-SIZE: 8pt; MARGIN: 0px 0px 10px
+}
+#searchExportAdd IMG {
+	BORDER-TOP-STYLE: none; BORDER-LEFT-STYLE: none; BORDER-BOTTOM-STYLE: none; POSITION: relative; BORDER-RIGHT-STYLE: none; MARGIN: 0px 5px 0px 0px; TOP: 2px
+}
+#pubListOrder {
+	FONT-SIZE: 8pt; POSITION: relative; FLOAT: right; PADDING-BOTTOM: 0px; TEXT-ALIGN: right; PADDING-TOP: 5px; PADDING-LEFT: 0px; LEFT: -3px; MARGIN: 0px 0px 20px; PADDING-RIGHT: 0px; WIDTH: 300px
+}
+.showAll {
+	FONT-SIZE: 11px; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; PADDING-RIGHT: 0px
+}
+.communitySearchMenu {
+	BORDER-BOTTOM: #9a9a9a 1px solid; PADDING-BOTTOM: 3px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 3px 0px 15px; PADDING-RIGHT: 0px
+}
+.communitySearchMenuExpSearch {
+	BORDER-BOTTOM: #9a9a9a 1px solid; PADDING-BOTTOM: 3px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 3px 0px 15px; PADDING-RIGHT: 0px
+}
+#startPageCommunityInfo {
+	BACKGROUND: url(./img/community.png) no-repeat 0px 55px; FLOAT: right; PADDING-BOTTOM: 100px; PADDING-TOP: 10px; PADDING-LEFT: 0px; MARGIN: 0px 0px 21px; PADDING-RIGHT: 0px; WIDTH: 220px
+}
+#startPageCommunityInfo P {
+	FONT-SIZE: 8pt; COLOR: #7f7e7e; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 95px; MARGIN: 8px 0px 0px; LINE-HEIGHT: 150%; PADDING-RIGHT: 0px
+}
+.communityList {
+	LIST-STYLE-TYPE: none; BORDER-TOP: #eeeeee 1px solid; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; PADDING-RIGHT: 0px
+}
+.communityList LI {
+	LIST-STYLE-TYPE: none; BORDER-BOTTOM: #eeeeee 1px solid; PADDING-BOTTOM: 10px; PADDING-TOP: 10px; PADDING-LEFT: 0px; CLEAR: right; MARGIN: 0px; PADDING-RIGHT: 0px
+}
+.communityList LI P {
+	FONT-SIZE: 8pt; FLOAT: right; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; PADDING-RIGHT: 0px; WIDTH: 300px
+}
+#communitySearch {
+	BACKGROUND: url(./img/bgComSearch.png) no-repeat 0px 5px; MARGIN: 0px 0px 40px
+}
+#communitySearch INPUT {
+	FLOAT: left
+}
+#communitySearch #searchVal2 {
+	BORDER-TOP-STYLE: none; FONT-SIZE: 9pt; BORDER-LEFT-STYLE: none; HEIGHT: 16px; BACKGROUND: none transparent scroll repeat 0% 0%; BORDER-BOTTOM-STYLE: none; PADDING-BOTTOM: 0px; PADDING-TOP: 4px; BORDER-RIGHT-STYLE: none; PADDING-LEFT: 0px; MARGIN: 6px 5px 0px 10px; PADDING-RIGHT: 0px; WIDTH: 643px
+}
+#buttonCommunitySearch {
+	BORDER-TOP-STYLE: none; CURSOR: pointer; BORDER-LEFT-STYLE: none; HEIGHT: 22px; BACKGROUND: none transparent scroll repeat 0% 0%; BORDER-BOTTOM-STYLE: none; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; BORDER-RIGHT-STYLE: none; PADDING-LEFT: 0px; MARGIN: 5px 0px 0px; PADDING-RIGHT: 0px; WIDTH: 27px
+}
+#communitySearch UL {
+	HEIGHT: 22px; POSITION: relative; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; CLEAR: left; LEFT: 10px; MARGIN: 0px; TOP: 0px; PADDING-RIGHT: 0px
+}
+#communitySearch UL LI {
+	LIST-STYLE-TYPE: none; CURSOR: pointer; FONT-SIZE: 7.5pt; HEIGHT: 17px; FLOAT: left; COLOR: #345f8a; PADDING-BOTTOM: 0px; TEXT-ALIGN: center; PADDING-TOP: 6px; PADDING-LEFT: 0px; PADDING-RIGHT: 0px; WIDTH: 148px
+}
+#communitySearch UL LI.sell {
+	CURSOR: default; BACKGROUND: url(./img/bgComSearchType.png) no-repeat 0px 0px
+}
+#specialCommunityInfo {
+	HEIGHT: 168px; BACKGROUND: url(./img/bg_communityStart.png) no-repeat 0px 0px; MARGIN: 0px 0px 50px
+}
+#specialCommunityInfo #communitySearch {
+	BACKGROUND: none transparent scroll repeat 0% 0%; PADDING-BOTTOM: 0px; PADDING-TOP: 76px; PADDING-LEFT: 90px; PADDING-RIGHT: 0px
+}
+#specialCommunityInfo #communitySearch #searchVal2 {
+	MARGIN: 7px 5px 0px 10px; WIDTH: 460px
+}
+#boolSearch {
+	BACKGROUND: url(img/bgBoolSearch.png) no-repeat 0px 0px; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 10px 0px 20px; PADDING-RIGHT: 0px
+}
+#boolInput {
+	BORDER-LEFT-WIDTH: 0px; FONT-SIZE: 8pt; BORDER-RIGHT-WIDTH: 0px; BORDER-BOTTOM-WIDTH: 0px; POSITION: relative; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px 0px 0px 10px; TOP: -6px; PADDING-RIGHT: 0px; BORDER-TOP-WIDTH: 0px; WIDTH: 390px
+}
+.boolSearchAlterList {
+	LIST-STYLE-TYPE: none; BORDER-TOP: #9a9a9a 1px solid; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; PADDING-RIGHT: 0px; WIDTH: 100%
+}
+.boolSearchAlterList LI {
+	CURSOR: pointer; FONT-SIZE: 8pt; BORDER-BOTTOM: #9a9a9a 1px solid; FONT-WEIGHT: bold; COLOR: #345f8a; PADDING-BOTTOM: 3px; PADDING-TOP: 3px; PADDING-LEFT: 10px; LINE-HEIGHT: 150%; PADDING-RIGHT: 10px
+}
+.projectList LI {
+	MARGIN-BOTTOM: 15px !important; BORDER-BOTTOM: #9a9a9a 1px solid; PADDING-BOTTOM: 0px !important
+}
+.debugInfo {
+	FONT-SIZE: 8pt; BORDER-TOP: #aa0000 1px solid; BORDER-RIGHT: #aa0000 1px solid; BACKGROUND: #ffffaa; BORDER-BOTTOM: #aa0000 1px solid; FONT-WEIGHT: normal; COLOR: black; PADDING-BOTTOM: 3px; PADDING-TOP: 3px; PADDING-LEFT: 3px; MARGIN: 0px 0px 3px; BORDER-LEFT: #aa0000 1px solid; PADDING-RIGHT: 3px
+}
+.sciCon {
+	BACKGROUND: url(img/bgContent.png) repeat-x 0px -2px
+}
+.thesSelection {
+	BACKGROUND: #ffffff; BORDER-BOTTOM: #686868 1px solid; PADDING-BOTTOM: 5px; PADDING-TOP: 5px; PADDING-LEFT: 0px; MARGIN: 20px 0px 10px; PADDING-RIGHT: 0px
+}
+.thesSelection SPAN {
+	FONT-SIZE: 9pt; POSITION: relative; COLOR: #686868; PADDING-BOTTOM: 5px; PADDING-TOP: 5px; PADDING-LEFT: 5px; TOP: 1px; PADDING-RIGHT: 5px
+}
+.thesSelection SPAN.sel {
+	BORDER-TOP: #686868 1px solid; BORDER-RIGHT: #686868 1px solid; BACKGROUND: url(img/bgContent.png) repeat-x 0px -2px; BORDER-BOTTOM: #686868 1px; PADDING-BOTTOM: 5px; PADDING-TOP: 5px; PADDING-LEFT: 4px; BORDER-LEFT: #686868 1px solid; PADDING-RIGHT: 4px
+}
+.thesSelection SPAN.sel A {
+	COLOR: #000000
+}
+#networkSearch {
+	BACKGROUND: url(./img/bgComSearch.png) no-repeat 0px 5px; MARGIN: 0px 0px 40px
+}
+#networkSearch INPUT#buttonNetworkSearch {
+	FLOAT: left
+}
+#networkSearch INPUT#searchValNet {
+	FLOAT: left
+}
+#networkSearch #searchValNet {
+	BORDER-TOP-STYLE: none; FONT-SIZE: 8pt; BORDER-LEFT-STYLE: none; HEIGHT: 16px; BACKGROUND: none transparent scroll repeat 0% 0%; BORDER-BOTTOM-STYLE: none; PADDING-BOTTOM: 0px; PADDING-TOP: 4px; BORDER-RIGHT-STYLE: none; PADDING-LEFT: 0px; MARGIN: 6px 5px 0px 10px; PADDING-RIGHT: 0px; WIDTH: 640px
+}
+#networkSearch .exampleStyle#searchValNet {
+	COLOR: #686868; FONT-STYLE: italic
+}
+#buttonNetworkSearch {
+	BORDER-TOP-STYLE: none; CURSOR: pointer; BORDER-LEFT-STYLE: none; HEIGHT: 22px; BACKGROUND: none transparent scroll repeat 0% 0%; BORDER-BOTTOM-STYLE: none; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; BORDER-RIGHT-STYLE: none; PADDING-LEFT: 0px; MARGIN: 5px 0px 0px; PADDING-RIGHT: 0px; WIDTH: 27px
+}
+#networkSearch UL {
+	HEIGHT: 23px; POSITION: relative; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; LEFT: 10px; MARGIN: 0px; TOP: -1px; PADDING-RIGHT: 0px
+}
+* HTML #networkSearch UL {
+	POSITION: relative; TOP: -17px
+}
+#networkSearch UL LI {
+	LIST-STYLE-TYPE: none; FLOAT: left; COLOR: #345f8a; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; PADDING-RIGHT: 0px; WIDTH: 148px
+}
+#networkSearch UL LI INPUT {
+	BORDER-TOP-STYLE: none; CURSOR: pointer; FONT-SIZE: 8pt; BORDER-LEFT-STYLE: none; HEIGHT: 23px; BACKGROUND: none transparent scroll repeat 0% 0%; BORDER-BOTTOM-STYLE: none; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; BORDER-RIGHT-STYLE: none; PADDING-LEFT: 0px; MARGIN: 0px; PADDING-RIGHT: 0px; WIDTH: 148px
+}
+#networkSearch UL LI INPUT.sell {
+	CURSOR: default; BACKGROUND: url(./img/bgComSearchType.png) no-repeat 0px 0px
+}
+#networkSearchInput {
+	BACKGROUND: url(img/bgBoolSearch.png) no-repeat 0px 0px; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 10px 0px 20px; PADDING-RIGHT: 0px
+}
+#networkSearchInput .exampleStyle {
+	COLOR: #686868; FONT-STYLE: italic
+}
+#networkSearchInput INPUT {
+	BORDER-LEFT-WIDTH: 0px; FONT-SIZE: 8pt; BORDER-RIGHT-WIDTH: 0px; BORDER-BOTTOM-WIDTH: 0px; POSITION: relative; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px 0px 0px 10px; TOP: -6px; PADDING-RIGHT: 0px; BORDER-TOP-WIDTH: 0px; WIDTH: 390px
+}
+.networkSearchList {
+	LIST-STYLE-TYPE: none; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; PADDING-RIGHT: 0px
+}
+.networkSearchList LI {
+	LIST-STYLE-TYPE: none; FONT-SIZE: 8pt; BORDER-BOTTOM: #eeeeee 1px solid; PADDING-BOTTOM: 10px; PADDING-TOP: 10px; PADDING-LEFT: 0px; CLEAR: right; MARGIN: 0px; PADDING-RIGHT: 0px
+}
+.networkSearchList LI P {
+	FLOAT: right; PADDING-BOTTOM: 0px; TEXT-ALIGN: right; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; PADDING-RIGHT: 0px; WIDTH: 50px
+}
+.networkSearchMenu {
+	BORDER-BOTTOM: #9a9a9a 1px solid; PADDING-BOTTOM: 3px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 3px 0px 0px; PADDING-RIGHT: 0px
+}
+#dataComment {
+	FONT-SIZE: 8pt; MARGIN: 10px 0px 0px
+}
+.fulltextButton {
+	BORDER-TOP-STYLE: none; CURSOR: pointer; FONT-SIZE: 10pt; BORDER-LEFT-STYLE: none; HEIGHT: 19px; BACKGROUND: url(img/buttonSearch.png) no-repeat; BORDER-BOTTOM-STYLE: none; FONT-WEIGHT: bold; COLOR: #ffffff; BORDER-RIGHT-STYLE: none; WIDTH: 183px
+}
+.networkButton {
+	BORDER-TOP-STYLE: none; CURSOR: pointer; FONT-SIZE: 8pt; BORDER-LEFT-STYLE: none; HEIGHT: 17px; BACKGROUND: none transparent scroll repeat 0% 0%; BORDER-BOTTOM-STYLE: none; FONT-WEIGHT: bold; COLOR: #000000; BORDER-RIGHT-STYLE: none; WIDTH: 150px
+}
+.networkButtonSel {
+	BORDER-TOP-STYLE: none; CURSOR: pointer; FONT-SIZE: 8pt; BORDER-LEFT-STYLE: none; HEIGHT: 17px; BACKGROUND: url(img/buttonNetwork.png) no-repeat; BORDER-BOTTOM-STYLE: none; FONT-WEIGHT: bold; COLOR: #ffffff; BORDER-RIGHT-STYLE: none; WIDTH: 150px
+}
+#addInfoList {
+	PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px 0px 30px; PADDING-RIGHT: 0px
+}
+#addInfoList LI {
+	LIST-STYLE-TYPE: none; FONT-SIZE: 11px; BORDER-BOTTOM: #cccccc 1px solid; PADDING-BOTTOM: 15px; PADDING-TOP: 10px; PADDING-LEFT: 0px; MARGIN: 0px; LINE-HEIGHT: 150%; PADDING-RIGHT: 0px
+}
+.addInfos H2 {
+	FONT-SIZE: 14px; MARGIN: 15px 0px 0px
+}
+.addInfos P {
+	FONT-SIZE: 12px; BORDER-BOTTOM: #dddddd 1px solid; FONT-WEIGHT: bold; PADDING-BOTTOM: 5px; PADDING-TOP: 5px; PADDING-LEFT: 0px; MARGIN: 0px; PADDING-RIGHT: 0px
+}
+.researchStatement {
+	FONT-SIZE: 11px; MARGIN: 0px 0px 40px; LINE-HEIGHT: 150%
+}
+.researchStatement B {
+	FONT-SIZE: 12px; COLOR: #7bb949
+}
+.greenButtonBorder {
+	FLOAT: left
+}
+.greenButton {
+	CURSOR: pointer; FONT-SIZE: 8pt; BORDER-TOP: 0px; HEIGHT: 19px; BORDER-RIGHT: 0px; BACKGROUND: url(img/greenButton.png) repeat-x 0px 0px; BORDER-BOTTOM: 0px; FLOAT: left; COLOR: #ffffff; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: 0px; PADDING-RIGHT: 0px
+}
+.greenButtonLeft {
+	CURSOR: pointer; BORDER-TOP: 0px; HEIGHT: 19px; BORDER-RIGHT: 0px; BACKGROUND: url(img/greenButtonLeft.png) no-repeat; BORDER-BOTTOM: 0px; FLOAT: left; BORDER-LEFT: 0px; WIDTH: 10px
+}
+.greenButtonRight {
+	CURSOR: pointer; BORDER-TOP: 0px; HEIGHT: 19px; BORDER-RIGHT: 0px; BACKGROUND: url(img/greenButtonRight.png) no-repeat; BORDER-BOTTOM: 0px; FLOAT: left; BORDER-LEFT: 0px; WIDTH: 10px
+}
+.expertEditProfileButton {
+	FLOAT: right; MARGIN: 5px 0px 0px
+}
+#expertPubNavigPE {
+	FONT-SIZE: 10px; VERTICAL-ALIGN: middle; BORDER-BOTTOM: #cccccc 1px solid; COLOR: #c6c6c6; PADDING-BOTTOM: 3px; PADDING-TOP: 3px; PADDING-LEFT: 1px; PADDING-RIGHT: 0px
+}
+#expertPubNavigPE UL {
+	LIST-STYLE-TYPE: none; BORDER-TOP: #cccccc 1px solid; VERTICAL-ALIGN: middle; PADDING-BOTTOM: 0px; PADDING-TOP: 3px; PADDING-LEFT: 0px; MARGIN: 4px 0px 0px; PADDING-RIGHT: 0px
+}
+#expertPubNavigPE UL LI {
+	CURSOR: pointer; FONT-SIZE: 11px; HEIGHT: 28px; VERTICAL-ALIGN: middle; BACKGROUND: none transparent scroll repeat 0% 0%; FLOAT: left; PADDING-BOTTOM: 2px; TEXT-ALIGN: center; PADDING-TOP: 2px; PADDING-LEFT: 0px; MARGIN: 0px; PADDING-RIGHT: 0px; WIDTH: 80px
+}
+#expertPubNavigPE UL LI A {
+	VERTICAL-ALIGN: middle
+}
+#expertPubNavigPE UL LI.sell {
+	BACKGROUND: url(./img/bgTallSubNavig.png)
+}
+#expertPubNavigPE UL LI.sell A {
+	COLOR: #ffffff
+}
+#expertPubNavigPE UL LI A.shortButtonText {
+	POSITION: relative; TOP: 5px
+}
+#expertPubNavigPE UL LI.offline {
+	CURSOR: default
+}
+P.helpProf {
+	FONT-SIZE: 11px; COLOR: #aaaaaa; PADDING-BOTTOM: 5px; PADDING-TOP: 5px; PADDING-LEFT: 5px; MARGIN: 3px 0px 0px; PADDING-RIGHT: 5px
+}
+P.helpKeyWords {
+	FONT-SIZE: 11px; COLOR: #aaaaaa; PADDING-BOTTOM: 10px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 3px 0px 0px; PADDING-RIGHT: 0px
+}
+#expertSubNavigPE {
+	FONT-SIZE: 10px; BORDER-BOTTOM: #cccccc 1px solid; COLOR: #c6c6c6; PADDING-BOTTOM: 3px; PADDING-TOP: 3px; PADDING-LEFT: 1px; PADDING-RIGHT: 0px
+}
+#expertSubNavigPE UL {
+	LIST-STYLE-TYPE: none; BORDER-TOP: #cccccc 1px solid; PADDING-BOTTOM: 0px; PADDING-TOP: 3px; PADDING-LEFT: 0px; MARGIN: 4px 0px 0px; PADDING-RIGHT: 0px
+}
+#expertSubNavigPE UL LI {
+	CURSOR: pointer; FONT-SIZE: 11px; HEIGHT: 15px; BACKGROUND: none transparent scroll repeat 0% 0%; FLOAT: left; PADDING-BOTTOM: 0px; TEXT-ALIGN: center; PADDING-TOP: 2px; PADDING-LEFT: 0px; MARGIN: 0px; PADDING-RIGHT: 0px; WIDTH: 124px
+}
+#expertSubNavigPE UL LI.sell {
+	BACKGROUND: url(./img/bgSubNavigExpPE.png)
+}
+#expertSubNavigPE UL LI.sell A {
+	COLOR: #ffffff
+}
+#expertSubNavigPE UL LI.offline {
+	CURSOR: default
+}
+#expertPubNavigPE {
+	FONT-SIZE: 10px; VERTICAL-ALIGN: middle; BORDER-BOTTOM: #cccccc 1px solid; COLOR: #c6c6c6; PADDING-BOTTOM: 3px; PADDING-TOP: 3px; PADDING-LEFT: 1px; PADDING-RIGHT: 0px
+}
+#expertPubNavigPE UL {
+	LIST-STYLE-TYPE: none; BORDER-TOP: #cccccc 1px solid; VERTICAL-ALIGN: middle; PADDING-BOTTOM: 0px; PADDING-TOP: 3px; PADDING-LEFT: 0px; MARGIN: 4px 0px 0px; PADDING-RIGHT: 0px
+}
+#expertPubNavigPE UL LI {
+	CURSOR: pointer; FONT-SIZE: 11px; HEIGHT: 28px; VERTICAL-ALIGN: middle; BACKGROUND: none transparent scroll repeat 0% 0%; FLOAT: left; PADDING-BOTTOM: 2px; TEXT-ALIGN: center; PADDING-TOP: 2px; PADDING-LEFT: 0px; MARGIN: 0px; PADDING-RIGHT: 0px; WIDTH: 80px
+}
+#expertPubNavigPE UL LI A {
+	VERTICAL-ALIGN: middle
+}
+#expertPubNavigPE UL LI.sell {
+	BACKGROUND: url(./img/bgTallSubNavig.png)
+}
+#expertPubNavigPE UL LI.sell A {
+	COLOR: #ffffff
+}
+#expertPubNavigPE UL LI A.shortButtonText {
+	POSITION: relative; TOP: 5px
+}
+#expertPubNavigPE UL LI.offline {
+	CURSOR: default
+}
+.addInfos TABLE {
+	FONT-SIZE: 11px; WIDTH: 100%
+}
+.addInfos TABLE TD {
+	VERTICAL-ALIGN: top
+}
+.addInfos TD.list {
+	FONT-WEIGHT: bold; WIDTH: 44px
+}
+.addInfos TD SPAN {
+	FONT-WEIGHT: normal; COLOR: #9b9b9b
+}
+.addInfos TD P.details {
+	COLOR: black
+}
+.addInfos TD P {
+	FONT-SIZE: 11px; BORDER-BOTTOM-STYLE: none; FONT-WEIGHT: normal; COLOR: #9b9b9b; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; LINE-HEIGHT: 150%; PADDING-RIGHT: 0px
+}
+.addInfos TD A {
+	FONT-WEIGHT: bold
+}
+A.icon-rdf {
+	FONT-SIZE: 18px; COLOR: #b2d15a
+}
+.vivoRdfLink A {
+	FONT-SIZE: 17px; FONT-WEIGHT: bold; COLOR: #7bb949
+}
+.vivoRdfLink A IMG {
+	POSITION: relative; TOP: 2px
+}
+#startPageInfoVivo {
+	FONT-SIZE: 11px; FLOAT: right; COLOR: #898787; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; LINE-HEIGHT: 150%; PADDING-RIGHT: 0px; WIDTH: 200px
+}
+TD.yearRange {
+	FONT-WEIGHT: normal; COLOR: #9b9b9b; WIDTH: 70px
+}
+TD.simpleYearRange {
+	FONT-WEIGHT: normal; COLOR: #9b9b9b
+}
+TABLE.profileOverview {
+	
+}
+TABLE.profileOverview TD.desc {
+	FONT-SIZE: 8pt; FONT-WEIGHT: bold; COLOR: #6e6b63; PADDING-BOTTOM: 10px; PADDING-TOP: 10px; PADDING-LEFT: 0px; MARGIN: 0px; PADDING-RIGHT: 0px; WIDTH: 230px
+}
+TABLE.profileOverview TD.value {
+	FONT-SIZE: 8pt; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; PADDING-RIGHT: 0px
+}
+TABLE.additionalData {
+	FONT-SIZE: 8pt; FONT-WEIGHT: normal; COLOR: #686868; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px 0px 30px; PADDING-RIGHT: 0px
+}
+TABLE.additionalData TD.desc {
+	FLOAT: right; FONT-WEIGHT: bold
+}
+TD.KeyWords {
+	FONT-SIZE: 11px; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; PADDING-RIGHT: 0px
+}
+#ContentTabArea {
+	
+}
+#ContentTabArea .TabActiveLeft {
+	HEIGHT: 33px; BACKGROUND: url(img/tab_active_left.png) no-repeat left 50%; FLOAT: left; DISPLAY: block; WIDTH: 10px
+}
+#ContentTabArea .TabActiveRight {
+	FONT-SIZE: 11px; HEIGHT: 33px; BACKGROUND: url(img/tab_active_right.png) no-repeat right 50%; MIN-WIDTH: 140px; FLOAT: left; FONT-WEIGHT: bold; COLOR: #579417; DISPLAY: block; LINE-HEIGHT: 33px
+}
+#ContentTabArea .TabPassive {
+	HEIGHT: 33px; BACKGROUND: url(img/tab_passive_right.png) no-repeat right 50%; MIN-WIDTH: 125px; FLOAT: left; PADDING-LEFT: 10px; DISPLAY: block; LINE-HEIGHT: 33px; PADDING-RIGHT: 10px
+}
+#ContentTabArea .TabPassive A {
+	FONT-SIZE: 11px; FONT-WEIGHT: bold; COLOR: #135386
+}
+#ContentTabArea .TabSeparator {
+	HEIGHT: 33px; BACKGROUND: url(img/tab_separator.png) no-repeat; FLOAT: left; DISPLAY: block; WIDTH: 1px
+}
+.ProfileSectionLeft {
+	LIST-STYLE-TYPE: none; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 10px 0px; PADDING-RIGHT: 0px; WIDTH: 100%
+}
+.ProfileSectionLeft LI {
+	PADDING-BOTTOM: 8px; PADDING-TOP: 0px; PADDING-LEFT: 0px; CLEAR: left; MARGIN: 0px; PADDING-RIGHT: 0px
+}
+.ProfileSectionLeft LI SPAN {
+	COLOR: #686868
+}
+.ProfileSectionLeft LI DIV.name {
+	BORDER-BOTTOM: #cccccc 1px solid; FLOAT: left; PADDING-BOTTOM: 10px !important; PADDING-TOP: 5px; PADDING-LEFT: 2px; MARGIN: 0px; PADDING-RIGHT: 0px; WIDTH: 100%
+}
+.ProfileSectionLeft LI DIV.name IMG {
+	PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; TOP: 2px; PADDING-RIGHT: 3px
+}
+.ProfileSectionLeft LI A SPAN {
+	FONT-WEIGHT: bold; COLOR: #7cb83d
+}
+.previewAddInfo {
+	PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px 0px 20px; PADDING-RIGHT: 0px
+}
+P.AuthorWrittenWorks {
+	PADDING-BOTTOM: 8px !important
+}
+#lanSelArea_bright {
+	FLOAT: right; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 5px 0px 0px; PADDING-RIGHT: 30px
+}
+#lanSelArea_bright #dropDownArea {
+	FLOAT: right; PADDING-TOP: 3px; LINE-HEIGHT: 18px
+}
+#lanSelArea_bright #dropDownArea #lanDropDownButton {
+	CURSOR: pointer; FONT-SIZE: 11px; MAX-WIDTH: 100px; BORDER-TOP: #777777 0px solid; HEIGHT: 18px; BORDER-RIGHT: #777777 0px solid; BACKGROUND: url(./img/bgLanguageButton_bright.png) no-repeat; MIN-WIDTH: 100px; BORDER-BOTTOM: #777777 0px solid; COLOR: #ffffff; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; MIN-HEIGHT: 18px; BORDER-LEFT: #777777 0px solid; PADDING-RIGHT: 0px; MAX-HEIGHT: 18px; WIDTH: 100px
+}
+#lanSelArea_bright #dropDownArea #lanDropDownButton P {
+	FONT-SIZE: 11px; MAX-WIDTH: 80px; HEIGHT: 18px; MIN-WIDTH: 80px; COLOR: #ffffff; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 5px; MARGIN: 0px; MIN-HEIGHT: 18px; PADDING-RIGHT: 0px; MAX-HEIGHT: 18px; WIDTH: 80px
+}
+#lanSelArea_bright #dropDownArea #lanDropDown {
+	FONT-SIZE: 11px; MAX-WIDTH: 98px; BORDER-TOP: #cccccc 1px; BORDER-RIGHT: #cccccc 1px solid; BACKGROUND: #f0f0f0; MIN-WIDTH: 98px; BORDER-BOTTOM: #cccccc 1px solid; POSITION: absolute; COLOR: #000000; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: #cccccc 1px solid; Z-INDEX: 1; DISPLAY: none; PADDING-RIGHT: 0px; WIDTH: 98px
+}
+#lanSelArea_bright #dropDownArea #lanDropDown P {
+	CURSOR: pointer; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 5px; MARGIN: 0px; PADDING-RIGHT: 2px
+}
+#lanSelArea_bright #dropDownArea #lanDropDown P:hover {
+	BACKGROUND: #e7e7e7
+}
+#lanSelArea_bright #lanDropDownInfo {
+	FONT-SIZE: 11px; MAX-WIDTH: 300px; HEIGHT: 18px; BACKGROUND: url(./img/icon_world_bright.png) no-repeat right 4px; MIN-WIDTH: 300px; FLOAT: right; PADDING-BOTTOM: 0px; TEXT-ALIGN: right; PADDING-TOP: 3px; PADDING-LEFT: 0px; MARGIN: 0px 10px 0px 0px; MIN-HEIGHT: 18px; LINE-HEIGHT: 18px; PADDING-RIGHT: 40px; MAX-HEIGHT: 18px; WIDTH: 300px
+}
+#lanSelArea_bright #lanDropDownInfo A {
+	COLOR: #ffffff
+}
+#lanSelArea_dark {
+	FLOAT: right; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 5px 0px 0px; PADDING-RIGHT: 30px
+}
+#lanSelArea_dark #dropDownArea {
+	FLOAT: right; PADDING-TOP: 3px; LINE-HEIGHT: 18px
+}
+#lanSelArea_dark #dropDownArea #lanDropDownButton {
+	CURSOR: pointer; FONT-SIZE: 11px; MAX-WIDTH: 100px; BORDER-TOP: #777777 0px solid; HEIGHT: 18px; BORDER-RIGHT: #777777 0px solid; BACKGROUND: url(./img/bgLanguageButton_dark.png) no-repeat; MIN-WIDTH: 100px; BORDER-BOTTOM: #777777 0px solid; COLOR: #000000; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; MIN-HEIGHT: 18px; BORDER-LEFT: #777777 0px solid; PADDING-RIGHT: 0px; MAX-HEIGHT: 18px; WIDTH: 100px
+}
+#lanSelArea_dark #dropDownArea #lanDropDownButton P {
+	FONT-SIZE: 11px; MAX-WIDTH: 80px; HEIGHT: 18px; MIN-WIDTH: 80px; COLOR: #000000; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 5px; MARGIN: 0px; MIN-HEIGHT: 18px; PADDING-RIGHT: 0px; MAX-HEIGHT: 18px; WIDTH: 80px
+}
+#lanSelArea_dark #dropDownArea #lanDropDown {
+	FONT-SIZE: 11px; MAX-WIDTH: 98px; BORDER-TOP: #cccccc 1px; BORDER-RIGHT: #cccccc 1px solid; BACKGROUND: #f0f0f0; MIN-WIDTH: 98px; BORDER-BOTTOM: #cccccc 1px solid; POSITION: absolute; COLOR: #000000; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: #cccccc 1px solid; Z-INDEX: 1; DISPLAY: none; PADDING-RIGHT: 0px; WIDTH: 98px
+}
+#lanSelArea_dark #dropDownArea #lanDropDown P {
+	CURSOR: pointer; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 5px; MARGIN: 0px; PADDING-RIGHT: 2px
+}
+#lanSelArea_dark #dropDownArea #lanDropDown P:hover {
+	BACKGROUND: #e7e7e7
+}
+#lanSelArea_dark #lanDropDownInfo {
+	FONT-SIZE: 11px; MAX-WIDTH: 300px; HEIGHT: 18px; BACKGROUND: url(./img/icon_world_dark.png) no-repeat right 4px; MIN-WIDTH: 300px; FLOAT: right; PADDING-BOTTOM: 0px; TEXT-ALIGN: right; PADDING-TOP: 3px; PADDING-LEFT: 0px; MARGIN: 0px 10px 0px 0px; MIN-HEIGHT: 18px; LINE-HEIGHT: 18px; PADDING-RIGHT: 40px; MAX-HEIGHT: 18px; WIDTH: 300px
+}
+#lanSelArea_dark #lanDropDownInfo A {
+	COLOR: #000000
+}
+.addInfosCVshort {
+	FONT-SIZE: 11px
+}
+.addInfosCVshort H2 {
+	FONT-SIZE: 14px; PADDING-BOTTOM: 10px; MARGIN: 30px 0px 0px
+}
+.addInfosCVshort P {
+	BORDER-BOTTOM: #dddddd 1px solid; PADDING-BOTTOM: 5px; PADDING-TOP: 5px; PADDING-LEFT: 0px; MARGIN: 0px; PADDING-RIGHT: 0px
+}
+.addInfosCVshort H3 {
+	FONT-SIZE: 13px !important; BORDER-BOTTOM: #dddddd 1px solid; COLOR: #7bb949; PADDING-BOTTOM: 6px; PADDING-TOP: 6px; MARGIN: 0px 0px 10px
+}
+.addInfoTable {
+	MARGIN-TOP: 10px; WIDTH: 685px
+}
+.addInfoTable TD {
+	VERTICAL-ALIGN: top; PADDING-BOTTOM: 5px
+}
+.addInfoTable TD P.details {
+	WORD-WRAP: break-word; BORDER-BOTTOM: 0px; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; PADDING-RIGHT: 0px
+}
+.years {
+	COLOR: #686868; WIDTH: 107px
+}
+.FingerprintCoreFacilities {
+	FLOAT: left; PADDING-RIGHT: 20px; WIDTH: 170px
+}
+.FingerprintCoreFacilities .moreLink {
+	FONT-SIZE: 11px; FLOAT: right; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; PADDING-RIGHT: 0px
+}
+.FingerprintCoreFacilities H2 {
+	MARGIN-BOTTOM: 5px !important; FONT-WEIGHT: normal !important
+}
+.FingerprintCoreFacilities UL {
+	MARGIN-TOP: 0px !important
+}
+.FingerprintCoreFacilities UL LI P {
+	COLOR: #345f8a !important
+}
+.FingerprintCoreFacilities UL LI {
+	PADDING-TOP: 3px !important
+}
+.FingerprintCoreFacilities .Head {
+	PADDING-TOP: 0px !important
+}
+UL.tabs {
+	LIST-STYLE-TYPE: none; HEIGHT: 32px; BORDER-BOTTOM: #c5c5c5 1px solid; FLOAT: left; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 10px 0px 0px; BORDER-LEFT: #c5c5c5 1px solid; PADDING-RIGHT: 0px; WIDTH: 100%
+}
+UL.tabs LI {
+	OVERFLOW: hidden; BORDER-TOP: #c5c5c5 1px solid; HEIGHT: 31px; BORDER-RIGHT: #c5c5c5 1px solid; BACKGROUND: url(img/contentTabsPassBG.png); POSITION: relative; FLOAT: left; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px 0px -1px; LINE-HEIGHT: 31px; PADDING-RIGHT: 0px; WIDTH: 224px
+}
+UL.tabs LI A {
+	FONT-SIZE: 17px; FONT-WEIGHT: bold; COLOR: #345f8a; OUTLINE-STYLE: none; PADDING-LEFT: 10px; TEXT-DECORATION: none; DISPLAY: block; PADDING-RIGHT: 5px
+}
+UL.tabs LI A:hover {
+	
+}
+HTML UL.tabs LI.active {
+	BACKGROUND-REPEAT: repeat-x; BACKGROUND-POSITION: left 50%; FONT-WEIGHT: bold
+}
+HTML UL.tabs LI.active A:hover {
+	BACKGROUND-REPEAT: repeat-x; BACKGROUND-POSITION: left 50%; FONT-WEIGHT: bold
+}
+HTML UL.tabs LI.active A:link {
+	FONT-SIZE: 17px; BACKGROUND: url(img/contentTabsBG.png); BORDER-BOTTOM: #c5c5c5 1px solid; FONT-WEIGHT: bold; COLOR: #7bb949
+}
+HTML UL.tabs LI.active A:active {
+	FONT-SIZE: 17px; BACKGROUND: url(img/contentTabsBG.png); BORDER-BOTTOM: #c5c5c5 1px solid; FONT-WEIGHT: bold; COLOR: #7bb949
+}
+.tabs IMG {
+	POSITION: relative; TOP: 1px
+}
+.tab_container {
+	BORDER-TOP-STYLE: none; OVERFLOW: hidden; BACKGROUND: #fff; FLOAT: left; CLEAR: both; WIDTH: 100%
+}
+.tab_content {
+	FONT-SIZE: 11px; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; PADDING-RIGHT: 0px
+}
+.expertListBig LI DIV.nameCrispResultsTabs {
+	FLOAT: left; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 2px; MARGIN: 0px; PADDING-RIGHT: 0px; WIDTH: 290px
+}
+.expertListBig LI DIV.pubsResultsTabs {
+	FLOAT: left; COLOR: #686868; PADDING-BOTTOM: 0px; TEXT-ALIGN: right; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; PADDING-RIGHT: 0px; WIDTH: 90px
+}
+.expertListBig LI DIV.pubsResultsTabs P {
+	POSITION: relative; MARGIN: 0px 0px 0px 8px; DISPLAY: inline; TOP: 5px
+}
+.expertListBig LI DIV.grantsResultsTabs {
+	FLOAT: left; COLOR: #686868; PADDING-BOTTOM: 0px; TEXT-ALIGN: right; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; PADDING-RIGHT: 2px; WIDTH: 48px
+}
+.expertListBig LI DIV.pubsResultsTabs IMG {
+	POSITION: relative; MARGIN: 0px 1px 0px 0px; TOP: -5px
+}
+.patentDetailLabels {
+	TABLE-LAYOUT: fixed; COLOR: #686868; PADDING-BOTTOM: 30px
+}
+.patentDetailLabels TD {
+	VERTICAL-ALIGN: top; PADDING-BOTTOM: 5px
+}
+.patentDetailLabels .labels {
+	MIN-WIDTH: 120px; FONT-WEIGHT: bold; TEXT-ALIGN: right; PADDING-RIGHT: 10px
+}
+#expertPubNavigAnchor {
+	VERTICAL-ALIGN: middle; BORDER-BOTTOM: #cccccc 1px solid; COLOR: #585858; PADDING-BOTTOM: 0px; PADDING-TOP: 5px; PADDING-LEFT: 0px; PADDING-RIGHT: 0px
+}
+#expertPubNavigAnchor UL {
+	BORDER-TOP: #cccccc 1px solid; VERTICAL-ALIGN: middle; PADDING-BOTTOM: 0px; PADDING-TOP: 3px; PADDING-LEFT: 0px; MARGIN: 4px 0px 0px; LIST-STYLE: none none outside; PADDING-RIGHT: 0px
+}
+#expertPubNavigAnchor UL LI {
+	FONT-SIZE: 9px; HEIGHT: 18px; VERTICAL-ALIGN: middle; BACKGROUND: 0px 0px; FLOAT: left; PADDING-BOTTOM: 0px; TEXT-ALIGN: left; PADDING-TOP: 5px; PADDING-LEFT: 6px; MARGIN: 0px; PADDING-RIGHT: 6px
+}
+#expertPubNavigAnchor UL LI A {
+	
+}
+.PubPageSubhead {
+	FONT-SIZE: 15px; BORDER-BOTTOM: #9a9a9a 1px solid; FONT-WEIGHT: bold !important; COLOR: #7bb949; PADDING-BOTTOM: 11px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; PADDING-RIGHT: 0px
+}
+#researchInterestKeywords {
+	MARGIN-BOTTOM: 15px; FONT-SIZE: 11px; COLOR: #333333; MARGIN-TOP: 10px
+}
+#researchInterestKeywords IMG {
+	POSITION: relative; TOP: 2px
+}
+.ListIndent70 {
+	PADDING-LEFT: 70px !important
+}
+.ListIndent30 {
+	PADDING-LEFT: 30px !important
+}
+.ListIndent10 {
+	PADDING-LEFT: 10px !important
+}
+#pubList LI DIV.listTimeSpan {
+	FLOAT: left; FONT-WEIGHT: bold; WIDTH: 60px
+}
+.subH2 {
+	FONT-SIZE: 15px !important
+}
+.addInfoTablePubs {
+	MARGIN-TOP: 10px; LINE-HEIGHT: 12px
+}
+.addInfoTablePubs A {
+	FONT-WEIGHT: bold; LINE-HEIGHT: 14px
+}
+.addInfoTablePubs TD {
+	VERTICAL-ALIGN: top; PADDING-BOTTOM: 5px
+}
+.addInfoTablePubs SPAN {
+	COLOR: #686868
+}
+.addInfoTablePubs .line {
+	BORDER-BOTTOM: #9a9a9a 1px solid
+}
+#innerContentOneArea .moreLinkInfo {
+	FONT-SIZE: 7.5pt; FLOAT: right; PADDING-BOTTOM: 0px; PADDING-TOP: 7px; PADDING-LEFT: 0px; MARGIN-TOP: 27px; PADDING-RIGHT: 0px
+}
+.expertProfileLink {
+	FONT-SIZE: 11px; FLOAT: right; MARGIN: 13px 0px 0px
+}
+.expertProfileLink .sep {
+	FONT-SIZE: 9px
+}
+P.ConferenceProceedings {
+	PADDING-BOTTOM: 8px !important
+}
+TABLE.dataConference {
+	MARGIN: 0px
+}
+#startInfoDefaultPage {
+	FONT-SIZE: 9pt; FONT-WEIGHT: normal; COLOR: #686868; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px 0px 20px; LINE-HEIGHT: 150%; PADDING-RIGHT: 20px; WIDTH: 900px
+}
+.TableStandard {
+	BORDER-RIGHT: #888888 1px solid; BORDER-BOTTOM: #888888 1px solid
+}
+.TableStandard TD {
+	BORDER-TOP: #888888 1px solid; BORDER-LEFT: #888888 1px solid
+}
+TH {
+	BORDER-TOP: #888888 1px solid; BORDER-LEFT: #888888 1px solid
+}
+.TableStandard TD {
+	BORDER-TOP: #888888 1px solid; BORDER-LEFT: #888888 1px solid
+}
+TH {
+	BORDER-TOP: #888888 1px solid; BORDER-LEFT: #888888 1px solid
+}
+.TableStandard TD {
+	VERTICAL-ALIGN: top; PADDING-BOTTOM: 10px; TEXT-ALIGN: left; PADDING-TOP: 6px; PADDING-LEFT: 12px; PADDING-RIGHT: 10px
+}
+TH {
+	VERTICAL-ALIGN: top; PADDING-BOTTOM: 10px; TEXT-ALIGN: left; PADDING-TOP: 6px; PADDING-LEFT: 12px; PADDING-RIGHT: 10px
+}
+.TableStandard THEAD {
+	COLOR: #333333; BACKGROUND-COLOR: #eeeeee
+}
+#startContainer {
+	PADDING-BOTTOM: 10px
+}

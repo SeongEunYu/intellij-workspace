@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.argonet.r2rims.gotit.mapper.GotitMapper">
+
+  <sql id="pageHeader">SELECT * FROM ( SELECT * FROM (</sql>
+  <sql id="pageFooter"><![CDATA[) WHERE RN  <=  (#{ps} + #{ct})) a  WHERE a.RN > #{ps}]]></sql>
+  <sql id="nvlifnull"><if test="_databaseId == 'oracle' ">NVL</if><if test="_databaseId == 'mysql' ">IFNULL</if></sql>
+  <sql id="prefixToChar"><if test="_databaseId == 'oracle' ">TO_CHAR(</if><if test="_databaseId == 'mysql' ">DATE_FORMAT(</if></sql>
+  <sql id="postfixToCharYmd"><if test="_databaseId == 'oracle' ">, 'YYYYMMDD')</if><if test="_databaseId == 'mysql' ">, '%Y%m%d')</if></sql>
+  <sql id="postfixToCharY-m-d"><if test="_databaseId == 'oracle' ">, 'YYYY-MM-DD')</if><if test="_databaseId == 'mysql' ">, '%Y-%m-%d')</if></sql>
+  <sql id="prefixToDate"><if test="_databaseId == 'oracle' ">TO_DATE(</if><if test="_databaseId == 'mysql' ">STR_TO_DATE(</if></sql>
+  <sql id="postfixToDate"><if test="_databaseId == 'oracle' ">, 'YYYY-MM-DD')</if><if test="_databaseId == 'mysql' ">, '%Y-%m-%d')</if></sql>
+  <sql id="sysdateNow"><if test="_databaseId == 'oracle' ">SYSDATE</if><if test="_databaseId == 'mysql' ">now()</if></sql>
+
+
+  <select id="findTop5" resultType="java.util.HashMap">
+    select RECID, USERID, SVCGRP, TITLE, URL, AUTHOR
+    from GI_RECITEM
+    where USERID = #{userId}
+    order by REGDATE desc limit 5;
+  </select>
+
+  <select id="findFavorite" resultType="java.util.HashMap">
+    select "no", recissueno, data_id, userid, title, svcgrp, solution, url, regdate
+    from GI_FAVORITE
+    where USERID = #{userId}
+    order by REGDATE desc;
+  </select>
+
+</mapper>

@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.argonet.r2rims.erp.mapper.ErpFundingMapper">
+
+  <sql id="pageHeader">SELECT * FROM ( SELECT * FROM (</sql>
+  <sql id="pageFooter"><![CDATA[) WHERE RN  <=  (#{ps} + #{ct})) a  WHERE a.RN > #{ps}]]></sql>
+  <sql id="nvlifnull"><if test="_databaseId == 'oracle' ">NVL</if><if test="_databaseId == 'mysql' ">IFNULL</if></sql>
+  <sql id="prefixToChar"><if test="_databaseId == 'oracle' ">TO_CHAR(</if><if test="_databaseId == 'mysql' ">DATE_FORMAT(</if></sql>
+  <sql id="postfixToCharYmd"><if test="_databaseId == 'oracle' ">, 'YYYYMMDD')</if><if test="_databaseId == 'mysql' ">, '%Y%m%d')</if></sql>
+  <sql id="postfixToCharY-m-d"><if test="_databaseId == 'oracle' ">, 'YYYY-MM-DD')</if><if test="_databaseId == 'mysql' ">, '%Y-%m-%d')</if></sql>
+  <sql id="prefixToDate"><if test="_databaseId == 'oracle' ">TO_DATE(</if><if test="_databaseId == 'mysql' ">STR_TO_DATE(</if></sql>
+  <sql id="postfixToDate"><if test="_databaseId == 'oracle' ">, 'YYYY-MM-DD')</if><if test="_databaseId == 'mysql' ">, '%Y-%m-%d')</if></sql>
+  <sql id="sysdateNow"><if test="_databaseId == 'oracle' ">SYSDATE</if><if test="_databaseId == 'mysql' ">now()</if></sql>
+
+  <select id="findCboPaContractMstNoteVByLastHarvestDate" resultType="kr.co.argonet.r2rims.erp.vo.CboPaContractMstNoteVo">
+	select TA.* from CBO_PA_CONTRACT_MST_NOTE_V TA
+	where TA.PROJECT_ID is not null
+	 and TA.PROJECT_CODE not in (select TB.SEGMENT1 as project_code from PA_PROJECTS_ALL TB where TB.PROJECT_STATUS_CODE like 'R%')
+	 and TA.LAST_UPDATE_DATE <![CDATA[ <  ]]> <include refid="prefixToChar"/><include refid="sysdateNow"/><include refid="postfixToCharYmd"/>
+	 and TA.LAST_UPDATE_DATE <![CDATA[ >= ]]> #{lastHarvestDate, jdbcType=VARCHAR}
+  </select>
+
+  <select id="findCboPaLaborNoteVByLastHarvestDate" resultType="kr.co.argonet.r2rims.erp.vo.CboPaLaborNoteVo">
+  	select TA.* from CBO_PA_LABOR_NOTE_V TA
+  	where TA.LAST_UPDATE_DATE <![CDATA[ <  ]]> <include refid="prefixToChar"/><include refid="sysdateNow"/><include refid="postfixToCharYmd"/>
+	 and TA.LAST_UPDATE_DATE <![CDATA[ >= ]]> #{lastHarvestDate, jdbcType=VARCHAR}
+	 order by HEADER_ID
+  </select>
+
+  <select id="findCboPaBudgetNoteVByLastHarvestDate" resultType="kr.co.argonet.r2rims.erp.vo.CboPaBudgetNoteVo">
+  	select TA.* from CBO_PA_BUDGET_NOTE_NEW_V TA
+  	where TA.LAST_UPDATE_DATE <![CDATA[ <  ]]> <include refid="prefixToChar"/><include refid="sysdateNow"/><include refid="postfixToCharYmd"/>
+	 and TA.LAST_UPDATE_DATE <![CDATA[ >= ]]> #{lastHarvestDate, jdbcType=VARCHAR}
+	 order by CONTRACT_ID
+  </select>
+
+  <select id="findCboPaTaskConMstNoteVByLastHarvestDate" resultType="kr.co.argonet.r2rims.erp.vo.CboPaTaskConMstNoteVo">
+  	select  TA.PROJECT_ID
+	       ,TA.TASK_ID
+	       ,TA.PROJECT_CODE
+	       ,TA.TASK_NUM
+	       ,TA.TASK_MANAGER
+	       ,TA.TASK_NAME
+	       ,TA.TASK_MANAGER_EMP_NO
+	       ,TA.PROJECT_STATUS_CODE
+	       ,<include refid="prefixToChar"/>TA.START_DATE<include refid="postfixToCharYmd"/> 	  as START_DATE
+	       ,<include refid="prefixToChar"/>TA.END_DATE<include refid="postfixToCharYmd"/>		  as END_DATE
+	       ,<include refid="prefixToChar"/>TA.CREATE_DATE<include refid="postfixToCharYmd"/> 	  as CREATE_DATE
+	       ,<include refid="prefixToChar"/>TA.LAST_UPDATE_DATE<include refid="postfixToCharYmd"/> as LAST_UPDATE_DATE
+  	from CBO_PA_TASK_CON_MST_NOTE_V TA
+     where TASK_ID is not null
+      and TASK_NUM != '0Z'
+      and TASK_NUM != 'OZ'
+	  and <include refid="prefixToChar"/>TA.LAST_UPDATE_DATE<include refid="postfixToCharYmd"/> <![CDATA[ <=  ]]> <include refid="prefixToChar"/><include refid="sysdateNow"/><include refid="postfixToCharYmd"/>
+	  and <include refid="prefixToChar"/>TA.LAST_UPDATE_DATE<include refid="postfixToCharYmd"/> <![CDATA[ >= ]]> #{lastHarvestDate, jdbcType=VARCHAR}
+  </select>
+
+  <select id="findCboPaTaskLaborNoteVByLastHarvestDate" resultType="kr.co.argonet.r2rims.erp.vo.CboPaTaskLaborNoteVo">
+  	select TA.* from CBO_PA_TASK_LABOR_NOTE_V TA
+  	where TA.LAST_UPDATE_DATE <![CDATA[ <  ]]> <include refid="prefixToChar"/><include refid="sysdateNow"/><include refid="postfixToCharYmd"/>
+	 and TA.LAST_UPDATE_DATE <![CDATA[ >= ]]> #{lastHarvestDate, jdbcType=VARCHAR}
+	 order by HEADER_ID
+
+  </select>
+
+  <select id="findCboPaTaskBudgetNoteVByLastHarvestDate" resultType="kr.co.argonet.r2rims.erp.vo.CboPaTaskBudgetNoteVo">
+  	select  TA.PROJECT_ID
+	       ,TA.TASK_ID
+	       ,TA.PROJECT_CODE
+	       ,TA.TASK_NUMBER
+	       ,TA.PROJECT_NAME
+	       ,<include refid="prefixToChar"/>TA.START_DATE<include refid="postfixToCharYmd"/> 	  as START_DATE
+	       ,<include refid="prefixToChar"/>TA.END_DATE<include refid="postfixToCharYmd"/>		  as END_DATE
+	       ,TA.TASK_MANAGER
+	       ,TA.ROW_COST
+	       ,TA.LABOR_PROF
+	       ,TA.LABOR_SCH
+	       ,<include refid="prefixToChar"/>TA.CREATE_DATE<include refid="postfixToCharYmd"/> 	  as CREATE_DATE
+	       ,<include refid="prefixToChar"/>TA.LAST_UPDATE_DATE<include refid="postfixToCharYmd"/> as LAST_UPDATE_DATE
+  	from CBO_PA_TASK_BUDGET_NOTE_V TA
+  	where <include refid="prefixToChar"/>TA.LAST_UPDATE_DATE<include refid="postfixToCharYmd"/> <![CDATA[ <  ]]> <include refid="prefixToChar"/><include refid="sysdateNow"/><include refid="postfixToCharYmd"/>
+	 and <include refid="prefixToChar"/>TA.LAST_UPDATE_DATE<include refid="postfixToCharYmd"/> <![CDATA[ >= ]]> #{lastHarvestDate, jdbcType=VARCHAR}
+	 order by TASK_ID
+  </select>
+
+  <select id="findCboPaTaskBudgetNoteVByTaskId" resultType="kr.co.argonet.r2rims.erp.vo.CboPaTaskBudgetNoteVo">
+  	select  TA.PROJECT_ID
+	       ,TA.TASK_ID
+	       ,TA.PROJECT_CODE
+	       ,TA.TASK_NUMBER
+	       ,TA.PROJECT_NAME
+	       ,<include refid="prefixToChar"/>TA.START_DATE<include refid="postfixToCharYmd"/> 	  as START_DATE
+	       ,<include refid="prefixToChar"/>TA.END_DATE<include refid="postfixToCharYmd"/>		  as END_DATE
+	       ,TA.TASK_MANAGER
+	       ,TA.ROW_COST
+	       ,TA.LABOR_PROF
+	       ,TA.LABOR_SCH
+	       ,<include refid="prefixToChar"/>TA.CREATE_DATE<include refid="postfixToCharYmd"/> 	  as CREATE_DATE
+	       ,<include refid="prefixToChar"/>TA.LAST_UPDATE_DATE<include refid="postfixToCharYmd"/> as LAST_UPDATE_DATE
+  	from CBO_PA_TASK_BUDGET_NOTE_V TA
+  	where TASK_ID = #{taskId, jdbcType=VARCHAR}
+  </select>
+
+</mapper>

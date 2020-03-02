@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:context="http://www.springframework.org/schema/context" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
+        http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.2.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.2.xsd
+        http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-4.2.xsd">
+
+	<context:annotation-config />
+	<util:properties id="r2Conf" location="file:/data/software/config/r2rims_kaist/r2rimsConfiguration.properties" />
+	<util:properties id="sysConf" location="file:/data/software/config/r2rims_kaist/r2rimsSystemConfiguration.xml" />
+	<context:property-placeholder properties-ref="sysConf" />
+
+	<bean id="syncActivity" class="kr.co.argonet.r2rims.sysCntc.syncrslt.module.SyncActivityService" ></bean>
+	<bean id="syncUser" class="kr.co.argonet.r2rims.sysCntc.syncrslt.module.SyncUserService" ></bean>
+	<bean id="syncLicense" class="kr.co.argonet.r2rims.sysCntc.syncrslt.module.SyncLicenseService" ></bean>
+	<bean id="syncDegree" class="kr.co.argonet.r2rims.sysCntc.syncrslt.module.SyncDegreeService" ></bean>
+	<bean id="syncCareer" class="kr.co.argonet.r2rims.sysCntc.syncrslt.module.SyncCareerService" ></bean>
+	<bean id="syncAward" class="kr.co.argonet.r2rims.sysCntc.syncrslt.module.SyncAwardService" ></bean>
+	<bean id="syncFunding" class="kr.co.argonet.r2rims.sysCntc.syncrslt.module.SyncFundingService" ></bean>
+
+   	<util:properties id="rims_cfg" location="file:/data/software/config/r2rims_kaist/rims_kaist.cfg" />
+ 	<context:property-placeholder properties-ref="rims_cfg"/>
+
+ 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
+	  <property name="driverClassName" value="#{rims_cfg['oracle.driver']}"/>
+	  <property name="url" value="#{rims_cfg['db.url']}"/>
+	  <property name="username" value="#{rims_cfg['db.username']}"/>
+	  <property name="password" value="#{rims_cfg['db.password']}"/>
+	  <property name="maxActive" value="30"/>
+	  <property name="maxIdle" value="10"/>
+	  <property name="maxWait" value="10000"/>
+	  <property name="defaultAutoCommit" value="true"/>
+	  <property name="validationQuery" value="select 1 from dual"/>
+	  <property name="testWhileIdle" value="true"/>
+	  <property name="timeBetweenEvictionRunsMillis" value="7200000"/>
+	</bean>
+
+ 	<bean id="erpDataSource" class="org.apache.commons.dbcp.BasicDataSource">
+	  <property name="driverClassName" value="#{rims_cfg['oracle.driver']}"/>
+	  <property name="url" value="#{rims_cfg['erp.db.url']}"/>
+	  <property name="username" value="#{rims_cfg['erp.db.username']}"/>
+	  <property name="password" value="#{rims_cfg['erp.db.password']}"/>
+	  <property name="maxActive" value="30"/>
+	  <property name="maxIdle" value="10"/>
+	  <property name="maxWait" value="10000"/>
+	  <property name="defaultAutoCommit" value="true"/>
+	  <property name="validationQuery" value="select 1 from dual"/>
+	  <property name="testWhileIdle" value="true"/>
+	  <property name="timeBetweenEvictionRunsMillis" value="7200000"/>
+	</bean>
+
+ 	<bean id="pmsDataSource" class="org.apache.commons.dbcp.BasicDataSource">
+	  <property name="driverClassName" value="#{rims_cfg['mysql.driver']}"/>
+	  <property name="url" value="#{rims_cfg['pat.db.url']}"/>
+	  <property name="username" value="#{rims_cfg['pat.db.username']}"/>
+	  <property name="password" value="#{rims_cfg['pat.db.password']}"/>
+	  <!--
+	  <property name="password" value="#ppmsno1"/>
+	   -->
+	  <property name="maxActive" value="30"/>
+	  <property name="maxIdle" value="10"/>
+	  <property name="maxWait" value="10000"/>
+	  <property name="defaultAutoCommit" value="true"/>
+	  <property name="validationQuery" value="select 1 from dual"/>
+	  <property name="testWhileIdle" value="true"/>
+	  <property name="timeBetweenEvictionRunsMillis" value="7200000"/>
+	</bean>
+
+ 	<bean id="scholarDataSource" class="org.apache.commons.dbcp.BasicDataSource">
+	  <property name="driverClassName" value="#{rims_cfg['sybase.driver']}"/>
+	  <property name="url" value="#{rims_cfg['scholar.db.url']}"/>
+	  <property name="username" value="#{rims_cfg['scholar.db.username']}"/>
+	  <property name="password" value="#{rims_cfg['scholar.db.password']}"/>
+	  <property name="maxActive" value="30"/>
+	  <property name="maxIdle" value="10"/>
+	  <property name="maxWait" value="10000"/>
+	  <property name="defaultAutoCommit" value="true"/>
+	  <property name="validationQuery" value="select 1"/>
+	  <property name="testWhileIdle" value="true"/>
+	  <property name="timeBetweenEvictionRunsMillis" value="7200000"/>
+	</bean>
+
+</beans>

@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.argonet.r2rims.core.mapper.PatentCntcMpper">
+
+  <sql id="pageHeader">SELECT * FROM ( SELECT * FROM (</sql>
+  <sql id="pageFooter"><![CDATA[) WHERE RN  <=  (#{ps} + #{ct})) a  WHERE a.RN > #{ps}]]></sql>
+  <sql id="nvlifnull"><if test="_databaseId == 'oracle' ">NVL</if><if test="_databaseId == 'mysql' ">IFNULL</if></sql>
+  <sql id="prefixToDate"><if test="_databaseId == 'oracle' ">TO_DATE(</if><if test="_databaseId == 'mysql' ">STR_TO_DATE(</if></sql>
+  <sql id="postfixToDate"><if test="_databaseId == 'oracle' ">, 'YYYY-MM-DD')</if><if test="_databaseId == 'mysql' ">, '%Y-%m-%d')</if></sql>
+  <sql id="sysdateNow"><if test="_databaseId == 'oracle' ">SYSDATE</if><if test="_databaseId == 'mysql' ">now()</if></sql>
+
+  <select id="findBySrcId" resultType="kr.co.argonet.r2rims.core.vo.PatentCntcVo">
+  	select * from RI_PATENT_CNTC where SRC_ID = #{srcId, jdbcType=INTEGER}
+  </select>
+
+  <select id="findByCntcStatus" resultType="kr.co.argonet.r2rims.core.vo.PatentCntcVo">
+  	select * from RI_PATENT_CNTC where CNTC_STATUS = #{cntcStatus, jdbcType=VARCHAR}
+  </select>
+
+  <select id="findLastedInputSrcId" resultType="java.lang.Integer">
+  	select MAX(SRC_ID) as srcId from RI_PATENT_CNTC
+  </select>
+
+  <select id="findLastedModHistId" resultType="java.lang.Integer">
+    select MAX(MOD_HIST_ID) as modHistId from RI_PATENT_CNTC
+  </select>
+
+  <select id="findPatentIdBySrcId" resultType="Integer">
+  	select MAX(PATENT_ID) as patentId from RI_PATENT_CNTC where SRC_ID = #{srcId, jdbcType=INTEGER}
+  </select>
+
+  <sql id="cntcCondition">
+  	<if test='srcId != null and srcId != ""'>
+  		and SRC_ID = #{srcId, jdbcType=INTEGER}
+  	</if>
+  	<if test='patentId != null and patentId != ""'>
+  		and PATENT_ID = #{patentId, jdbcType=INTEGER}
+  	</if>
+  	<if test='srchStatus != null and srchStatus != ""'>
+  		and CNTC_STATUS = #{srchStatus, jdbcType=VARCHAR}
+  	</if>
+  	<if test='sttDate != null and sttDate != ""'>
+  		<![CDATA[ and MOD_DATE >= #{sttDate,jdbcType=DATE} ]]>
+  	</if>
+  	<if test='endDate != null and endDate != ""'>
+  		<![CDATA[ and MOD_DATE <= #{endDate,jdbcType=DATE} ]]>
+  	</if>
+  </sql>
+
+  <sql id="cntcOrderby">
+  	order by
+  	<choose>
+  		<when test='orderby == "srcId"'>SRC_ID</when>
+  		<when test='orderby == "patentId"'>PATENT_ID</when>
+  		<when test='orderby == "status"'>CNTC_STATUS</when>
+  		<otherwise>MOD_DATE</otherwise>
+  	</choose>
+	<if test=" direct != null and direct == 'asc' ">ASC</if>
+	<if test=" direct == null or direct == 'des' ">DESC</if>
+  </sql>
+
+  <select id="countBySearchVo" resultType="int">
+  	select count(*) as totalCount
+  	from RI_PATENT_CNTC
+  	<where>
+  		<include refid="cntcCondition"/>
+  	</where>
+  </select>
+
+  <select id="findBySearchVo" resultType="kr.co.argonet.r2rims.core.vo.PatentCntcVo">
+    <if test="_databaseId == 'oracle' "><include refid="pageHeader"/></if>
+  	select RTC.*
+	      <if test="_databaseId == 'oracle' "> <!-- oracle paging column -->
+	      	,row_number()over(<include refid="cntcOrderby"/>) AS RN
+	      </if>
+  	from RI_PATENT_CNTC RTC
+  	<where>
+  		<include refid="cntcCondition"/>
+  	</where>
+  	<include refid="cntcOrderby"/>
+  	<if test="_databaseId == 'mysql' "> LIMIT ${ps}, ${ct}</if> <!-- mysql paging -->
+	<if test="_databaseId == 'oracle' "><include refid="pageFooter"/></if>
+  </select>
+
+  <insert id="add" parameterType="kr.co.argonet.r2rims.core.vo.PatentCntcVo">
+  	insert into RI_PATENT_CNTC (
+  									<if test="_databaseId == 'oracle' ">SEQ_NO,</if>
+  									SRC_ID,			 	PMS_ID,			FAMILY_CODE, 		MOD_HIST_ID,
+  									SRC_MOD_DATE,		SRC_REG_DATE,   PATENT_ID,			CNTC_STATUS,
+  									REG_USER_ID,		REG_DATE,		MOD_USER_ID,		MOD_DATE
+  	                              )
+  	                        values(
+  									<if test="_databaseId == 'oracle' ">SEQ_RI_PATENT_CNTC.nextval,</if>
+  									#{srcId,jdbcType=INTEGER},			#{pmsId,jdbcType=INTEGER}, 			#{familyCode,jdbcType=VARCHAR}, 		#{modHistId,jdbcType=INTEGER},
+  									#{srcModDate,jdbcType=DATE},		#{srcRegDate,jdbcType=DATE},	    #{patentId,jdbcType=INTEGER},			#{cntcStatus,jdbcType=VARCHAR},
+  									#{regUserId,jdbcType=VARCHAR},		<include refid="sysdateNow"/>,		#{modUserId,jdbcType=VARCHAR},			<include refid="sysdateNow"/>
+  	                              )
+  </insert>
+
+  <update id="update" parameterType="kr.co.argonet.r2rims.core.vo.PatentCntcVo">
+  	update RI_PATENT_CNTC
+  	  <set>
+  	  	 <if test='pmsId != null and pmsId != ""'>
+  	  	 	PMS_ID = #{pmsId,jdbcType=INTEGER},
+  	  	 </if>
+  	  	 <if test='familyCode != null and familyCode != ""'>
+  	  	 	FAMILY_CODE = #{familyCode,jdbcType=INTEGER},
+  	  	 </if>
+  	  	 <if test='modHistId != null and modHistId != ""'>
+  	  	 	MOD_HIST_ID = #{modHistId,jdbcType=INTEGER},
+  	  	 </if>
+  	  	 <if test='patentId != null and patentId != ""'>
+  	  	 	PATENT_ID = #{patentId,jdbcType=INTEGER},
+  	  	 </if>
+  	  	 <if test='cntcStatus != null and cntcStatus != ""'>
+  	  	 	CNTC_STATUS = #{cntcStatus,jdbcType=VARCHAR},
+  	  	 </if>
+  	  	 <if test='srcModDate != null'>
+  	  	 	SRC_MOD_DATE = #{srcModDate,jdbcType=DATE},
+  	  	 </if>
+  	  	 <if test='srcRegDate != null'>
+  	  	 	SRC_REG_DATE = #{srcRegDate,jdbcType=DATE},
+  	  	 </if>
+  	  	 MOD_USER_ID 	= #{modUserId, jdbcType=VARCHAR},
+  	  	 MOD_DATE		= <include refid="sysdateNow"/>
+  	  </set>
+  	 where SEQ_NO = #{seqNo, jdbcType=INTEGER}
+  	   and SRC_ID = #{srcId, jdbcType=INTEGER}
+  </update>
+
+  <update id="updateCntcStatusBySrcId">
+  	update RI_PATENT_CNTC
+  	  <set>
+	  	  CNTC_STATUS = #{cntcStatus,jdbcType=VARCHAR},
+    	  MOD_DATE = <include refid="sysdateNow"/>
+  	  </set>
+  	 where SRC_ID = #{srcId, jdbcType=INTEGER}
+  </update>
+
+  <update id="updateModHistIdBySrcId">
+  	update RI_PATENT_CNTC
+  	  <set>
+	  	   CNTC_STATUS = case when PATENT_ID is null then 'N' else 'U' end
+	  	  ,MOD_HIST_ID = #{modHistId,jdbcType=INTEGER}
+	  	  ,MOD_DATE = <include refid="sysdateNow"/>
+  	  </set>
+  	 where SRC_ID = #{srcId, jdbcType=INTEGER}
+  </update>
+
+  <update id="updatePatentIdBySrcId">
+  	update RI_PATENT_CNTC
+  	  <set>
+	  	   PATENT_ID = #{patentId, jdbcType=INTEGER}
+	  	  ,MOD_DATE = <include refid="sysdateNow"/>
+  	  </set>
+  	 where SRC_ID = #{srcId, jdbcType=INTEGER}
+  </update>
+
+  <delete id="delete">
+  	delete from RI_PATENT_CNTC where SEQ_NO = #{seqNo, jdbcType=INTEGER} and SRC_ID = #{srcId, jdbcType=INTEGER}
+  </delete>
+
+	<update id="completeCntc">
+		UPDATE RI_PATENT_CNTC 
+		<set>
+			patent_id = #{patentId}, 
+			cntc_status = 'D', 
+			mod_date = <include refid="sysdateNow"/>, 
+			mod_user_id = #{modUserId} 
+		</set>
+		<where>
+			src_id = #{srcId} 
+		</where>
+	</update>
+
+	<update id="updateStatus">
+		UPDATE RI_PATENT_CNTC
+		<set>
+			cntc_status = 'D', 
+			mod_date = <include refid="sysdateNow"/>, 
+			mod_user_id = #{modUserId} 
+		</set>
+		<where> 
+			src_id IN 
+			<foreach item="srcId" collection="srcIds" open="(" close=")" separator=",">
+				#{srcId}
+			</foreach>
+		</where>
+	</update>
+  
+</mapper>

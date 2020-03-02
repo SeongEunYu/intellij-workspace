@@ -1,0 +1,32 @@
+@charset "utf-8";
+* {padding:0; margin:0;}
+html { width:100%;height: 100%; -webki.top_search_box .int_typet-tap-highlight-color: rgba(0,0,0,0); -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; }
+body {width:100%; height: 100%;line-height:normal; font-size: 12px; font-family:Malgun Gothic,맑은 고딕, Verdana,Arial, '돋움', Dotum;  color:#555;  }
+body, div, dl, dt, dd, ul, ol, menu, li, h1, h2, h3, h4, h5, h6, pre, form, fieldset, input, textarea, blockquote, th, td, p { margin: 0px; padding: 0px; }
+table { border-collapse: collapse; border-spacing: 0px;}
+fieldset, img, abbr, acronym { margin: 0px; border: 0px; _vertical-align: top; }
+address, caption, cite, code, dfn, em, var { font-style: normal; font-weight: normal; }
+ol,ul,menu { list-style: none; }
+legend { position: absolute;visibility: hidden;height: 0;line-height: 0;font-size: 1px;  }
+q:before, q:after { content:''; }
+a { color: inherit; text-decoration: none; }
+a:hover { text-decoration: none; }
+hr { display: none; }
+em { color: inherit; font-weight: normal; font-style: normal; }
+/*html 5 type*/
+header, footer, article, section, aside, details, figure, figcaption, nav, hgroup { display: block; margin: 0; padding: 0; }
+
+
+
+
+.error_wrap {  background: url(../images/common/top_bg.gif) repeat-x 0 0; }
+.error_box { width:560px; margin:0 auto;background: url(../images/common/error_icon.png) no-repeat 50% 38px; padding: 220px 0 0 0;}
+.error_box .top_error_text {border-top:1px solid #95c8e0; font-size: 22px;font-weight: bold;color: #3b3b3b; padding: 20px 0 0 0; margin-bottom: 20px }
+.error_box .top_error_text strong { font-size: 30px; color: #305eb3;  display: block;  }
+
+.error_text_box { font-size: 13px; line-height: 24px;  margin-bottom: 20px;}
+
+.error_info_box span {display: inline-block;  margin-right: 30px; background: url(../images/common/customer_icon.png) no-repeat 0 0;font-size: 13px; padding: 0 0 0 24px; line-height: 20px; }
+.error_info_box .customer_mail{ margin-right: 0px; background: url(../images/common/customer_icon.png) no-repeat 0 -31px;  }
+
+
