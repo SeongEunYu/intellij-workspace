@@ -8,5 +8,4 @@
 	<beans:import resource="context/context-transaction.xml" />
 	<beans:import resource="context/context-mapper.xml" />
 	<beans:import resource="context/context-schedule.xml" />
-	<beans:import resource="context/context-liquibase.xml" />
 </beans:beans>

@@ -16,9 +16,9 @@
 		class="org.springframework.jdbc.datasource.DataSourceTransactionManager"
 		p:dataSource-ref="dataSource" />
 
-	<bean id="localTransactionManager"
+	<bean id="rssTransactionManager"
 		  class="org.springframework.jdbc.datasource.DataSourceTransactionManager"
-		  p:dataSource-ref="localDataSource" />
+		  p:dataSource-ref="rssDataSource" />
 
 
 </beans>

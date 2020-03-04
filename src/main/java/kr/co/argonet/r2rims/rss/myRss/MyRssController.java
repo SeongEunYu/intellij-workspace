@@ -1,11 +1,9 @@
-package kr.co.argonet.r2rims.myRSS;
+package kr.co.argonet.r2rims.rss.myRss;
 
 import kr.co.argonet.r2rims.constant.R2Constant;
 import kr.co.argonet.r2rims.core.vo.UserVo;
-import kr.co.argonet.r2rims.myRSS.vo.FavoriteVo;
-/*import kr.co.argonet.r2rims.myRSS.vo.MyDocumentVo;*/
+import kr.co.argonet.r2rims.rss.vo.FavoriteVo;
 import kr.co.argonet.r2rims.share.ShareUserService;
-import org.apache.solr.client.solrj.SolrServerException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,14 +12,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-import java.io.IOException;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * <pre>
- *  kr.co.argonet.r2rims.myRSS
+ *  kr.co.argonet.r2rims.rss.myRSS
  *      ┗ MyRssController.java
  *
  * </pre>

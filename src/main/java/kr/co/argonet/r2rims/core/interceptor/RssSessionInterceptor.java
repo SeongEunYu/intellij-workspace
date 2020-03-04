@@ -18,13 +18,13 @@ import java.io.PrintWriter;
  * <pre>
  * 세션 유무를 체크하는 인터셉터
  *  kr.co.argonet.r2rims.core.interceptor
- *      ┗ KaistSessionInterceptor.java
+ *      ┗ RssSessionInterceptor.java
  *
  * </pre>
  */
-public class KaistSessionInterceptor extends HandlerInterceptorAdapter{
+public class RssSessionInterceptor extends HandlerInterceptorAdapter{
 
-	Logger log = LoggerFactory.getLogger(KaistSessionInterceptor.class);
+	Logger log = LoggerFactory.getLogger(RssSessionInterceptor.class);
 
 	@Value("#{sysConf['system.url']}")
 	private String systemUrl;

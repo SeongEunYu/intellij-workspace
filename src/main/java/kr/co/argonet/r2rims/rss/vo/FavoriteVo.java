@@ -1,4 +1,4 @@
-package kr.co.argonet.r2rims.myRSS.vo;
+package kr.co.argonet.r2rims.rss.vo;
 
 /**
  * <pre>

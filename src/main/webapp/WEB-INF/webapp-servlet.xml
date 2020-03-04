@@ -51,7 +51,7 @@
 			<mvc:exclude-mapping path="/index/login.do"/>
 			<mvc:exclude-mapping path="/**Ajax.do"/>
 			<mvc:exclude-mapping path="/share/**"/>
-			<bean class="kr.co.argonet.r2rims.core.interceptor.KaistSessionInterceptor"/>
+			<bean class="kr.co.argonet.r2rims.core.interceptor.RssSessionInterceptor"/>
 		</mvc:interceptor>
 		<mvc:interceptor>
 			<mvc:mapping path="/**"/>

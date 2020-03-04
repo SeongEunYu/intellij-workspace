@@ -8,7 +8,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=yes"/> 
 
 	<title>Research Support System</title>
-	<%@include file="../pageInit.jsp" %>
+	<%@include file="../share/pageInit.jsp" %>
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/share/css/bootstrap.min.css"/>
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/share/css/layout_RSS.css"/>
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/share/css/custom.css"/>

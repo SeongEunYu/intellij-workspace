@@ -1,4 +1,4 @@
-package kr.co.argonet.r2rims.kaist.account;
+package kr.co.argonet.r2rims.rss.account;
 
 import kr.co.argonet.r2rims.core.account.Account;
 import kr.co.argonet.r2rims.core.index.IndexService;

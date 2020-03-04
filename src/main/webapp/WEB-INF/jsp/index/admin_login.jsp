@@ -26,7 +26,7 @@ function loginClick(){ if (event.keyCode == 13) $('#loginForm').submit(); }
 <link href="${pageContext.request.contextPath}/css/layout.css" rel="stylesheet" type="text/css"/>
 </head>
 <body class="login_wrap">
-<form action="${pageContext.request.contextPath}/index/login.do" name="login_form" id="loginForm" method="post" onkeypress="loginClick();">
+<form action="${pageContext.request.contextPath}/login.do" name="login_form" id="loginForm" method="post" onkeypress="loginClick();">
 	<div class="login_box">
 		<%--<h1>${sysConf['system.abbr']}<span>${sysConf['system.full']}</span></h1>--%>
 		<h1>RSS<span>Research Support System</span></h1>

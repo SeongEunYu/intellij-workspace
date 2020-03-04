@@ -1,4 +1,4 @@
-package kr.co.argonet.r2rims.kaist.board;
+package kr.co.argonet.r2rims.rss.board;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,10 +20,10 @@ import kr.co.argonet.r2rims.core.vo.AcessModeVo;
  * @version
  * @author : hojkim
  */
-@Controller(value="kaistBoardController")
-public class KaistBoardController {
+@Controller(value="rssBoardController")
+public class RssBoardController {
 
-	Logger log = LoggerFactory.getLogger(KaistBoardController.class);
+	Logger log = LoggerFactory.getLogger(RssBoardController.class);
 
 	@RequestMapping("/kboard")
 	public String notice(@ModelAttribute AcessModeVo acessModeVo, ModelMap model) {

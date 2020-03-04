@@ -7,13 +7,13 @@
 
 	<context-param>
 		<param-name>webAppRootKey</param-name>
-		<param-value>r2rims.kaist</param-value>
+		<param-value>r2rims.rss</param-value>
 	</context-param>
 
 	<!-- fusionchart config file location -->
 	<context-param>
 		<param-name>fusionchartConfigLocation</param-name>
-		<param-value>file:/data/software/config/r2rims_rss_test/fusioncharts_export.properties</param-value>
+		<param-value>file:/data/software/config/r2rims_rss/fusioncharts_export.properties</param-value>
 	</context-param>
 
 	<!-- logbackconfig listener -->
@@ -26,7 +26,7 @@
 		<!--KAIST-->
 		<!--
 		-->
-		<param-value>file:/data/software/config/r2rims_rss_test/logback.xml</param-value>
+		<param-value>file:/data/software/config/r2rims_rss/logback.xml</param-value>
 
 	</context-param>
 	<listener>
@@ -73,15 +73,6 @@
 	<servlet-mapping>
 		<servlet-name>fileDown</servlet-name>
 		<url-pattern>/servlet/download.do</url-pattern>
-	</servlet-mapping>
-
-	<servlet>
-		<servlet-name>resume</servlet-name>
-		<servlet-class>kr.co.argonet.r2rims.core.servlets.KaistResumeExportServlet</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>resume</servlet-name>
-		<url-pattern>/servlet/resume.do</url-pattern>
 	</servlet-mapping>
 
 	<servlet>

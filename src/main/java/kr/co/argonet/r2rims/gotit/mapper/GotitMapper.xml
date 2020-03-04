@@ -14,14 +14,14 @@
 
 
   <select id="findTop5" resultType="java.util.HashMap">
-    select RECID, USERID, SVCGRP, TITLE, URL, AUTHOR
+    select RECID, USERID, SVCGRP, TITLE, URL, AUTHOR, DATE_FORMAT(REGDATE, '%Y-%m-%d') AS REGDATE
     from GI_RECITEM
     where USERID = #{userId}
     order by REGDATE desc limit 5;
   </select>
 
   <select id="findFavorite" resultType="java.util.HashMap">
-    select "no", recissueno, data_id, userid, title, svcgrp, solution, url, regdate
+    select "no", recissueno, data_id, userid, title, svcgrp, solution, url, DATE_FORMAT(REGDATE, '%Y-%m-%d') AS regdate
     from GI_FAVORITE
     where USERID = #{userId}
     order by REGDATE desc;

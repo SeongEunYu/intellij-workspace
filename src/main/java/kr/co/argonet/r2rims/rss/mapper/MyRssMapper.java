@@ -1,6 +1,6 @@
-package kr.co.argonet.r2rims.myRSS.mapper;
+package kr.co.argonet.r2rims.rss.mapper;
 
-import kr.co.argonet.r2rims.myRSS.vo.FavoriteVo;
+import kr.co.argonet.r2rims.rss.vo.FavoriteVo;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 

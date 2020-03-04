@@ -33,9 +33,9 @@
 		<pattern>*/share/*.do*</pattern>
 	</decorator>
 
-	<decorator name="main" page="default.jsp">
+<!--	<decorator name="main" page="default.jsp">
 		<pattern>*.do</pattern>
-	</decorator>
+	</decorator>-->
 
 
 </decorators>
