@@ -62,9 +62,8 @@
 			type = "add";
 		}
 		var itemId = "${userDetail.encptUserId}";
-		var url = "${pageContext.request.requestURL}";
+		var url = "${requestScope["javax.servlet.forward.request_uri"]}" + "?id=" + itemId;
 
-		//ajax
 		$.ajax({
 			url: ajaxURL,
 			data: {itemId:itemId, svcgrp:svcgrp, type:type, url:url}
