@@ -45,35 +45,6 @@
 			}*!/
 		}*/
 
-		$(".favorite_star").click(function(){
-
-			var ajaxURL = "${pageContext.request.contextPath}/editFavorite.do";
-			var svcgrp = "VUSER";
-			var type = "";
-			if($(".favorite_star").hasClass("star_fill")){
-				type = "remove";
-			} else {
-				type = "add";
-			}
-			var itemId = "${userDetail.encptUserId}";
-			var url = "${pageContext.request.requestURL}";
-
-			//ajax
-			$.ajax({
-				url: ajaxURL,
-				data: {itemId:itemId, svcgrp:svcgrp, type:type, url:url}
-			}).done(function(data){
-                // id와 class만 교체
-                if(type == "add"){
-                    $(".favorite_star").removeClass("star_fill");
-                    $(".favorite_star").addClass("star_empty");
-                } else {
-					$(".favorite_star").removeClass("star_empty");
-					$(".favorite_star").addClass("star_fill");
-                }
-            });
-		});
-
 		//Journal Article 선택
 		tabClick("journal");
 
@@ -81,7 +52,7 @@
 		checkFavorite("${userDetail.encptUserId}")
 	});
 
-	function editFavoriteTest(){
+	function editFavorite(){
 		var ajaxURL = "${pageContext.request.contextPath}/editFavorite.do";
 		var svcgrp = "VUSER";
 		var type = "";
@@ -115,9 +86,9 @@
 
 			var starCode = "";
 			if(data){
-				starCode = "<span class='favorite_star star_fill' onclick='editFavoriteTest();'></span>";
+				starCode = "<span class='favorite_star star_fill' onclick='editFavorite();'></span>";
 			} else {
-				starCode = "<span class='favorite_star star_empty' onclick='editFavoriteTest();'></span>";
+				starCode = "<span class='favorite_star star_empty' onclick='editFavorite();'></span>";
 			}
 
 			$(".r_name").append(starCode);
