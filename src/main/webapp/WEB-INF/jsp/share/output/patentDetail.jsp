@@ -38,7 +38,52 @@
             if(${fn:length(resultMap.articleVoList)+fn:length(resultMap.fundingVoList)+fn:length(resultMap.patentVoList)+fn:length(resultMap.conferenceVoList)} > 0){
                 $("#tabs a").eq(0).addClass("on");
             }
+
+			checkFavorite("${resultMap.patentVo.patentId}")
         });
+
+		function editFavorite(){
+			var ajaxURL = "${pageContext.request.contextPath}/editFavorite.do";
+			var svcgrp = "VPAT";
+			var type = "";
+			if($(".favorite_star").hasClass("star_fill")){
+				type = "remove";
+			} else {
+				type = "add";
+			}
+			var itemId = "${resultMap.patentVo.patentId}";
+			var url = "${requestScope["javax.servlet.forward.request_uri"]}" + "?id=" + itemId;
+
+			//ajax
+			$.ajax({
+				url: ajaxURL,
+				data: {itemId:itemId, svcgrp:svcgrp, type:type, url:url}
+			}).done(function(){
+				$(".favorite_star").remove();
+				checkFavorite(itemId);
+			});
+		}
+
+		function checkFavorite(itemId){
+
+			var svcgrp = "VPAT";
+
+			$.ajax({
+				url: "${pageContext.request.contextPath}/checkFavorite.do",
+				method: "GET",
+				data: {itemId : itemId, svcgrp : svcgrp}
+			}).done(function(data){
+
+				var starCode = "";
+				if(data){
+					starCode = "<span class='favorite_star star_fill' onclick='editFavorite();' style='top:5px;'></span>";
+				} else {
+					starCode = "<span class='favorite_star star_empty' onclick='editFavorite();' style='top:5px;'></span>";
+				}
+
+				$(".view_title").append(starCode);
+			});
+		}
 
 	</script>
 </head>
