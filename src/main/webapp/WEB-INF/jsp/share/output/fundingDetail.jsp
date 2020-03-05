@@ -38,7 +38,7 @@
                 $("#tabs a").eq(0).addClass("on");
             }
 
-			checkFavorite("${resultMap.fundingVo.articleId}")
+			checkFavorite("${resultMap.fundingVo.fundingId}")
         });
 
 		function editFavorite(){
@@ -50,7 +50,7 @@
 			} else {
 				type = "add";
 			}
-			var itemId = "${resultMap.fundingVo.articleId}";
+			var itemId = "${resultMap.fundingVo.fundingId}";
 			var url = "${requestScope["javax.servlet.forward.request_uri"]}" + "?id=" + itemId;
 
 			//ajax
