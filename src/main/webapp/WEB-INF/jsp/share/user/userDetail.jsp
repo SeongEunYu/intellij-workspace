@@ -45,11 +45,84 @@
 			}*!/
 		}*/
 
+		$(".favorite_star").click(function(){
 
+			var ajaxURL = "${pageContext.request.contextPath}/editFavorite.do";
+			var svcgrp = "VUSER";
+			var type = "";
+			if($(".favorite_star").hasClass("star_fill")){
+				type = "remove";
+			} else {
+				type = "add";
+			}
+			var itemId = "${userDetail.encptUserId}";
+			var url = "${pageContext.request.requestURL}";
+
+			//ajax
+			$.ajax({
+				url: ajaxURL,
+				data: {itemId:itemId, svcgrp:svcgrp, type:type, url:url}
+			}).done(function(data){
+                // id와 class만 교체
+                if(type == "add"){
+                    $(".favorite_star").removeClass("star_fill");
+                    $(".favorite_star").addClass("star_empty");
+                } else {
+					$(".favorite_star").removeClass("star_empty");
+					$(".favorite_star").addClass("star_fill");
+                }
+            });
+		});
 
 		//Journal Article 선택
 		tabClick("journal");
+
+		// favorite check
+		checkFavorite("${userDetail.encptUserId}")
 	});
+
+	function editFavoriteTest(){
+		var ajaxURL = "${pageContext.request.contextPath}/editFavorite.do";
+		var svcgrp = "VUSER";
+		var type = "";
+		if($(".favorite_star").hasClass("star_fill")){
+			type = "remove";
+		} else {
+			type = "add";
+		}
+		var itemId = "${userDetail.encptUserId}";
+		var url = "${pageContext.request.requestURL}";
+
+		//ajax
+		$.ajax({
+			url: ajaxURL,
+			data: {itemId:itemId, svcgrp:svcgrp, type:type, url:url}
+		}).done(function(){
+			$(".favorite_star").remove();
+			checkFavorite(itemId);
+		});
+	}
+
+	function checkFavorite(itemId){
+
+		var svcgrp = "VUSER";
+
+		$.ajax({
+			url: "${pageContext.request.contextPath}/checkFavorite.do",
+			method: "GET",
+			data: {itemId : itemId, svcgrp : svcgrp}
+		}).done(function(data){
+
+			var starCode = "";
+			if(data){
+				starCode = "<span class='favorite_star star_fill' onclick='editFavoriteTest();'></span>";
+			} else {
+				starCode = "<span class='favorite_star star_empty' onclick='editFavoriteTest();'></span>";
+			}
+
+			$(".r_name").append(starCode);
+		});
+	}
 
 	function tabClick(tabId){
 
@@ -390,7 +463,7 @@ function coAuthorNetworkWithInstView(encptUserId, type){
 			<div class="pic_box">
 				<span>
 					<c:if test="${userDetail.profPhotoFileId != null}">
-						<img src="${contextPath}/rims/servlet/image/profile.do?fileid=<c:out value="${userDetail.profPhotoFileId}"/>" height="164" width="130"/>
+						<img src="${contextPath}/rss/servlet/image/profile.do?fileid=<c:out value="${userDetail.profPhotoFileId}"/>" height="164" width="130"/>
 					</c:if>
 					<c:if test="${userDetail.profPhotoFileId == null}">
 						<img src="<c:url value="/share/img/common/researcher_none_img.jpg"/>"/>
@@ -401,17 +474,15 @@ function coAuthorNetworkWithInstView(encptUserId, type){
 				<div class="ri_box">
 					<div class="r_name">
 						<c:out value='${userDetail.engNm}' /><em>(<c:out value='${userDetail.korNm}' />)</em>
-						<%--<i class="far fa-star" style="color: #bebfb2"></i>
-						<i class="fas fa-star" style="color: #f3cd16"></i>--%>
 					</div>
 					<c:set value='${userDetail.posiNm == "교수" ? "Professor" :userDetail.posiNm == "조교수" ? "Assistant Professor" :userDetail.posiNm == "부교수" ? "Associate Professor" :"" }' var="engPosiNm"/>
 					<span class="r_t02"><c:out value='${language eq "en" ? engPosiNm : userDetail.posiNm}'/>, <c:out value='${language eq "en" ? userDetail.deptEng : userDetail.deptKor}'/></span>
 					<div class="ri_type_box" style="background:white;">
-						<c:if test="${userDetail.rid != null}"><a href="http://www.researcherid.com/rid/${userDetail.rid}" class="rid_type" target="_blank" >rid</a></c:if>
-						<c:if test="${userDetail.scpid != null}"><a href="https://www.scopus.com/authid/detail.uri?authorId=${userDetail.scpid}" class="si_type" target="_blank">scopus</a></c:if>
-						<c:if test="${userDetail.orcid != null}"><a href="http://orcid.org/${userDetail.orcid}" class="id_type" target="_blank">orcid</a></c:if>
-						<c:if test="${userDetail.rgtid != null}"><a href="https://www.researchgate.net/profile/${userDetail.rgtid}" class="rg_type" target="_blank">research gate</a></c:if>
-						<c:if test="${userDetail.grdId != null}"><a href="https://scholar.google.com/citations?user=${userDetail.grdId}" class="gi_type" target="_blank">google</a></c:if>
+						<a <c:if test="${userDetail.rid != null}">href="http://www.researcherid.com/rid/${userDetail.rid}"</c:if> class="rid_type${userDetail.rid != null ? '_on' : ''}" target="_blank" >rid</a>
+						<a <c:if test="${userDetail.scpid != null}">href="https://www.scopus.com/authid/detail.uri?authorId=${userDetail.scpid}"</c:if> class="si_type${userDetail.scpid != null ? '_on' : ''}" target="_blank">scopus</a>
+						<a <c:if test="${userDetail.orcid != null}">href="http://orcid.org/${userDetail.orcid}"</c:if> class="id_type${userDetail.orcid != null ? '_on' : ''}" target="_blank">orcid</a>
+						<a <c:if test="${userDetail.rgtid != null}">href="https://www.researchgate.net/profile/${userDetail.rgtid}"</c:if> class="rg_type${userDetail.rgtid != null ? '_on' : ''}" target="_blank">research gate</a>
+						<a <c:if test="${userDetail.grdId != null}">href="https://scholar.google.com/citations?user=${userDetail.grdId}"</c:if> class="gi_type${userDetail.grdId != null ? '_on' : ''}" target="_blank">google</a>
 					</div>
 				</div>
 				<div class="ri_bottom_box">
@@ -506,7 +577,7 @@ function coAuthorNetworkWithInstView(encptUserId, type){
 										<a href="#" onclick="$(this).closest('form').submit()" title="<c:out value='${language eq "en"? coAuthor.engNm : coAuthor.korNm}'/> (<c:out value='${language eq "en"? coAuthor.deptEng : coAuthor.deptKor}'/>)">
 											<span class="researcher_img ${coAuthor.profPhotoFileId == null ? 'none_img' : ''}">
 												<c:if test="${coAuthor.profPhotoFileId != null}">
-													<img src="${contextPath}/rims/servlet/image/profile.do?fileid=<c:out value="${coAuthor.profPhotoFileId}"/>"/>
+													<img src="${contextPath}/rss/servlet/image/profile.do?fileid=<c:out value="${coAuthor.profPhotoFileId}"/>"/>
 												</c:if>
 											</span>
 										</a>
@@ -531,7 +602,7 @@ function coAuthorNetworkWithInstView(encptUserId, type){
 									<a href="#" onclick="$(this).closest('form').submit()" title="<c:out value='${language eq "en"? similar.engNm : similar.korNm}'/> (<c:out value='${language eq "en"? similar.deptEng : similar.deptKor}'/>)">
 										<span class="researcher_img ${similar.profPhotoFileId == null ? 'none_img' : ''}">
 											<c:if test="${similar.profPhotoFileId != null}">
-												<img src="${contextPath}/rims/servlet/image/profile.do?fileid=<c:out value="${similar.profPhotoFileId}"/>"/>
+												<img src="${contextPath}/rss/servlet/image/profile.do?fileid=<c:out value="${similar.profPhotoFileId}"/>"/>
 											</c:if>
 										</span>
 									</a>

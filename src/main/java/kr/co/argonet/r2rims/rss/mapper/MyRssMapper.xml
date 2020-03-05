@@ -15,22 +15,56 @@
 
   <select id="findFavorite" resultType="kr.co.argonet.r2rims.rss.vo.FavoriteVo">
     <if test="_databaseId == 'oracle'">
-      select RF.TITLE, RF.SVCGRP, RF.REGDATE, RF.SOLUTION, RF.DATA_ID
-      from (select rownum as num, NO, TITLE, SVCGRP, REGDATE, SOLUTION, DATA_ID, USER_ID from RSS_FAVORITE) RF
-      where RF.USER_ID = #{userId}
-      and RF.num <![CDATA[ > ]]> #{page}
-      and RF.num <![CDATA[ <= ]]> #{count}
+      select AF.TITLE, AF.SVCGRP, AF.REGDATE, AF.SOLUTION, AF.DATA_ID
+      from (select rownum as num, NO, TITLE, SVCGRP, REGDATE, SOLUTION, DATA_ID, USER_ID from AT_FAVORITE) AF
+      where AF.USER_ID = #{userId}
+      and AF.num <![CDATA[ > ]]> #{page}
+      and AF.num <![CDATA[ <= ]]> #{count}
     </if>
     <if test="_databaseId == 'mysql'">
-      select RF.TITLE, RF.SVCGRP, RF.REGDATE, RF.SOLUTION, RF.DATA_ID
-      from RSS_FAVORITE RF
-      where RF.USER_ID = #{userId}
+      select AF.TITLE, AF.SVCGRP, AF.REGDATE, AF.SOLUTION, AF.DATA_ID
+      from AT_FAVORITE AF
+      where AF.USER_ID = #{userId}
       limit #{page}, #{count}
     </if>
   </select>
 
   <select id="totalFavorite" resultType="int">
-    select count(1) from RSS_FAVORITE where USER_ID = #{userId}
+    select count(1) from AT_FAVORITE where USER_ID = #{userId}
   </select>
+
+  <select id="findByItemId" resultType="java.lang.String">
+    select NO
+    from AT_FAVORITE
+    where USER_ID = #{userId}
+    and SVCGRP = #{svcgrp}
+    and DATA_ID = #{dataId}
+    and SOLUTION = 'rss'
+  </select>
+
+
+
+  <insert id="addFavorite" parameterType="kr.co.argonet.r2rims.rss.vo.FavoriteVo" keyColumn="NO" keyProperty="no" useGeneratedKeys="true">
+      <selectKey keyProperty="no" resultType="int" order="AFTER">
+          <if test="_databaseId == 'oracle' ">select SEQ_AT_FAVORITE.CURRVAL from dual</if>
+          <if test="_databaseId == 'mysql' ">select LAST_INSERT_ID()</if>
+      </selectKey>
+      insert into AT_FAVORITE (
+          <if test="_databaseId == 'oracle' ">NO,</if>
+          TITLE, SVCGRP, SOLUTION, DATA_ID, URL, USER_ID
+      )
+      values(
+          <if test="_databaseId == 'oracle' ">SEQ_AT_FAVORITE.NEXTVAL,</if>
+          #{title, jdbcType=VARCHAR}, #{svcgrp, jdbcType=VARCHAR}, #{solution, jdbcType=VARCHAR}, #{dataId, jdbcType=VARCHAR}, #{url, jdbcType=VARCHAR}, #{userId, jdbcType=VARCHAR}
+      )
+  </insert>
+
+  <delete id="deleteFavorite">
+    delete from AT_FAVORITE
+    where USER_ID = #{userId}
+    and SVCGRP = #{svcgrp}
+    and DATA_ID = #{dataId}
+    and SOLUTION = 'rss'
+  </delete>
 
 </mapper>

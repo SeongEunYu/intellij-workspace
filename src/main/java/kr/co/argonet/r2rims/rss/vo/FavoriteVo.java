@@ -25,8 +25,8 @@ public class FavoriteVo implements Serializable {
     private String svcgrp;
     private Date regDate;
     private String solution;
-    private String data_id;
+    private String dataId;
     private String url;
-    private String user_id;
+    private String userId;
     private Integer recIssueNo;
 }

@@ -23,4 +23,10 @@ public interface MyRssMapper {
 
     Integer totalFavorite(@Param("userId") String userId);
 
+    String findByItemId(@Param("dataId") String dataId, @Param("svcgrp") String svcgrp, @Param("userId") String userId);
+
+    void addFavorite(FavoriteVo favoriteVo);
+
+    void deleteFavorite(@Param("userId") String userId, @Param("svcgrp") String svcgrp, @Param("dataId") String dataId);
+
 }

@@ -73,18 +73,35 @@ public class MyRssController {
         return "/share/aboutRims/mydocument";
     }
 
-    // EDIT Favorite
+    // add Favorite
     @RequestMapping(value = "/editFavorite")
-    private @ResponseBody void editMyDocument(ModelMap model, HttpServletRequest req,
-                                              @RequestParam("flag") String flag,
-                                              @RequestParam("id") String id,
-                                              @RequestParam("type") String type,
-                                              @RequestParam("url") String url){
+    private @ResponseBody void editFavorite(HttpServletRequest req,
+                                            @RequestParam("itemId") String itemId,
+                                            @RequestParam("svcgrp") String svcgrp,
+                                            @RequestParam("type") String type,
+                                            @RequestParam("url") String url){
 
         UserVo sessUser = (UserVo) req.getSession().getAttribute(R2Constant.SESSION_USER);
-
         String userId = sessUser.getUserId();
 
-        /*myRssService.addFavorite(userId, id, flag, type);*/
+        myRssService.editFavorite(itemId, svcgrp, userId, type, url);
+    }
+
+    // Favorite 체크(연구자, 논문 등의 상세페이지 부분)
+    // r2Rims_share를 통해 불러올 때 같이 불러오기?? 현재는 ajax로 favorite 체크
+    @RequestMapping(value = "/checkFavorite")
+    private @ResponseBody boolean checkFavorite(@RequestParam("itemId") String itemId,
+                                               @RequestParam("svcgrp") String svcgrp,
+                                               HttpServletRequest req){
+
+        UserVo sessUser = (UserVo) req.getSession().getAttribute(R2Constant.SESSION_USER);
+        String userId = sessUser.getUserId();
+        boolean result = false;
+
+        int favorite = myRssService.checkFavorite(itemId, svcgrp, userId);
+        if(favorite > 0){
+            result = true;
+        }
+        return result;
     }
 }

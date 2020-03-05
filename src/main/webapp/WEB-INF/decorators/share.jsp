@@ -66,7 +66,7 @@
 	<script>
 		<%
 			String url = request.getRequestURL().toString();
-			if(url.contains("rims.kaist.ac.kr")){
+			if(url.contains("rss.bwise.kr")){
 		%>
         // Global site tag (gtag.js) - Google Analytics
         window.dataLayer = window.dataLayer || [];
@@ -153,10 +153,10 @@
 <div id="sb-site">
 	<div class="system_header_wrap">
 		<div class="system_header_inner">
-			<h1 class="rss_logo"><a href="${pageContext.request.contextPath}/share/user/main.do">Research Support System</a></h1>
+			<h1 class="rss_logo"><a href="${pageContext.request.contextPath}/home.do">Research Support System</a></h1>
 			<div class="user_search_wrap">
 				<%--<input type="text" title="검색" class="u_s_int"  placeholder="Search" id="searchAllName" name="searchAllName"/>--%>
-				<form action="/rims/share/user/searchAll.do" method="get" id="searchAllForm" onsubmit="return searchCheck()">
+				<form action="/rss/share/user/searchAll.do" method="get" id="searchAllForm" onsubmit="return searchCheck()">
 					<input class="u_s_int" type="text" placeholder="연구자 이름, 연구분야 또는 키워드를 입력하세요." id="searchAllName" name="searchAllName" value="">
 					<span class="focus-border">
 						<i></i>
