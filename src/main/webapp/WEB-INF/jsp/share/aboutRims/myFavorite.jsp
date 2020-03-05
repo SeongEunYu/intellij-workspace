@@ -108,7 +108,7 @@
                     </thead>
                         <tbody>
                         <c:choose>
-                            <c: test="${fn:length(favoriteList) > 0}">
+                            <c:when test="${fn:length(favoriteList) > 0}">
                                 <c:forEach items="${favoriteList}" var="favorite">
                                     <tr>
                                         <td class='al_center' style="padding-left: 0px; padding-right: 0px">
@@ -117,9 +117,18 @@
                                                     <c:when test="${favorite.svcgrp == 'VUSER'}">
                                                         연구자
                                                     </c:when>
-                                                    <c:otherwise>
-
-                                                    </c:otherwise>
+                                                    <c:when test="${favorite.svcgrp == 'VART'}">
+                                                        논문
+                                                    </c:when>
+                                                    <c:when test="${favorite.svcgrp == 'VPROJ'}">
+                                                        연구과제
+                                                    </c:when>
+                                                    <c:when test="${favorite.svcgrp == 'VPAT'}">
+                                                        특허
+                                                    </c:when>
+                                                    <c:when test="${favorite.svcgrp == 'VCONF'}">
+                                                        학술활동
+                                                    </c:when>
                                                 </c:choose>
                                             </span>
                                         </td>

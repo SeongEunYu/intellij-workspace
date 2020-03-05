@@ -15,14 +15,14 @@
 
   <select id="findFavorite" resultType="kr.co.argonet.r2rims.rss.vo.FavoriteVo">
     <if test="_databaseId == 'oracle'">
-      select AF.TITLE, AF.SVCGRP, AF.REGDATE, AF.SOLUTION, AF.DATA_ID
-      from (select rownum as num, NO, TITLE, SVCGRP, REGDATE, SOLUTION, DATA_ID, USER_ID from AT_FAVORITE) AF
+      select AF.TITLE, AF.SVCGRP, AF.REGDATE, AF.SOLUTION, AF.DATA_ID, AF.URL
+      from (select rownum as num, NO, TITLE, SVCGRP, REGDATE, SOLUTION, DATA_ID, USER_ID, URL from AT_FAVORITE) AF
       where AF.USER_ID = #{userId}
       and AF.num <![CDATA[ > ]]> #{page}
       and AF.num <![CDATA[ <= ]]> #{count}
     </if>
     <if test="_databaseId == 'mysql'">
-      select AF.TITLE, AF.SVCGRP, AF.REGDATE, AF.SOLUTION, AF.DATA_ID
+      select AF.TITLE, AF.SVCGRP, AF.REGDATE, AF.SOLUTION, AF.DATA_ID, AF.URL
       from AT_FAVORITE AF
       where AF.USER_ID = #{userId}
       limit #{page}, #{count}
