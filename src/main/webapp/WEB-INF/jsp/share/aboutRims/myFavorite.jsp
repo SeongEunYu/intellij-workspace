@@ -41,7 +41,7 @@
         function goDocument(page){
             var addr = "&page="+page+"&sort="+sort;
 
-            $(location).attr('href',"${pageContext.request.contextPath}/share/myRss/myDocument.do?"+addr);
+            $(location).attr('href',"${pageContext.request.contextPath}/share/myRss/myFavorite.do?"+addr);
         }
 
         //페이지 그리기
@@ -108,10 +108,21 @@
                     </thead>
                         <tbody>
                         <c:choose>
-                            <c:when test="${fn:length(favoriteList) > 0}">
+                            <c: test="${fn:length(favoriteList) > 0}">
                                 <c:forEach items="${favoriteList}" var="favorite">
                                     <tr>
-                                        <td class='al_center' style="padding-left: 0px; padding-right: 0px"><span style="font-size: 13px"><c:out value="${favorite.svcgrp != 'null' ? favorite.svcgrp : ''}"/></span></td>
+                                        <td class='al_center' style="padding-left: 0px; padding-right: 0px">
+                                            <span style="font-size: 13px">
+                                                <c:choose>
+                                                    <c:when test="${favorite.svcgrp == 'VUSER'}">
+                                                        연구자
+                                                    </c:when>
+                                                    <c:otherwise>
+
+                                                    </c:otherwise>
+                                                </c:choose>
+                                            </span>
+                                        </td>
                                         <td class='al_left'><a href="${favorite.url}"><c:out value="${favorite.title != 'null' ? favorite.title : 'Not found Title'}" escapeXml="false"/></a></td>
                                         <%--<td class='al_center' style="padding-left: 0px; padding-right: 0px"><span style="font-size: 13px"><c:out value="${favorite.regDate != 'null' ? favorite.regDate : ''}"/></span></td>--%>
                                         <td class='al_center' style="padding-left: 0px; padding-right: 0px"><span style="font-size: 13px"><fmt:formatDate value="${favorite.regDate}" pattern="yyyy-MM-dd"/></span></td>

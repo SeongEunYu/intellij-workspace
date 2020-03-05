@@ -34,7 +34,7 @@ public class MyRssController {
     private ShareUserService userService;
 
     // My Document 리스트
-    @RequestMapping(value = "/share/myRss/myDocument")
+    @RequestMapping(value = "/share/myRss/myFavorite")
     private String findMyDocument(ModelMap model, HttpServletRequest req,
                                   @RequestParam(value = "page", defaultValue = "1") String page,
                                   @RequestParam(value = "sort", defaultValue = "date") String sort,
@@ -70,7 +70,7 @@ public class MyRssController {
         model.addAttribute("totalFavorite",totalFavorite);
         model.addAttribute("page",page);
 
-        return "/share/aboutRims/mydocument";
+        return "/share/aboutRims/myFavorite";
     }
 
     // add Favorite
