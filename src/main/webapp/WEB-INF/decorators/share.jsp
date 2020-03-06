@@ -157,7 +157,7 @@
 			<div class="user_search_wrap">
 				<%--<input type="text" title="검색" class="u_s_int"  placeholder="Search" id="searchAllName" name="searchAllName"/>--%>
 				<form action="/rss/share/user/searchAll.do" method="get" id="searchAllForm" onsubmit="return searchCheck()">
-					<input class="u_s_int" type="text" placeholder="연구자 이름, 연구분야 또는 키워드를 입력하세요." id="searchAllName" name="searchAllName" value="">
+					<input class="u_s_int" type="text" placeholder="연구자 이름, 연구분야 또는 키워드를 입력하세요." id="searchAllName" name="searchAllName" value="<c:out value="${searchAllName}"/>">
 					<span class="focus-border">
 						<i></i>
 					</span>
