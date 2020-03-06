@@ -44,9 +44,9 @@ public class MyRssService {
     private FundingMapper fundingMapper;
 
 
-    public List<FavoriteVo> findFavorite (String userId, int ps, int end, String sort, String order){
+    public List<FavoriteVo> findFavorite (String userId, int ps, int ct, String sort, String order){
         List<FavoriteVo> favoriteList = new ArrayList<>();
-        favoriteList = myRssMapper.findFavorite(userId, ps, end, sort, order);
+        favoriteList = myRssMapper.findFavorite(userId, ps, ct, sort, order);
         return favoriteList;
     }
 

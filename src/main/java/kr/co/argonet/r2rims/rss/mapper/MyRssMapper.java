@@ -19,7 +19,7 @@ import java.util.List;
 @Repository(value = "myRssMapper")
 public interface MyRssMapper {
 
-    List<FavoriteVo> findFavorite(@Param("userId") String userId, @Param("page") int ps, @Param("count") int end, @Param("sort") String sort, @Param("order") String order);
+    List<FavoriteVo> findFavorite(@Param("userId") String userId, @Param("page") int ps, @Param("count") int ct, @Param("sort") String sort, @Param("order") String order);
 
     Integer totalFavorite(@Param("userId") String userId);
 

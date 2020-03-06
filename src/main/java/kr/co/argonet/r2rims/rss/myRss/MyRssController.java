@@ -37,7 +37,7 @@ public class MyRssController {
     @RequestMapping(value = "/share/myRss/myFavorite")
     private String findMyDocument(ModelMap model, HttpServletRequest req,
                                   @RequestParam(value = "page", defaultValue = "1") String page,
-                                  @RequestParam(value = "sort", defaultValue = "date") String sort,
+                                  @RequestParam(value = "sort", defaultValue = "regDate") String sort,
                                   @RequestParam(value = "order", defaultValue = "desc") String order){
 
         UserVo sessUser = (UserVo) req.getSession().getAttribute(R2Constant.SESSION_USER);
@@ -58,7 +58,7 @@ public class MyRssController {
             end = ps+ct;
         }
 
-        List<FavoriteVo> favoriteList = myRssService.findFavorite(userId, ps, end, sort, order);
+        List<FavoriteVo> favoriteList = myRssService.findFavorite(userId, ps, ct, sort, order);
 
 
         model.addAttribute("pageList", userService.drawPages(Integer.parseInt(page), (double)ct, (double)totalFavorite));
@@ -69,6 +69,8 @@ public class MyRssController {
         model.addAttribute("end",end);
         model.addAttribute("totalFavorite",totalFavorite);
         model.addAttribute("page",page);
+        model.addAttribute("sort", sort);
+        model.addAttribute("order", order);
 
         return "/share/aboutRims/myFavorite";
     }

@@ -2,6 +2,9 @@
 <%@include file="../pageInit.jsp" %>
 <head>
     <script type="text/javascript">
+        var sort = "${sort}";
+        var order = "${order}";
+
         $(function () {
             //대메뉴 형광색 들어오게하기
             $("#bigAbout").addClass("on");
@@ -26,6 +29,9 @@
                 }
             });
 
+            $("#"+sort).addClass(order.slice(0,-1)+"_type");
+            $("#"+sort).css("font-weight","bold");
+
             //페이징 변수 초기화
             var pageClass = [];
             var pageNm = [];
@@ -39,7 +45,7 @@
         });
 
         function goDocument(page){
-            var addr = "&page="+page+"&sort="+sort;
+            var addr = "page="+page+"&sort="+sort+"&order="+order;
 
             $(location).attr('href',"${pageContext.request.contextPath}/share/myRss/myFavorite.do?"+addr);
         }
@@ -47,7 +53,6 @@
         //페이지 그리기
         function drawPages(pageClass, pageNm){
             var span = 1;
-            var searchName = "${searchName}";
             var currentPage = "${page}";
 
             //페이징
@@ -70,6 +75,22 @@
                 }
             }
         }
+
+        //sort a태그 클릭시
+        function sortTab(inSortNm){
+            if(sort == inSortNm){
+                if(order == "desc"){
+                    order = "asc";
+                }else{
+                    order = "desc";
+                }
+            }else{
+                sort = inSortNm;
+                if(inSortNm == "regDate")  order = "desc";
+            }
+
+            goDocument("1");
+        }
     </script>
 </head>
 <body>
@@ -87,9 +108,8 @@
                     <p class="page_num_box"></p>
                     <div class="list_sort_box">
                         <ul>
-                            <li><i><span style="padding-right: 30px;"><spring:message code="disc.sort.sort"/></span></i><a href="javascript:sortTab('date')" id="date" style="display: inline;"><span><spring:message code="disc.sort.date"/></span></a></li>
-                            <li><a href="javascript:sortTab('hit')" id="hit" style="display: inline;"><span><spring:message code="disc.sort.views"/></span></a></li>
-                            <li class="hidden"><a href="javascript:sortTab('score')" id="score"><span><spring:message code="disc.sort.relevance"/></span></a></li>
+                            <li><i><span style="padding-right: 30px;"><spring:message code="disc.sort.sort"/></span></i><a onclick="sortTab('regDate')" id="regDate" style="display: inline; cursor: pointer;"><span><spring:message code="disc.sort.date"/></span><em>정렬</em></a></li>
+                            <%--<li><a href="javascript:sortTab('svcgrp')" id="hit" style="display: inline;"><span>구분순</span></a></li>--%>
                         </ul>
                     </div>
                 </div>

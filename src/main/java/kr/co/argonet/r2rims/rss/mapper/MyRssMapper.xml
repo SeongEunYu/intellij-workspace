@@ -12,7 +12,6 @@
   <sql id="postfixToDate"><if test="_databaseId == 'oracle' ">, 'YYYY-MM-DD')</if><if test="_databaseId == 'mysql' ">, '%Y-%m-%d')</if></sql>
   <sql id="sysdateNow"><if test="_databaseId == 'oracle' ">SYSDATE</if><if test="_databaseId == 'mysql' ">now()</if></sql>
 
-
   <select id="findFavorite" resultType="kr.co.argonet.r2rims.rss.vo.FavoriteVo">
     <if test="_databaseId == 'oracle'">
       select AF.TITLE, AF.SVCGRP, AF.REGDATE, AF.SOLUTION, AF.DATA_ID, AF.URL
@@ -25,7 +24,15 @@
       select AF.TITLE, AF.SVCGRP, AF.REGDATE, AF.SOLUTION, AF.DATA_ID, AF.URL
       from AT_FAVORITE AF
       where AF.USER_ID = #{userId}
-      limit #{page}, #{count}
+        <choose>
+            <when test='sort == "regDate" and order == "desc"'>
+              order by AF.REGDATE desc
+            </when>
+            <otherwise>
+              order by AF.REGDATE
+            </otherwise>
+        </choose>
+      limit #{page} <![CDATA[,]]> #{count}
     </if>
   </select>
 
