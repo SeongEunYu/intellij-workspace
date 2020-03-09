@@ -207,3 +207,17 @@ function fn_resume(){
         $('#closeBtn').trigger('click');
 	}
 }
+
+function fn_resume_2(type){
+	if($('.chk_rslt:checked').length > 0)
+	{
+		location.href = contextpath+"/servlet/resume.do?" + $('#resumeFrm').serialize();
+		$('.chk_rslt').prop('checked',false);
+		$('#closeBtn').trigger('click');
+	}
+	else
+	{
+		dhtmlx.alert({type:"alert-warning",text:"Resume로 출력할 성과를 선택하세요.",callback:function(){}});
+		return;
+	}
+}

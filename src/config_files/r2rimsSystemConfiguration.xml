@@ -15,7 +15,7 @@
     <entry key="inst.name.eng">CAU</entry>
     <entry key="inst.name.eng.full">Chung-ang University</entry>
     <entry key="inst.address.kor">서울특별시 동작구 흑석로 84</entry>
-    <entry key="inst.portal.url">http://localhost:8080/rss/home.do</entry>
+    <entry key="inst.portal.url">https://rss.bwise.kr/rss/home.do</entry>
 
     <entry key="system.admin.email">webmaster@cau.ac.kr</entry>
     <entry key="system.admin.telno">02-820-6193</entry>
@@ -89,7 +89,7 @@
     <entry key="article.abstract.datatype">CLOB</entry> <!-- or VARCHAR2 -->
     <entry key="article.author.prtcpnt.name.lang">en</entry>
 
-    <entry key="article.solr.url">http://localhost:8983/solr/rss_article</entry>
+    <entry key="article.solr.url">http://solr:8983/solr/rss_article</entry>
 
     <!--<entry key="article.solr.url">http://work.argonet.co.kr:48983/solr/kaist_article</entry>-->
     <entry key="article.pblcday.input.at">N</entry>
@@ -135,7 +135,7 @@
 
     <!-- Solr search -->
 
-    <entry key="search.solr.url">http://localhost:8983/solr/rss_researcher</entry>
+    <entry key="search.solr.url">http://solr:8983/solr/rss_researcher</entry>
 
     <!--<entry key="search.solr.url">http://143.248.118.21:8983/solr/kaist_researcher</entry>-->
     <entry key="search.solr.proximity">5</entry>
@@ -224,8 +224,8 @@
     <!--
     <entry key="system.url">http://143.248.103.115:8080</entry>
      -->
-    <entry key="system.url">http://localhost:8080/rss/login.do</entry>
-    <entry key="proxy.url">http://localhost:8080/rss</entry>
+    <entry key="system.url">http://rss.bwise.kr/rss/main/home.do</entry>
+    <entry key="proxy.url">http://rss.bwise.kr/rss</entry>
 
     <!-- IP Range -->
     <entry key="mngr.perm.ip.class">143.248.;0:0:0:;127.0.0.;172.28.11.</entry>
@@ -267,11 +267,11 @@
     <entry key="dis.code.fud.solr.url">http://143.248.118.21:8983/solr/kaist_funding</entry>
     <entry key="dis.code.pat.solr.url">http://143.248.118.21:8983/solr/kaist_patent</entry>
     <entry key="dis.code.con.solr.url">http://143.248.118.21:8983/solr/kaist_conference</entry>-->
-    <entry key="dis.code.usr.solr.url">http://localhost:8983/solr/rss_user</entry>
-    <entry key="dis.code.art.solr.url">http://localhost:8983/solr/rss_article</entry>
-    <entry key="dis.code.fud.solr.url">http://localhost:8983/solr/rss_funding</entry>
-    <entry key="dis.code.pat.solr.url">http://localhost:8983/solr/rss_patent</entry>
-    <entry key="dis.code.con.solr.url">http://localhost:8983/solr/rss_conference</entry>
+    <entry key="dis.code.usr.solr.url">http://solr:8983/solr/rss_user</entry>
+    <entry key="dis.code.art.solr.url">http://solr:8983/solr/rss_article</entry>
+    <entry key="dis.code.fud.solr.url">http://solr:8983/solr/rss_funding</entry>
+    <entry key="dis.code.pat.solr.url">http://solr:8983/solr/rss_patent</entry>
+    <entry key="dis.code.con.solr.url">http://solr:8983/solr/rss_conference</entry>
     <entry key="dis.limit.ip">192.249.16~31;110.76.64~127;137.68.*;143.248.*;172.28.11.1~20</entry>
     <entry key="dis.not.session.check.ip"></entry>
 

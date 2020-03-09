@@ -76,6 +76,15 @@
 	</servlet-mapping>
 
 	<servlet>
+		<servlet-name>resume</servlet-name>
+		<servlet-class>kr.co.argonet.r2rims.core.servlets.ResumeExportServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>resume</servlet-name>
+		<url-pattern>/servlet/resume.do</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
 		<servlet-name>imageView</servlet-name>
 		<servlet-class>kr.co.argonet.r2rims.core.servlets.ImageViewServlet</servlet-class>
 	</servlet>
