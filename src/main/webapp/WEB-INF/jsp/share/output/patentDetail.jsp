@@ -52,7 +52,7 @@
 				type = "add";
 			}
 			var itemId = "${resultMap.patentVo.patentId}";
-			var url = "${requestScope["javax.servlet.forward.request_uri"]}" + "?id=" + itemId;
+			var url = document.location.href;
 
 			//ajax
 			$.ajax({

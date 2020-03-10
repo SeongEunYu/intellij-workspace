@@ -33,7 +33,7 @@
 		<afterInit>
 			<c:if test="${param.statsGubun eq 'F'}">
 			<call command="attachHeader">
-				<param>#rspan,기관,KAIST,#rspan,#rspan,#rspan,#rspan,#rspan,#rspan,#rspan,사번,성명,소속,#rspan,#rspan,#rspan,#rspan</param>
+				<param>#rspan,기관,CAU,#rspan,#rspan,#rspan,#rspan,#rspan,#rspan,#rspan,사번,성명,소속,#rspan,#rspan,#rspan,#rspan</param>
 				<param>text-align:center;,text-align:center;,text-align:center;,text-align:center;,text-align:center;,
 					text-align:center;,text-align:center;,text-align:center;,text-align:center;,text-align:center;,text-align:center;,
 					text-align:center;,text-align:center;,text-align:center;,text-align:center;,text-align:center;,text-align:center;

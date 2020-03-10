@@ -165,6 +165,16 @@ input[type="checkbox"],input[type="radio"] { vertical-align: middle; }
 .service_link_box ul li a .system_rss {   background: url(../img/background_rss/system_icon01.png) no-repeat 50% 0; }
 .service_link_box ul li a .system_sw {   background: url(../img/background_rss/scholarworks_logo.png) no-repeat 50% 0; }
 
+.service_link_box ul li .service_gray span { color: #aeaeae}
+.service_link_box ul li .service_gray em { background: url(../img/background_rss/rims_logo_dis.png) no-repeat 50% 0; }
+.service_link_box ul li .service_gray .system_rss {   background: url(../img/background_rss/system_icon01_dis.png) no-repeat 50% 0; }
+.service_link_box ul li .service_gray .system_sw {   background: url(../img/background_rss/scholarworks_logo_dis.png) no-repeat 50% 0; }
+.service_link_box ul li .service_gray .system_ra {   background: url(../img/background_rss/rims_analysis_logo_dis.png) no-repeat 50% 0; }
+.service_link_box ul li .service_gray .system_rd {   background: url(../img/background_rss/rims_discovery_logo_dis.png) no-repeat 50% 0; }
+.service_link_box ul li .service_gray .system_s2 {   background: url(../img/background_rss/s2journal_logo_dis.png) no-repeat 50% 0; }
+.service_link_box ul li .service_gray .system_g {   background: url(../img/background_rss/circle_gotit_dis.png) no-repeat 50% 0; }
+.service_link_box ul li .service_gray .system_prism {   background: url(../img/background_rss/prism_logo_dis.png) no-repeat 50% 0; }
+
 .service_link_box ul li a span {
     overflow: hidden;
     text-overflow: ellipsis;

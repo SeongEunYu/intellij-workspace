@@ -40,7 +40,7 @@ function lfn_sso() {
 	</div>
 <form id="kriApiFrm" action="http://www.kri.go.kr/kri/ra/cm/sso/wisesso_api.jsp">
 	<input type="hidden"  name="AgcId"  value="610400"/>
-	<input type="hidden"  name="AgcPw"  value="kaist_argonet"/>
+	<input type="hidden"  name="AgcPw"  value="cau_argonet"/>
 	<input type="hidden"  name="Type"  value="1"/>
 	<input type="hidden"  name="RschrRegNo"  value="${sessionScope.sess_user.rschrRegNo}"/>
 </form>

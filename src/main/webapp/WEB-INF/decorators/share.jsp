@@ -270,10 +270,10 @@
 					<div class="sub_menu" style="display: none;">
 						<ul style="display: none;">
 							<%--<li><a href="${pageContext.request.contextPath}/share/myRss/myDocument.do"><spring:message code="disc.menu.rss.doc"/></a></li>--%>
-								<li><a href="${pageContext.request.contextPath}/share/myRss/myFavorite.do">My Achivements</a></li>
-								<li><a href="${pageContext.request.contextPath}/share/myRss/myFavorite.do">My Recomended</a></li>
-								<li><a href="${pageContext.request.contextPath}/share/myRss/myFavorite.do">My Achivements Analysis</a></li>
-								<li><a href="${pageContext.request.contextPath}/share/myRss/myFavorite.do">My Favorite</a></li>
+                                <li><a href="${pageContext.request.contextPath}/personal/myRss/myArchivements.do">My Archivements</a></li>
+                                <li><a href="${pageContext.request.contextPath}/personal/myRss/myRecommended.do">My Recommended</a></li>
+                                <li><a href="${pageContext.request.contextPath}/personal/myRss/myAnalysis.do">My Archivements Analysis</a></li>
+                                <li><a href="${pageContext.request.contextPath}/personal/myRss/myFavorite.do">My Favorite</a></li>
 						</ul>
 					</div>
 				</li>

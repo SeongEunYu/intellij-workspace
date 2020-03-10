@@ -290,7 +290,7 @@ function toggleTimeSpan(value){
 				<tr>
 					<th>Query</th>
 					<td colspan="3">
-						<textarea rows="3"  style="width: 100%" name="userQuery" id="userQuery">AD=KAIST</textarea>
+						<textarea rows="3"  style="width: 100%" name="userQuery" id="userQuery">AD=CAU</textarea>
 					</td>
 					<td rowspan="4" class="option_search_td" onclick="javascript:impGrid_load();"><em>search</em></td>
 				</tr>

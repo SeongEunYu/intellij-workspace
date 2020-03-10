@@ -208,7 +208,7 @@ function downloadListXlsx(param) {
 				<tr class="fundingGubun">
 					<th>연구과제 관리번호</th>
 					<td><input type="text" name="fundingId" class="input2" /></td>
-					<th>과제번호(KAIST)</th>
+					<th>과제번호</th>
 					<td colspan="3"><input type="text" name="agcSbjtNo" class="input2" /></td>
 				</tr>
 				<tr class="fundingGubun">

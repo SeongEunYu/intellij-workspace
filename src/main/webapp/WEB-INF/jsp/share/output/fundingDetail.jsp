@@ -51,7 +51,7 @@
 				type = "add";
 			}
 			var itemId = "${resultMap.fundingVo.fundingId}";
-			var url = "${requestScope["javax.servlet.forward.request_uri"]}" + "?id=" + itemId;
+			var url = document.location.href;
 
 			//ajax
 			$.ajax({

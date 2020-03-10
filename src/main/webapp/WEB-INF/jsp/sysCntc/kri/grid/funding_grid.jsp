@@ -9,7 +9,7 @@
 		<column width="120" type="ro" align="center" sort="na" id="rsrcctSpptDvsCd"><![CDATA[<div style='text-align:center;font-weight:bold;'>연구비지원구분</div>]]></column>
 		<column width="*" type="ro" align="left" sort="na" id="rschSbjtNm"><![CDATA[<div style='text-align:center;font-weight:bold;'>연구과제명</div>]]></column>
 		<column width="100" type="ro" align="center" sort="na" id="sbjtNo"><![CDATA[<div style='text-align:center;font-weight:bold;'>과제번호</div>]]></column>
-		<column width="100" type="ro" align="center" sort="na" id="agcSbjtNo"><![CDATA[<div style='text-align:center;font-weight:bold;'>과제번호(KAIST)</div>]]></column>
+		<column width="100" type="ro" align="center" sort="na" id="agcSbjtNo"><![CDATA[<div style='text-align:center;font-weight:bold;'>과제번호</div>]]></column>
 		<column width="110" type="ro" align="center" sort="na" id="rsrcctSpptAgcNm"><![CDATA[<div style='text-align:center;font-weight:bold;'>연구비지원기관</div>]]></column>
 		<column width="75" type="ro" align="center" sort="na" id="apprDvsCd"><![CDATA[<div style='text-align:center;font-weight:bold;'>승인여부</div>]]></column>
 		<column width="78" type="ro" align="center" sort="na" id="modDate"><![CDATA[<div style='text-align:center;font-weight:bold;'>최종수정일</div>]]></column>

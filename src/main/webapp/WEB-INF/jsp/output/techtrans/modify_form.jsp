@@ -128,7 +128,7 @@
 									<th><spring:message code='tech.dept.dstb'/></th>
 									<th><spring:message code='tech.acdincp.dstb'/></th>
 									-->
-									<th style="width:70px;">KAIST승인</th>
+									<th style="width:70px;">CAU 승인</th>
 									<th style="width:100px;">승인일자</th>
 									<th style="width:160px;">담당자의견</th>
 									<th style="width: 60px;"></th>

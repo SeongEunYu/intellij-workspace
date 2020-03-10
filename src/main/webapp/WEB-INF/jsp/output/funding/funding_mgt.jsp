@@ -20,7 +20,7 @@ $(document).ready(function(){
 	dhxLayout.cells("a").hideHeader();
 	dhxLayout.setSizes(false);
 
-	var header = "번호,관리번호,연구기간,연구비지원구분,연구과제명,과제번호,과제번호(KAIST),연구비지원기관,승인여부,최종수정일,삭제여부,Source";
+	var header = "번호,관리번호,연구기간,연구비지원구분,연구과제명,과제번호,과제번호,연구비지원기관,승인여부,최종수정일,삭제여부,Source";
 	var columnIds = "no,fundingId,rschCmcmYm,rsrcctSpptDvsCd,rschSbjtNm,sbjtNo,agcSbjtNo,rsrcctSpptAgcNm,apprDvsCd,modDate,delDvsCd,overallFlag";
 	var initWidths = "40,70,120,120,*,100,100,110,75,78,60,53";
 	var colAlign = "center,center,center,center,left,center,center,left,center,center,center,center";
@@ -280,7 +280,7 @@ function fn_export(){
 					<tr>
 						<th>관리번호</th>
 						<td><input type="text" name="fundingId" id="fundingId" class="input2" maxlength="10" onKeyup="javascript:if(event.keyCode=='13')myGrid_load();"/></td>
-						<th>과제번호(KAIST)</th>
+						<th>과제번호</th>
 						<td><input type="text" name="agcSbjtNo" id="agcSbjtNo" class="input2" maxlength="10" onKeyup="javascript:if(event.keyCode=='13')myGrid_load();"/></td>
 					</tr>
 					<tr>

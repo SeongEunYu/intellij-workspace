@@ -57,7 +57,8 @@
 				type = "add";
 			}
 			var itemId = "${resultMap.conferenceVo.conferenceId}";
-			var url = "${requestScope["javax.servlet.forward.request_uri"]}" + "?id=" + itemId;
+			var url = document.location.href;
+
 
 			//ajax
 			$.ajax({

@@ -375,13 +375,13 @@ function downloadAppointmentSciXlsx(appointment) {
 					</tr>
 					<tr>
 						<th><spring:message code='stats.report.integ.otherorg'/></th>
-						<th>KAIST</th>
+						<th>CAU</th>
 						<th><spring:message code='stats.report.integ.otherorg'/></th>
-						<th>KAIST</th>
+						<th>CAU</th>
 						<th><spring:message code='stats.report.integ.otherorg'/></th>
-						<th>KAIST</th>
+						<th>CAU</th>
 						<th><spring:message code='stats.report.integ.otherorg'/></th>
-						<th style="border-right: 0;">KAIST</th>
+						<th style="border-right: 0;">CAU</th>
 					</tr>
 					</thead>
 					<tbody>
@@ -595,11 +595,11 @@ function downloadAppointmentSciXlsx(appointment) {
 					</tr>
 					<tr>
 						<th><spring:message code='stats.report.integ.otherorg'/></th>
-						<th>KAIST</th>
+						<th>CAU</th>
 						<th><spring:message code='stats.report.integ.otherorg'/></th>
-						<th>KAIST</th>
+						<th>CAU</th>
 						<th><spring:message code='stats.report.integ.otherorg'/></th>
-						<th style="border-right: 0;">KAIST</th>
+						<th style="border-right: 0;">CAU</th>
 					</tr>
 					</thead>
 					<tbody>
