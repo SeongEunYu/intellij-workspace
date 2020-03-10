@@ -46,38 +46,37 @@
 			<mvc:mapping path="/**" />
 			<bean class="kr.co.argonet.r2rims.core.interceptor.LocaleInterceptor"/>
 		</mvc:interceptor>
-		<mvc:interceptor>
-			<mvc:mapping path="/**"/>
-			<mvc:exclude-mapping path="/index/login.do"/>
-			<mvc:exclude-mapping path="/**Ajax.do"/>
-			<mvc:exclude-mapping path="/share/**"/>
-			<bean class="kr.co.argonet.r2rims.core.interceptor.RssSessionInterceptor"/>
-		</mvc:interceptor>
-		<mvc:interceptor>
-			<mvc:mapping path="/**"/>
-			<mvc:exclude-mapping path="/index/login.do"/>
-			<mvc:exclude-mapping path="/**Ajax.do"/>
-			<mvc:exclude-mapping path="/share/**"/>
-			<bean class="kr.co.argonet.r2rims.core.interceptor.AuthorityInterceptor"/>
-		</mvc:interceptor>
-		<mvc:interceptor>
-			<mvc:mapping path="/**"/>
-			<mvc:exclude-mapping path="/index/login.do"/>
-			<mvc:exclude-mapping path="/main.do"/>
-			<mvc:exclude-mapping path="/**Ajax.do"/>
-			<mvc:exclude-mapping path="/share/**"/>
-			<bean class="kr.co.argonet.r2rims.core.interceptor.InfoPrtcAgreInterceptor"/>
-		</mvc:interceptor>
-		<mvc:interceptor>
-			<mvc:mapping path="/analysis/**"/>
-			<mvc:exclude-mapping path="/analysis/**Ajax.do"/>
-			<bean class="kr.co.argonet.r2rims.core.interceptor.AnalysisLogInterceptor" />
-		</mvc:interceptor>
-		<mvc:interceptor>
-			<mvc:mapping path="/share/**"/>
-			<mvc:exclude-mapping path="/share/api/**"/>
-			<bean class="kr.co.argonet.r2rims.core.interceptor.ShareSessionInterceptor" />
-		</mvc:interceptor>
+		<!--<mvc:interceptor>-->
+			<!--<mvc:mapping path="/**"/>-->
+			<!--<mvc:exclude-mapping path="/home.do"/>-->
+			<!--<mvc:exclude-mapping path="/**Ajax.do"/>-->
+			<!--<mvc:exclude-mapping path="/share/**"/>-->
+			<!--<bean class="kr.co.argonet.r2rims.core.interceptor.RssSessionInterceptor"/>-->
+		<!--</mvc:interceptor>-->
+		<!--<mvc:interceptor>-->
+			<!--<mvc:mapping path="/**"/>-->
+			<!--<mvc:exclude-mapping path="/home.do"/>-->
+			<!--<mvc:exclude-mapping path="/**Ajax.do"/>-->
+			<!--<mvc:exclude-mapping path="/share/**"/>-->
+			<!--<bean class="kr.co.argonet.r2rims.core.interceptor.AuthorityInterceptor"/>-->
+		<!--</mvc:interceptor>-->
+		<!--<mvc:interceptor>-->
+			<!--<mvc:mapping path="/**"/>-->
+			<!--<mvc:exclude-mapping path="/home.do"/>-->
+			<!--<mvc:exclude-mapping path="/**Ajax.do"/>-->
+			<!--<mvc:exclude-mapping path="/share/**"/>-->
+			<!--<bean class="kr.co.argonet.r2rims.core.interceptor.InfoPrtcAgreInterceptor"/>-->
+		<!--</mvc:interceptor>-->
+		<!--<mvc:interceptor>-->
+			<!--<mvc:mapping path="/analysis/**"/>-->
+			<!--<mvc:exclude-mapping path="/analysis/**Ajax.do"/>-->
+			<!--<bean class="kr.co.argonet.r2rims.core.interceptor.AnalysisLogInterceptor" />-->
+		<!--</mvc:interceptor>-->
+		<!--<mvc:interceptor>-->
+			<!--<mvc:mapping path="/share/**"/>-->
+			<!--<mvc:exclude-mapping path="/share/api/**"/>-->
+			<!--<bean class="kr.co.argonet.r2rims.core.interceptor.ShareSessionInterceptor" />-->
+		<!--</mvc:interceptor>-->
 		<mvc:interceptor>
 			<mvc:mapping path="/**"/>
 			<bean id="webContentInterceptor" class="org.springframework.web.servlet.mvc.WebContentInterceptor">

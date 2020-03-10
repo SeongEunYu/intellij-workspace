@@ -39,6 +39,8 @@ public class RssSessionInterceptor extends HandlerInterceptorAdapter{
 
 		if(usingAuth == null)
 		{
+			log.debug("session check Interceptor : usingAuth null");
+
 			HttpSession session = request.getSession();
 			UserVo loginUser = (UserVo) session.getAttribute(R2Constant.LOGIN_USER);
 			if(loginUser == null || loginUser.getUserId() == null)
