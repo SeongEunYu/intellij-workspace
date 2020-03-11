@@ -281,10 +281,14 @@
 <form id="frm" name="frm" method="post">
 <div class="top_search_wrap">
 	<div class="ts_title">
-		<h3><spring:message code="disc.anls.keyNet.title"/></h3>
+		<%--<h3><spring:message code="disc.anls.keyNet.title"/></h3>--%>
+		<h3>키워드 동시발생 네트워크</h3>
 	</div>
 	<div class="ts_text_box">
-		<div class="ts_text_inner"><p style="font-weight:bold;"><spring:message code="disc.anls.keyNet.desc"/></p></div>
+		<div class="ts_text_inner">
+			<%--<p style="font-weight:bold;"><spring:message code="disc.anls.keyNet.desc"/></p>--%>
+			<p style="font-weight:bold;">상위 출현 용어를 기준으로 동일 논문에 해당 키워드가 얼마나 많이 출현했는지 활인할 수 있습니다. 연결된 선이 굵을수록 관계가 깊고, 원의 크기가 클수록 출현빈도가 높습니다.</p>
+		</div>
 	</div>
 	<div class="search_select_option">
 		<ul>

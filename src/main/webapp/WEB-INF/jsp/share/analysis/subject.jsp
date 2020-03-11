@@ -233,7 +233,12 @@
 		<h3><spring:message code="disc.anls.sbj.title"/></h3>
 	</div>
 	<div class="ts_text_box">
-		<div class="ts_text_inner"><p style="font-weight:bold;"><spring:message code="disc.anls.sbj.desc"/></p></div>
+		<div class="ts_text_inner">
+			<p style="font-weight:bold;">
+				<%--<spring:message code="disc.anls.sbj.desc"/>--%>
+				학과별로 출판된 논문의 저널 주제분야 분석정보를 제공합니다.
+			</p>
+		</div>
 	</div>
 	<form id="frm" name="frm">
 		<input type="hidden" id="language" name="language"/>

@@ -153,10 +153,10 @@
 <div id="sb-site">
 	<div class="system_header_wrap">
 		<div class="system_header_inner">
-			<h1 class="rss_logo"><a href="${pageContext.request.contextPath}/home.do">Research Support System</a></h1>
+			<h1 class="rss_logo"><a href="${pageContext.request.contextPath}/home/login.do">Research Support System</a></h1>
 			<div class="user_search_wrap">
 				<%--<input type="text" title="검색" class="u_s_int"  placeholder="Search" id="searchAllName" name="searchAllName"/>--%>
-				<form action="/rss/share/user/searchAll.do" method="get" id="searchAllForm" onsubmit="return searchCheck()">
+				<form action="${pageContext.request.contextPath}/search/all.do" method="get" id="searchAllForm" onsubmit="return searchCheck()">
 					<input class="u_s_int" type="text" placeholder="연구자 이름, 연구분야 또는 키워드를 입력하세요." id="searchAllName" name="searchAllName" value="<c:out value="${searchAllName}"/>">
 					<span class="focus-border">
 						<i></i>
@@ -170,14 +170,14 @@
 					<a href="#" class="top_icon_btn service_btn">서비스 이동</a>
 					<div class="service_link_box">
 						<ul>
-							<li><a href="#"><em class="system_rss">RSS</em><span>RSS</span></a></li>
-							<li><a href="#"><em>Rims</em><span>RIMS</span></a></li>
-							<li><a href="#"><em class="system_rd">Discovery</em><span>Discovery</span></a></li>
-							<li><a href="#"><em class="system_s2">S2jJournal</em><span>S2jJournal</span></a></li>
-							<li><a href="#"><em class="system_g">GotIt</em><span>GotIt</span></a></li>
-							<li><a href="#"><em class="system_prism">PRISM</em><span>PRISM</span></a></li>
-							<li><a href="#"><em class="system_sw">ScholarWorks</em><span>ScholarWorks</span></a></li>
-							<li><a href="#"><em class="system_board">Board</em><span>Board</span></a></li>
+							<li><a <c:if test="${RSS.admin eq 'Y' or RSS.user eq 'Y'}">href="https://rss.bwise.kr/home/login.do"</c:if><c:if test="${RSS.admin eq 'N' and RSS.user eq 'N'}"> class="service_gray"</c:if>><em class="system_rss">RSS</em><span>RSS</span></a></li>
+							<li><a <c:if test="${RIMS.admin eq 'Y' or RIMS.user eq 'Y'}">href="https://rims.cau.ac.kr/"</c:if><c:if test="${RIMS.admin eq 'N' and RIMS.user eq 'N'}"> class="service_gray"</c:if>><em>Rims</em><span>RIMS</span></a></li>
+							<li><a <c:if test="${DISCOVERY.admin eq 'Y' or DISCOVERY.user eq 'Y'}">href="#"</c:if><c:if test="${DISCOVERY.admin eq 'N' and DISCOVERY.user eq 'N'}"> class="service_gray"</c:if>><em class="system_rd">Discovery</em><span>Discovery</span></a></li>
+							<li><a <c:if test="${S2JOURNAL.admin eq 'Y' or S2JOURNAL.user eq 'Y'}">href="https://s2journal.bwise.kr/"</c:if><c:if test="${S2JOURNAL.admin eq 'N' and S2JOURNAL.user eq 'N'}"> class="service_gray"</c:if>><em class="system_s2">S2jJournal</em><span>S2jJournal</span></a></li>
+							<li><a <c:if test="${GOTIT.admin eq 'Y' or GOTIT.user eq 'Y'}">href="https://gotit.bwise.kr/auth/rsch/main"</c:if><c:if test="${GOTIT.admin eq 'N' and GOTIT.user eq 'N'}"> class="service_gray"</c:if>><em class="system_g">GotIt</em><span>GotIt</span></a></li>
+							<li><a <c:if test="${PRISM.admin eq 'Y' or PRISM.user eq 'Y'}">href="#"</c:if><c:if test="${PRISM.admin eq 'N' and PRISM.user eq 'N'}"> class="service_gray"</c:if>><em class="system_prism">PRISM</em><span>PRISM</span></a></li>
+							<li><a <c:if test="${SCHOLARWORKS.admin eq 'Y' or SCHOLARWORKS.user eq 'Y'}">href="#"</c:if><c:if test="${SCHOLARWORKS.admin eq 'N' and SCHOLARWORKS.user eq 'N'}"> class="service_gray"</c:if>><em class="system_sw">ScholarWorks</em><span>ScholarWorks</span></a></li>
+							<li><a <c:if test="${BOARD.admin eq 'Y' or BOARD.user eq 'Y'}">href=""</c:if><c:if test="${BOARD.admin eq 'N' and BOARD.user eq 'N'}"> class="service_gray"</c:if>><em class="system_board">Board</em><span>Board</span></a></li>
 						</ul>
 					</div>
 				</div><!-- 서비스 설정 -->
@@ -185,18 +185,18 @@
 					<div class="user_box">
 						<c:choose>
 							<c:when test="${pageContext.response.locale eq 'ko'}">
-								${sessionScope.sess_user.korNm}
+								${userInfo.korNm}
 							</c:when>
 							<c:otherwise>
-								<c:if test="${not empty sessionScope.sess_user.lastName}">
-									${sessionScope.sess_user.lastName}, ${sessionScope.sess_user.firstName}
+								<c:if test="${not empty userInfo.lastName}">
+									${userInfo.lastName}, ${userInfo.firstName}
 								</c:if>
-								<c:if test="${empty sessionScope.sess_user.lastName}">
-									${sessionScope.sess_user.engNm}
+								<c:if test="${empty userInfo.lastName}">
+									${userInfo.engNm}
 								</c:if>
 							</c:otherwise>
 						</c:choose>
-						<a href="<c:url value="/logout.do"/>" class="logout_btn">Logout</a>
+						<a href="<c:url value="/home/logout.do"/>" class="logout_btn">Logout</a>
 					</div>
 				</div>
 			</div>
@@ -239,7 +239,7 @@
 							<li><a href="${pageContext.request.contextPath}/share/article/subject.do"><spring:message code="disc.menu.anls.sbj"/></a></li>
 							<li><a href="${pageContext.request.contextPath}/share/article/journalByDept.do"><spring:message code="disc.menu.anls.jnl"/></a></li>
 							<li><a href="${pageContext.request.contextPath}/share/user/keywordAnalysis.do"><spring:message code="disc.menu.anls.key"/></a></li>
-							<li><a href="${pageContext.request.contextPath}/share/user/keywordNetwork.do"><spring:message code="disc.menu.anls.keyNet"/></a></li>
+							<%--<li><a href="${pageContext.request.contextPath}/share/user/keywordNetwork.do"><spring:message code="disc.menu.anls.keyNet"/></a></li>--%>
 							<%--<li><a href="${pageContext.request.contextPath}/share/article/SCIByYear.do">SCI Artices by Year</a></li>
 							<li><a href="#">Journal Impact Factor</a></li>--%>
 						</ul>
@@ -292,7 +292,7 @@
 				<em class="f_line">Contact</em>Academic Information Development Team
 			</c:if>
 			<c:if test="${language eq 'ko'}">
-				<em class="f_line">문의</em>학술정보개발팀
+				<em class="f_line">문의</em>학술정보원 주제정보서비스팀
 			</c:if>
 			<span class="foonter_icon01">${sysConf['system.admin.telno']}</span>
 			<span class="foonter_icon02">${sysConf['system.admin.email']}</span>

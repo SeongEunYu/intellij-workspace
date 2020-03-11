@@ -254,7 +254,7 @@
 					<em class="f_line">Contact</em>Academic Information Development Team
 				</c:if>
 				<c:if test="${language eq 'ko'}">
-					<em class="f_line">문의</em>학술정보개발팀
+					<em class="f_line">문의</em>학술정보원 주제정보서비스팀
 				</c:if>
   				<span class="foonter_icon01">${sysConf['system.admin.telno']}</span>
   				<span class="foonter_icon02">${sysConf['system.admin.email']}</span>

@@ -19,7 +19,7 @@
             String name = c.getName(); // 쿠키 이름 가져오기
 
             if(ssoCookieList.contains( name ) ) {
-                c.setDomain(".cau.ac.kr");
+                c.setDomain("rss.bwise.kr");
                 c.setPath("/");
 
                 c.setMaxAge(0); // 유효시간을 0으로 설정

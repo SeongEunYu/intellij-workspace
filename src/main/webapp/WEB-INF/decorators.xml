@@ -32,6 +32,7 @@
 	<decorator name="share" page="share.jsp">
 		<pattern>*/share/*.do*</pattern>
 		<pattern>*/personal/*.do*</pattern>
+		<pattern>*/search/*.do*</pattern>
 	</decorator>
 
 <!--	<decorator name="main" page="default.jsp">

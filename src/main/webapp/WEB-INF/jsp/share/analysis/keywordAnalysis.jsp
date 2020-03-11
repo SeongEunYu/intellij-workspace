@@ -355,10 +355,14 @@
 <form id="frm" name="frm" method="post">
 <div class="top_search_wrap">
 	<div class="ts_title">
-		<h3><spring:message code="disc.anls.key.title"/></h3>
+		<%--<h3><spring:message code="disc.anls.key.title"/></h3>--%>
+		<h3>키워드 트렌드 네트워크</h3>
 	</div>
 	<div class="ts_text_box">
-		<div class="ts_text_inner"><p style="font-weight:bold;"><spring:message code="disc.anls.key.desc"/></p></div>
+		<div class="ts_text_inner">
+			<%--<p style="font-weight:bold;"><spring:message code="disc.anls.key.desc"/></p>--%>
+			<p style="font-weight:bold;">논문의 저자 키워드를 기반으로 학과별 연구 키워드 트렌드를 확인하실 수 있습니다.</p>
+		</div>
 	</div>
 	<div class="search_select_option">
 		<ul>

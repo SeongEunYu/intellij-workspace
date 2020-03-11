@@ -153,10 +153,18 @@
 <body><!--nav_wrap : e  -->
 <div class="top_search_wrap">
 	<div class="ts_title">
-		<h3><spring:message code="disc.anls.topif.title"/></h3>
+		<%--<h3><spring:message code="disc.anls.topif.title"/></h3>--%>
+		<h3>최상위 논문 by IF</h3>
 	</div>
 	<div class="ts_text_box">
-		<div class="ts_text_inner"><p><span  style="font-weight:bold;"><spring:message code="disc.anls.topif.desc"/></span></p></div>
+		<div class="ts_text_inner">
+			<p>
+				<%--<span  style="font-weight:bold;"><spring:message code="disc.anls.topif.desc"/></span>--%>
+				<span  style="font-weight:bold;">저널 영향력 지수(JIF)가 주제별로 상위 1%~20%안에 드는 중앙대학교 논문 정보를 제공합니다. </span>
+				<br>
+				<span>(출처: Journal Citation Report by CLARIVATE ANALYTICS)</span>
+			</p>
+		</div>
 	</div>
 	<div class="search_select_option">
 		<ul>

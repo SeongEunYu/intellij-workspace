@@ -86,7 +86,14 @@
 			<h3><spring:message code="disc.anls.toprf.title"/></h3>
 		</div>
 		<div class="ts_text_box">
-			<div class="ts_text_inner"><p><span  style="font-weight:bold;"><spring:message code="disc.anls.toprf.desc"/></span></p></div>
+			<%--<div class="ts_text_inner"><p><span  style="font-weight:bold;"><spring:message code="disc.anls.toprf.desc"/></span></p></div>--%>
+			<div class="ts_text_inner">
+				<p>
+					<span  style="font-weight:bold;">최근 10년간 출판된 논문 중에서 연구분야별로 피인용수가 세계 상위 1%안에 드는 중앙대학교 논문 현황을 보실 수 있습니다.</span>
+					<br>
+					<span>(출처: Essential Science Indicator by CLARIVATE ANALYTICS)</span>
+				</p>
+			</div>
 		</div>
 		<div class="search_select_option">
 			<span class="sel_label"><spring:message code="disc.search.filter.pub.date"/></span>
