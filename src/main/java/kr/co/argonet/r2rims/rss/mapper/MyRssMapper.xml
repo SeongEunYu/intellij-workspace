@@ -14,14 +14,14 @@
 
   <select id="findFavorite" resultType="kr.co.argonet.r2rims.rss.vo.FavoriteVo">
     <if test="_databaseId == 'oracle'">
-      select AF.TITLE, AF.SVCGRP, AF.REGDATE, AF.SOLUTION, AF.DATA_ID, AF.URL
-      from (select rownum as num, NO, TITLE, SVCGRP, REGDATE, SOLUTION, DATA_ID, USER_ID, URL from AT_FAVORITE) AF
+      select AF.TITLE, AF.SVCGRP, AF.REGDATE, AF.SOLUTION, AF.DATA_ID, AF.URL, AF.VOLUME, AF.ISSUE, AF.PAGE, AF.CLG_NM, AF.DEPT_NM, AF.AUTHOR
+      from (select rownum as num, NO, TITLE, SVCGRP, REGDATE, SOLUTION, DATA_ID, USER_ID, URL, VOLUME, ISSUE, PAGE, CLG_NM, DEPT_NM, AUTHOR from AT_FAVORITE) AF
       where AF.USER_ID = #{userId}
       and AF.num <![CDATA[ > ]]> #{page}
       and AF.num <![CDATA[ <= ]]> #{count}
     </if>
     <if test="_databaseId == 'mysql'">
-      select AF.TITLE, AF.SVCGRP, AF.REGDATE, AF.SOLUTION, AF.DATA_ID, AF.URL
+      select AF.TITLE, AF.SVCGRP, AF.REGDATE, AF.SOLUTION, AF.DATA_ID, AF.URL, AF.VOLUME, AF.ISSUE, AF.PAGE, AF.CLG_NM, AF.DEPT_NM, AF.AUTHOR
       from AT_FAVORITE AF
       where AF.USER_ID = #{userId}
         <choose>
@@ -46,10 +46,8 @@
     where USER_ID = #{userId}
     and SVCGRP = #{svcgrp}
     and DATA_ID = #{dataId}
-    and SOLUTION = 'rss'
+    and SOLUTION = 'RSS'
   </select>
-
-
 
   <insert id="addFavorite" parameterType="kr.co.argonet.r2rims.rss.vo.FavoriteVo" keyColumn="NO" keyProperty="no" useGeneratedKeys="true">
       <selectKey keyProperty="no" resultType="int" order="AFTER">
@@ -58,11 +56,13 @@
       </selectKey>
       insert into AT_FAVORITE (
           <if test="_databaseId == 'oracle' ">NO,</if>
-          TITLE, SVCGRP, SOLUTION, DATA_ID, URL, USER_ID
+          TITLE, SVCGRP, SOLUTION, DATA_ID, URL, USER_ID, PUBYEAR, VOLUME, ISSUE, PAGE, CLG_NM, DEPT_NM, AUTHOR
       )
       values(
           <if test="_databaseId == 'oracle' ">SEQ_AT_FAVORITE.NEXTVAL,</if>
-          #{title, jdbcType=VARCHAR}, #{svcgrp, jdbcType=VARCHAR}, #{solution, jdbcType=VARCHAR}, #{dataId, jdbcType=VARCHAR}, #{url, jdbcType=VARCHAR}, #{userId, jdbcType=VARCHAR}
+          #{title, jdbcType=VARCHAR}, #{svcgrp, jdbcType=VARCHAR}, #{solution, jdbcType=VARCHAR}, #{dataId, jdbcType=VARCHAR}, #{url, jdbcType=VARCHAR}, #{userId, jdbcType=VARCHAR},
+          #{pubYear, jdbcType=VARCHAR}, #{volume, jdbcType=VARCHAR}, #{issue, jdbcType=VARCHAR}, #{page, jdbcType=VARCHAR}, #{clgNm, jdbcType=VARCHAR}, #{deptNm, jdbcType=VARCHAR},
+          #{author, jdbcType=VARCHAR}
       )
   </insert>
 
@@ -71,7 +71,7 @@
     where USER_ID = #{userId}
     and SVCGRP = #{svcgrp}
     and DATA_ID = #{dataId}
-    and SOLUTION = 'rss'
+    and SOLUTION = 'RSS'
   </delete>
 
   <select id="totalBoardCount" resultType="int">

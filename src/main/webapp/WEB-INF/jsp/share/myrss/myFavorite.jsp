@@ -47,7 +47,7 @@
         function goDocument(page){
             var addr = "page="+page+"&sort="+sort+"&order="+order;
 
-            $(location).attr('href',"${pageContext.request.contextPath}/share/myRss/myFavorite.do?"+addr);
+            $(location).attr('href',"${pageContext.request.contextPath}/personal/myRss/myFavorite.do?"+addr);
         }
 
         //페이지 그리기
@@ -103,7 +103,7 @@
             <a href="${pageContext.request.contextPath}/share/user/kboard.do?language=ko" ${lang=='ko'?'class="on"':''}><spring:message code="disc.language.kor"/></a>
         </div>--%>
         <div id="tabs">
-            <div class="left_list_box" style="width: 1200px;">
+            <div class="left_list_box" style="width: 1200px; display: contents;">
                 <div class="list_top_box">
                     <p class="page_num_box"></p>
                     <div class="list_sort_box">
@@ -116,14 +116,16 @@
                 <table class="tbl_type" id="journalTbl">
                     <colgroup>
                         <col width="10%">
-                        <col width="42%">
-                        <col width="12%">
+                        <col width="70%">
+                        <col width="10%">
+                        <col width="10%">
                     </colgroup>
                     <thead>
                     <tr>
                         <th>구분</th>
                         <th>제목</th>
                         <th>등록 날짜</th>
+                        <th>비고</th>
                     </tr>
                     </thead>
                         <tbody>
@@ -152,15 +154,60 @@
                                                 </c:choose>
                                             </span>
                                         </td>
-                                        <td class='al_left'><a href="${favorite.url}"><c:out value="${favorite.title != 'null' ? favorite.title : 'Not found Title'}" escapeXml="false"/></a></td>
-                                        <%--<td class='al_center' style="padding-left: 0px; padding-right: 0px"><span style="font-size: 13px"><c:out value="${favorite.regDate != 'null' ? favorite.regDate : ''}"/></span></td>--%>
+                                        <td class='al_left'>
+                                            <c:choose>
+                                                <c:when test="${favorite.svcgrp == 'VUSER'}">
+                                                    <a href="${favorite.url}">
+                                                        <c:out value="${favorite.title != 'null' ? favorite.title : 'Not found Title'}" escapeXml="false"/>
+                                                        (<c:out value="${favorite.clgNm} / ${favorite.deptNm}" />)
+                                                    </a>
+                                                </c:when>
+                                                <c:when test="${favorite.svcgrp == 'VART'}">
+                                                    <a href="${favorite.url}">
+                                                        <c:out value="${favorite.title != 'null' ? favorite.title : 'Not found Title'}" escapeXml="false"/>
+                                                        <c:if test="${favorite.volume != '' or favorite.issue != '' or favorite.page != ''}">
+                                                            (
+                                                            <c:if test="${favorite.volume != ''}">
+                                                                Vol.<c:out value="${favorite.volume}" />
+                                                            </c:if>
+                                                            <c:if test="${favorite.issue != ''}">
+                                                                No.<c:out value="${favorite.issue}" />
+                                                            </c:if>
+                                                            <c:if test="${favorite.page != ''}">
+                                                                page.<c:out value="${favorite.page}" />
+                                                            </c:if>
+                                                            )
+                                                        </c:if>
+                                                    </a>
+                                                </c:when>
+                                                <c:when test="${favorite.svcgrp == 'VPROJ'}">
+                                                    <a href="${favorite.url}">
+                                                        <c:out value="${favorite.title != 'null' ? favorite.title : 'Not found Title'}" escapeXml="false"/>
+                                                        (<c:out value="${favorite.author}" />)
+                                                    </a>
+                                                </c:when>
+                                                <c:when test="${favorite.svcgrp == 'VPAT'}">
+                                                    <a href="${favorite.url}">
+                                                        <c:out value="${favorite.title != 'null' ? favorite.title : 'Not found Title'}" escapeXml="false"/>
+                                                        (<c:out value="${favorite.author}" />)
+                                                    </a>
+                                                </c:when>
+                                                <c:when test="${favorite.svcgrp == 'VCONF'}">
+                                                    <a href="${favorite.url}">
+                                                        <c:out value="${favorite.title != 'null' ? favorite.title : 'Not found Title'}" escapeXml="false"/>
+                                                        (<c:out value="${favorite.author}" />)
+                                                    </a>
+                                                </c:when>
+                                            </c:choose>
+                                        </td>
                                         <td class='al_center' style="padding-left: 0px; padding-right: 0px"><span style="font-size: 13px"><fmt:formatDate value="${favorite.regDate}" pattern="yyyy-MM-dd"/></span></td>
+                                        <td class='al_center' style="padding-left: 0px; padding-right: 0px"><span style="font-size: 13px">${favorite.solution}</span></td>
                                     </tr>
                                 </c:forEach>
                             </c:when>
                             <c:otherwise>
                                 <tr>
-                                    <td class='al_center' colspan="3">등록된 데이터가 없습니다.</td>
+                                    <td class='al_center' colspan="4">등록된 데이터가 없습니다.</td>
                                 </tr>
                             </c:otherwise>
                         </c:choose>

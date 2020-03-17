@@ -95,21 +95,28 @@ public class MyRssService {
                 UserVo user = userMapper.findByEncptUserId(itemId);
                 favorite.setTitle(user.getKorNm());
                 favorite.setDataId(user.getUserId());
+                favorite.setClgNm(user.getClgNm());
+                favorite.setDeptNm(user.getDeptKor());
             } else if(svcgrp.equals("VART")){
                 // 논문
                 ArticleVo article = articleMapper.findForDetail(itemId);
                 favorite.setTitle(article.getOrgLangPprNm());
                 favorite.setDataId(Integer.toString(article.getArticleId()));
+                favorite.setVolume(article.getVolume());
+                favorite.setIssue(article.getIssue());
+                favorite.setPage(article.getSttPage() + "-" + article.getEndPage());
             } else if(svcgrp.equals("VPAT")){
                 // 특허
                 PatentVo patent = patentMapper.findAllById(itemId);
                 favorite.setTitle(patent.getItlPprRgtNm());
                 favorite.setDataId(Integer.toString(patent.getPatentId()));
+                favorite.setAuthor(patent.getInvtNm());
             } else if(svcgrp.equals("VPROJ")){
                 // 연구과제
                 FundingVo funding = fundingMapper.findByFundingId(itemId);
                 favorite.setTitle(funding.getRschSbjtNm());
                 favorite.setDataId(Integer.toString(funding.getFundingId()));
+                favorite.setAuthor(funding.getRsrcctSpptAgcNm());
             } else {
                 // 학술활동
                 RimsSearchVo rimsSearchVo = new RimsSearchVo();
@@ -117,8 +124,9 @@ public class MyRssService {
                 ConferenceVo conference = conferenceMapper.findAllById(rimsSearchVo);
                 favorite.setTitle(conference.getOrgLangPprNm());
                 favorite.setDataId(Integer.toString(conference.getConferenceId()));
+                favorite.setAuthor(conference.getPblcPlcNm());
             }
-            favorite.setSolution("rss");
+            favorite.setSolution("RSS");
             favorite.setSvcgrp(svcgrp);
             favorite.setUrl(url);
             favorite.setUserId(userId);

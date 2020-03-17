@@ -29,4 +29,11 @@ public class FavoriteVo implements Serializable {
     private String url;
     private String userId;
     private Integer recIssueNo;
+    private String pubYear;
+    private String volume;
+    private String issue;
+    private String page;
+    private String clgNm;
+    private String deptNm;
+    private String author;
 }
