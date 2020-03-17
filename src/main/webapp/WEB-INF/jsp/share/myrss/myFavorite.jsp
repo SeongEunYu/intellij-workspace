@@ -7,7 +7,7 @@
 
         $(function () {
             //대메뉴 형광색 들어오게하기
-            $("#bigAbout").addClass("on");
+            $("#myRSS").addClass("on");
 
             $( "#tabs" ).tabs({
                 active: '0',
@@ -123,7 +123,7 @@
                     <tr>
                         <th>구분</th>
                         <th>제목</th>
-                        <th>보관 날짜</th>
+                        <th>등록 날짜</th>
                     </tr>
                     </thead>
                         <tbody>

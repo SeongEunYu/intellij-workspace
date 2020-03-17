@@ -289,10 +289,12 @@
 									<h4><span><spring:message code="disc.facet.wos.keyword"/></span></h4>
 									<ul>
 										<c:forEach var="wosSub" items="${facetMapList[2]}" varStatus="stat">
-											<li class="wosSubList ${fn:replace(fn:replace(fn:replace(wosSub.key,',','442C'),'&','3826'),' ','')}  ${stat.index > 9 ? 'more hidden' : ''}">
-												<a href="javascript:filterWos('${wosSub.key}');">${wosSub.key}</a>
-												<span><fmt:formatNumber value="${wosSub.value}" pattern="#,###"/></span>
-											</li>
+											<c:if test="${fn:replace(fn:replace(fn:replace(wosSub.key,',','442C'),'&','3826'),' ','') ne ''}">
+												<li class="wosSubList ${fn:replace(fn:replace(fn:replace(wosSub.key,',','442C'),'&','3826'),' ','')}  ${stat.index > 9 ? 'more hidden' : ''}">
+													<a href="javascript:filterWos('${wosSub.key}');">${wosSub.key}</a>
+													<span><fmt:formatNumber value="${wosSub.value}" pattern="#,###"/></span>
+												</li>
+											</c:if>
 										</c:forEach>
 									</ul>
 									<c:if test="${fn:length(facetMapList[2]) > 10}">

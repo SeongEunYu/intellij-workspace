@@ -1,9 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"
-%><%@ taglib prefix="decorator" uri="http://www.opensymphony.com/sitemesh/decorator"
-%><!doctype html>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib prefix="decorator" uri="http://www.opensymphony.com/sitemesh/decorator"%>
+<!doctype html>
 <html>
 <head>
-	<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 	<meta http-equiv="cache-Control" content="co-cache" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=yes"/>
@@ -185,14 +185,14 @@
 					<div class="user_box">
 						<c:choose>
 							<c:when test="${pageContext.response.locale eq 'ko'}">
-								${userInfo.korNm}
+								${login_user.korNm}
 							</c:when>
 							<c:otherwise>
-								<c:if test="${not empty userInfo.lastName}">
-									${userInfo.lastName}, ${userInfo.firstName}
+								<c:if test="${not empty login_user.lastName}">
+									${login_user.lastName}, ${login_user.firstName}
 								</c:if>
-								<c:if test="${empty userInfo.lastName}">
-									${userInfo.engNm}
+								<c:if test="${empty login_user.lastName}">
+									${login_user.engNm}
 								</c:if>
 							</c:otherwise>
 						</c:choose>
@@ -270,10 +270,10 @@
 					<div class="sub_menu" style="display: none;">
 						<ul style="display: none;">
 							<%--<li><a href="${pageContext.request.contextPath}/share/myRss/myDocument.do"><spring:message code="disc.menu.rss.doc"/></a></li>--%>
-                                <li><a href="${pageContext.request.contextPath}/personal/myRss/myArchivements.do">My Archivements</a></li>
-                                <li><a href="${pageContext.request.contextPath}/personal/myRss/myRecommended.do">My Recommended</a></li>
-                                <li><a href="${pageContext.request.contextPath}/personal/myRss/myAnalysis.do">My Archivements Analysis</a></li>
-                                <li><a href="${pageContext.request.contextPath}/personal/myRss/myFavorite.do">My Favorite</a></li>
+								<li><a href="${pageContext.request.contextPath}/personal/myRss/myArchivements.do">My Archivements</a></li>
+								<li><a href="${pageContext.request.contextPath}/personal/myRss/myFavorite.do">My Favorite</a></li>
+								<li><a href="${pageContext.request.contextPath}/personal/mailingList.do">My Mailing List</a></li>
+								<li><a href="${pageContext.request.contextPath}/personal/myRss/rBoard.do">Research board</a></li>
 						</ul>
 					</div>
 				</li>
@@ -289,7 +289,7 @@
 	<div class="footer_inner">
 		<p class="fl_text">
 			<c:if test="${language eq 'en'}">
-				<em class="f_line">Contact</em>Academic Information Development Team
+				<em class="f_line">Contact</em>Topic Information Service Team
 			</c:if>
 			<c:if test="${language eq 'ko'}">
 				<em class="f_line">문의</em>학술정보원 주제정보서비스팀
@@ -297,7 +297,7 @@
 			<span class="foonter_icon01">${sysConf['system.admin.telno']}</span>
 			<span class="foonter_icon02">${sysConf['system.admin.email']}</span>
 		</p>
-		<p class="fr_text">Copyright (C) 2017, ${sysConf['inst.name.eng.full']}, All Rights Reserved.</p>
+		<p class="fr_text">Copyright (C) 2019, ${sysConf['inst.name.eng.full']}, All Rights Reserved.</p>
 	</div>
 </div>
 

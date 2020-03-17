@@ -1,5 +1,7 @@
 package kr.co.argonet.r2rims.rss.mapper;
 
+import kr.co.argonet.r2rims.core.vo.BbsVo;
+import kr.co.argonet.r2rims.core.vo.FileVo;
 import kr.co.argonet.r2rims.rss.vo.FavoriteVo;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
@@ -29,4 +31,13 @@ public interface MyRssMapper {
 
     void deleteFavorite(@Param("userId") String userId, @Param("svcgrp") String svcgrp, @Param("dataId") String dataId);
 
+    Integer totalBoardCount(@Param("deptCode") String deptCode);
+
+    List<BbsVo> findBoardLIst(@Param("deptCode") String deptCode, @Param("page") int ps, @Param("count") int ct, @Param("sort") String sort, @Param("order") String order);
+
+    BbsVo findBoardDetail(@Param("bbsId") String bbsId, @Param("deptCode") String deptCode);
+
+    List<FileVo> findFile(@Param("bbsId") String bbsId);
+
+    void increaseBoardCount(@Param("bbsId") String bbsId);
 }

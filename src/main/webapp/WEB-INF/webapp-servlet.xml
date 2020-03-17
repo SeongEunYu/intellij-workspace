@@ -41,18 +41,21 @@
 			expression="org.springframework.stereotype.Repository" />
 	</context:component-scan>
 
+	<!--<mvc:resources mapping="/pdfjs/**" location="pdfjs"/>-->
+
 	<mvc:interceptors>
 		<mvc:interceptor>
 			<mvc:mapping path="/**" />
 			<bean class="kr.co.argonet.r2rims.core.interceptor.LocaleInterceptor"/>
 		</mvc:interceptor>
-		<!--<mvc:interceptor>-->
-			<!--<mvc:mapping path="/**"/>-->
-			<!--<mvc:exclude-mapping path="/home.do"/>-->
-			<!--<mvc:exclude-mapping path="/**Ajax.do"/>-->
-			<!--<mvc:exclude-mapping path="/share/**"/>-->
-			<!--<bean class="kr.co.argonet.r2rims.core.interceptor.RssSessionInterceptor"/>-->
-		<!--</mvc:interceptor>-->
+		<mvc:interceptor>
+			<mvc:mapping path="/**"/>
+			<mvc:exclude-mapping path="/home/login.do"/>
+			<mvc:exclude-mapping path="/home.do"/>
+			<mvc:exclude-mapping path="/**Ajax.do"/>
+			<mvc:exclude-mapping path="/share/**"/>
+			<bean class="kr.co.argonet.r2rims.core.interceptor.RssSessionInterceptor"/>
+		</mvc:interceptor>
 		<!--<mvc:interceptor>-->
 			<!--<mvc:mapping path="/**"/>-->
 			<!--<mvc:exclude-mapping path="/home.do"/>-->
@@ -128,6 +131,9 @@
 			<value>org.springframework.web.servlet.view.JstlView</value>
 		</property>
 		<property name="prefix">
+			<value>/WEB-INF/jsp/</value>
+		</property>
+		<property name="contentType">
 			<value>/WEB-INF/jsp/</value>
 		</property>
 		<property name="suffix">

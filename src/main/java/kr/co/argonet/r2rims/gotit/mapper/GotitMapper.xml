@@ -27,4 +27,49 @@
     order by REGDATE desc;
   </select>
 
+  <select id="findMailingTop5" resultType="java.util.HashMap">
+    select GI.ISSUE_ID, GI.ISSN, GI.JOURNALNAME, GI.VOLUME, GI.ISSUE, GM.MSG_ID, GM.MESSAGE, GM.USERID, DATE_FORMAT(GM.SENDDATE, '%Y-%m-%d') AS SENDDATE
+    from GI_SVC_MESSAGE GM, GI_SVC_ISSUE GI
+    where GM.ISSUE_ID = GI.ISSUE_ID
+      and GM.USERID = #{userId}
+      and GM.SEND_YN = 'Y'
+    order by GM.SENDDATE DESC LIMIT 5
+  </select>
+
+  <select id="totalMail" resultType="java.lang.Integer">
+    select count(1)
+    from GI_SVC_MESSAGE gm, GI_SVC_ISSUE gi
+    where gm.ISSUE_ID = gi.ISSUE_ID
+    and gm.USERID = #{userId}
+    and gm.SEND_YN= 'Y'
+    order by gm.SEND_YN desc
+  </select>
+
+  <select id="findMailList" resultType="java.util.HashMap">
+    select gi.JOURNALNAME, gi.ISSN, gi.VOLUME, gi.ISSUE, gm.SENDDATE
+    from GI_SVC_MESSAGE gm, GI_SVC_ISSUE gi
+    where gm.ISSUE_ID = gi.ISSUE_ID
+    and gm.USERID = #{userId}
+    and gm.SEND_YN= 'Y'
+    <choose>
+      <when test='sort == "regDate" and order == "desc"'>
+        order by gm.SEND_YN desc
+      </when>
+      <otherwise>
+        order by gm.SEND_YN
+      </otherwise>
+    </choose>
+    limit #{page} <![CDATA[,]]> #{count}
+  </select>
+
+  <select id="getMailArticle" resultType="java.util.HashMap">
+    select gx.TITLE, gx.AUTHOR, gx.VOLUME, gx.ISSUE, gx.STR_PAGE, gx.END_PAGE, gx.DOI
+    from GI_SVC_MESSAGE gm, GI_SVC_ISSUE gi, GI_SVC_INDEX gx
+    where gm.ISSUE_ID = gi.ISSUE_ID
+    and gi.ISSUE_ID = gx.ISSUE_ID
+    and gm.USERID = #{userId}
+    and gm.MSG_ID = #{msgId}
+    order by CAST(gx.STR_PAGE AS UNSIGNED);
+  </select>
+
 </mapper>

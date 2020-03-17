@@ -935,8 +935,7 @@ background-repeat: no-repeat,no-repeat; background-position: left top, right bot
 .search_select_option ul li { display: inline;  margin-right: 20px; }
 .search_select_option ul li:last-child  {   margin-right: 0px; }
 
-
-
+.search_select_option2 {    text-align: center;    padding: 26px 0 0 0;    width: 1200px;    margin: 0 auto;}
 
 
 

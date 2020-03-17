@@ -2,9 +2,12 @@ package kr.co.argonet.r2rims.gotit;
 
 import kr.co.argonet.r2rims.constant.R2Constant;
 import kr.co.argonet.r2rims.core.vo.UserVo;
+import kr.co.argonet.r2rims.gotit.vo.SvcMessageVo;
+import kr.co.argonet.r2rims.share.ShareUserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
@@ -38,4 +41,15 @@ public class GotitController {
 
         return gotitTopList;
     }
+
+    @RequestMapping(value = "/gotitMailingTop")
+    public @ResponseBody List<Map<String, Object>> gotitIndexTop5 (HttpServletRequest req, ModelMap model){
+
+        UserVo sessUser = (UserVo) req.getSession().getAttribute(R2Constant.SESSION_USER);
+        String userId = sessUser.getUserId();
+        List<Map<String, Object>> indexMailing = gotitService.findMailingTop5(userId);
+
+        return indexMailing;
+    }
+
 }

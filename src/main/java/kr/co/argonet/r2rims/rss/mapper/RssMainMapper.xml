@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.argonet.r2rims.rss.mapper.RssMainMapper">
+
+  <sql id="pageHeader">SELECT * FROM ( SELECT * FROM (</sql>
+  <sql id="pageFooter"><![CDATA[) WHERE RN  <=  (#{ps} + #{ct})) a  WHERE a.RN > #{ps}]]></sql>
+  <sql id="nvlifnull"><if test="_databaseId == 'oracle' ">NVL</if><if test="_databaseId == 'mysql' ">IFNULL</if></sql>
+  <sql id="prefixToChar"><if test="_databaseId == 'oracle' ">TO_CHAR(</if><if test="_databaseId == 'mysql' ">DATE_FORMAT(</if></sql>
+  <sql id="postfixToCharYmd"><if test="_databaseId == 'oracle' ">, 'YYYYMMDD')</if><if test="_databaseId == 'mysql' ">, '%Y%m%d')</if></sql>
+  <sql id="postfixToCharY-m-d"><if test="_databaseId == 'oracle' ">, 'YYYY-MM-DD')</if><if test="_databaseId == 'mysql' ">, '%Y-%m-%d')</if></sql>
+  <sql id="prefixToDate"><if test="_databaseId == 'oracle' ">TO_DATE(</if><if test="_databaseId == 'mysql' ">STR_TO_DATE(</if></sql>
+  <sql id="postfixToDate"><if test="_databaseId == 'oracle' ">, 'YYYY-MM-DD')</if><if test="_databaseId == 'mysql' ">, '%Y-%m-%d')</if></sql>
+  <sql id="sysdateNow"><if test="_databaseId == 'oracle' ">SYSDATE</if><if test="_databaseId == 'mysql' ">now()</if></sql>
+
+
+    <select id="staticsArticleByUser" resultType="java.util.HashMap">
+        select MID(A.PBLC_YM, 1, 4) AS "year", count(A.ARTICLE_ID) AS "count"
+        from RI_ARTICLE A, RI_ARTICLE_PARTI AP
+        where A.ARTICLE_ID = AP.ARTICLE_ID and AP.PRTCPNT_ID =#{userId} and A.PBLC_YM != 'ACCEPT'
+        group by MID(A.PBLC_YM, 1, 4)
+order by A.PBLC_YM
+    </select>
+
+    <select id="findKeywordOfKeyword" resultType="kr.co.argonet.r2rims.core.vo.KeywordVo">
+        SELECT *
+        FROM RI_KEYWORD
+        WHERE (RSLT_TYPE = 'ART' AND SRC = 'ATH' AND RSLT_ID IN (SELECT ARTICLE_ID FROM RI_ARTICLE_PARTI WHERE  <include refid="nvlifnull"/>(DEL_DVS_CD, 'N') != 'Y') AND KEYWORD_REGX LIKE CONCAT('%', #{keyword},'%'))
+        OR (RSLT_TYPE = 'CON' AND SRC = 'ATH' AND RSLT_ID IN (SELECT CONFERENCE_ID FROM RI_CONFERENCE_PARTI WHERE  <include refid="nvlifnull"/>(DEL_DVS_CD, 'N') != 'Y') AND KEYWORD_REGX LIKE CONCAT('%', #{keyword},'%'))
+    </select>
+
+    <select id="findKeywordByUser" resultType="kr.co.argonet.r2rims.core.vo.KeywordVo">
+        SELECT *
+        FROM RI_KEYWORD
+        WHERE (RSLT_TYPE = 'ART' AND SRC = 'ATH' AND RSLT_ID IN (SELECT ARTICLE_ID FROM RI_ARTICLE_PARTI WHERE  <include refid="nvlifnull"/>(DEL_DVS_CD, 'N') != 'Y'  AND PRTCPNT_ID =  #{userId}))
+        OR (RSLT_TYPE = 'CON' AND SRC = 'ATH' AND RSLT_ID IN (SELECT CONFERENCE_ID FROM RI_CONFERENCE_PARTI WHERE  <include refid="nvlifnull"/>(DEL_DVS_CD, 'N') != 'Y'  AND PRTCPNT_ID =  #{userId}))
+    </select>
+
+    <select id="findKeywordOfUserBySimilar" resultType="kr.co.argonet.r2rims.core.vo.KeywordVo">
+        SELECT distinct (KEYWORD_REGX)
+        FROM RI_KEYWORD
+        WHERE (RSLT_TYPE = 'ART' AND SRC = 'ATH' AND RSLT_ID IN (SELECT ARTICLE_ID FROM RI_ARTICLE_PARTI WHERE  <include refid="nvlifnull"/>(DEL_DVS_CD, 'N') != 'Y'  AND (PRTCPNT_ID =  #{userId} OR PRTCPNT_ID =  #{smUserId})))
+        OR (RSLT_TYPE = 'CON' AND SRC = 'ATH' AND RSLT_ID IN (SELECT CONFERENCE_ID FROM RI_CONFERENCE_PARTI WHERE  <include refid="nvlifnull"/>(DEL_DVS_CD, 'N') != 'Y'  AND AND (PRTCPNT_ID =  #{userId} OR PRTCPNT_ID =  #{smUserId})))
+    </select>
+
+    <select id="findSimilarUserList" resultType="kr.co.argonet.r2rims.core.vo.UserVo">
+        select  TA.TRGT_USER_ID as USER_ID
+        ,RU.KOR_NM
+        ,RU.ENCPT_USER_ID
+        ,CONCAT(CONCAT(RU.LAST_NAME, ', '),RU.FIRST_NAME) AS ENG_NM
+        ,DCM.DEPT_ENG_NM AS DEPT_ENG
+        ,DCM.DEPT_KOR_NM AS DEPT_KOR
+        ,RU.PROF_PHOTO_FILE_ID
+        from (
+        select US.SIMILARITY,
+        case
+        when US.USER_ID = #{userId}
+        then US.USER_ID
+        else US.TRGT_USER_ID
+        end as USER_ID ,
+        case
+        when US.TRGT_USER_ID = #{userId}
+        then US.USER_ID
+        else US.TRGT_USER_ID
+        end as TRGT_USER_ID,
+        CASE
+        when @prev_value = US.SIMILARITY then @vRank
+        when @prev_value := US.SIMILARITY then @vRank := @vRank + 1
+        END AS 'rank',
+        US2.sum
+        from RA_USER_SIMILARITY as US, (select @vRank := 0, @prev_value := null) as r,
+        (select count(RS2.SIMILARITY) as sum
+        from RA_USER_SIMILARITY as RS2
+        where (RS2.USER_ID = #{userId} or RS2.TRGT_USER_ID = #{userId})) US2
+        where (US.USER_ID = #{userId} or US.TRGT_USER_ID = #{userId}) order by US.SIMILARITY desc
+        ) TA
+        left join RI_USER RU on (TA.TRGT_USER_ID = RU.USER_ID)
+        left join DEPT_CLG_MAP DCM on (RU.DEPT_KOR = DCM.DEPT_KOR_NM and RU.DEPT_CODE = DCM.DEPT_CODE)
+        where RU.GUBUN = 'M'
+        and <include refid="nvlifnull"/>(RU.HLDOF_YN, '0') = '1'
+        and <include refid="nvlifnull"/>(DCM.IS_USED,'Y') != 'N'
+        and TA.SIMILARITY >= 2
+        and TA.`rank` / TA.sum * 100.0 <![CDATA[ < ]]> 10
+        order by rand() limit 1
+    </select>
+
+    <select id="findLatestBBS" resultType="kr.co.argonet.r2rims.core.vo.BbsVo">
+        select rb.* from RI_BBS rb
+        where
+        <include refid="nvlifnull"/>(rb.DEL_DVS_CD,'N') != 'Y'
+        and rb.NOTICE_STT_DATE <![CDATA[ <= ]]> <include refid="prefixToChar"/><include refid="sysdateNow"/><include refid="postfixToCharY-m-d"/>
+        and rb.NOTICE_END_DATE <![CDATA[ >= ]]> <include refid="prefixToChar"/><include refid="sysdateNow"/><include refid="postfixToCharY-m-d"/>
+        order by rb.NOTICE_STT_DATE desc
+        limit 5
+    </select>
+</mapper>

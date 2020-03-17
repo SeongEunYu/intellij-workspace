@@ -21,6 +21,37 @@
 
     });
 
+	//파이차트
+	function animate(elementId, endPercent) {
+		var canvas = document.getElementById(elementId);
+		var context = canvas.getContext('2d');
+		var x = canvas.width / 2;
+		var y = canvas.height / 2;
+		var radius = 75;
+		var circ = Math.PI * 2;
+		var quart = Math.PI / 2;
+
+		context.lineWidth = 50;
+		context.clearRect(0, 0, canvas.width, canvas.height);
+		context.strokeStyle = '#288CFF';  //파이차트 파란색
+		context.shadowOffsetX = 0;
+		context.shadowOffsetY = 0;
+		context.shadowBlur = 10;
+		context.shadowColor = '#656565'; // 그림자 색
+		context.beginPath();
+		context.arc(x, y, radius, -(quart), ((circ) * (endPercent-1)/100) - quart, false);
+		context.stroke();
+
+		context.strokeStyle = '#d5d8e0';//파이차트 회색
+		context.shadowOffsetX = 0;
+		context.shadowOffsetY = 0;
+		context.shadowBlur = 10;
+		context.shadowColor = '#656565'; // 그림자 색
+		context.beginPath();
+		context.arc(x, y, radius, -(quart), ((circ) * (endPercent-1)/100) - quart, true);
+		context.stroke();
+	}
+
 
 </script>
 </head>
@@ -28,12 +59,27 @@
 <div class="sub_container">
 
 	<%--<div>Relation keyword</div>--%>
-	<h5>Relation keyword</h5>
-	<div class="dash_keyword" style="margin-bottom: 20px;">
-		<div>
-
+	<c:if test="${not empty keywordList}">
+		<h5><i><b>Relation keyword</b></i></h5>
+		<div class="dash_keyword" style="margin-bottom: 20px; background-color: white">
+			<div>
+				<c:set var="textLen" value="0"/>
+				<c:forEach items="${keywordList}" var="keyword" varStatus="stat">
+					<c:set var="textLen" value="${textLen + fn:length(keyword.name)}"/>
+					<c:if test="${textLen < 130}">
+						<a href="javascript:searchAll('<c:out value="${keyword.name}"/>');" class="keyword_graph keyw">
+							<canvas class="chart_b" id="keyGraph${stat.index}" width="250" height="250"></canvas>
+							<script>
+								animate("keyGraph${stat.index}", (${keyword.num}*100)/${keywordList[0].num});
+							</script>
+							<span class="keyword_b keyw"><c:out value="${keyword.name}"/></span>
+						</a>
+						${keywod.name}
+					</c:if>
+				</c:forEach>
+			</div>
 		</div>
-	</div>
+	</c:if>
 
 	<div class="sub_title add_r_box h_fix">
 		<h4 style="font-size:22px; font-weight: bold;"><spring:message code="disc.menu.rsch.rsch"/></h4>
