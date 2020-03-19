@@ -268,7 +268,7 @@
 							<%--<li><a href="${pageContext.request.contextPath}/share/myRss/myDocument.do"><spring:message code="disc.menu.rss.doc"/></a></li>--%>
 								<li><a href="${pageContext.request.contextPath}/personal/myRss/myResearchOutput.do">My Research Output</a></li>
 								<li><a href="${pageContext.request.contextPath}/personal/myRss/myFavorite.do">My Favorite</a></li>
-								<li><a href="${pageContext.request.contextPath}/personal/toc.do">My Mailing List</a></li>
+								<li><a href="${pageContext.request.contextPath}/personal/toc.do">Journal TOC Mailing</a></li>
 								<li><a href="${pageContext.request.contextPath}/personal/myRss/rBoard.do">Research Support Board</a></li>
 						</ul>
 					</div>
