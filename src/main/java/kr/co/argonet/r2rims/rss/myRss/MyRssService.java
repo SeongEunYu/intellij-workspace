@@ -81,12 +81,18 @@ public class MyRssService {
         return favoriteList;
     }
 
+    public List<FavoriteVo> findAllFavorite (String userId, String svcgrp){
+        List<FavoriteVo> favoriteList = new ArrayList<>();
+        favoriteList = myRssMapper.findAllFavorite(userId, svcgrp);
+        return favoriteList;
+    }
+
     public int totalFavorite (String userId){
         int total = myRssMapper.totalFavorite(userId);
         return total;
     }
 
-    public void editFavorite (String itemId, String svcgrp, String userId, String type, String url){
+    public void editFavorite (String itemId, String svcgrp, String userId, String type, String url, String elseList){
         if(type.equals("add")){
             FavoriteVo favorite = new FavoriteVo();
 
@@ -117,7 +123,7 @@ public class MyRssService {
                 favorite.setTitle(funding.getRschSbjtNm());
                 favorite.setDataId(Integer.toString(funding.getFundingId()));
                 favorite.setAuthor(funding.getRsrcctSpptAgcNm());
-            } else {
+            } else if(svcgrp.equals("VCONF")){
                 // 학술활동
                 RimsSearchVo rimsSearchVo = new RimsSearchVo();
                 rimsSearchVo.setConferenceId(itemId);
@@ -125,6 +131,17 @@ public class MyRssService {
                 favorite.setTitle(conference.getOrgLangPprNm());
                 favorite.setDataId(Integer.toString(conference.getConferenceId()));
                 favorite.setAuthor(conference.getPblcPlcNm());
+            } else {
+                // 저널
+                favorite.setDataId(itemId);
+                favorite.setUrl(url);
+
+                String[] elseListSplit = elseList.split(";");
+                favorite.setTitle(elseListSplit[0]);
+                String issn = elseListSplit[1].substring(0,4) + "-" + elseListSplit[1].substring(4);
+                favorite.setIssn(issn);
+                favorite.setIsOA(elseListSplit[2]);
+                favorite.setAuthor(elseListSplit[3]);
             }
             favorite.setSolution("RSS");
             favorite.setSvcgrp(svcgrp);

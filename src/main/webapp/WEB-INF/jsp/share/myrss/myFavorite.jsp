@@ -50,6 +50,19 @@
             $(location).attr('href',"${pageContext.request.contextPath}/personal/myRss/myFavorite.do?"+addr);
         }
 
+        function viewDetail(seq){
+
+            var width = $(document).width() * 0.7;
+            var height = $(document).height() * 0.8;
+
+            var left = ($(document).width()/2)-(width/2);
+            var top = ($(document).height()/2)-(height/2);
+
+            var win = window.open('${s2jUrl}/journal/journalDetailPopup.do?jrnlId='+seq,'jorunalDtl',' height=' + height + 'px, width=' + width + 'px, resizable=yes, location=no, scrollbars=yes');
+            win.moveTo(left, top);
+            win.focus();
+        }
+
         //페이지 그리기
         function drawPages(pageClass, pageNm){
             var span = 1;
@@ -134,32 +147,54 @@
                                 <c:forEach items="${favoriteList}" var="favorite">
                                     <tr>
                                         <td class='al_center' style="padding-left: 0px; padding-right: 0px">
-                                            <span style="font-size: 13px">
                                                 <c:choose>
                                                     <c:when test="${favorite.svcgrp == 'VUSER'}">
-                                                        연구자
+                                                        <%--<span class="l_researcher_t" style="font-size: 13px">연구자</span>--%>
+                                                        <span class="" style="font-size: 13px"><img src="<c:url value="/share/img/background_rss/modal_user02_icon.png"/>" style="width: 20%"></span>
                                                     </c:when>
                                                     <c:when test="${favorite.svcgrp == 'VART'}">
-                                                        논문
+                                                        <%--<span class="l_article_t" style="font-size: 13px">논문</span>--%>
+                                                        <span class="favoriteList l_article_t" style="font-size: 13px"></span>
                                                     </c:when>
                                                     <c:when test="${favorite.svcgrp == 'VPROJ'}">
-                                                        연구과제
+                                                        <%--<span class="l_project_t" style="font-size: 13px">연구과제</span>--%>
+                                                        <span class="favoriteList l_project_t" style="font-size: 13px"></span>
                                                     </c:when>
                                                     <c:when test="${favorite.svcgrp == 'VPAT'}">
-                                                        특허
+                                                        <%--<span class="l_patent_t" style="font-size: 13px">특허</span>--%>
+                                                        <span class="favoriteList l_patent_t" style="font-size: 13px"></span>
                                                     </c:when>
                                                     <c:when test="${favorite.svcgrp == 'VCONF'}">
-                                                        학술활동
+                                                        <%--<span class="l_conference_t" style="font-size: 13px">학술활동</span>--%>
+                                                        <span class="favoriteList l_conference_t" style="font-size: 13px"></span>
+                                                    </c:when>
+                                                    <c:when test="${favorite.svcgrp == 'VJOUR'}">
+                                                        <%--<span class="l_journal_t" style="font-size: 13px">저널</span>--%>
+                                                        <span class="favoriteList l_journal_t" style="font-size: 13px"></span>
                                                     </c:when>
                                                 </c:choose>
-                                            </span>
                                         </td>
                                         <td class='al_left'>
                                             <c:choose>
                                                 <c:when test="${favorite.svcgrp == 'VUSER'}">
                                                     <a href="${favorite.url}">
                                                         <c:out value="${favorite.title != 'null' ? favorite.title : 'Not found Title'}" escapeXml="false"/>
-                                                        (<c:out value="${favorite.clgNm} / ${favorite.deptNm}" />)
+                                                        <c:if test="${favorite.clgNm != '' or favorite.deptNm != ''}">
+                                                            (
+                                                            <c:if test="${favorite.clgNm != ''}">
+                                                                <c:out value="${favorite.clgNm}" />
+                                                            </c:if>
+                                                            <c:if test="${favorite.deptNm != ''}">
+                                                                <c:if test="${favorite.clgNm != ''}">
+                                                                    &nbsp;/&nbsp;<c:out value="${favorite.deptNm}" />
+                                                                </c:if>
+                                                                <c:if test="${!favorite.clgNm == ''}">
+                                                                    <c:out value="${favorite.deptNm}" />
+                                                                </c:if>
+                                                            </c:if>
+                                                            )
+                                                        </c:if>
+
                                                     </a>
                                                 </c:when>
                                                 <c:when test="${favorite.svcgrp == 'VART'}">
@@ -183,19 +218,45 @@
                                                 <c:when test="${favorite.svcgrp == 'VPROJ'}">
                                                     <a href="${favorite.url}">
                                                         <c:out value="${favorite.title != 'null' ? favorite.title : 'Not found Title'}" escapeXml="false"/>
-                                                        (<c:out value="${favorite.author}" />)
+                                                        <c:if test="${favorite.author != ''}">
+                                                            (<c:out value="${favorite.author}" />)
+                                                        </c:if>
                                                     </a>
                                                 </c:when>
                                                 <c:when test="${favorite.svcgrp == 'VPAT'}">
                                                     <a href="${favorite.url}">
                                                         <c:out value="${favorite.title != 'null' ? favorite.title : 'Not found Title'}" escapeXml="false"/>
-                                                        (<c:out value="${favorite.author}" />)
+                                                        <c:if test="${favorite.author != ''}">
+                                                            (<c:out value="${favorite.author}" />)
+                                                        </c:if>
                                                     </a>
                                                 </c:when>
                                                 <c:when test="${favorite.svcgrp == 'VCONF'}">
                                                     <a href="${favorite.url}">
                                                         <c:out value="${favorite.title != 'null' ? favorite.title : 'Not found Title'}" escapeXml="false"/>
-                                                        (<c:out value="${favorite.author}" />)
+                                                        <c:if test="${favorite.author != ''}">
+                                                            (<c:out value="${favorite.author}" />)
+                                                        </c:if>
+                                                    </a>
+                                                </c:when>
+                                                <c:when test="${favorite.svcgrp == 'VJOUR'}">
+                                                    <a href="javascript:viewDetail('${favorite.dataId}')">
+                                                        <c:out value="${favorite.title != 'null' ? favorite.title : 'Not found Title'}" escapeXml="false"/>
+                                                        <c:if test="${favorite.author != '' or favorite.issn != ''}">
+                                                            (
+                                                            <c:if test="${favorite.author != ''}">
+                                                                <c:out value="${favorite.author}" />
+                                                            </c:if>
+                                                            <c:if test="${favorite.issn != ''}">
+                                                                <c:if test="${favorite.author != ''}">
+                                                                    &nbsp;/&nbsp;<c:out value="${favorite.issn}" />
+                                                                </c:if>
+                                                                <c:if test="${!favorite.author == ''}">
+                                                                    <c:out value="${favorite.issn}" />
+                                                                </c:if>
+                                                            </c:if>
+                                                            )
+                                                        </c:if>
                                                     </a>
                                                 </c:when>
                                             </c:choose>

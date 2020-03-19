@@ -259,7 +259,8 @@
 <body>
 	<div class="top_search_wrap">
 		<div class="ts_title">
-			<h3><spring:message code="disc.anls.jnl.title"/></h3>
+			<%--<h3><spring:message code="disc.anls.jnl.title"/></h3>--%>
+			<h3>Journal Analysis</h3>
 		</div>
 		<div class="ts_text_box">
 			<%--<div class="ts_text_inner"><p style="font-weight:bold;"><spring:message code="disc.anls.jnl.desc"/></p></div>--%>

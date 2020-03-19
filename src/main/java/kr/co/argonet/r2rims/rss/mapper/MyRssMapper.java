@@ -23,6 +23,8 @@ public interface MyRssMapper {
 
     List<FavoriteVo> findFavorite(@Param("userId") String userId, @Param("page") int ps, @Param("count") int ct, @Param("sort") String sort, @Param("order") String order);
 
+    List<FavoriteVo> findAllFavorite(@Param("userId") String userId, @Param("svcgrp") String svcgrp);
+
     Integer totalFavorite(@Param("userId") String userId);
 
     String findByItemId(@Param("dataId") String dataId, @Param("svcgrp") String svcgrp, @Param("userId") String userId);

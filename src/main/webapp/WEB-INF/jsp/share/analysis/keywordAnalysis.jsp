@@ -356,7 +356,7 @@
 <div class="top_search_wrap">
 	<div class="ts_title">
 		<%--<h3><spring:message code="disc.anls.key.title"/></h3>--%>
-		<h3>키워드 트렌드 네트워크</h3>
+		<h3>Keyword Trend Networds</h3>
 	</div>
 	<div class="ts_text_box">
 		<div class="ts_text_inner">

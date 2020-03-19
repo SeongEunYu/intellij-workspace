@@ -47,6 +47,11 @@
 
 
         drawPages(pageClass, pageNm);
+
+		$('img.lazy').each(function() {
+			var $img = $(this);
+			$img.attr('src', $img.data('src'));
+		});
     });
 
 	function selectBox(selectedId){
@@ -158,7 +163,8 @@
 				<div class="researcher_info_top">
 					<span class="researcher_img ${user.profPhotoFileId == null ? 'none_img' : ''}">
 						<c:if test="${user.profPhotoFileId != null}">
-							<img src="${contextPath}/rims/servlet/image/profile.do?fileid=<c:out value="${user.profPhotoFileId}"/>"/>
+							<img class="lazy" src="${contextPath}/share/img/background/researcher_list_icon.png"
+								 data-src="${contextPath}/rims/servlet/image/profile.do?fileid=<c:out value="${user.profPhotoFileId}"/>"/>
 						</c:if>
 					</span>
 					<dl>

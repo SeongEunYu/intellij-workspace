@@ -75,7 +75,7 @@
 						var appendText = "<li class='add_state'>";
 
 						if(svcgrp == "VART"){
-							appendText = appendText + "<span class='u_l_state l_journal_t'>journal</span>";
+							appendText = appendText + "<span class='u_l_state l_article_t'>journal</span>";
 						} else if(svcgrp == "VPAT") {
 							appendText = appendText + "<span class='u_l_state l_project_t'>project</span>";
 						} else {

@@ -17,11 +17,12 @@
 
 	HashMap2 summaryMap = (HashMap2)request.getAttribute("summaryMap");
 	if(summaryMap == null) summaryMap = new HashMap2();
+
+	String favoriteItem = (String)request.getAttribute("favoriteString");
 %>
 	<script type="text/javascript">
 
 	$(function () {
-		//대메뉴 형광색 들어오게하기
 
 		$(".sub_container").hide();
 		$("input[type=checkbox]").on("change", function(){
@@ -75,6 +76,37 @@
 		if(code == 13) goSearch();
 	}
 
+	function editFavorite(itemId, publisher, oa, issn, title){
+		var ajaxURL = "${pageContext.request.contextPath}/editFavorite.do";
+		var svcgrp = "VJOUR";
+		var type = "";
+		if($(".favorite_star").hasClass("star_fill")){
+			type = "remove";
+		}
+		if($(".favorite_star").hasClass("star_empty")){
+			type = "add";
+		}
+		var url = '${s2jUrl}/journal/journalDetailPopup.do?jrnlId='+itemId;
+
+		var elseList = title + ";" + issn + ";" + oa + ";" + publisher;
+
+		$.ajax({
+			url: ajaxURL,
+			data: {itemId:itemId, svcgrp:svcgrp, type:type, url:url, elseList:elseList}
+		}).done(function(){
+			if(type == 'remove'){
+				$("#" + itemId).addClass("star_empty");
+				$("#" + itemId).removeClass("star_fill");
+			}
+			if(type == 'add'){
+				$("#" + itemId).addClass("star_fill");
+				$("#" + itemId).removeClass("star_empty");
+			}
+
+			// checkFavorite(itemId);
+		});
+	}
+
 </script>
 <link rel="stylesheet" type="text/css" href="<c:url value="/share/css/mquery.css"/>" />
 </head>
@@ -83,7 +115,7 @@
 	<div class="top_search_wrap">
 		<div class="ts_title">
 			<%--<h3><spring:message code="disc.anls.topif.title"/></h3>--%>
-			<h3>투고 저널 추천</h3>
+			<h3>Journal Selection Service</h3>
 		</div>
 		<div class="ts_text_box">
 			<div class="ts_text_inner">
@@ -119,6 +151,7 @@
 				<div class="al_right">
 					<a href="#" class="normal_bt2" onclick="javascript:sampleInput();">Sample</a>
 					<a href="#" class="normal_bt" onclick="javascript:goSearch();">Recommend Journal</a>
+					<a href="${pageContext.request.contextPath}/personal/compare.do" class="normal_bt">Compare Journal</a>
 				</div>
 			</div>
 			<div style="text-align: left; margin-left: 20px;">
@@ -195,16 +228,35 @@
 					<table style="width: 100%;">
 						<tr>
 							<td><div class="jss_title" style="margin-top: 6px;"><h4 class="h4_title">Selected Journals</h4><span class="round_num"><em><%= resultList.size() %></em></span></div></td>
+							<td><div class="al_right" ><a href="${pageContext.request.contextPath}/personal/compare.do" class="nomal_bt"><span class="compare_icon">Compare Journals</span></a></div></td>
 						</tr>
 					</table>
 
 					<div class="list_line_box">
 						<%
 							for(HashMap2 map:resultList){
+								String id = map.getString("jrnl_id");
+								String publisher = map.getString("publisher");
+								String isOA = "Y".equals(map.getString("is_oa")) ? "Y" : "N";
+								String issn = map.getString("issn_1");
+								String title = map.getString("title");
 						%>
 						<div class="inter_search_box">
 							<dl>
 								<dt>
+									<span id="<%= map.get("jrnl_id") %>" class='favorite_star
+										<%
+											if(favoriteItem.contains((String)map.get("jrnl_id"))){
+										%>
+												star_fill
+										<%
+											} else {
+										%>
+												star_empty
+										<%
+											}
+										%>
+									' style="margin-left: 5px; top: 8px;" onclick='editFavorite("<%= id %>", "<%= publisher %>","<%= isOA %>","<%= issn %>","<%= title %>")'></span>
 									<a href="javascript:viewDetail('<%= map.get("jrnl_id") %>');"><%= map.get("title") %></a>
 									<% if("Y".equals(map.get("is_oa"))){ %>
 									<img src="<c:url value="/share/img/icon/oa_icon.png"/>" width="10px" style="position: relative; top:1px;">

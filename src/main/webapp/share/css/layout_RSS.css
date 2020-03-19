@@ -697,10 +697,13 @@ td .line_bt {  line-height: 24px;}
 .u_l_cover p {  background: #e5e5e5;   padding: 10px; position: relative;  margin-bottom: 5px;}
 .u_l_cover p em {   display: inline-block;}
 
-.u_l_state { width:22px; height: 22px; text-indent: -9999px; overflow: hidden; border-radius: 2px;   display: inline-block;  }
-.l_journal_t  {  background:#5c79d8 url(../img/background_rss/user_left_icon0101_on.png) no-repeat 4px -27px;   }
+.u_l_state { width:22px; height: 22px; text-indent: -9999px; overflow: hidden; border-radius: 10px;   display: inline-block;  }
+.l_article_t  {  background:#5c79d8 url(../img/background_rss/user_left_icon0101_on.png) no-repeat 4px -27px;   }
 .l_patent_t  {  background:#7f59b0 url(../img/background_rss/user_left_icon0101_on.png) no-repeat 4px -60px;   }
 .l_project_t  {  background:#e84d89 url(../img/background_rss/user_left_icon0101_on.png) no-repeat 3px -91px;   }
+/*.l_researcher_t  {  background: #35e82e url(../img/background_rss/user_left_icon0101_on.png) no-repeat 3px -91px;   }*/
+.l_journal_t  {  background: #d87434 url(../img/background_rss/user_left_icon0101_on.png) no-repeat 2px -126px;   }
+.l_conference_t  {  background: #52d1d8 url(../img/background_rss/user_left_icon0101_on.png) no-repeat 3px -91px;   }
 
 
 .u_l_cover .u_l_state {  position: absolute; right: 5px; bottom:5px;  }
@@ -915,17 +918,24 @@ td .line_bt {  line-height: 24px;}
 .discover_list ul li em {    display: block;    position: absolute;    right: 0;    top: 7px;    font-style: italic;    font-size: 11px;}
 
 .jss_rbox {    margin: -38px 0 0 230px;}
+.jss_rbox .al_right {    margin-bottom: 10px;}
+.al_right {    text-align: right !important;}
+.nomal_bt {    display: inline-block;    border: 1px solid #c9c9c9;    background: #f8f8f8;    line-height: 26px;    padding: 0 14px;    font-size: 13px;}
 .list_line_box {    border-top: 1px solid #1b14c5;}
 .inter_search_box {    position: relative;    padding: 0 72px 9px 0;    border-bottom: 1px solid #e0e0e0;    margin: 10px 0;}
 .inter_search_box dl dt {    margin-bottom: 6px;}
-.inter_search_box dl dt a {    padding: 4px 0 0 20px;    vertical-align: middle;    display: inline-block;    font-size: 16px;    color: #3d6bb1;    line-height: 22px;}
+.inter_search_box dl dt a {    padding: 4px 0 0 0;    vertical-align: middle;    display: inline-block;    font-size: 16px;    color: #3d6bb1;    line-height: 22px;}
 .inter_search_box dl dd {    font-size: 12px;    color: #555;    padding: 2px 0 2px 30px;}
 .inter_search_box dl dd .publisher_text {    display: inline-block;    padding: 0 10px 0 0;    margin-right: 10px;    background: url(../img/background_rss/list_text_line.png) no-repeat right 3px;    font-size: 13px;    color: #222;}
 .inter_search_box dl dd em {    color: #888;    margin-right: 10px;}
 .inter_search_box .line_num {    background: url(../img/background_rss/js_circle.png) no-repeat 0 0;    width: 62px;    height: 62px;    position: absolute;    right: 0;    top: 8px;    text-align: center;    line-height: 62px;    font-family: Arial;    color: #4461a4;    font-style: italic;}
 
+
+
 .main_more_bt { float: right; position: relative;right:-10px;top:0px; display: inline-block; width:20px; height: 20px;   background: url(../img/background_rss/main_more_bt.png) no-repeat 50% 50%;   text-indent: -9999px; transition: all 0.3s ease;  }
 .main_more_bt:hover { transform:rotate( 90deg );}
+
+
 
 .google_scholar_box { padding: 10px 20px 0 20px; position: relative; }
 .gs_r_left { float: left; width:102px;height: 132px;   }
@@ -938,3 +948,6 @@ td .line_bt {  line-height: 24px;}
 
 .gs_r_link span  { display: inline-block; padding: 0 8px 0 0;    background: url(../img/background_rss/gs_link_arrow.png) no-repeat right 50%;   font-size: 12px;   color: #222;}
 
+
+
+.favoriteList{ position:relative; top: 2px; width: 22px; height: 22px; text-indent: -9999px; overflow: hidden; border-radius: 2px; display: inline-block; }

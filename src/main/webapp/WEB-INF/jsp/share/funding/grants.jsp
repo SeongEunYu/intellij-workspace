@@ -144,7 +144,8 @@
 <body><!--nav_wrap : e  -->
 <div class="top_search_wrap">
 	<div class="form_search_wrap" style="width: 760px;">
-		<span class="fs_title"><a href="https://www.grants.gov/" target="_blank"><img src='<c:url value="/share/img/background/grants.png"/>' style="margin-right: 5px;"><spring:message code="disc.fnd.grnt.title"/></a></span>
+		<%--<span class="fs_title"><a href="https://www.grants.gov/" target="_blank"><img src='<c:url value="/share/img/background/grants.png"/>' style="margin-right: 5px;"><spring:message code="disc.fnd.grnt.title"/></a></span>--%>
+		<span class="fs_title"><a href="https://www.grants.gov/" target="_blank"><img src='<c:url value="/share/img/background/grants.png"/>' style="margin-right: 5px;"> GRANTS.GOV</a></span>
 		<div class="search_field_box">
 			<input type="text" class="sf_int" placeholder="<spring:message code='disc.placeholder.title'/>" id="projectSearchTxt" onkeydown="event.keyCode == 13 ? projectSearch():''" maxlength="100" value="${searchName}" style=" border:0px; height: 30px;">
 			<button type="button" class="fs_bt" onclick="projectSearch()"></button>
@@ -152,7 +153,8 @@
 	</div>
 	<div class="ts_text_box">
 		<div class="ts_text_inner">
-			<p style="font-weight:bold;"><spring:message code="disc.fnd.grnt.desc"/></p>
+			<%--<p style="font-weight:bold;"><spring:message code="disc.fnd.grnt.desc"/></p>--%>
+			<p style="font-weight:bold;">Grants.gov는 미국의 Office of Management and Budget의 관리하에 운영되는 전자 정부 이니셔티브이며, 대통령 관리 의제에 따라 연구과제정보를 제공합니다.</p>
 		</div>
 	</div>
 </div>

@@ -67,7 +67,7 @@
 
 		$.ajax({
 			url: ajaxURL,
-			data: {itemId:itemId, svcgrp:svcgrp, type:type, url:url}
+			data: {itemId:itemId, svcgrp:svcgrp, type:type, url:url, elseList:''}
 		}).done(function(){
 			$(".favorite_star").remove();
 			checkFavorite(itemId);

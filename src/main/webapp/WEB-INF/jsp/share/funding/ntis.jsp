@@ -120,7 +120,8 @@
 <body><!--nav_wrap : e  -->
 <div class="top_search_wrap">
 	<div class="form_search_wrap" style="width: 730px;">
-		<span class="fs_title"><a href="http://www.ntis.go.kr" target="_blank"><img src='<c:url value="/share/img/background/ntis.png"/>' style="margin-bottom: 6px;" > <spring:message code="disc.fnd.ntis.title"/></a></span>
+		<%--<span class="fs_title"><a href="http://www.ntis.go.kr" target="_blank"><img src='<c:url value="/share/img/background/ntis.png"/>' style="margin-bottom: 6px;" > <spring:message code="disc.fnd.ntis.title"/></a></span>--%>
+		<span class="fs_title"><a href="http://www.ntis.go.kr" target="_blank"><img src='<c:url value="/share/img/background/ntis.png"/>' style="margin-bottom: 6px;" > NTIS R&D</a></span>
 		<div class="search_field_box">
 			<input type="text" class="sf_int" placeholder="<spring:message code='disc.placeholder.title'/>" id="projectSearchTxt" onkeydown="event.keyCode == 13 ? projectSearch():''" maxlength="100" value="${searchName}" style=" border:0px; height: 30px;">
 			<button type="button" class="fs_bt" onclick="projectSearch()"></button>
@@ -128,7 +129,8 @@
 	</div>
 	<div class="ts_text_box">
 		<div class="ts_text_inner">
-			<p style="font-weight:bold;"><spring:message code="disc.fnd.ntis.desc"/></p>
+			<%--<p style="font-weight:bold;"><spring:message code="disc.fnd.ntis.desc"/></p>--%>
+			<p style="font-weight:bold;">NTIS(National Science & Technology Information Service)는 국내 부처별 또는 전문관리기관을 통해 공고되는 국가 R&D 통합공고 정보를 제공합니다.</p>
 		</div>
 	</div>
 </div>

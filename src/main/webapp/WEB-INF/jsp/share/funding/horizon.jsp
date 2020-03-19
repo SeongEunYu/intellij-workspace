@@ -131,7 +131,8 @@
 <body><!--nav_wrap : e  -->
 <div class="top_search_wrap">
 	<div class="form_search_wrap" style="width: 785px;">
-		<span class="fs_title"><a href="https://ec.europa.eu/programmes/horizon2020/" target="_blank"><img src='<c:url value="/share/img/background/horizon.png"/>' style="margin-bottom: 6px;margin-right: 6px;"><spring:message code="disc.fnd.hrzn.title"/></a></span>
+		<%--<span class="fs_title"><a href="https://ec.europa.eu/programmes/horizon2020/" target="_blank"><img src='<c:url value="/share/img/background/horizon.png"/>' style="margin-bottom: 6px;margin-right: 6px;"><spring:message code="disc.fnd.hrzn.title"/></a></span>--%>
+		<span class="fs_title"><a href="https://ec.europa.eu/programmes/horizon2020/" target="_blank"><img src='<c:url value="/share/img/background/horizon.png"/>' style="margin-bottom: 6px;margin-right: 6px;"> HORIZON 2020</a></span>
 		<div class="search_field_box">
 			<input type="text" class="sf_int" placeholder="<spring:message code='disc.placeholder.title'/>" id="projectSearchTxt" onkeydown="event.keyCode == 13 ? projectSearch():''" maxlength="100" value="${searchName}" style=" border:0px; height: 30px;">
 			<button type="button" class="fs_bt" onclick="projectSearch()"></button>
@@ -139,7 +140,8 @@
 	</div>
 	<div class="ts_text_box">
 		<div class="ts_text_inner">
-			<p style="font-weight:bold;"><spring:message code="disc.fnd.hrzn.desc"/></p>
+			<%--<p style="font-weight:bold;"><spring:message code="disc.fnd.hrzn.desc"/></p>--%>
+			<p style="font-weight:bold;">Horizon 2020는 7년 동안(2014년~2020년) 800억 유로의 연구비를 지원하는 유럽에서 가장 규모가 큰 연구 혁신 프로그램입니다.</p>
 		</div>
 	</div>
 </div>

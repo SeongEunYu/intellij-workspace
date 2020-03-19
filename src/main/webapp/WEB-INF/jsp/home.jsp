@@ -95,7 +95,7 @@
 						var appendText = "<li class='add_state'>";
 
 						if(svcgrp == "VART"){
-							appendText = appendText + "<span class='u_l_state l_journal_t'>journal</span>";
+							appendText = appendText + "<span class='u_l_state l_article_t'>journal</span>";
 						} else if(svcgrp == "VPAT") {
 							appendText = appendText + "<span class='u_l_state l_project_t'>project</span>";
 						} else {
@@ -118,9 +118,9 @@
 
 						$("#topGotit ul").append(appendText);
 
-						var moreAppend = "<a href='https://gotit.bwise.kr/rsch/rec/list' class='main_more_bt' id='gotit_more'>more</a>";
-						$("#topGotitTitle").append(moreAppend);
 					}
+					var moreAppend = "<a href='https://gotit.bwise.kr/rsch/rec/list' class='main_more_bt' id='gotit_more'>more</a>";
+					$("#topGotitTitle").append(moreAppend);
 				} else {
 					$("#topGotit ul").append("<li class='add_state'><span class='sr_under_t'>추천 정보가 없습니다.</span></li>");
 				}
@@ -515,7 +515,7 @@
 			<div class="col_row">
 				<div class="col_md_6">
 					<div class="dash_box box1">
-						<h3>최근 등록 논문<c:if test="${fn:length(recentArticle) > 0}"><a href="${pageContext.request.contextPath}/personal/myRss/myResearchOutput.do" class="main_more_bt">more</a></c:if></h3>
+						<h3>나의 최근 등록 논문<c:if test="${fn:length(recentArticle) > 0}"><a href="${pageContext.request.contextPath}/personal/myRss/myResearchOutput.do" class="main_more_bt">more</a></c:if></h3>
 						<div class="sr_list">
 							<ul>
 								<c:choose>
@@ -599,6 +599,10 @@
 									</div>
 									<p class="gs_r_right">
 										<a href="${pageContext.request.contextPath}/share/user/userDetail.do?id=${smUser.encptUserId}"><img src="<c:url value="/share/img/common/researcher_none_img.jpg"/>" width="100%"/></a>
+										<p style="text-align: center; margin-top: 5px;">${smUser.korNm}</p><br>
+										<c:if test="${smUser.deptKor}">
+											<p style="text-align: center;">(${smUser.deptKor})</p>
+										</c:if>
 									</p>
 								</c:when>
 								<c:otherwise>
@@ -782,8 +786,8 @@
 						datasets: [
 							{
 								data: statics.count,
-								borderColor: 'rgb(211, 211, 211)',
-								backgroundColor: 'rgb(173, 216, 230)',
+								backgroundColor: 'rgb(000, 051, 102)',
+								borderColor: 'rgb(153, 153, 153)',
 								fill: false,
 								pointRadius: 4,
 								lineTension: 0.00000001

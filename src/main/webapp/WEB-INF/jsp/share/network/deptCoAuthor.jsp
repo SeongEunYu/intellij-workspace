@@ -558,7 +558,8 @@
 		</div>
 		<div class="ts_text_box">
 			<div class="ts_text_inner">
-				<p style="font-weight:bold;"><spring:message code="disc.ntwk.dept.desc"/></p>
+				<%--<p style="font-weight:bold;"><spring:message code="disc.ntwk.dept.desc"/></p>--%>
+				<p style="font-weight:bold;">논문의 저자 소속 정보를 분석하여 기관단위, 학과단위, 연구자단위로 협력 현황 정보를 제공합니다.</p>
 			</div>
 		</div>
 		<input type="hidden" id="sTabIdx"/>

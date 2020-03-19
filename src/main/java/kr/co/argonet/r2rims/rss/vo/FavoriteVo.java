@@ -36,4 +36,6 @@ public class FavoriteVo implements Serializable {
     private String clgNm;
     private String deptNm;
     private String author;
+    private String issn;
+    private String isOA;
 }

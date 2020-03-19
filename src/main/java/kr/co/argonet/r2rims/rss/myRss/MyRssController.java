@@ -98,6 +98,7 @@ public class MyRssController {
         model.addAttribute("page",page);
         model.addAttribute("sort", sort);
         model.addAttribute("order", order);
+        model.addAttribute("s2jUrl", s2JournalUrl);
 
         return "/share/myrss/myFavorite";
     }
@@ -108,12 +109,13 @@ public class MyRssController {
                                             @RequestParam("itemId") String itemId,
                                             @RequestParam("svcgrp") String svcgrp,
                                             @RequestParam("type") String type,
-                                            @RequestParam("url") String url){
+                                            @RequestParam("url") String url,
+                                            @RequestParam("elseList") String elseList){
 
         UserVo sessUser = (UserVo) req.getSession().getAttribute(R2Constant.SESSION_USER);
         String userId = sessUser.getUserId();
 
-        myRssService.editFavorite(itemId, svcgrp, userId, type, url);
+        myRssService.editFavorite(itemId, svcgrp, userId, type, url, elseList);
     }
 
     // Favorite 체크(연구자, 논문 등의 상세페이지 부분)
@@ -233,6 +235,9 @@ public class MyRssController {
                                          @RequestParam(value = "under_per", defaultValue = "100") String under_per)
             throws MalformedURLException, ParserConfigurationException, SAXException, UnsupportedEncodingException {
 
+        UserVo sessUser = (UserVo) req.getSession().getAttribute(R2Constant.SESSION_USER);
+        String userId = sessUser.getUserId();
+
         if(isSearch.equals("Y")) {
             Map<String, Object> s2journalReturnMap = myRssService.selectionJournal(title, keyword, abstracts);
 
@@ -292,6 +297,16 @@ public class MyRssController {
         modelMap.addAttribute("isSearch", isSearch);
         modelMap.addAttribute("under_per", under_per);
 
+        List<FavoriteVo> favoriteList = myRssService.findAllFavorite(userId, "VJOUR");
+        String favoriteString = "";
+        int index = 0;
+        for (FavoriteVo favorite:favoriteList) {
+            if(index > 0)
+                favoriteString += ",";
+            favoriteString += favorite.getDataId();
+        }
+        req.setAttribute("favoriteString", favoriteString);
+
         return "share/recommand/selection";
     }
 
@@ -340,6 +355,19 @@ public class MyRssController {
             req.setAttribute("resultList", journalList);
         }
 
+    }
+
+    @RequestMapping(value = "/personal/compare")
+    private String compare (ModelMap modelMap, HttpServletRequest req){
+        UserVo sessUser = (UserVo) req.getSession().getAttribute(R2Constant.SESSION_USER);
+        String userId = sessUser.getUserId();
+
+        List<FavoriteVo> favoriteJournalList = myRssService.findAllFavorite(userId, "VJOUR");
+        modelMap.addAttribute("journalList", favoriteJournalList);
+
+        modelMap.addAttribute("s2jUrl", s2JournalUrl);
+
+        return "share/recommand/compare";
     }
 
     @RequestMapping(value = "/personal/toc")
