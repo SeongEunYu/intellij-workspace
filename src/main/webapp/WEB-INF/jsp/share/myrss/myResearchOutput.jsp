@@ -65,7 +65,7 @@
 		$(".paging_nav").empty();
 
 		$.ajax({
-			url: "${pageContext.request.contextPath}/personal/myRss/myArchivements/contents.do",
+			url: "${pageContext.request.contextPath}/personal/myRss/myResearchOutput/contents.do",
 			method: "GET",
 			data: {tabId : tabId, id : "${userId}", page:page, sort:sort, order:order}
 		}).done(function(data){
@@ -258,25 +258,26 @@
 <body>
 	<div class="sub_container">
 		<%--<h3 class="h3_title"><spring:message code="disc.detail.user.title"/></h3>--%>
-		<h3 class="h3_title">업적목록</h3>
-
-		<div class="tab_wrap w_25">
-			<ul>
-				<li><a id="journal" href="javascript:tabClick('journal')" class="on"><spring:message code="disc.tab.journal"/></a></li>
-				<li><a id="funding" href="javascript:tabClick('funding')"><spring:message code="disc.tab.research"/></a></li>
-				<li><a id="patent" href="javascript:tabClick('patent')"><spring:message code="disc.tab.patent"/></a></li>
-				<li><a id="conference" href="javascript:tabClick('conference')"><spring:message code="disc.tab.conference"/></a></li>
-			</ul>
-		</div>
-		<div class="list_top_box">
-			<h3></h3>
-			<p class="page_num_box"></p><span id="memo" style='font-weight:bold;color:red;padding-left: 10px;'></span>
-			<div class="list_sort_box">
+		<h3 class="h3_title">My Research Output</h3>
+		<div class="about_top_wrap">
+			<div class="tab_wrap w_25">
 				<ul>
-					<li><i><span style="padding-right: 30px;"><spring:message code="disc.sort.sort"/></span></i><a id="date" href="javascript:sortTab('date');" style="display: inline;"><span><spring:message code="disc.sort.date"/></span><em>정렬</em></a></li>
-					<li><a id="tc" href="javascript:sortTab('tc');"><span><spring:message code="disc.sort.citation"/></span><em>정렬</em></a></li>
-					<li><a id="title" href="javascript:sortTab('title');"><span><spring:message code="disc.sort.title"/></span><em>정렬</em></a></li>
+					<li><a id="journal" href="javascript:tabClick('journal')" class="on"><spring:message code="disc.tab.journal"/></a></li>
+					<li><a id="funding" href="javascript:tabClick('funding')"><spring:message code="disc.tab.research"/></a></li>
+					<li><a id="patent" href="javascript:tabClick('patent')"><spring:message code="disc.tab.patent"/></a></li>
+					<li><a id="conference" href="javascript:tabClick('conference')"><spring:message code="disc.tab.conference"/></a></li>
 				</ul>
+			</div>
+			<div class="list_top_box">
+				<h3></h3>
+				<p class="page_num_box"></p><span id="memo" style='font-weight:bold;color:red;padding-left: 10px;'></span>
+				<div class="list_sort_box">
+					<ul>
+						<li><i><span style="padding-right: 30px;"><spring:message code="disc.sort.sort"/></span></i><a id="date" href="javascript:sortTab('date');" style="display: inline;"><span><spring:message code="disc.sort.date"/></span><em>정렬</em></a></li>
+						<li><a id="tc" href="javascript:sortTab('tc');"><span><spring:message code="disc.sort.citation"/></span><em>정렬</em></a></li>
+						<li><a id="title" href="javascript:sortTab('title');"><span><spring:message code="disc.sort.title"/></span><em>정렬</em></a></li>
+					</ul>
+				</div>
 			</div>
 		</div>
 		<div class="paging_nav"></div>

@@ -712,7 +712,7 @@ td .line_bt {  line-height: 24px;}
 
 /* dashboard */
 .left_col_box {  float: left; width:230px; border-top:2px solid #0472e1;  }
-.dash_user_box { padding: 24px 0 0 0; margin-bottom: 34px;}
+.dash_user_box { padding: 24px 0 0 0; margin-bottom: 18px;}
 .ri_type_box {  background: #f1eff0; text-align: center;padding: 8px 0; border-radius: 27px;}
 .ri_type_box a { margin-left: 5px; display: inline-block; width:34px; height: 34px; text-indent: -99999px;  }
 
@@ -923,3 +923,18 @@ td .line_bt {  line-height: 24px;}
 .inter_search_box dl dd .publisher_text {    display: inline-block;    padding: 0 10px 0 0;    margin-right: 10px;    background: url(../img/background_rss/list_text_line.png) no-repeat right 3px;    font-size: 13px;    color: #222;}
 .inter_search_box dl dd em {    color: #888;    margin-right: 10px;}
 .inter_search_box .line_num {    background: url(../img/background_rss/js_circle.png) no-repeat 0 0;    width: 62px;    height: 62px;    position: absolute;    right: 0;    top: 8px;    text-align: center;    line-height: 62px;    font-family: Arial;    color: #4461a4;    font-style: italic;}
+
+.main_more_bt { float: right; position: relative;right:-10px;top:0px; display: inline-block; width:20px; height: 20px;   background: url(../img/background_rss/main_more_bt.png) no-repeat 50% 50%;   text-indent: -9999px; transition: all 0.3s ease;  }
+.main_more_bt:hover { transform:rotate( 90deg );}
+
+.google_scholar_box { padding: 10px 20px 0 20px; position: relative; }
+.gs_r_left { float: left; width:102px;height: 132px;   }
+.gs_r_right { float: right; width:102px;height: 132px;   }
+.gs_r_left img,
+.gs_r_right img	 { border:1px solid #ddd; width:100%; height: 100%; }
+.gs_r_link {   width: 154px; position: absolute; left:50%; margin-left: -77px; top:0; }
+.gs_r_link a {  display: block; background: url(../img/background_rss/gs_img_over.png) no-repeat 50% 0px;    height: 120px;      transition: all 0.2s ease;  text-align: center; padding: 66px 0 0 0;  }
+.gs_r_link a:hover span  {  color:#397ef6;  }
+
+.gs_r_link span  { display: inline-block; padding: 0 8px 0 0;    background: url(../img/background_rss/gs_link_arrow.png) no-repeat right 50%;   font-size: 12px;   color: #222;}
+

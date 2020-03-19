@@ -12,7 +12,7 @@
 <body>
 <div class="sub_container">
     <%--<h3 class="h3_title"><spring:message code="disc.about.ntcm.title"/></h3>--%>
-    <a href="${pageContext.request.contextPath}/personal/mailingList.do?page=${page}&order=${order}&sort=${sort}" class="prev_bt" style="float:right;">목록</a>
+    <a href="${pageContext.request.contextPath}/personal/toc.do?page=${page}&order=${order}&sort=${sort}" class="prev_bt" style="float:right;">목록</a>
     <h3 class="h3_title">My Mailing List <em>(Article List)</em></h3>
     <div class="about_top_wrap">
         <%--<div class="language_r_box">

@@ -76,7 +76,7 @@
 <body>
 <div class="sub_container">
     <%--<h3 class="h3_title"><spring:message code="disc.about.ntcm.title"/></h3>--%>
-    <h3 class="h3_title">Research board</h3>
+    <h3 class="h3_title">Research Support Board</h3>
     <div class="about_top_wrap">
         <%--<div class="language_r_box">
             <a href="${pageContext.request.contextPath}/share/user/kboard.do?language=en" ${lang=='en'?'class="on"':''}><spring:message code="disc.language.eng"/></a>

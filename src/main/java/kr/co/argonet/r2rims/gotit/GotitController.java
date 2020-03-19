@@ -42,8 +42,8 @@ public class GotitController {
         return gotitTopList;
     }
 
-    @RequestMapping(value = "/gotitMailingTop")
-    public @ResponseBody List<Map<String, Object>> gotitIndexTop5 (HttpServletRequest req, ModelMap model){
+    @RequestMapping(value = "/gotitTocTop")
+    public @ResponseBody List<Map<String, Object>> gotitTocTop5 (HttpServletRequest req, ModelMap model){
 
         UserVo sessUser = (UserVo) req.getSession().getAttribute(R2Constant.SESSION_USER);
         String userId = sessUser.getUserId();

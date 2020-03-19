@@ -322,7 +322,7 @@ public class MyRssService {
     }
 
     public InputStream openPdf(String fileUrl) throws IOException {
-        File target = new File("/data/gotit/files/resume.pdf");
+        File target = new File(fileUrl);
         if(target.exists()){
             return new FileInputStream(target);
         } else {

@@ -2,13 +2,16 @@ package kr.co.argonet.r2rims.core.interceptor;
 
 import kr.co.argonet.r2rims.constant.R2Constant;
 import kr.co.argonet.r2rims.core.annotation.NoLoginCheck;
+import kr.co.argonet.r2rims.core.util.SessionUtil;
 import kr.co.argonet.r2rims.core.vo.UserVo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -42,9 +45,15 @@ public class RssSessionInterceptor extends HandlerInterceptorAdapter{
 			log.debug("session check Interceptor : usingAuth null");
 
 			HttpSession session = request.getSession();
-			UserVo loginUser = (UserVo) session.getAttribute(R2Constant.LOGIN_USER);
+			UserVo loginUser = (UserVo) session.getAttribute(R2Constant.SESSION_USER);
 			if(loginUser == null || loginUser.getUserId() == null)
 			{
+				Cookie cookie = new Cookie("ARM_UC", null);
+				cookie.setMaxAge(0);
+				cookie.setPath("/");
+				cookie.setDomain("bwise.kr");
+				response.addCookie(cookie);
+
 				response.setCharacterEncoding("UTF-8");
 				response.setContentType("text/html;charset:UTF-8");
 				PrintWriter pw = response.getWriter();

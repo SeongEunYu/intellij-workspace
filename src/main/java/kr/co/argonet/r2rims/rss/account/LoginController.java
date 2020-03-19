@@ -211,7 +211,6 @@ public class LoginController {
      * @param pathname
      * @param mode
      * @param inst
-     * @param user
      * @param req
      * @param webReq
      * @return
@@ -285,29 +284,13 @@ public class LoginController {
                     mvo.addObject("USER_ID", "");
                     mvo.setViewName("index/loginFail");
                 }
-                else if(authorityList.size() == 1 ) // 권한이 1개인 경우 auth setSession 후 페이지로 이동
+//                else if(authorityList.size() == 1 ) // 권한이 1개인 경우 auth setSession 후 페이지로 이동
+                else
                 {
                     String adminDvsCd = authorityList.get(0).getAdminDvsCd();
                     String workTrget = authorityList.get(0).getWorkTrget();
                     String workTrgetNm = authorityList.get(0).getWorkTrgetNm();
-                    //연구자인가?
-                    if(adminDvsCd != null && R2Constant.RESEARCHER_DVS_CD.equals(adminDvsCd))
-                    {
-                        req.getSession().setAttribute(R2Constant.SESSION_USER , user);
-                    }
-                    //대리입력자인가?
-                    else if(adminDvsCd != null && R2Constant.SITTER_DVS_CD.equals(adminDvsCd) && workTrget != null && !"".equals(workTrget))
-                    {
-                        UserVo sessUser = indexService.findUserById(workTrget);
-                        req.getSession().setAttribute(R2Constant.SESSION_USER , sessUser);
-                    }
-                    else
-                    {
-                        UserVo authUser = indexService.findUserByUserIdAndAdminDvsCdAndWorkTrget(user.getUserId(), adminDvsCd, workTrget);
-                        if(authUser != null) req.getSession().setAttribute(R2Constant.SESSION_USER, authUser);
-                        else req.getSession().setAttribute(R2Constant.SESSION_USER, user);
 
-                    }
                     user.setAdminDvsCd(adminDvsCd);
                     user.setWorkTrget(workTrget);
                     user.setWorkTrgetNm(workTrgetNm);
@@ -316,6 +299,7 @@ public class LoginController {
                     user.setWorkUserNm(workTrgetNm);
                     req.getSession().setAttribute(R2Constant.LOGIN_USER, user);
                     req.getSession().setAttribute(R2Constant.SHARE_USER, user);
+                    req.getSession().setAttribute(R2Constant.SESSION_USER, user);
 
                     //setSession
                     MemberAuthorVo authorVo = authorityList.get(0);
@@ -331,15 +315,7 @@ public class LoginController {
                     returnPage = getReturnPageByAdminDvsCd(adminDvsCd, mgtAt);
                     mvo.setViewName("redirect:"+returnPage);
                 }
-                else
-                {
-                    user.setMgtAt(mgtAt);
-                    mvo.addObject("user", user);
-                    mvo.addObject("authorityList", authorityList);
-                    mvo.addObject("conectMth", "IDP");
-                    req.getSession().setAttribute(R2Constant.SHARE_USER, user);
-                    mvo.setViewName("index/auth_check");
-                }
+
                 req.getSession().setMaxInactiveInterval(60*60);
             }
             else

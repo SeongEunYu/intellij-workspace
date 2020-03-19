@@ -433,12 +433,13 @@ function coAuthorNetworkWithInstView(encptUserId, type){
 		<div class="researcher_view_wrap">
 			<div class="pic_box">
 				<span>
-					<c:if test="${userDetail.profPhotoFileId != null}">
-						<img src="${pageContext.request.contextPath}/servlet/image/profile.do?fileid=<c:out value="${userDetail.profPhotoFileId}"/>" height="164" width="130"/>
-					</c:if>
-					<c:if test="${userDetail.profPhotoFileId == null}">
-						<img src="<c:url value="/share/img/common/researcher_none_img.jpg"/>"/>
-					</c:if>
+					<%--<c:if test="${userDetail.profPhotoFileId != null}">--%>
+						<%--<img src="${pageContext.request.contextPath}/servlet/image/profile.do?fileid=<c:out value="${userDetail.profPhotoFileId}"/>" height="164" width="130"/>--%>
+					<%--</c:if>--%>
+					<%--<c:if test="${userDetail.profPhotoFileId == null}">--%>
+						<%--<img src="<c:url value="/share/img/common/researcher_none_img.jpg"/>"/>--%>
+					<%--</c:if>--%>
+					<img src="<c:url value="/share/img/common/researcher_none_img.jpg"/>"/>
 				</span>
 			</div>
 			<div class="researcher_info">
@@ -547,9 +548,10 @@ function coAuthorNetworkWithInstView(encptUserId, type){
 									<input type="hidden" name="id" value="<c:out value="${coAuthor.encptUserId}"/>">
 										<a href="#" onclick="$(this).closest('form').submit()" title="<c:out value='${language eq "en"? coAuthor.engNm : coAuthor.korNm}'/> (<c:out value='${language eq "en"? coAuthor.deptEng : coAuthor.deptKor}'/>)">
 											<span class="researcher_img ${coAuthor.profPhotoFileId == null ? 'none_img' : ''}">
-												<c:if test="${coAuthor.profPhotoFileId != null}">
-													<img src="${pageContext.request.contextPath}/servlet/image/profile.do?fileid=<c:out value="${coAuthor.profPhotoFileId}"/>"/>
-												</c:if>
+												<%--<c:if test="${coAuthor.profPhotoFileId != null}">--%>
+													<%--<img src="${pageContext.request.contextPath}/servlet/image/profile.do?fileid=<c:out value="${coAuthor.profPhotoFileId}"/>"/>--%>
+												<%--</c:if>--%>
+												<img src="<c:url value="/share/img/common/researcher_none_img.jpg"/>" style="top: -5px;"/>
 											</span>
 										</a>
 								</form>
@@ -572,9 +574,10 @@ function coAuthorNetworkWithInstView(encptUserId, type){
 									<input type="hidden" name="id" value="<c:out value="${similar.encptUserId}"/>">
 									<a href="#" onclick="$(this).closest('form').submit()" title="<c:out value='${language eq "en"? similar.engNm : similar.korNm}'/> (<c:out value='${language eq "en"? similar.deptEng : similar.deptKor}'/>)">
 										<span class="researcher_img ${similar.profPhotoFileId == null ? 'none_img' : ''}">
-											<c:if test="${similar.profPhotoFileId != null}">
-												<img src="${pageContext.request.contextPath}/servlet/image/profile.do?fileid=<c:out value="${similar.profPhotoFileId}"/>"/>
-											</c:if>
+											<%--<c:if test="${similar.profPhotoFileId != null}">--%>
+												<%--<img src="${pageContext.request.contextPath}/servlet/image/profile.do?fileid=<c:out value="${similar.profPhotoFileId}"/>"/>--%>
+											<%--</c:if>--%>
+											<img src="<c:url value="/share/img/common/researcher_none_img.jpg"/>" style="top: -5px;"/>
 										</span>
 									</a>
 								</form>

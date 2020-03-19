@@ -22,7 +22,6 @@
 
 	$(function () {
 		//대메뉴 형광색 들어오게하기
-		$("#myRSS").addClass("on");
 
 		$(".sub_container").hide();
 		$("input[type=checkbox]").on("change", function(){

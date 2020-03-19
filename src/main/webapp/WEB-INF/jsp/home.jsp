@@ -69,7 +69,7 @@
         $(document).ready(function() {
             effectBySize();
             getTopGotit();
-			getMailingTop();
+			getTocTop();
 			bindModalLink();
         });
 
@@ -103,9 +103,23 @@
 						}
 
 						// appendText = appendText + "<a href='" + url + "'>" + title + "</a><span class='sr_under_t'>" + author + "</span></li>";
-						appendText = appendText + "<a href='" + url + "'>" + title + "</a><span class='sr_under_t'>" + regDate + " / " + author + "</span></li>";
+						appendText = appendText + "<a href='" + url + "'>" + title + "</a><span class='sr_under_t'>";
+						if(regDate && author){
+							appendText = appendText + regDate  + " / " + author;
+						} else {
+							if(regDate){
+								appendText = appendText + regDate;
+							}
+							if(author){
+								appendText = appendText + author;
+							}
+						}
+						appendText = appendText + "</span></li>";
 
 						$("#topGotit ul").append(appendText);
+
+						var moreAppend = "<a href='https://gotit.bwise.kr/rsch/rec/list' class='main_more_bt' id='gotit_more'>more</a>";
+						$("#topGotitTitle").append(moreAppend);
 					}
 				} else {
 					$("#topGotit ul").append("<li class='add_state'><span class='sr_under_t'>추천 정보가 없습니다.</span></li>");
@@ -114,9 +128,9 @@
 		}
 
 
-		function getMailingTop(){
+		function getTocTop(){
 			$.ajax({
-				url: "${pageContext.request.contextPath}/gotitMailingTop.do",
+				url: "${pageContext.request.contextPath}/gotitTocTop.do",
 				method: "GET",
 			}).done(function(data){
 				if(data.length > 0){
@@ -129,13 +143,16 @@
 
 						var appendText = "<li>";
 
-						appendText = appendText + "<a href='${pageContext.request.contextPath}/personal/mailing/article.do?msgId=" + data[i].MSG_ID + "'>" + journalName + "</a>";
+						appendText = appendText + "<a href='${pageContext.request.contextPath}/personal/toc/article.do?msgId=" + data[i].MSG_ID + "'>" + journalName + "</a>";
 
 						appendText = appendText + "<span class='sr_under_t'>" + sendDate + " / Vol." + volume + " No." + issue + "</span>";
 
 						appendText = appendText + "</li>";
 
 						$("#topMailing ul").append(appendText);
+
+						var moreAppend = "<a href='${pageContext.request.contextPath}/personal/toc.do' class='main_more_bt'>more</a>";
+						$("#topMailingTitle").append(moreAppend);
 					}
 				} else {
 					$("#topMailing ul").append("<li><span class='sr_under_t'>수신된 목차정보 메일이 없습니다.</span></li>");
@@ -401,9 +418,6 @@
 							<li><a href="${pageContext.request.contextPath}/share/article/subject.do"><spring:message code="disc.menu.anls.sbj"/></a></li>
 							<li><a href="${pageContext.request.contextPath}/share/article/journalByDept.do"><spring:message code="disc.menu.anls.jnl"/></a></li>
 							<li><a href="${pageContext.request.contextPath}/share/user/keywordAnalysis.do"><spring:message code="disc.menu.anls.key"/></a></li>
-							<%--<li><a href="${pageContext.request.contextPath}/share/user/keywordNetwork.do"><spring:message code="disc.menu.anls.keyNet"/></a></li>--%>
-							<%--<li><a href="${pageContext.request.contextPath}/share/article/SCIByYear.do">SCI Artices by Year</a></li>
-							<li><a href="#">Journal Impact Factor</a></li>--%>
 						</ul>
 					</div>
 				</li>
@@ -412,7 +426,6 @@
 					<div class="sub_menu" style="display: none;">
 						<ul style="display: none;">
 							<li><a href="${pageContext.request.contextPath}/share/article/deptCoAuthor.do"><spring:message code="disc.menu.ntwk.dept"/></a></li>
-							<li><a href="${pageContext.request.contextPath}/share/user/researchGate.do"><spring:message code="disc.menu.ntwk.extn"/></a></li>
 							<%--<li><a href="#">${language == 'en' ? 'Subject Network' : '학문분야별 네트워크'}</a></li>--%>
 						</ul>
 					</div>
@@ -433,10 +446,10 @@
 					<div class="sub_menu" style="display: none;">
 						<ul style="display: none;">
 							<%--<li><a href="${pageContext.request.contextPath}/share/myRss/myDocument.do"><spring:message code="disc.menu.rss.doc"/></a></li>--%>
-								<li><a href="${pageContext.request.contextPath}/personal/myRss/myArchivements.do">My Archivements</a></li>
+								<li><a href="${pageContext.request.contextPath}/personal/myRss/myResearchOutput.do">My Research Output</a></li>
 								<li><a href="${pageContext.request.contextPath}/personal/myRss/myFavorite.do">My Favorite</a></li>
-								<li><a href="${pageContext.request.contextPath}/personal/mailingList.do">My Mailing List</a></li>
-								<li><a href="${pageContext.request.contextPath}/personal/myRss/rBoard.do">Research board</a></li>
+								<li><a href="${pageContext.request.contextPath}/personal/toc.do">Journal TOC Mailing</a></li>
+								<li><a href="${pageContext.request.contextPath}/personal/myRss/rBoard.do">Research Support Board</a></li>
 						</ul>
 					</div>
 				</li>
@@ -477,6 +490,9 @@
 					</div>
 				</c:if>
 			</div>
+			<div style="background-color: #39484d; margin-bottom: 18px; border-radius: 10px;">
+				<div style="padding: 5px; text-align: center;"><a href="${pageContext.request.contextPath}/personal/selection.do" style="color: white;">투고 저널 추천</a></div>
+			</div>
 			<div class="dash_keyword">
 				<h3>Keyword</h3>
 				<div>
@@ -494,15 +510,12 @@
 					</c:forEach>
 				</div>
 			</div>
-			<div style="background-color: #39484d; margin-bottom: 10px; border-radius: 10px;">
-				<div style="padding: 5px; text-align: center;"><a href="${pageContext.request.contextPath}/personal/selection.do" style="color: white;">투고 저널 추천</a></div>
-			</div>
 		</div><!-- left_col_box : e -->
 		<div class="u_contents">
 			<div class="col_row">
 				<div class="col_md_6">
 					<div class="dash_box box1">
-						<h3>최근 등록 논문</h3>
+						<h3>최근 등록 논문<c:if test="${fn:length(recentArticle) > 0}"><a href="${pageContext.request.contextPath}/personal/myRss/myResearchOutput.do" class="main_more_bt">more</a></c:if></h3>
 						<div class="sr_list">
 							<ul>
 								<c:choose>
@@ -526,7 +539,7 @@
 				</div>
 				<div class="col_md_6">
 					<div class="dash_box box1">
-						<h3>최근 추천 정보</h3>
+						<h3 id="topGotitTitle">최근 추천 정보</h3>
 						<div class="sr_list" id="topGotit">
 							<ul>
 
@@ -536,7 +549,7 @@
 				</div>
 				<div class="col_md_6">
 					<div class="dash_box box1">
-						<h3>공지사항</h3>
+						<h3>공지사항<c:if test="${fn:length(bbsList) > 0}"><a href="#" class="main_more_bt">more</a></c:if></h3>
 						<div class="sr_list">
 							<ul>
 								<c:choose>
@@ -569,23 +582,24 @@
 						</div>
 					</div>
 				</div>
+
 				<div class="col_md_6">
 					<div class="dash_box box1">
-						<h3>교내 공동 연구 정보</h3>
-						<div class="sr_list" style="margin: 60px 5px;">
+						<h3>교내 공동 연구자 추천</h3>
+						<div class="google_scholar_box" style="margin-top: 70px;">
 							<c:choose>
 								<c:when test="${not empty smUser}">
 									<%--<div>${userInfo.korNm}</div>--%>
 									<%--<div>${smUser.korNm}</div>--%>
-									<span class="dash_user_img" style="margin-left: 10px; float: left;">
+									<p class="gs_r_left">
 										<a href="${pageContext.request.contextPath}/share/user/userDetail.do?id=${userInfo.encptUserId}"><img src="<c:url value="/share/img/common/researcher_none_img.jpg"/>" width="100%"/></a>
-									</span>
-									<span>
-										<a href="#" onclick="goGoogleScholar()"><img src="<c:url value="/share/img/common_rss/Google_Scholar_logo.png"/>" style="width: 25%; margin-top: 60px; margin-left: 13px;"/></a>
-									</span>
-									<span class="dash_user_img" style="margin-right: 10px; float: right;">
+									</p>
+									<div class="gs_r_link">
+										<a href="#" onclick="goGoogleScholar()"><span>Google Scholar</span></a>
+									</div>
+									<p class="gs_r_right">
 										<a href="${pageContext.request.contextPath}/share/user/userDetail.do?id=${smUser.encptUserId}"><img src="<c:url value="/share/img/common/researcher_none_img.jpg"/>" width="100%"/></a>
-									</span>
+									</p>
 								</c:when>
 								<c:otherwise>
 									<ul>
@@ -600,7 +614,7 @@
 				</div>
 				<div class="col_md_6">
 					<div class="dash_box box1">
-						<h3>목차정보 메일링 정보</h3>
+						<h3 id="topMailingTitle">목차정보 메일링 목록</h3>
 						<div class="sr_list" id="topMailing">
 							<ul>
 
@@ -652,7 +666,7 @@
                             <label for="resume_art" class="radio_label"><spring:message code="resume.art"/></label>
                             <br/><br/>
 
-                            <input type="checkbox" id="resume_con" name="gubun" value="conference" class="radio" disabled="disabled"/>
+                            <input type="checkbox" id="resume_con" name="gubun" value="conference" class="radio" />
                             <label for="resume_con" class="radio_label"><spring:message code="resume.con"/></label>
 
                             <br/><br/>

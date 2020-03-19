@@ -27,7 +27,7 @@
         function goDocument(page){
             var addr = "page="+page+"&sort="+sort+"&order="+order;
 
-            $(location).attr('href',"${pageContext.request.contextPath}/personal/mailingList.do?"+addr);
+            $(location).attr('href',"${pageContext.request.contextPath}/personal/toc.do?"+addr);
         }
 
         //페이지 그리기
@@ -113,7 +113,7 @@
                             <c:when test="${fn:length(mailList) > 0}">
                                 <c:forEach items="${mailList}" var="mail">
                                     <tr>
-                                        <td class='al_left'><a href="${pageContext.request.contextPath}/personal/mailing/article.do?msgId=${mail.MSG_ID}&page=${page}&order=${order}&sort=${sort}">${mail.JOURNALNAME}</a></td>
+                                        <td class='al_left'><a href="${pageContext.request.contextPath}/personal/toc/article.do?msgId=${mail.MSG_ID}&page=${page}&order=${order}&sort=${sort}">${mail.JOURNALNAME}</a></td>
                                         <td class='al_center' style="padding-left: 0px; padding-right: 0px"><span style="font-size: 13px">${mail.ISSN}</span></td>
                                         <td class='al_center' style="padding-left: 0px; padding-right: 0px"><span style="font-size: 13px">VOL.${mail.VOLUME} NO.${mail.ISSUE}</span></td>
                                         <td class='al_center' style="padding-left: 0px; padding-right: 0px"><span style="font-size: 13px"><fmt:formatDate value="${mail.SENDDATE}" pattern="yyyy-MM-dd"/></span></td>

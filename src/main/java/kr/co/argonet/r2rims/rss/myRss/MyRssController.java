@@ -1,6 +1,8 @@
 package kr.co.argonet.r2rims.rss.myRss;
 
 import kr.co.argonet.r2rims.constant.R2Constant;
+import kr.co.argonet.r2rims.core.annotation.NoAuthCheck;
+import kr.co.argonet.r2rims.core.annotation.NoShareSessionCheck;
 import kr.co.argonet.r2rims.core.util.HashMap2;
 import kr.co.argonet.r2rims.core.vo.BbsVo;
 import kr.co.argonet.r2rims.core.vo.FileVo;
@@ -12,7 +14,6 @@ import kr.co.argonet.r2rims.share.ShareUserService;
 import org.apache.solr.client.solrj.SolrServerException;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.InputStreamResource;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.ResponseEntity.BodyBuilder;
@@ -134,7 +135,7 @@ public class MyRssController {
     }
 
     // My Archivements 페이지
-    @RequestMapping(value = "/personal/myRss/myArchivements")
+    @RequestMapping(value = "/personal/myRss/myResearchOutput")
     public String userDetail(HttpServletRequest req, ModelMap model) {
 
         UserVo sessUser = (UserVo) req.getSession().getAttribute(R2Constant.SESSION_USER);
@@ -144,13 +145,13 @@ public class MyRssController {
 
         model.addAttribute("userId", userVo.getEncptUserId());
 
-        return "share/myrss/myArchivements";
+        return "share/myrss/myResearchOutput";
     }
 
     // My Archivements 컨텐츠
-    @RequestMapping(value = "/personal/myRss/myArchivements/contents")
+    @RequestMapping(value = "/personal/myRss/myResearchOutput/contents")
     public @ResponseBody
-    Map<String,Object> myArchivements(@RequestParam("tabId") String tabId,
+    Map<String,Object> myResearchOutput(@RequestParam("tabId") String tabId,
                                @RequestParam("id") String encptUserId,
                                @RequestParam(value = "page", defaultValue = "1") String page, //현재 페이지
                                @RequestParam(value = "count", required = false, defaultValue = "10") String count,
@@ -341,7 +342,7 @@ public class MyRssController {
 
     }
 
-    @RequestMapping(value = "/personal/mailingList")
+    @RequestMapping(value = "/personal/toc")
     private String mailingList (ModelMap model, HttpServletRequest req,
                                 @RequestParam(value = "page", defaultValue = "1") String page,
                                 @RequestParam(value = "sort", defaultValue = "regDate") String sort,
@@ -379,10 +380,10 @@ public class MyRssController {
         model.addAttribute("sort", sort);
         model.addAttribute("order", order);
 
-        return "share/myrss/mailList";
+        return "share/myrss/tocList";
     }
 
-    @RequestMapping(value = "/personal/mailing/article")
+    @RequestMapping(value = "/personal/toc/article")
     public String mailingDetail (HttpServletRequest req, ModelMap modelMap, @RequestParam(value = "msgId") String msgId,
                                  @RequestParam(value = "page", defaultValue = "1") String page,
                                  @RequestParam(value = "sort", defaultValue = "regDate") String sort,
@@ -398,7 +399,7 @@ public class MyRssController {
         modelMap.addAttribute("sort", sort);
         modelMap.addAttribute("order", order);
 
-        return "share/myrss/articleList";
+        return "share/myrss/tocArticleList";
     }
 
     @RequestMapping(value = "/personal/myRss/rBoard")
@@ -466,7 +467,8 @@ public class MyRssController {
         return "share/myrss/boardView";
     }
 
-    @RequestMapping(value = "/pdf/{bbsId}/{pdfName}", method = RequestMethod.GET)
+    @NoAuthCheck @NoShareSessionCheck
+    @RequestMapping(value = "/pdf/{bbsId}/{pdfName}", method = RequestMethod.GET, produces={MediaType.TEXT_HTML_VALUE, "application/pdf"})
     public @ResponseBody
     ResponseEntity<InputStreamResource> pdfFile(HttpServletRequest req, HttpServletResponse res,
                                                 @PathVariable("bbsId") String bbsId) throws IOException{
@@ -489,7 +491,8 @@ public class MyRssController {
         BodyBuilder r = ResponseEntity.ok();
         if(file.getFileSize() > 0)
             r.contentLength(file.getFileSize());
-        r.header("Content-Type", "application/pdf");
+//        r.header("Content-Type", "application/pdf");
+        r.contentType(MediaType.parseMediaType("application/pdf"));
         return r.body(new InputStreamResource(resource));
     }
 

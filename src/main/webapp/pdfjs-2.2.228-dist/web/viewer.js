@@ -158,8 +158,6 @@ function getViewerConfiguration() {
       toolbarButtonContainer: document.getElementById('secondaryToolbarButtonContainer'),
       presentationModeButton: document.getElementById('secondaryPresentationMode'),
       openFileButton: document.getElementById('secondaryOpenFile'),
-      printButton: document.getElementById('secondaryPrint'),
-      downloadButton: document.getElementById('secondaryDownload'),
       viewBookmarkButton: document.getElementById('secondaryViewBookmark'),
       firstPageButton: document.getElementById('firstPage'),
       lastPageButton: document.getElementById('lastPage'),
@@ -1854,11 +1852,6 @@ function webViewerInitialized() {
       fileInput: evt.dataTransfer
     });
   });
-
-  if (!PDFViewerApplication.supportsPrinting) {
-    appConfig.toolbar.print.classList.add('hidden');
-    appConfig.secondaryToolbar.printButton.classList.add('hidden');
-  }
 
   if (!PDFViewerApplication.supportsFullscreen) {
     appConfig.toolbar.presentationModeButton.classList.add('hidden');
@@ -4221,6 +4214,11 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
+var url = unescape(location);
+var param = url.split('?');
+var splitParam = param[1].split('&');
+var bbsId = splitParam[0].replace('bbsId=','');
+var fileNm = splitParam[1].replace('fileNm=','');
 var OptionKind = {
   VIEWER: 0x02,
   API: 0x04,
@@ -4229,12 +4227,17 @@ var OptionKind = {
 };
 exports.OptionKind = OptionKind;
 var defaultOptions = {
+  httpHeaders: {
+    value: { 'Accept': 'text/html, */*' },
+    kind: OptionKind.VIEWER + OptionKind.PREFERENCE + OptionKind.API + OptionKind.WORKER
+  },
   cursorToolOnLoad: {
     value: 0,
     kind: OptionKind.VIEWER + OptionKind.PREFERENCE
   },
   defaultUrl: {
-    value: 'compressed.tracemonkey-pldi-09.pdf',
+    // value: 'compressed.tracemonkey-pldi-09.pdf',
+    value: 'http://localhost:8080/rss/pdf/' + bbsId + '/' + fileNm + '.do',
     kind: OptionKind.VIEWER
   },
   defaultZoomValue: {
@@ -12726,14 +12729,6 @@ function () {
       eventName: 'openfile',
       close: true
     }, {
-      element: options.printButton,
-      eventName: 'print',
-      close: true
-    }, {
-      element: options.downloadButton,
-      eventName: 'download',
-      close: true
-    }, {
       element: options.viewBookmarkButton,
       eventName: null,
       close: true
@@ -13335,16 +13330,6 @@ function () {
       });
       items.openFile.addEventListener('click', function () {
         eventBus.dispatch('openfile', {
-          source: self
-        });
-      });
-      items.print.addEventListener('click', function () {
-        eventBus.dispatch('print', {
-          source: self
-        });
-      });
-      items.download.addEventListener('click', function () {
-        eventBus.dispatch('download', {
           source: self
         });
       });

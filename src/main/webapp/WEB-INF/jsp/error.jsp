@@ -29,6 +29,7 @@
 			<div class="error_info_box">
 				<span>T : ${sysConf['system.admin.telno']}</span>
 				<span class="customer_mail">E-Mail : ${sysConf['system.admin.email']}</span>
+				<span class="customer_mail">E-Mail : ${sysConf['system.admin.email']}</span>
 			</div>
 		</div>
 	</div>

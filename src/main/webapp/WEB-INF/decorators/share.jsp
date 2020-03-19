@@ -239,9 +239,6 @@
 							<li><a href="${pageContext.request.contextPath}/share/article/subject.do"><spring:message code="disc.menu.anls.sbj"/></a></li>
 							<li><a href="${pageContext.request.contextPath}/share/article/journalByDept.do"><spring:message code="disc.menu.anls.jnl"/></a></li>
 							<li><a href="${pageContext.request.contextPath}/share/user/keywordAnalysis.do"><spring:message code="disc.menu.anls.key"/></a></li>
-							<%--<li><a href="${pageContext.request.contextPath}/share/user/keywordNetwork.do"><spring:message code="disc.menu.anls.keyNet"/></a></li>--%>
-							<%--<li><a href="${pageContext.request.contextPath}/share/article/SCIByYear.do">SCI Artices by Year</a></li>
-							<li><a href="#">Journal Impact Factor</a></li>--%>
 						</ul>
 					</div>
 				</li>
@@ -250,7 +247,6 @@
 					<div class="sub_menu" style="display: none;">
 						<ul style="display: none;">
 							<li><a href="${pageContext.request.contextPath}/share/article/deptCoAuthor.do"><spring:message code="disc.menu.ntwk.dept"/></a></li>
-							<li><a href="${pageContext.request.contextPath}/share/user/researchGate.do"><spring:message code="disc.menu.ntwk.extn"/></a></li>
 							<%--<li><a href="#">${language == 'en' ? 'Subject Network' : '학문분야별 네트워크'}</a></li>--%>
 						</ul>
 					</div>
@@ -270,10 +266,10 @@
 					<div class="sub_menu" style="display: none;">
 						<ul style="display: none;">
 							<%--<li><a href="${pageContext.request.contextPath}/share/myRss/myDocument.do"><spring:message code="disc.menu.rss.doc"/></a></li>--%>
-								<li><a href="${pageContext.request.contextPath}/personal/myRss/myArchivements.do">My Archivements</a></li>
+								<li><a href="${pageContext.request.contextPath}/personal/myRss/myResearchOutput.do">My Research Output</a></li>
 								<li><a href="${pageContext.request.contextPath}/personal/myRss/myFavorite.do">My Favorite</a></li>
-								<li><a href="${pageContext.request.contextPath}/personal/mailingList.do">My Mailing List</a></li>
-								<li><a href="${pageContext.request.contextPath}/personal/myRss/rBoard.do">Research board</a></li>
+								<li><a href="${pageContext.request.contextPath}/personal/toc.do">My Mailing List</a></li>
+								<li><a href="${pageContext.request.contextPath}/personal/myRss/rBoard.do">Research Support Board</a></li>
 						</ul>
 					</div>
 				</li>

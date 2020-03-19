@@ -107,6 +107,7 @@ public class RssMainController {
 	@Value("#{sysConf['admin.mgt.intro.page']}")
 	private String adminMgtIntroPage;
 
+	@NoLoginCheck @NoAuthCheck @NoLocaleSet @NoInfoPrtcAgreCheck
     @RequestMapping("/home")
     public String main(ModelMap model, HttpServletRequest req, HttpServletResponse res, WebRequest webReq,
 					   @RequestParam(value = "user_id", defaultValue = "") String userId,
@@ -121,7 +122,7 @@ public class RssMainController {
 		user = rssLoginService.loginById(userId);
 		userId = user.getUserId();
 
-		SessionUtil.clearSessionByWebRequest(webReq);
+
 		sessionSetting(req, res, webReq, user, model);
 
 		model.addAttribute("inst", inst);
@@ -251,6 +252,7 @@ public class RssMainController {
 			{
 				//mvo.addObject(R2Constant.LOGIN_USER, user); // session setAttribute
 				req.getSession().setAttribute(R2Constant.LOGIN_USER, user);
+				req.getSession().setAttribute(R2Constant.SESSION_USER, user);
 
 				String language = user.getLanguageFlag();
 				if(language == null || "".equals(language)) language = defaultLanguage;
