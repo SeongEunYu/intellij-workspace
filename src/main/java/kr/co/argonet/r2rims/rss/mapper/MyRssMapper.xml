@@ -124,4 +124,37 @@
         set rb.VIEW_CNT = rb.VIEW_CNT + 1
         where rb.BBS_ID = #{bbsId}
     </update>
+
+    <select id="totalBoardCountN" resultType="int">
+    select count(1) from RI_RSS_NOTICE
+  </select>
+
+    <select id="findBoardLIstN"	resultType="kr.co.argonet.r2rims.rss.vo.RssBbsVo">
+        select rb.*
+        from RI_RSS_NOTICE rb
+        where rb.TYPE = 'rssNotice'
+        and rb.DEL_DVS_CD = 'N'
+        <choose>
+            <when test='sort == "regDate" and order == "desc"'>
+                order by rb.REG_DATE desc
+            </when>
+            <otherwise>
+                order by rb.REG_DATE
+            </otherwise>
+        </choose>
+        limit #{page} <![CDATA[,]]> #{count}
+    </select>
+
+    <select id="findBoardDetailN" resultType="kr.co.argonet.r2rims.rss.vo.RssBbsVo">
+        select rb.*
+        from RI_RSS_NOTICE rb
+        where rb.BBS_ID = #{bbsId}
+        and rb.DEL_DVS_CD = 'N'
+    </select>
+
+    <update id="increaseBoardCountN">
+        update RI_RSS_NOTICE rb
+        set rb.VIEW_CNT = rb.VIEW_CNT + 1
+        where rb.BBS_ID = #{bbsId}
+    </update>
 </mapper>

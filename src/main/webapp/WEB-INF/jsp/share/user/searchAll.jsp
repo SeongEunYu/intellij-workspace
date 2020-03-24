@@ -95,13 +95,14 @@
 			<div class="col-lg-3 col-md-4 col-sm-6">
 				<div class="researcher_card kor_dept_card">
 					<div class="researcher_info_top">
-						<span class="researcher_img ${user.profPhotoFileId == null ? 'none_img' : ''}">
-							<c:if test="${user.profPhotoFileId != null}">
-								<img src="${contextPath}/rims/servlet/image/profile.do?fileid=<c:out value="${user.profPhotoFileId}"/>"/>
-							</c:if>
-						</span>
+						<%--<span class="researcher_img ${user.profPhotoFileId == null ? 'none_img' : ''}">--%>
+							<%--<c:if test="${user.profPhotoFileId != null}">--%>
+								<%--<img src="${contextPath}/rims/servlet/image/profile.do?fileid=<c:out value="${user.profPhotoFileId}"/>"/>--%>
+							<%--</c:if>--%>
+						<%--</span>--%>
+						<span class="researcher_img none_img"></span>
 						<dl>
-							<form action="userDetail.do" method="get">
+							<form action="${pageContext.request.contextPath}/share/user/userDetail.do" method="get">
 								<input type="hidden" name="id" value="<c:out value="${user.encptUserId}"/>">
 								<dt><a href="#" onclick="$(this).closest('form').submit()"><c:out value='${language=="en"? user.engNm : user.korNm}' escapeXml="false"/></a></dt>
 							</form>

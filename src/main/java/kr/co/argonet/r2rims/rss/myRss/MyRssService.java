@@ -5,6 +5,7 @@ import kr.co.argonet.r2rims.core.util.HashMap2;
 import kr.co.argonet.r2rims.core.vo.*;
 import kr.co.argonet.r2rims.rss.mapper.MyRssMapper;
 import kr.co.argonet.r2rims.rss.vo.FavoriteVo;
+import kr.co.argonet.r2rims.rss.vo.RssBbsVo;
 import kr.co.argonet.util.StringUtil;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -337,6 +338,31 @@ public class MyRssService {
     public void increaseBoardCount(String bbsId){
         myRssMapper.increaseBoardCount(bbsId);
     }
+
+    public int totalBoardCountN (){
+        int total = myRssMapper.totalBoardCountN();
+        return total;
+    }
+
+    public List<RssBbsVo> getBoardListN (int ps, int ct, String sort, String order){
+        List<RssBbsVo> bbsList = new ArrayList<>();
+        bbsList = myRssMapper.findBoardLIstN(ps, ct, sort, order);
+        return bbsList;
+    }
+
+    public RssBbsVo findBbsN (String bbsId) {
+        RssBbsVo bbs = myRssMapper.findBoardDetailN(bbsId);
+        if(bbs.getBbsId() != null){
+            List<FileVo> file = myRssMapper.findFile(bbsId);
+            bbs.setFileList(file);
+        }
+        return bbs;
+    }
+
+    public void increaseBoardCountN(String bbsId){
+        myRssMapper.increaseBoardCountN(bbsId);
+    }
+
 
     public InputStream openPdf(String fileUrl) throws IOException {
         File target = new File(fileUrl);

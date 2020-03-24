@@ -5,6 +5,7 @@ import kr.co.argonet.r2rims.core.vo.BbsVo;
 import kr.co.argonet.r2rims.core.vo.KeywordVo;
 import kr.co.argonet.r2rims.core.vo.UserVo;
 import kr.co.argonet.r2rims.rss.mapper.RssMainMapper;
+import kr.co.argonet.r2rims.rss.vo.RssBbsVo;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -53,7 +54,7 @@ public class RssMainService {
         return rssMainMapper.findSimilarUserList(userId);
     }
 
-    public List<BbsVo> findLatestBBS(){
+    public List<RssBbsVo> findLatestBBS(){
         return rssMainMapper.findLatestBBS();
     }
 }

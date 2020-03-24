@@ -5,7 +5,7 @@
 <head>
 <%@include file="../pageInit.jsp" %>
 <link rel="stylesheet" type="text/css" href="<c:url value="/js/dhtmlx/skins/${sysConf['dhtmlx.skin']}/dhtmlx.css"/>" />
-<link rel="stylesheet" type="text/css" href="<c:url value="/share/css/bootstrap.min.css"/>" />
+<%--<link rel="stylesheet" type="text/css" href="<c:url value="/share/css/bootstrap.min.css"/>" />--%>
 <LINK rel=stylesheet type=text/css	href="<c:url value="/share/css/fixedheader.css"/>">
 
 <script type="text/javascript" src="<c:url value="/share/js/jquery-1.9.1.min.js"/>"></script>

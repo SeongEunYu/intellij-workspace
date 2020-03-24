@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"
-%><!doctype html>
+%>
+<%
+    pageContext.setAttribute("replaceChar", "\n");
+%>
+<!doctype html>
 <html>
 	<head>
 	<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
@@ -161,14 +165,21 @@
 		}
 
 		function goGoogleScholar(){
-        	var gsUrl = "https://scholar.google.com/scholar?as_q=";
+			var gsUrl = "https://scholar.google.com/scholar?as_q=";
 			<c:forEach items="${keywordList}" var="keyword" varStatus="stats">
-				<c:if test="${stats.index > 0}">gsUrl = gsUrl + " OR ";</c:if>
-				gsUrl = gsUrl +'"' + "${keyword.name}" + '"';
+				<c:set var="textLen1" value="${textLen1 + fn:length(keyword.name)}"/>
+				<c:if test="${textLen1 < 130}">
+					<c:if test="${stats.index > 0}">gsUrl = gsUrl + " OR ";</c:if>
+					var keywordName = "${fn:replace(keyword.name, replaceChar, '')}";
+					gsUrl = gsUrl +'"' + keywordName + '"';
+				</c:if>
 			</c:forEach>
 			<c:forEach items="${simKeywordList}" var="simKeyword" varStatus="stats">
-				<c:if test="${stats.index > 0}">gsUrl = gsUrl + " OR ";</c:if>
-				gsUrl = gsUrl +'"' + "${simKeyword.name}" + '"';
+				<c:set var="textLen2" value="${textLen2 + fn:length(simKeyword.name)}"/>
+				<c:if test="${textLen2 < 130}">
+					var simKeywordName = "${fn:replace(simKeyword.name, replaceChar, '')}";
+					gsUrl = gsUrl +'"' + simKeywordName + '"';
+				</c:if>
 			</c:forEach>
 			window.open(gsUrl, '_blank');
 		}
@@ -346,14 +357,14 @@
 					<a href="#" class="top_icon_btn service_btn">서비스 이동</a>
 					<div class="service_link_box">
 						<ul>
-							<li><a <c:if test="${RSS.admin eq 'Y' or RSS.user eq 'Y'}">href="https://rss.bwise.kr/home/login.do"</c:if><c:if test="${RSS.admin eq 'N' and RSS.user eq 'N'}"> class="service_gray"</c:if>><em class="system_rss">RSS</em><span>RSS</span></a></li>
-							<li><a <c:if test="${RIMS.admin eq 'Y' or RIMS.user eq 'Y'}">href="https://rims.cau.ac.kr/"</c:if><c:if test="${RIMS.admin eq 'N' and RIMS.user eq 'N'}"> class="service_gray"</c:if>><em>Rims</em><span>RIMS</span></a></li>
-							<li><a <c:if test="${DISCOVERY.admin eq 'Y' or DISCOVERY.user eq 'Y'}">href="#"</c:if><c:if test="${DISCOVERY.admin eq 'N' and DISCOVERY.user eq 'N'}"> class="service_gray"</c:if>><em class="system_rd">Discovery</em><span>Discovery</span></a></li>
-							<li><a <c:if test="${S2JOURNAL.admin eq 'Y' or S2JOURNAL.user eq 'Y'}">href="https://s2journal.bwise.kr/"</c:if><c:if test="${S2JOURNAL.admin eq 'N' and S2JOURNAL.user eq 'N'}"> class="service_gray"</c:if>><em class="system_s2">S2jJournal</em><span>S2jJournal</span></a></li>
-							<li><a <c:if test="${GOTIT.admin eq 'Y' or GOTIT.user eq 'Y'}">href="https://gotit.bwise.kr/auth/rsch/main"</c:if><c:if test="${GOTIT.admin eq 'N' and GOTIT.user eq 'N'}"> class="service_gray"</c:if>><em class="system_g">GotIt</em><span>GotIt</span></a></li>
-							<li><a <c:if test="${PRISM.admin eq 'Y' or PRISM.user eq 'Y'}">href="#"</c:if><c:if test="${PRISM.admin eq 'N' and PRISM.user eq 'N'}"> class="service_gray"</c:if>><em class="system_prism">PRISM</em><span>PRISM</span></a></li>
-							<li><a <c:if test="${SCHOLARWORKS.admin eq 'Y' or SCHOLARWORKS.user eq 'Y'}">href="#"</c:if><c:if test="${SCHOLARWORKS.admin eq 'N' and SCHOLARWORKS.user eq 'N'}"> class="service_gray"</c:if>><em class="system_sw">ScholarWorks</em><span>ScholarWorks</span></a></li>
-							<li><a <c:if test="${BOARD.admin eq 'Y' or BOARD.user eq 'Y'}">href=""</c:if><c:if test="${BOARD.admin eq 'N' and BOARD.user eq 'N'}"> class="service_gray"</c:if>><em class="system_board">Board</em><span>Board</span></a></li>
+							<li><a <c:if test="${RSS.admin eq 'Y' or RSS.user eq 'Y'}">href="javascript:location.href='${RSS.url}'"</c:if><c:if test="${RSS.admin eq 'N' and RSS.user eq 'N'}"> class="service_gray"</c:if>><em class="system_rss">RSS</em><span>RSS</span></a></li>
+							<li><a <c:if test="${RIMS.admin eq 'Y' or RIMS.user eq 'Y'}">href="javascript:location.href='${RIMS.url}'"</c:if><c:if test="${RIMS.admin eq 'N' and RIMS.user eq 'N'}"> class="service_gray"</c:if>><em>Rims</em><span>RIMS</span></a></li>
+							<li><a <c:if test="${DISCOVERY.admin eq 'Y' or DISCOVERY.user eq 'Y'}">href="javascript:location.href='${DISCOVERY.url}'"</c:if><c:if test="${DISCOVERY.admin eq 'N' and DISCOVERY.user eq 'N'}"> class="service_gray"</c:if>><em class="system_rd">Discovery</em><span>Discovery</span></a></li>
+							<li><a <c:if test="${S2JOURNAL.admin eq 'Y' or S2JOURNAL.user eq 'Y'}">href="javascript:location.href='${S2JOURNAL.url}'"</c:if><c:if test="${S2JOURNAL.admin eq 'N' and S2JOURNAL.user eq 'N'}"> class="service_gray"</c:if>><em class="system_s2">S2jJournal</em><span>S2jJournal</span></a></li>
+							<li><a <c:if test="${GOTIT.admin eq 'Y' or GOTIT.user eq 'Y'}">href="javascript:location.href='${GOTIT.url}'"</c:if><c:if test="${GOTIT.admin eq 'N' and GOTIT.user eq 'N'}"> class="service_gray"</c:if>><em class="system_g">GotIt</em><span>GotIt</span></a></li>
+							<li><a <c:if test="${PRISM.admin eq 'Y' or PRISM.user eq 'Y'}">href="javascript:location.href='${PRISM.url}'"</c:if><c:if test="${PRISM.admin eq 'N' and PRISM.user eq 'N'}"> class="service_gray"</c:if>><em class="system_prism">PRISM</em><span>PRISM</span></a></li>
+							<li><a <c:if test="${SCHOLARWORKS.admin eq 'Y' or SCHOLARWORKS.user eq 'Y'}">href="javascript:location.href='${SCHOLARWORKS.url}'"</c:if><c:if test="${SCHOLARWORKS.admin eq 'N' and SCHOLARWORKS.user eq 'N'}"> class="service_gray"</c:if>><em class="system_sw">ScholarWorks</em><span>ScholarWorks</span></a></li>
+							<li><a <c:if test="${BOARD.admin eq 'Y' or BOARD.user eq 'Y'}">href="#"</c:if><c:if test="${BOARD.admin eq 'N' and BOARD.user eq 'N'}"> class="service_gray"</c:if>><em class="system_board">Board</em><span>Board</span></a></li>
 						</ul>
 					</div>
 				</div><!-- 서비스 설정 -->
@@ -448,8 +459,10 @@
 							<%--<li><a href="${pageContext.request.contextPath}/share/myRss/myDocument.do"><spring:message code="disc.menu.rss.doc"/></a></li>--%>
 								<li><a href="${pageContext.request.contextPath}/personal/myRss/myResearchOutput.do">My Research Output</a></li>
 								<li><a href="${pageContext.request.contextPath}/personal/myRss/myFavorite.do">My Favorite</a></li>
+								<li><a href="${pageContext.request.contextPath}/personal/selection.do">Journal Selection Service</a></li>
 								<li><a href="${pageContext.request.contextPath}/personal/toc.do">Journal TOC Mailing</a></li>
 								<li><a href="${pageContext.request.contextPath}/personal/myRss/rBoard.do">Research Support Board</a></li>
+								<li><a href="${pageContext.request.contextPath}/personal/myRss/nBoard.do">Notice Board</a></li>
 						</ul>
 					</div>
 				</li>
@@ -489,9 +502,6 @@
 						<a <c:if test="${userInfo.grdId != null}">href="https://scholar.google.com/citations?user=${userInfo.grdId}"</c:if> class="gi_type${userInfo.grdId != null ? '_on' : ''}" target="_blank">google</a>
 					</div>
 				</c:if>
-			</div>
-			<div style="background-color: #39484d; margin-bottom: 18px; border-radius: 10px;">
-				<div style="padding: 5px; text-align: center;"><a href="${pageContext.request.contextPath}/personal/selection.do" style="color: white;">투고 저널 추천</a></div>
 			</div>
 			<div class="dash_keyword">
 				<h3>Keyword</h3>
@@ -549,14 +559,14 @@
 				</div>
 				<div class="col_md_6">
 					<div class="dash_box box1">
-						<h3>공지사항<c:if test="${fn:length(bbsList) > 0}"><a href="#" class="main_more_bt">more</a></c:if></h3>
+						<h3>공지사항<c:if test="${fn:length(bbsList) > 0}"><a href="${pageContext.request.contextPath}/personal/myRss/nBoard.do" class="main_more_bt">more</a></c:if></h3>
 						<div class="sr_list">
 							<ul>
 								<c:choose>
 									<c:when test="${fn:length(bbsList) > 0}">
 										<c:forEach items="${bbsList}" var="bbs" varStatus="stat">
 											<li>
-												<a href="#">${bbs.title}</a>
+												<a href="${pageContext.request.contextPath}/personal/myRss/nBoardDetail.do?bbsId=${bbs.bbsId}">${bbs.title}</a>
 												<span class="sr_under_t">
 													<c:if test="${not empty bbs.noticeSttDate or bbs.noticeSttDate != ''}"><c:out value="${bbs.noticeSttDate}" /></c:if>
 													<c:if test="${not empty bbs.noticeEndDate or bbs.noticeEndDate != ''}">~ <c:out value="${bbs.noticeEndDate}" /></c:if>
@@ -589,20 +599,16 @@
 						<div class="google_scholar_box" style="margin-top: 70px;">
 							<c:choose>
 								<c:when test="${not empty smUser}">
-									<%--<div>${userInfo.korNm}</div>--%>
-									<%--<div>${smUser.korNm}</div>--%>
 									<p class="gs_r_left">
-										<a href="${pageContext.request.contextPath}/share/user/userDetail.do?id=${userInfo.encptUserId}"><img src="<c:url value="/share/img/common/researcher_none_img.jpg"/>" width="100%"/></a>
+										<a href="${pageContext.request.contextPath}/share/user/userDetail.do?id=${userInfo.encptUserId}"><img src="<c:url value='/share/img/common/researcher_none_img.jpg'/>" width="100%"/></a>
 									</p>
 									<div class="gs_r_link">
 										<a href="#" onclick="goGoogleScholar()"><span>Google Scholar</span></a>
 									</div>
 									<p class="gs_r_right">
-										<a href="${pageContext.request.contextPath}/share/user/userDetail.do?id=${smUser.encptUserId}"><img src="<c:url value="/share/img/common/researcher_none_img.jpg"/>" width="100%"/></a>
-										<p style="text-align: center; margin-top: 5px;">${smUser.korNm}</p><br>
-										<c:if test="${smUser.deptKor}">
-											<p style="text-align: center;">(${smUser.deptKor})</p>
-										</c:if>
+										<a href="${pageContext.request.contextPath}/share/user/userDetail.do?id=${smUser.encptUserId}"><img src="<c:url value='/share/img/common/researcher_none_img.jpg' />"></a>
+										<span style="text-align: center; margin-top: 5px; display: block;">${smUser.korNm}</span>
+										<span style="text-align: center; display: block;">${smUser.deptKor}</span>
 									</p>
 								</c:when>
 								<c:otherwise>
@@ -626,17 +632,8 @@
 						</div>
 					</div>
 				</div>
-
-
-
-
-
 			</div><!--  row : e -->
-
-
 		</div><!--u_contents : e -->
-
-
 	</div><!--user_sub_contents :  e  -->
 
     <div id="modal_area" class="overlay" style="display: none;"></div>
@@ -744,8 +741,53 @@
 		</div>
 	</div>
 
+	<c:if test="${fn:length(popupList) > 0}">
+		<c:forEach items="${popupList}" var="popup" varStatus="stats">
+			<div id="div_laypopup${stats.index}" align="center" style="display:none;border-width:0px;Z-INDEX: 201; POSITION: absolute;left:150px; top:170px; background-color: #d0dce6; width: auto; min-width: 250px; border:1px solid black;">
+				<div class="popup_content${stats.index}" style="padding:15px 0; border-bottom: 1px solid black;"><c:out value="${popup.content}" escapeXml="false"/></div>
+				<div style="float: left; margin-top: 5px; margin-left: 5px; margin-bottom:5px; display: flex;">
+					<input type="checkbox" name="close" value="OK" onclick="closeWinDay('${stats.index}');" style="margin: 2px 5px 0 0;"/> <span style="font-size: 14px; color:black;">하루동안 이 창을 열지 않음</span>
+				</div>
+				<div style="float: right; margin-top: 5px; margin-right: 5px; cursor: pointer;">
+					<a onclick="closeWin('${stats.index}');"/> <span style="font-size: 14px; color:black;">닫기</span></a>
+				</div>
+			</div>
+		</c:forEach>
+	</c:if>
+
 	<script>
 		$(function(){
+			//popup
+			var now = new Date();
+			var aa = now.getFullYear()+''+getStrNo((now.getMonth()+1))+''+getStrNo(now.getDate());
+
+			var left = 0;
+			var top = 0;
+
+			<c:if test="${fn:length(popupList) > 0}">
+				<c:forEach items="${popupList}" var="popup" varStatus="stats">
+					var startDate = "${popup.noticeSttDate}";
+					var endDate = "${popup.noticeEndDate}";
+					startDate = startDate.replace(/-/gi, "");
+					endDate = endDate.replace(/-/gi, "");
+					if ( aa >= startDate && aa <= endDate ) {
+						if(getCookie("todayClose") == "Y"){
+							$("#div_laypopup${stats.index}").hide();
+						} else {
+							$("#div_laypopup${stats.index}").show();
+							if(${stats.index > 0}){
+								var mLeft = $("#div_laypopup${stats.index}").css("left") + "";
+								var mTop = $("#div_laypopup${stats.index}").css("top") + "";
+								left = mLeft.replace("px","")*1 + 50;
+								top = mTop.replace("px","")*1 + 50;
+								$("#div_laypopup${stats.index}").css("left", left);
+								$("#div_laypopup${stats.index}").css("top", top);
+							}
+
+						}
+					}
+				</c:forEach>
+			</c:if>
 
 			// var topSearchbox = $('.u_s_int');
 			// topSearchbox.focus(function(){
@@ -834,6 +876,43 @@
 				});
 			}
 		});
+
+		function getStrNo(str) {
+			if(str < 10) {
+				return "0"+str;
+			} else {
+				return str;
+			}
+		}
+		function closeWinDay(id){
+// setCookieMobile( "todayCookie", "done" , 1);
+			setCookie('todayClose','Y', 1);
+			var popupId = "div_laypopup" + id;
+			$("#" + popupId).hide();
+		}
+		function closeWin(id){
+			var popupId = "div_laypopup" + id;
+			$("#" + popupId).hide();
+		}
+		function setCookie(cookieName, value, exdays){
+			var exdate = new Date();
+			exdate.setDate(exdate.getDate() + exdays);
+			var cookieValue = escape(value) + ((exdays==null) ? "" : "; expires=" + exdate.toGMTString());
+			document.cookie = cookieName + "=" + cookieValue;
+		}
+		function getCookie(cookieName) {
+			cookieName = cookieName + '=';
+			var cookieData = document.cookie;
+			var start = cookieData.indexOf(cookieName);
+			var cookieValue = '';
+			if(start != -1){
+				start += cookieName.length;
+				var end = cookieData.indexOf(';', start);
+				if(end == -1)end = cookieData.length;
+				cookieValue = cookieData.substring(start, end);
+			}
+			return unescape(cookieValue);
+		}
 	</script>
 
 </body>

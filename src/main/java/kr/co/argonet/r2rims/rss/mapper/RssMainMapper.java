@@ -3,6 +3,7 @@ package kr.co.argonet.r2rims.rss.mapper;
 import kr.co.argonet.r2rims.core.vo.BbsVo;
 import kr.co.argonet.r2rims.core.vo.KeywordVo;
 import kr.co.argonet.r2rims.core.vo.UserVo;
+import kr.co.argonet.r2rims.rss.vo.RssBbsVo;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
@@ -32,5 +33,5 @@ public interface RssMainMapper {
 
     UserVo findSimilarUserList(@Param("userId") String userId);
 
-    List<BbsVo> findLatestBBS();
+    List<RssBbsVo> findLatestBBS();
 }

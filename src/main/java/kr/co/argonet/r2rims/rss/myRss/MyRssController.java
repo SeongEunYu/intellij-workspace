@@ -10,6 +10,7 @@ import kr.co.argonet.r2rims.core.vo.RimsSearchVo;
 import kr.co.argonet.r2rims.core.vo.UserVo;
 import kr.co.argonet.r2rims.gotit.GotitService;
 import kr.co.argonet.r2rims.rss.vo.FavoriteVo;
+import kr.co.argonet.r2rims.rss.vo.RssBbsVo;
 import kr.co.argonet.r2rims.share.ShareUserService;
 import org.apache.solr.client.solrj.SolrServerException;
 import org.springframework.beans.factory.annotation.Value;
@@ -58,6 +59,8 @@ public class MyRssController {
 
     @Value("#{sysConf['s2journal.url']}")
     private String s2JournalUrl;
+    @Value("#{sysConf['s2journal.api.url']}")
+    private String s2JournalApiUrl;
 
 
     // My Favorite 리스트
@@ -365,7 +368,7 @@ public class MyRssController {
         List<FavoriteVo> favoriteJournalList = myRssService.findAllFavorite(userId, "VJOUR");
         modelMap.addAttribute("journalList", favoriteJournalList);
 
-        modelMap.addAttribute("s2jUrl", s2JournalUrl);
+        modelMap.addAttribute("s2jApiUrl", s2JournalApiUrl);
 
         return "share/recommand/compare";
     }
@@ -428,6 +431,69 @@ public class MyRssController {
         modelMap.addAttribute("order", order);
 
         return "share/myrss/tocArticleList";
+    }
+
+    @RequestMapping(value = "/personal/myRss/nBoard")
+    private String nboardList (ModelMap model, HttpServletRequest req,
+                              @RequestParam(value = "page", defaultValue = "1") String page,
+                              @RequestParam(value = "sort", defaultValue = "regDate") String sort,
+                              @RequestParam(value = "order", defaultValue = "desc") String order){
+
+        UserVo sessUser = (UserVo) req.getSession().getAttribute(R2Constant.SESSION_USER);
+        String userId = sessUser.getUserId();
+
+        int ct = 10;
+        int ps = Integer.parseInt(page);
+        int total;
+        int end;
+
+        ps = (ps-1)*ct;   // 페이지 시작부분 index
+
+        total = myRssService.totalBoardCountN();
+
+        if(ps+ct > total){
+            end = total;
+        }else{
+            end = ps+ct;
+        }
+
+        List<RssBbsVo> boardList = myRssService.getBoardListN(ps, ct, sort, order);
+
+
+        model.addAttribute("pageList", userService.drawPages(Integer.parseInt(page), (double)ct, (double)total));
+
+        model.addAttribute("boardList",boardList);
+
+        model.addAttribute("ps",ps+1);
+        model.addAttribute("end",end);
+        model.addAttribute("total",total);
+        model.addAttribute("page",page);
+        model.addAttribute("sort", sort);
+        model.addAttribute("order", order);
+
+        return "share/myrss/nboard";
+    }
+
+    @RequestMapping(value = "/personal/myRss/nBoardDetail")
+    private String nboardListView (ModelMap model, HttpServletRequest req,
+                                  @RequestParam(value = "bbsId", defaultValue = "") String bbsId,
+                                  @RequestParam(value = "page", defaultValue = "1") String page,
+                                  @RequestParam(value = "sort", defaultValue = "regDate") String sort,
+                                  @RequestParam(value = "order", defaultValue = "desc") String order){
+
+        UserVo sessUser = (UserVo) req.getSession().getAttribute(R2Constant.SESSION_USER);
+
+        // 조회수 +
+        myRssService.increaseBoardCountN(bbsId);
+
+        RssBbsVo bbs = myRssService.findBbsN(bbsId);
+
+        model.addAttribute("bbs", bbs);
+        model.addAttribute("page",page);
+        model.addAttribute("sort", sort);
+        model.addAttribute("order", order);
+
+        return "share/myrss/nboardView";
     }
 
     @RequestMapping(value = "/personal/myRss/rBoard")

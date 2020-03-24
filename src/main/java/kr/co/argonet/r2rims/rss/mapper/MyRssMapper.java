@@ -3,6 +3,7 @@ package kr.co.argonet.r2rims.rss.mapper;
 import kr.co.argonet.r2rims.core.vo.BbsVo;
 import kr.co.argonet.r2rims.core.vo.FileVo;
 import kr.co.argonet.r2rims.rss.vo.FavoriteVo;
+import kr.co.argonet.r2rims.rss.vo.RssBbsVo;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
@@ -42,4 +43,12 @@ public interface MyRssMapper {
     List<FileVo> findFile(@Param("bbsId") String bbsId);
 
     void increaseBoardCount(@Param("bbsId") String bbsId);
+
+    Integer totalBoardCountN();
+
+    List<RssBbsVo> findBoardLIstN(@Param("page") int ps, @Param("count") int ct, @Param("sort") String sort, @Param("order") String order);
+
+    RssBbsVo findBoardDetailN(@Param("bbsId") String bbsId);
+
+    void increaseBoardCountN(@Param("bbsId") String bbsId);
 }

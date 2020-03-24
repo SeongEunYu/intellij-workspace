@@ -161,11 +161,12 @@
 		<div class="col-lg-3 col-md-4 col-sm-6">
 			<div class="researcher_card kor_dept_card">
 				<div class="researcher_info_top">
-					<span class="researcher_img ${user.profPhotoFileId == null ? 'none_img' : ''}">
-						<c:if test="${user.profPhotoFileId != null}">
-							<img class="lazy" src="${contextPath}/share/img/background/researcher_list_icon.png"
-								 data-src="${contextPath}/rims/servlet/image/profile.do?fileid=<c:out value="${user.profPhotoFileId}"/>"/>
-						</c:if>
+					<%--<span class="researcher_img ${user.profPhotoFileId == null ? 'none_img' : ''}">--%>
+					<span class="researcher_img none_img">
+						<%--<c:if test="${user.profPhotoFileId != null}">--%>
+							<%--<img class="lazy" src="${contextPath}/share/img/background/researcher_list_icon.png"--%>
+								 <%--data-src="${contextPath}/rims/servlet/image/profile.do?fileid=<c:out value="${user.profPhotoFileId}"/>"/>--%>
+						<%--</c:if>--%>
 					</span>
 					<dl>
 						<form action="userDetail.do" method="get">

@@ -83,8 +83,8 @@ order by A.PBLC_YM
         order by rand() limit 1
     </select>
 
-    <select id="findLatestBBS" resultType="kr.co.argonet.r2rims.core.vo.BbsVo">
-        select rb.* from RI_BBS rb
+    <select id="findLatestBBS" resultType="kr.co.argonet.r2rims.rss.vo.RssBbsVo">
+        select rb.* from RI_RSS_NOTICE rb
         where
         <include refid="nvlifnull"/>(rb.DEL_DVS_CD,'N') != 'Y'
         and rb.NOTICE_STT_DATE <![CDATA[ <= ]]> <include refid="prefixToChar"/><include refid="sysdateNow"/><include refid="postfixToCharY-m-d"/>

@@ -112,7 +112,7 @@
 </head>
 <body><!--nav_wrap : e  -->
 <form id="searchSelectionForm" method="post" action="${pageContext.request.contextPath}/personal/selection.do">
-	<div class="top_search_wrap">
+	<div class="top_search_wrap" style="padding-bottom: 20px;">
 		<div class="ts_title">
 			<%--<h3><spring:message code="disc.anls.topif.title"/></h3>--%>
 			<h3>Journal Selection Service</h3>
@@ -151,7 +151,6 @@
 				<div class="al_right">
 					<a href="#" class="normal_bt2" onclick="javascript:sampleInput();">Sample</a>
 					<a href="#" class="normal_bt" onclick="javascript:goSearch();">Recommend Journal</a>
-					<a href="${pageContext.request.contextPath}/personal/compare.do" class="normal_bt">Compare Journal</a>
 				</div>
 			</div>
 			<div style="text-align: left; margin-left: 20px;">
@@ -166,6 +165,7 @@
 					<li>Wiley Journal Finder(<a herf="https://journalfinder.wiley.com/search?type=match">https://journalfinder.wiley.com/search?type=match</a>)</li>
 				</ul>
 			</div>
+			<span style="display: block; position: relative;" class="al_right" ><a href="${pageContext.request.contextPath}/personal/compare.do" class="nomal_bt"><span class="compare_icon">Compare Journals</span></a></span>
 		</div>
 	</div>
 	<div class="sub_container" style="min-height:720px;">
@@ -228,7 +228,6 @@
 					<table style="width: 100%;">
 						<tr>
 							<td><div class="jss_title" style="margin-top: 6px;"><h4 class="h4_title">Selected Journals</h4><span class="round_num"><em><%= resultList.size() %></em></span></div></td>
-							<td><div class="al_right" ><a href="${pageContext.request.contextPath}/personal/compare.do" class="nomal_bt"><span class="compare_icon">Compare Journals</span></a></div></td>
 						</tr>
 					</table>
 

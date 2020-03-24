@@ -6,32 +6,44 @@
 	var checkList = new Array();
 
 	$(function () {
-		if(checkList.length || checkList.length < 4){
-			$('input[name="checkbox"]').change(function(e){
-				var id = $(e.currentTarget).attr(id);
-				if($("#" + id).is(":checked")){
-					checkList.push(id);
-				} else {
-					checkList.splice($.inArray(id, checkList),1);
-				}
-			});
-		} else {
-			alert("최대 3개까지 선택할 수 있습니다.");
-		}
+
+        $('.checkJournal').change(function(e){
+			var id = $(e.currentTarget).attr("id");
+            if(checkList.length < 3){
+                if($("#" + id).is(":checked")){
+                    checkList.push(id);
+                    console.log(checkList);
+                } else {
+                    checkList.splice($.inArray(id, checkList),1);
+                    console.log(checkList);
+                }
+            } else {
+                alert("최대 3개까지 선택할 수 있습니다.");
+                e.preventDefault();
+                $("#" + id).prop("checked",false);
+            }
+        });
 	});
 
 
 	function goCompareJournal() {
-		if(!checkList.length || checkList.length > 3){
+		if(checkList.length > 3){
 			alert("최대 3개까지 선택할 수 있습니다.");
 		} else {
-			var url = "${s2jUrl}" + "/personal/interestedJournal/compare/comparePopup.do?jdisf="
+			var url = "${s2jApiUrl}" + "/recommend/compare/comparePopup.do?jIds=";
 			for(var i=0 ; i < checkList.length ; i++){
 				if(i != 0)
 					url += ";";
+				console.log(checkList[i]);
 				url += checkList[i];
 			}
-			window.open(url, "관심 저널 비교");
+			console.log(url);
+			var width = $(document).width() * 0.7;
+			var height = $(document).height() * 0.8;
+
+			var left = ($(document).width()/2)-(width/2);
+			var top = ($(document).height()/2)-(height/2);
+			window.open(url, "Journal Compare", ' height=' + height + 'px, width=' + width + 'px, resizable=yes, location=no, scrollbars=yes');
 		}
 	}
 
@@ -59,7 +71,7 @@
 			url: ajaxURL,
 			data: {itemId:itemId, svcgrp:svcgrp, type:type, url:'', elseList:''}
 		}).done(function(){
-			refresh();
+			location.reload();
 		});
 	}
 
@@ -78,7 +90,7 @@
 			<div class="ts_text_inner">
 				<p>
 					<%--<span  style="font-weight:bold;"><spring:message code="disc.anls.topif.desc"/></span>--%>
-					<span  style="font-weight:bold;"> 관심 등록한 저널들에 대한 정보를 서로 비교할 수 있습니다.(최대 3개)</span>
+					<span  style="font-weight:bold;"> 관심 등록한 저널에 대한 정보를 서로 비교할 수 있습니다.(최대 3개)</span>
 				</p>
 			</div>
 		</div>
@@ -86,7 +98,7 @@
 	<div class="sub_container" style="min-height:720px; padding-top: 10px">
 		<div class="jss_wrap">
 			<div class="al_right">
-				<a href="${pageContext.request.contextPath}/personal/compare.do" class="normal_bt">Compare Journal</a>
+				<a href="javascript:goCompareJournal();" class="normal_bt">Compare Journal</a>
 			</div>
 			<%--<div class="language_r_box">
                 <a href="${pageContext.request.contextPath}/share/user/kboard.do?language=en" ${lang=='en'?'class="on"':''}><spring:message code="disc.language.eng"/></a>
@@ -115,7 +127,7 @@
 							<c:when test="${fn:length(journalList) > 0}">
 								<c:forEach items="${journalList}" var="journal">
 									<tr>
-										<td class='al_center' style="padding-left: 0px; padding-right: 0px"><span style="font-size: 13px;"><span class='favorite_star star_fill' style="margin-right: 15px; margin-top: -2px;"></span><input style="margin-top: -8px;" type="checkbox" id="${journal.dataId}" value="${journal.dataId}" ></span></td>
+										<td class='al_center' style="padding-left: 0px; padding-right: 0px"><span style="font-size: 13px;"><span class='favorite_star star_fill' style="margin-right: 15px; margin-top: -2px;" onclick="editFavorite('${journal.dataId}')"></span><input style="margin-top: -8px;" type="checkbox" id="${journal.dataId}" class="checkJournal" ></span></td>
 										<td class='al_left'><a href="javascript:viewDetail('${journal.dataId}')">${journal.title}</a></td>
 										<td class='al_center' style="padding-left: 0px; padding-right: 0px"><span style="font-size: 13px">${journal.issn}</span></td>
 										<td class='al_center' style="padding-left: 0px; padding-right: 0px"><span style="font-size: 13px">${journal.author}</span></td>
