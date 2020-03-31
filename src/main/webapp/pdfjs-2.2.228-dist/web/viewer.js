@@ -381,7 +381,7 @@ var PDFViewerApplication = {
   pdfViewer: null,
   pdfThumbnailViewer: null,
   pdfRenderingQueue: null,
-  pdfPresentationMode: null,
+  pdfPresentationMode: true,
   pdfDocumentProperties: null,
   pdfLinkService: null,
   pdfHistory: null,
@@ -4237,7 +4237,8 @@ var defaultOptions = {
   },
   defaultUrl: {
     // value: 'compressed.tracemonkey-pldi-09.pdf',
-    value: 'http://localhost:8080/rss/pdf/' + bbsId + '/' + fileNm + '.do',
+    // value: 'http://localhost:8080/rss/pdf/' + bbsId + '/' + fileNm + '.do',
+    value: 'https://rss.bwise.kr/pdf/' + bbsId + '/' + fileNm + '.do',
     kind: OptionKind.VIEWER
   },
   defaultZoomValue: {

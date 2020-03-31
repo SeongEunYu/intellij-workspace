@@ -26,11 +26,16 @@
     <script type="text/javascript" src="${pageContext.request.contextPath}/share/js/jquery.scroll.pack.js"></script>
 	<script type="text/javascript" src="<c:url value="/js/script.js"/>?t=20200115"></script>
     <script type="text/javascript" src="<c:url value="/js/jquery/jquery.modal.js"/>"></script>
-        <script type="text/javascript" src="<c:url value="/js/main_nav.js"/>"></script>
+	<script type="text/javascript" src="<c:url value="/js/main_nav.js"/>"></script>
+
+	<script type="text/javascript" src="<c:url value="/js/chart/fusioncharts.js"/>"></script>
+	<script type="text/javascript" src="<c:url value="/js/chart/fusioncharts-jquery-plugin.min.js"/>"></script>
+	<script type="text/javascript" src="<c:url value="/js/chart/opts/fusioncharts.opts.js"/>"></script>
 
 	<link rel="stylesheet" href="<c:url value="/css/chartJS/Chart.min.css" />">
 	<script type="text/javascript" src="<c:url value="/js/chartJS/Chart.bundle.min.js" />"></script>
 	<script type="text/javascript" src="<c:url value="/js/chartJS/Chart.min.js" />" />
+
 	<!-- Global site tag (gtag.js) - Google Analytics -->
 	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-112251421-1"></script>
 	<!-- Slidebars CSS -->
@@ -523,30 +528,7 @@
 		</div><!-- left_col_box : e -->
 		<div class="u_contents">
 			<div class="col_row">
-				<div class="col_md_6">
-					<div class="dash_box box1">
-						<h3>나의 최근 등록 논문<c:if test="${fn:length(recentArticle) > 0}"><a href="${pageContext.request.contextPath}/personal/myRss/myResearchOutput.do" class="main_more_bt">more</a></c:if></h3>
-						<div class="sr_list">
-							<ul>
-								<c:choose>
-									<c:when test="${fn:length(recentArticle) > 0}">
-										<c:forEach items="${recentArticle}" var="content" varStatus="stat">
-											<li>
-												<a href="${pageContext.request.contextPath}/share/article/articleDetail.do?id=${content.articleId}">${content.orgLangPprNm}</a>
-												<span class="sr_under_t">${content.pblcYm} <c:if test="${not empty content.volume or content.volume != ''}">Vol.${content.volume}</c:if> <c:if test="${not empty content.issue or content.issue != ''}">No.${content.issue}</c:if></span>
-											</li>
-										</c:forEach>
-									</c:when>
-									<c:otherwise>
-										<li>
-											<p>등록된 논문이 없습니다.</p>
-										</li>
-									</c:otherwise>
-								</c:choose>
-							</ul>
-						</div>
-					</div>
-				</div>
+				<%@ include file="widget/myResearchOutput.jsp" %>
 				<div class="col_md_6">
 					<div class="dash_box box1">
 						<h3 id="topGotitTitle">최근 추천 정보</h3>
@@ -584,14 +566,15 @@
 						</div>
 					</div>
 				</div>
-				<div class="col_md_6">
-					<div class="dash_box box1">
-						<h3>연도별 논문 수</h3>
-						<div class="chart_img" style="margin: 40px 0px;">
-							<canvas id="chart_canvas" width="377" height="220" style="padding: 0 3px;"></canvas>
-						</div>
-					</div>
-				</div>
+                <%@ include file="widget/myAnalysis.jsp" %>
+				<%--<div class="col_md_6">--%>
+					<%--<div class="dash_box box1">--%>
+						<%--<h3>연도별 논문 수</h3>--%>
+						<%--<div class="chart_img" style="margin: 40px 0px;">--%>
+							<%--<canvas id="chart_canvas" width="377" height="220" style="padding: 0 3px;"></canvas>--%>
+						<%--</div>--%>
+					<%--</div>--%>
+				<%--</div>--%>
 
 				<div class="col_md_6">
 					<div class="dash_box box1">
@@ -743,13 +726,18 @@
 
 	<c:if test="${fn:length(popupList) > 0}">
 		<c:forEach items="${popupList}" var="popup" varStatus="stats">
-			<div id="div_laypopup${stats.index}" align="center" style="display:none;border-width:0px;Z-INDEX: 201; POSITION: absolute;left:150px; top:170px; background-color: #d0dce6; width: auto; min-width: 250px; border:1px solid black;">
-				<div class="popup_content${stats.index}" style="padding:15px 0; border-bottom: 1px solid black;"><c:out value="${popup.content}" escapeXml="false"/></div>
-				<div style="float: left; margin-top: 5px; margin-left: 5px; margin-bottom:5px; display: flex;">
-					<input type="checkbox" name="close" value="OK" onclick="closeWinDay('${stats.index}');" style="margin: 2px 5px 0 0;"/> <span style="font-size: 14px; color:black;">하루동안 이 창을 열지 않음</span>
+			<div class="popup-box" id="div_laypopup${stats.index}" align="center" style="display:none;border-width:0px;Z-INDEX: 201; position: absolute; left:150px; top:170px; background-color: #2d2b4e; width: auto; min-width: 250px; border-radius: 5px; box-shadow: 2px 2px 4px 1px #0c1529;">
+				<div class="popup-header" style="padding-top: 5px; padding-bottom: 5px; color: white; font-size: 12px; height: 23px;">
+					<span>${popup.title}</span>
 				</div>
-				<div style="float: right; margin-top: 5px; margin-right: 5px; cursor: pointer;">
-					<a onclick="closeWin('${stats.index}');"/> <span style="font-size: 14px; color:black;">닫기</span></a>
+				<div class="popup-body" style="background-color: white; display: flow-root; border-bottom-left-radius: 5px; border-bottom-right-radius: 5px; margin-left: 2px;">
+					<div class="popup_content${stats.index}" style="padding:10px 0; border-bottom: 1px solid black;"><c:out value="${popup.content}" escapeXml="false"/></div>
+					<div style="float: left; margin-top: 5px; margin-left: 5px; margin-bottom:5px; display: flex; background-color: white;">
+						<input type="checkbox" name="close" value="OK" onclick="closeWinDay('${stats.index}');" style="margin: 2px 5px 0 0;"/> <span style="padding-top: 1px; font-size: 12px;">하루동안 이 창을 열지 않음</span>
+					</div>
+					<div style="float: right; margin-top: 4px; margin-right: 5px; cursor: pointer; background-color: white;">
+						<a onclick="closeWin('${stats.index}');"/> <span style="font-size: 12px;">닫기</span></a>
+					</div>
 				</div>
 			</div>
 		</c:forEach>
@@ -783,11 +771,12 @@
 								$("#div_laypopup${stats.index}").css("left", left);
 								$("#div_laypopup${stats.index}").css("top", top);
 							}
-
 						}
 					}
 				</c:forEach>
 			</c:if>
+
+			$(".popup-box").draggable({'cancel':'.popup-body', containment:'parent', scroll:false});
 
 			// var topSearchbox = $('.u_s_int');
 			// topSearchbox.focus(function(){
@@ -797,84 +786,84 @@
 			// 	$(".user_search_wrap").removeClass("u_s_shadow");
 			// });
 
-			loadArticleChart();
+			<%--loadArticleChart();--%>
 
-			function loadArticleChart(){
-				var statics = {
-					count : [],
-					label : []
-				};
+			<%--function loadArticleChart(){--%>
+				<%--var statics = {--%>
+					<%--count : [],--%>
+					<%--label : []--%>
+				<%--};--%>
 
-				<c:forEach items="${staticsArticle}" var="item">
-					statics.count.push(${item.count});
-					statics.label.push(${item.year});
-				</c:forEach>
-				updateStatics("chart_canvas", statics);
-			}
+				<%--<c:forEach items="${staticsArticle}" var="item">--%>
+					<%--statics.count.push(${item.count});--%>
+					<%--statics.label.push(${item.year});--%>
+				<%--</c:forEach>--%>
+				<%--updateStatics("chart_canvas", statics);--%>
+			<%--}--%>
 
-			function updateStatics(id, statics) {
-				var div = $("#" + id);
-				var chart = div.data("chart");
-				if(chart) chart.distroy();
-				chart = drawStatics(div[0], statics);
-				div.data("chart", chart);
-			}
+			<%--function updateStatics(id, statics) {--%>
+				<%--var div = $("#" + id);--%>
+				<%--var chart = div.data("chart");--%>
+				<%--if(chart) chart.distroy();--%>
+				<%--chart = drawStatics(div[0], statics);--%>
+				<%--div.data("chart", chart);--%>
+			<%--}--%>
 
-			function drawStatics(target, statics) {
-				return new Chart(target, {
-					type: 'line',
-					data: {
-						labels: statics.label,
-						datasets: [
-							{
-								data: statics.count,
-								backgroundColor: 'rgb(000, 051, 102)',
-								borderColor: 'rgb(153, 153, 153)',
-								fill: false,
-								pointRadius: 4,
-								lineTension: 0.00000001
-							}
-						]
-					},
-					options: {
-						responsive: true,
-						title: {
-							display: false
-						},
-						tooltips: {
-							mode: 'index',
-							intersect: false,
-						},
-						hover: {
-							mode: 'nearest',
-							intersect: true
-						},
-						legend: {
-							display: false,
-							position: 'right'
-						},
-						scales: {
-							xAxes: [{
-								display: true,
-								scaleLabel: {
-									display: true,
-									labelString: 'Year'
-								}
-							}],
-							yAxes: [{
-								display: true,
-								ticks: {
-									beginAtZero: true
-								},
-								scaleLabel: {
-									display: true,
-									labelString: 'count'
-								}
-							}]
-						}
-					}
-				});
-			}
+			<%--function drawStatics(target, statics) {--%>
+				<%--return new Chart(target, {--%>
+					<%--type: 'line',--%>
+					<%--data: {--%>
+						<%--labels: statics.label,--%>
+						<%--datasets: [--%>
+							<%--{--%>
+								<%--data: statics.count,--%>
+								<%--backgroundColor: 'rgb(000, 051, 102)',--%>
+								<%--borderColor: 'rgb(153, 153, 153)',--%>
+								<%--fill: false,--%>
+								<%--pointRadius: 4,--%>
+								<%--lineTension: 0.00000001--%>
+							<%--}--%>
+						<%--]--%>
+					<%--},--%>
+					<%--options: {--%>
+						<%--responsive: true,--%>
+						<%--title: {--%>
+							<%--display: false--%>
+						<%--},--%>
+						<%--tooltips: {--%>
+							<%--mode: 'index',--%>
+							<%--intersect: false,--%>
+						<%--},--%>
+						<%--hover: {--%>
+							<%--mode: 'nearest',--%>
+							<%--intersect: true--%>
+						<%--},--%>
+						<%--legend: {--%>
+							<%--display: false,--%>
+							<%--position: 'right'--%>
+						<%--},--%>
+						<%--scales: {--%>
+							<%--xAxes: [{--%>
+								<%--display: true,--%>
+								<%--scaleLabel: {--%>
+									<%--display: true,--%>
+									<%--labelString: 'Year'--%>
+								<%--}--%>
+							<%--}],--%>
+							<%--yAxes: [{--%>
+								<%--display: true,--%>
+								<%--ticks: {--%>
+									<%--beginAtZero: true--%>
+								<%--},--%>
+								<%--scaleLabel: {--%>
+									<%--display: true,--%>
+									<%--labelString: 'count'--%>
+								<%--}--%>
+							<%--}]--%>
+						<%--}--%>
+					<%--}--%>
+				<%--});--%>
+			<%--}--%>
 		});
 
 		function getStrNo(str) {

@@ -139,7 +139,7 @@ public class MyRssController {
         return result;
     }
 
-    // My Archivements 페이지
+    // My Research Output 페이지
     @RequestMapping(value = "/personal/myRss/myResearchOutput")
     public String userDetail(HttpServletRequest req, ModelMap model) {
 
@@ -153,7 +153,7 @@ public class MyRssController {
         return "share/myrss/myResearchOutput";
     }
 
-    // My Archivements 컨텐츠
+    // My Research Output 컨텐츠
     @RequestMapping(value = "/personal/myRss/myResearchOutput/contents")
     public @ResponseBody
     Map<String,Object> myResearchOutput(@RequestParam("tabId") String tabId,

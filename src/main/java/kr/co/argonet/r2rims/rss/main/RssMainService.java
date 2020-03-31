@@ -1,9 +1,10 @@
 package kr.co.argonet.r2rims.rss.main;
 
 import kr.co.argonet.r2rims.analysis.utils.ChartUtils;
-import kr.co.argonet.r2rims.core.vo.BbsVo;
-import kr.co.argonet.r2rims.core.vo.KeywordVo;
-import kr.co.argonet.r2rims.core.vo.UserVo;
+import kr.co.argonet.r2rims.core.mapper.ArticleMapper;
+import kr.co.argonet.r2rims.core.mapper.UserMapper;
+import kr.co.argonet.r2rims.core.vo.*;
+import kr.co.argonet.r2rims.rss.mapper.MyAnalysisMapper;
 import kr.co.argonet.r2rims.rss.mapper.RssMainMapper;
 import kr.co.argonet.r2rims.rss.vo.RssBbsVo;
 import org.springframework.stereotype.Service;
@@ -28,6 +29,12 @@ public class RssMainService {
 
     @Resource(name = "rssMainMapper")
     private RssMainMapper rssMainMapper;
+    @Resource(name = "userMapper")
+    private UserMapper userMapper;
+    @Resource(name = "myAnalysisMapper")
+    private MyAnalysisMapper myAnalysisMapper;
+    @Resource(name = "articleMapper")
+    private ArticleMapper articleMapper;
 
 
     public List<Map<String, Object>> staticsArticleByUser(String userId){
@@ -56,5 +63,27 @@ public class RssMainService {
 
     public List<RssBbsVo> findLatestBBS(){
         return rssMainMapper.findLatestBBS();
+    }
+
+    public UserVo findUserById(String userId){
+        UserVo userVo = userMapper.findUserById(userId);
+
+        return userVo;
+    }
+    public UserVo findUserById2(String userId){
+        UserVo userVo = userMapper.findAllByUserId2(userId);
+
+        return userVo;
+    }
+    public List<AnalysisVo> findPublicationGroup(RimsSearchVo searchVo){
+        return myAnalysisMapper.findPublicationGroup(searchVo);
+    }
+
+    public List<AnalysisVo> findArticleCitationByUserId(RimsSearchVo searchVo){
+        return myAnalysisMapper.findArticleCitationByUserId(searchVo);
+    }
+
+    public List<ArticleVo> findArticleListByUserId(RimsSearchVo searchVo){
+        return myAnalysisMapper.findArticleListBySearchVo(searchVo);
     }
 }

@@ -56,6 +56,8 @@
 			<mvc:exclude-mapping path="/gotitTop.do"/>
 			<mvc:exclude-mapping path="/gotitMailingTop.do"/>
 			<mvc:exclude-mapping path="/pdf/**"/>
+			<mvc:exclude-mapping path="/widget/**"/>
+			<mvc:exclude-mapping path="/assets/**"/>
 			<bean class="kr.co.argonet.r2rims.core.interceptor.RssSessionInterceptor"/>
 		</mvc:interceptor>
 		<!--<mvc:interceptor>-->

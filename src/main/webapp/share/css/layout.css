@@ -906,6 +906,8 @@ background-repeat: no-repeat,no-repeat; background-position: left top, right bot
 
 .view_downbt ul li .pdf_download {  background: #c40509;  border:1px solid #c40509;  }
 .view_downbt ul li .pdf_download em {  background: url(../img/background/download_pdf.png) no-repeat right 4px;   color: #fff; }
+.view_downbt ul li .ris_download {  background: #858590;  border:1px solid #858590;  }
+.view_downbt ul li .ris_download em {  color: #fff; }
 .view_downbt ul .list_icon { margin-left: 10px; }
 .view_downbt ul .list_icon a em {  background: url(../img/background/list_icon.png) no-repeat right 6px; }
 

@@ -46,7 +46,7 @@
   </select>
 
   <select id="findMailList" resultType="java.util.HashMap">
-    select gi.JOURNALNAME, gi.ISSN, gi.VOLUME, gi.ISSUE, gm.SENDDATE
+    select gm.MSG_ID, gi.JOURNALNAME, gi.ISSN, gi.VOLUME, gi.ISSUE, gm.SENDDATE
     from GI_SVC_MESSAGE gm, GI_SVC_ISSUE gi
     where gm.ISSUE_ID = gi.ISSUE_ID
     and gm.USERID = #{userId}
@@ -63,13 +63,13 @@
   </select>
 
   <select id="getMailArticle" resultType="java.util.HashMap">
-    select gx.TITLE, gx.AUTHOR, gx.VOLUME, gx.ISSUE, gx.STR_PAGE, gx.END_PAGE, gx.DOI
+    select gx.TITLE, gx.AUTHOR, gx.VOLUME, gx.ISSUE, gx.STR_PAGE, gx.END_PAGE
     from GI_SVC_MESSAGE gm, GI_SVC_ISSUE gi, GI_SVC_INDEX gx
     where gm.ISSUE_ID = gi.ISSUE_ID
     and gi.ISSUE_ID = gx.ISSUE_ID
     and gm.USERID = #{userId}
     and gm.MSG_ID = #{msgId}
-    order by CAST(gx.STR_PAGE AS UNSIGNED);
+    order by CAST(gx.STR_PAGE AS UNSIGNED)
   </select>
 
 </mapper>

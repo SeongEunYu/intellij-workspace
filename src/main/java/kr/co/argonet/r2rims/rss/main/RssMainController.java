@@ -24,19 +24,23 @@ import org.apache.solr.client.solrj.SolrServerException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.InputStreamResource;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 /**
@@ -108,229 +112,231 @@ public class RssMainController {
 	@Value("#{sysConf['admin.mgt.intro.page']}")
 	private String adminMgtIntroPage;
 
-	@NoLoginCheck @NoAuthCheck @NoLocaleSet @NoInfoPrtcAgreCheck
-    @RequestMapping("/home")
-    public String main(ModelMap model, HttpServletRequest req, HttpServletResponse res, WebRequest webReq,
-					   @RequestParam(value = "user_id", defaultValue = "") String userId,
-					   @RequestParam(value = "user_name", defaultValue = "") String userName,
-					   @RequestParam(value = "user_email", defaultValue = "") String userEmail,
-					   @RequestParam(value = "user_dept", defaultValue = "") String userDept,
-					   @RequestParam(value = "solutions", defaultValue = "") String solutions) {
-
-		log.debug("SSO LOGIN : RssMainController");
-
-		UserVo user = null;
-		user = rssLoginService.loginById(userId);
-		userId = user.getUserId();
-
-
-		sessionSetting(req, res, webReq, user, model);
-
-		model.addAttribute("inst", inst);
-
-		JsonParser jsonParser = new JsonParser();
-		JsonArray jsonArray = (JsonArray) jsonParser.parse(solutions);
-		for (int i = 0 ; i < jsonArray.size() ; i++) {
-			JsonObject object = (JsonObject) jsonArray.get(i);
-			Map<String, Object> map = new HashMap<>();
-			String moduleName = object.get("module").getAsString();
-			String adminValue = object.get("admin").getAsString();
-			String userValue = object.get("user").getAsString();
-			String urlValue = object.get("url").getAsString();
-			map.put("module", moduleName);
-			map.put("admin", adminValue);
-			map.put("user", userValue);
-			map.put("url", urlValue);
-
-			model.addAttribute(moduleName, map);
-			req.getSession().setAttribute(moduleName, map);
-		}
-
-		// 유사연구자(연구자 추천)
-		UserVo similarUser = null;
-		similarUser = rssMainService.findSimilarUserList(userId);
-		if(similarUser != null){
-			model.addAttribute("smUser", similarUser);
-			List<Map<String,String>> simKeywordList = userService.findKeywordOfUser(similarUser.getUserId());
-			if(simKeywordList != null || !simKeywordList.isEmpty()){
-				model.addAttribute("simKeywordList", simKeywordList);
-			}
-		}
-
-		List<RssBbsVo> bbsList = null;
-		bbsList = rssMainService.findLatestBBS();
-			if(!bbsList.isEmpty() || bbsList != null){
-			model.addAttribute("bbsList", bbsList);
-		}
-
-		List<RssBbsVo> popup = new ArrayList<>();
-			if(bbsList != null) {
-			for (RssBbsVo rbbs : bbsList) {
-				if(rbbs.getPopupYn().equals("Y"))
-					popup.add(rbbs);
-			}
-		}
-		Collections.sort(popup);
-		model.addAttribute("popupList", popup);
-
-		String currentLang = null;
-		String applcAuthor = "";
-		String srchUserId = "";
-
-		if("".equals(userId)) {
-			if(user != null) {
-				userId = user.getUserId();
-				currentLang = user.getLanguageFlag();
-			}
-		}
-
-		List<Map<String,String>> keywordList = userService.findKeywordOfUser(userId);
-		if(keywordList != null || !keywordList.isEmpty()){
-			model.addAttribute("keywordList", keywordList);
-		}
-
-
-		// 최근 등록 논문 검색
-		RimsSearchVo rimsSearchVo = new RimsSearchVo();
-		int totalContent; //총 컨텐츠 갯수
-		int ps = 1;
-		int ct = 5; 	 // 페이지당 row수
-		Map<String, Integer> pageCount = new HashMap<>();
-
-		ps = (ps-1)*ct; // 페이지 시작부분 index
-
-		rimsSearchVo.setUserId(userId);
-		rimsSearchVo.setPs(ps);
-		rimsSearchVo.setCt(ct);
-		rimsSearchVo.setText("date");
-		rimsSearchVo.setType("desc");
-
-		Map<String,Object> resultMap = null;
-		Map<String,Object> contentPagemap = new HashMap<>();
-
-		// 성과 리스트 및 성과 총개수
-		try {
-			resultMap = userService.findContents("journal", rimsSearchVo);
-		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (SolrServerException e) {
-			e.printStackTrace();
-		}
-
-		model.addAttribute("userInfo", user);
-		model.addAttribute("recentArticle", resultMap.get("contentList"));
-
-		List<Map<String, Object>> staticsArticle = rssMainService.staticsArticleByUser(userId);
-		model.addAttribute("staticsArticle", staticsArticle);
-
-		return "home";
-    }
-
-    public void sessionSetting(HttpServletRequest req, HttpServletResponse res, WebRequest webReq, UserVo user, ModelMap model){
-
-		String userId = user.getUserId();
-
-		model.addAttribute("inst", inst);
-		String returnPage = "";
-
-		// 0. clear Session
-		SessionUtil.clearSessionByWebRequest(webReq);
-
-		// 1. flag check
-//		if("".equals(flag)){
-//			returnPage = "index/loginFail";
-//		}else{
-//			if("S".equals(flag)) returnPage = "index/loginFail";
-//			else if("admin".equals(flag)) returnPage = "index/loginFail";
+//	@NoLoginCheck @NoAuthCheck @NoLocaleSet @NoInfoPrtcAgreCheck
+//    @RequestMapping("/home")
+//    public String main(ModelMap model, HttpServletRequest req, HttpServletResponse res, WebRequest webReq,
+//					   @RequestParam(value = "user_id", defaultValue = "") String userId,
+//					   @RequestParam(value = "user_name", defaultValue = "") String userName,
+//					   @RequestParam(value = "user_email", defaultValue = "") String userEmail,
+//					   @RequestParam(value = "user_dept", defaultValue = "") String userDept,
+//					   @RequestParam(value = "solutions", defaultValue = "") String solutions) {
+//
+//		log.debug("SSO LOGIN : RssMainController");
+//
+//		UserVo user = null;
+//		user = rssLoginService.loginById(userId);
+//		userId = user.getUserId();
+//
+//
+//		sessionSetting(req, res, webReq, user, model);
+//
+//		model.addAttribute("inst", inst);
+//
+//		JsonParser jsonParser = new JsonParser();
+//		JsonArray jsonArray = (JsonArray) jsonParser.parse(solutions);
+//		for (int i = 0 ; i < jsonArray.size() ; i++) {
+//			JsonObject object = (JsonObject) jsonArray.get(i);
+//			Map<String, Object> map = new HashMap<>();
+//			String moduleName = object.get("module").getAsString();
+//			String adminValue = object.get("admin").getAsString();
+//			String userValue = object.get("user").getAsString();
+//			String urlValue = object.get("url").getAsString();
+//			map.put("module", moduleName);
+//			map.put("admin", adminValue);
+//			map.put("user", userValue);
+//			map.put("url", urlValue);
+//
+//			model.addAttribute(moduleName, map);
+//			req.getSession().setAttribute(moduleName, map);
 //		}
-
-
-		if(!"".equals(userId)){
-			//IP Check
-			String userIp;
-			String xforwardedFor = req.getHeader(R2Constant.HTTP_HEADER_FORWARDED);
-			if(xforwardedFor != null){
-				xforwardedFor = xforwardedFor.trim();
-				if(xforwardedFor.indexOf(",") != -1)
-					xforwardedFor = xforwardedFor.substring(0, xforwardedFor.indexOf(","));
-				userIp = xforwardedFor;
-			}
-			else
-			{
-				userIp = req.getRemoteAddr();
-			}
-
-			req.getSession().setAttribute(R2Constant.IP_CHECK, indexService.limitedIpCheck(userIp, limitedIp));
-			if(user != null)
-			{
-				//mvo.addObject(R2Constant.LOGIN_USER, user); // session setAttribute
-				req.getSession().setAttribute(R2Constant.LOGIN_USER, user);
-				req.getSession().setAttribute(R2Constant.SESSION_USER, user);
-
-				String language = user.getLanguageFlag();
-				if(language == null || "".equals(language)) language = defaultLanguage;
-				String mgtAt = user.getMgtAt();
-				if(mgtAt == null || "".equals(mgtAt)) mgtAt = "1";
-
-				List<MemberAuthorVo> authorityList = indexService.findAutorityListByUserIdOrStdntNoOrUid(userId, null, null);
-
-				if(authorityList == null || authorityList.size() == 0)
-				{
-
-				}
-				else if(authorityList.size() == 1 ) // 권한이 1개인 경우 auth setSession 후 페이지로 이동
-				{
-					String adminDvsCd = authorityList.get(0).getAdminDvsCd();
-					String workTrget = authorityList.get(0).getWorkTrget();
-					String workTrgetNm = authorityList.get(0).getWorkTrgetNm();
-					//연구자인가?
-					if(adminDvsCd != null && R2Constant.RESEARCHER_DVS_CD.equals(adminDvsCd))
-					{
-						req.getSession().setAttribute(R2Constant.SESSION_USER , user);
-					}
-					//대리입력자인가?
-					else if(adminDvsCd != null && R2Constant.SITTER_DVS_CD.equals(adminDvsCd) && workTrget != null && !"".equals(workTrget))
-					{
-						UserVo sessUser = indexService.findUserById(workTrget);
-						req.getSession().setAttribute(R2Constant.SESSION_USER , sessUser);
-					}
-					else
-					{
-						UserVo authUser = indexService.findUserByUserIdAndAdminDvsCdAndWorkTrget(user.getUserId(), adminDvsCd, workTrget);
-						if(authUser != null) req.getSession().setAttribute(R2Constant.SESSION_USER, authUser);
-						else req.getSession().setAttribute(R2Constant.SESSION_USER, user);
-
-					}
-					user.setAdminDvsCd(adminDvsCd);
-					user.setWorkTrget(workTrget);
-					user.setWorkTrgetNm(workTrgetNm);
-					user.setWorkUserId(workTrget);
-					user.setWorkDeptKor(workTrgetNm);
-					user.setWorkUserNm(workTrgetNm);
-					req.getSession().setAttribute(R2Constant.LOGIN_USER, user);
-					req.getSession().setAttribute(R2Constant.SHARE_USER, user);
-
-					//setSession
-					MemberAuthorVo authorVo = authorityList.get(0);
-					authorVo.setGubun(user.getGubun());
-					setSessionAuthorDetailByAuthorId(req, authorVo);
-					addAccessLog(req, "IDP");
-
-					//setLocale
-					String authorLangFlag = authorityList.get(0).getLanguageFlag();
-					if(authorLangFlag != null && !"".equals(authorLangFlag)) language = authorLangFlag;
-					LocaleUtil.setLocale(req, res, language);
-
-
-				}
-//				req.getSession().setMaxInactiveInterval(60*60);
-			}
-		}
-		indexService.loadLanguage();
-		indexService.loadComment();
-		indexService.loadCode();
-		//indexService.loadMessage();
-	}
+//
+//		// 유사연구자(연구자 추천)
+//		UserVo similarUser = null;
+//		similarUser = rssMainService.findSimilarUserList(userId);
+//		if(similarUser != null){
+//			model.addAttribute("smUser", similarUser);
+//			List<Map<String,String>> simKeywordList = userService.findKeywordOfUser(similarUser.getUserId());
+//			if(simKeywordList != null || !simKeywordList.isEmpty()){
+//				model.addAttribute("simKeywordList", simKeywordList);
+//			}
+//		}
+//
+//		List<RssBbsVo> bbsList = null;
+//		bbsList = rssMainService.findLatestBBS();
+//			if(!bbsList.isEmpty() || bbsList != null){
+//			model.addAttribute("bbsList", bbsList);
+//		}
+//
+//		List<RssBbsVo> popup = new ArrayList<>();
+//			if(bbsList != null) {
+//			for (RssBbsVo rbbs : bbsList) {
+//				if(rbbs.getPopupYn() != null){
+//					if(rbbs.getPopupYn().equals("Y"))
+//						popup.add(rbbs);
+//				}
+//			}
+//		}
+//		Collections.sort(popup);
+//		model.addAttribute("popupList", popup);
+//
+//		String currentLang = null;
+//		String applcAuthor = "";
+//		String srchUserId = "";
+//
+//		if("".equals(userId)) {
+//			if(user != null) {
+//				userId = user.getUserId();
+//				currentLang = user.getLanguageFlag();
+//			}
+//		}
+//
+//		List<Map<String,String>> keywordList = userService.findKeywordOfUser(userId);
+//		if(keywordList != null || !keywordList.isEmpty()){
+//			model.addAttribute("keywordList", keywordList);
+//		}
+//
+//
+//		// 최근 등록 논문 검색
+//		RimsSearchVo rimsSearchVo = new RimsSearchVo();
+//		int totalContent; //총 컨텐츠 갯수
+//		int ps = 1;
+//		int ct = 5; 	 // 페이지당 row수
+//		Map<String, Integer> pageCount = new HashMap<>();
+//
+//		ps = (ps-1)*ct; // 페이지 시작부분 index
+//
+//		rimsSearchVo.setUserId(userId);
+//		rimsSearchVo.setPs(ps);
+//		rimsSearchVo.setCt(ct);
+//		rimsSearchVo.setText("date");
+//		rimsSearchVo.setType("desc");
+//
+//		Map<String,Object> resultMap = null;
+//		Map<String,Object> contentPagemap = new HashMap<>();
+//
+//		// 성과 리스트 및 성과 총개수
+//		try {
+//			resultMap = userService.findContents("journal", rimsSearchVo);
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		} catch (SolrServerException e) {
+//			e.printStackTrace();
+//		}
+//
+//		model.addAttribute("userInfo", user);
+//		model.addAttribute("recentArticle", resultMap.get("contentList"));
+//
+//		List<Map<String, Object>> staticsArticle = rssMainService.staticsArticleByUser(userId);
+//		model.addAttribute("staticsArticle", staticsArticle);
+//
+//		return "home";
+//    }
+//
+//    public void sessionSetting(HttpServletRequest req, HttpServletResponse res, WebRequest webReq, UserVo user, ModelMap model){
+//
+//		String userId = user.getUserId();
+//
+//		model.addAttribute("inst", inst);
+//		String returnPage = "";
+//
+//		// 0. clear Session
+//		SessionUtil.clearSessionByWebRequest(webReq);
+//
+//		// 1. flag check
+////		if("".equals(flag)){
+////			returnPage = "index/loginFail";
+////		}else{
+////			if("S".equals(flag)) returnPage = "index/loginFail";
+////			else if("admin".equals(flag)) returnPage = "index/loginFail";
+////		}
+//
+//
+//		if(!"".equals(userId)){
+//			//IP Check
+//			String userIp;
+//			String xforwardedFor = req.getHeader(R2Constant.HTTP_HEADER_FORWARDED);
+//			if(xforwardedFor != null){
+//				xforwardedFor = xforwardedFor.trim();
+//				if(xforwardedFor.indexOf(",") != -1)
+//					xforwardedFor = xforwardedFor.substring(0, xforwardedFor.indexOf(","));
+//				userIp = xforwardedFor;
+//			}
+//			else
+//			{
+//				userIp = req.getRemoteAddr();
+//			}
+//
+//			req.getSession().setAttribute(R2Constant.IP_CHECK, indexService.limitedIpCheck(userIp, limitedIp));
+//			if(user != null)
+//			{
+//				//mvo.addObject(R2Constant.LOGIN_USER, user); // session setAttribute
+//				req.getSession().setAttribute(R2Constant.LOGIN_USER, user);
+//				req.getSession().setAttribute(R2Constant.SESSION_USER, user);
+//
+//				String language = user.getLanguageFlag();
+//				if(language == null || "".equals(language)) language = defaultLanguage;
+//				String mgtAt = user.getMgtAt();
+//				if(mgtAt == null || "".equals(mgtAt)) mgtAt = "1";
+//
+//				List<MemberAuthorVo> authorityList = indexService.findAutorityListByUserIdOrStdntNoOrUid(userId, null, null);
+//
+//				if(authorityList == null || authorityList.size() == 0)
+//				{
+//
+//				}
+//				else if(authorityList.size() == 1 ) // 권한이 1개인 경우 auth setSession 후 페이지로 이동
+//				{
+//					String adminDvsCd = authorityList.get(0).getAdminDvsCd();
+//					String workTrget = authorityList.get(0).getWorkTrget();
+//					String workTrgetNm = authorityList.get(0).getWorkTrgetNm();
+//					//연구자인가?
+//					if(adminDvsCd != null && R2Constant.RESEARCHER_DVS_CD.equals(adminDvsCd))
+//					{
+//						req.getSession().setAttribute(R2Constant.SESSION_USER , user);
+//					}
+//					//대리입력자인가?
+//					else if(adminDvsCd != null && R2Constant.SITTER_DVS_CD.equals(adminDvsCd) && workTrget != null && !"".equals(workTrget))
+//					{
+//						UserVo sessUser = indexService.findUserById(workTrget);
+//						req.getSession().setAttribute(R2Constant.SESSION_USER , sessUser);
+//					}
+//					else
+//					{
+//						UserVo authUser = indexService.findUserByUserIdAndAdminDvsCdAndWorkTrget(user.getUserId(), adminDvsCd, workTrget);
+//						if(authUser != null) req.getSession().setAttribute(R2Constant.SESSION_USER, authUser);
+//						else req.getSession().setAttribute(R2Constant.SESSION_USER, user);
+//
+//					}
+//					user.setAdminDvsCd(adminDvsCd);
+//					user.setWorkTrget(workTrget);
+//					user.setWorkTrgetNm(workTrgetNm);
+//					user.setWorkUserId(workTrget);
+//					user.setWorkDeptKor(workTrgetNm);
+//					user.setWorkUserNm(workTrgetNm);
+//					req.getSession().setAttribute(R2Constant.LOGIN_USER, user);
+//					req.getSession().setAttribute(R2Constant.SHARE_USER, user);
+//
+//					//setSession
+//					MemberAuthorVo authorVo = authorityList.get(0);
+//					authorVo.setGubun(user.getGubun());
+//					setSessionAuthorDetailByAuthorId(req, authorVo);
+//					addAccessLog(req, "IDP");
+//
+//					//setLocale
+//					String authorLangFlag = authorityList.get(0).getLanguageFlag();
+//					if(authorLangFlag != null && !"".equals(authorLangFlag)) language = authorLangFlag;
+//					LocaleUtil.setLocale(req, res, language);
+//
+//
+//				}
+////				req.getSession().setMaxInactiveInterval(60*60);
+//			}
+//		}
+//		indexService.loadLanguage();
+//		indexService.loadComment();
+//		indexService.loadCode();
+//		//indexService.loadMessage();
+//	}
 
 	/*
    		전체 검색
@@ -508,124 +514,124 @@ public class RssMainController {
 		return result;
 	}
 
-
-
 	// 개발 서버 반영시 삭제
-//	@RequestMapping("/home")
-//	public String main(ModelMap model, HttpServletRequest req) {
-//
-//		UserVo loginUser = (UserVo) req.getSession().getAttribute(R2Constant.LOGIN_USER);
-//		UserVo user = userService.findUserById(loginUser.getUserId());
-//		String userId = user.getUserId();
-//
-//		String solutionList = "[{\"module\":\"GOTIT\",\"admin\":\"N\",\"user\":\"Y\"}\n" +
-//				",{\"module\":\"RIMS\",\"admin\":\"N\",\"user\":\"Y\"},{\"module\":\"RSS\",\"admin\":\"N\",\"user\":\"Y\"},{\"module\":\"S2JOURNAL\",\"admin\":\"N\",\"user\":\"N\"},{\"module\":\"DISCOVERY\",\"admin\":\"N\",\"user\":\"N\"},{\"module\":\"PRISM\",\"admin\":\"N\",\"user\":\"N\"},{\"module\":\"BOARD\",\"admin\":\"N\",\"user\":\"N\"},{\"module\":\"SCHOLARWORKS\",\"admin\":\"N\",\"user\":\"N\"}]";
-//
-//		// 개발 서버에 반영할 메소드에 추가
-//		JsonParser jsonParser = new JsonParser();
-//		JsonArray jsonArray = (JsonArray) jsonParser.parse(solutionList);
-//		for (int i = 0 ; i < jsonArray.size() ; i++) {
-//			JsonObject object = (JsonObject) jsonArray.get(i);
-//			Map<String, Object> map = new HashMap<>();
-//			String moduleName = object.get("module").getAsString();
-//			String adminValue = object.get("admin").getAsString();
-//			String userValue = object.get("user").getAsString();
-//			map.put("module", moduleName);
-//			map.put("admin", adminValue);
-//			map.put("user", userValue);
-//
-//			model.addAttribute(moduleName, map);
-//			req.getSession().setAttribute(moduleName, map);
-//		}
-//
-//		// 유사연구자(연구자 추천)
-//		UserVo similarUser = null;
-//		similarUser = rssMainService.findSimilarUserList(userId);
-//		if(similarUser != null){
-//			model.addAttribute("smUser", similarUser);
-////			List<KeywordVo> simKeywordList = rssMainService.findKeywordByUser(similarUser.getUserId());
-////			if(simKeywordList != null || !simKeywordList.isEmpty()){
-////				model.addAttribute("simKeywordList", simKeywordList);
-////			}
-//			List<Map<String,String>> simKeywordList = userService.findKeywordOfUser(similarUser.getUserId());
+	@RequestMapping("/home")
+	public String main(ModelMap model, HttpServletRequest req) {
+
+		UserVo loginUser = (UserVo) req.getSession().getAttribute(R2Constant.LOGIN_USER);
+		UserVo user = userService.findUserById(loginUser.getUserId());
+		String userId = user.getUserId();
+
+		String solutionList = "[{\"module\":\"GOTIT\",\"admin\":\"N\",\"user\":\"Y\"}\n" +
+				",{\"module\":\"RIMS\",\"admin\":\"N\",\"user\":\"Y\"},{\"module\":\"RSS\",\"admin\":\"N\",\"user\":\"Y\"},{\"module\":\"S2JOURNAL\",\"admin\":\"N\",\"user\":\"N\"},{\"module\":\"DISCOVERY\",\"admin\":\"N\",\"user\":\"N\"},{\"module\":\"PRISM\",\"admin\":\"N\",\"user\":\"N\"},{\"module\":\"BOARD\",\"admin\":\"N\",\"user\":\"N\"},{\"module\":\"SCHOLARWORKS\",\"admin\":\"N\",\"user\":\"N\"}]";
+
+		// 개발 서버에 반영할 메소드에 추가
+		JsonParser jsonParser = new JsonParser();
+		JsonArray jsonArray = (JsonArray) jsonParser.parse(solutionList);
+		for (int i = 0 ; i < jsonArray.size() ; i++) {
+			JsonObject object = (JsonObject) jsonArray.get(i);
+			Map<String, Object> map = new HashMap<>();
+			String moduleName = object.get("module").getAsString();
+			String adminValue = object.get("admin").getAsString();
+			String userValue = object.get("user").getAsString();
+			map.put("module", moduleName);
+			map.put("admin", adminValue);
+			map.put("user", userValue);
+
+			model.addAttribute(moduleName, map);
+			req.getSession().setAttribute(moduleName, map);
+		}
+
+		// 유사연구자(연구자 추천)
+		UserVo similarUser = null;
+		similarUser = rssMainService.findSimilarUserList(userId);
+		if(similarUser != null){
+			model.addAttribute("smUser", similarUser);
+//			List<KeywordVo> simKeywordList = rssMainService.findKeywordByUser(similarUser.getUserId());
 //			if(simKeywordList != null || !simKeywordList.isEmpty()){
 //				model.addAttribute("simKeywordList", simKeywordList);
 //			}
-//		}
-//
-//		List<RssBbsVo> bbsList = null;
-//		bbsList = rssMainService.findLatestBBS();
-//		if(!bbsList.isEmpty() || bbsList != null){
-//			model.addAttribute("bbsList", bbsList);
-//		}
-//
-//		List<RssBbsVo> popup = new ArrayList<>();
-//		if(bbsList != null) {
-//			for (RssBbsVo rbbs : bbsList) {
-//				if(rbbs.getPopupYn().equals("Y"))
-//					popup.add(rbbs);
-//			}
-//		}
-//		Collections.sort(popup);
-//		model.addAttribute("popupList", popup);
-//
-//
-//
-//
-//
-//		// 개발서버 반영 메소드 끝
-//
-//		String currentLang = null;
-//		String applcAuthor = "";
-//		String srchUserId = "";
-//
-//		if("".equals(userId)) {
-//			if(user != null) {
-//				userId = user.getUserId();
-//				currentLang = user.getLanguageFlag();
-//			}
-//		}
-//
-//		List<Map<String,String>> keywordList = userService.findKeywordOfUser(userId);
-//		if(keywordList != null || !keywordList.isEmpty()){
-//			model.addAttribute("keywordList", keywordList);
-//		}
-//
-//
-//		// 최근 등록 논문 검색
-//		RimsSearchVo rimsSearchVo = new RimsSearchVo();
-//		int totalContent; //총 컨텐츠 갯수
-//		int ps = 1;
-//		int ct = 5; 	 // 페이지당 row수
-//		Map<String, Integer> pageCount = new HashMap<>();
-//
-//		ps = (ps-1)*ct; // 페이지 시작부분 index
-//
-//		rimsSearchVo.setUserId(userId);
-//		rimsSearchVo.setPs(ps);
-//		rimsSearchVo.setCt(ct);
-//		rimsSearchVo.setText("date");
-//		rimsSearchVo.setType("desc");
-//
-//		Map<String,Object> resultMap = null;
-//		Map<String,Object> contentPagemap = new HashMap<>();
-//
-//		// 성과 리스트 및 성과 총개수
-//		try {
-//			resultMap = userService.findContents("journal", rimsSearchVo);
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//		} catch (SolrServerException e) {
-//			e.printStackTrace();
-//		}
-//
-//		model.addAttribute("userInfo", user);
-//		model.addAttribute("recentArticle", resultMap.get("contentList"));
-//
-//		List<Map<String, Object>> staticsArticle = rssMainService.staticsArticleByUser(userId);
-//		model.addAttribute("staticsArticle", staticsArticle);
-//
-//		return "home";
-//	}
+			List<Map<String,String>> simKeywordList = userService.findKeywordOfUser(similarUser.getUserId());
+			if(simKeywordList != null || !simKeywordList.isEmpty()){
+				model.addAttribute("simKeywordList", simKeywordList);
+			}
+		}
+
+		List<RssBbsVo> bbsList = null;
+		bbsList = rssMainService.findLatestBBS();
+		if(!bbsList.isEmpty() || bbsList != null){
+			model.addAttribute("bbsList", bbsList);
+		}
+
+		List<RssBbsVo> popup = new ArrayList<>();
+		if(bbsList != null) {
+			for (RssBbsVo rbbs : bbsList) {
+				if(rbbs.getPopupYn() != null){
+					if(rbbs.getPopupYn().equals("Y"))
+						popup.add(rbbs);
+				}
+			}
+		}
+		Collections.sort(popup);
+		model.addAttribute("popupList", popup);
+
+
+
+
+
+		// 개발서버 반영 메소드 끝
+
+		String currentLang = null;
+		String applcAuthor = "";
+		String srchUserId = "";
+
+		if("".equals(userId)) {
+			if(user != null) {
+				userId = user.getUserId();
+				currentLang = user.getLanguageFlag();
+			}
+		}
+
+		List<Map<String,String>> keywordList = userService.findKeywordOfUser(userId);
+		if(keywordList != null || !keywordList.isEmpty()){
+			model.addAttribute("keywordList", keywordList);
+		}
+
+
+		// 최근 등록 논문 검색
+		RimsSearchVo rimsSearchVo = new RimsSearchVo();
+		int totalContent; //총 컨텐츠 갯수
+		int ps = 1;
+		int ct = 5; 	 // 페이지당 row수
+		Map<String, Integer> pageCount = new HashMap<>();
+
+		ps = (ps-1)*ct; // 페이지 시작부분 index
+
+		rimsSearchVo.setUserId(userId);
+		rimsSearchVo.setPs(ps);
+		rimsSearchVo.setCt(ct);
+		rimsSearchVo.setText("date");
+		rimsSearchVo.setType("desc");
+
+		Map<String,Object> resultMap = null;
+		Map<String,Object> contentPagemap = new HashMap<>();
+
+		// 성과 리스트 및 성과 총개수
+		try {
+			resultMap = userService.findContents("journal", rimsSearchVo);
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (SolrServerException e) {
+			e.printStackTrace();
+		}
+
+		model.addAttribute("userInfo", user);
+		model.addAttribute("recentArticle", resultMap.get("contentList"));
+
+		List<Map<String, Object>> staticsArticle = rssMainService.staticsArticleByUser(userId);
+		model.addAttribute("staticsArticle", staticsArticle);
+
+		return "home";
+	}
 
 }

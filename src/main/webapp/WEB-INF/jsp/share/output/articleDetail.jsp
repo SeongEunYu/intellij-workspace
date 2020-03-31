@@ -167,16 +167,23 @@
 				<div data-badge-popover="right" data-link-target='_blank' data-badge-type="2" data-doi="<c:out value="${resultMap.articleVo.doi}"/>" data-hide-no-mentions="true" class="altmetric-embed"></div>
 			</span>
 		</div>
-		<c:if test="${resultMap.articleVo.pubFileId != null && sessionScope.ip_check == true}">
+		<%--<c:if test="${resultMap.articleVo.pubFileId != null && sessionScope.ip_check == true}">--%>
 			<!-- 카이스트 ip대역에서만  되게해야함-->
-			<div class="view_bt_area">
-				<div class="view_downbt">
-					<ul>
-						<li><a href="<c:url value="/servlet/download.do?fileid=${resultMap.articleVo.pubFileId}"/>" class="pdf_download" target="_blank"><em><spring:message code="disc.detail.article.pdf"/></em></a></li>
-					</ul>
-				</div>
+			<%--<div class="view_bt_area">--%>
+				<%--<div class="view_downbt">--%>
+					<%--<ul>--%>
+						<%--<li><a href="<c:url value="/servlet/download.do?fileid=${resultMap.articleVo.pubFileId}"/>" class="pdf_download" target="_blank"><em><spring:message code="disc.detail.article.pdf"/></em></a></li>--%>
+					<%--</ul>--%>
+				<%--</div>--%>
+			<%--</div>--%>
+		<%--</c:if>--%>
+		<div class="view_bt_area">
+			<div class="view_downbt">
+				<ul>
+					<li><a href="<c:url value=""></c:url>${pageContext.request.contextPath}/assets/ris/${resultMap.articleVo.articleId}" class="ris_download"><em>RIS Download</em></a></li>
+				</ul>
 			</div>
-		</c:if>
+		</div>
 	</div>
 	<p class="view_title" style="color:#2d52b1; font-weight: bold;">${resultMap.articleVo.orgLangPprNm} <img src="<c:url value="/share/img/common/open_access.png"/>" alt="open_access" style="padding-bottom: 5px;display: ${resultMap.articleVo.openAccesAt == 'Y' ? '' : 'none' }" ></p>
 

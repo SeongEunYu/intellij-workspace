@@ -92,4 +92,5 @@ order by A.PBLC_YM
         order by rb.NOTICE_STT_DATE desc
         limit 5
     </select>
+
 </mapper>

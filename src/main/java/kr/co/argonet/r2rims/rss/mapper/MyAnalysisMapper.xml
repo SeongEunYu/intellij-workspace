@@ -1,0 +1,365 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.argonet.r2rims.rss.mapper.MyAnalysisMapper">
+
+    <sql id="pageHeader">SELECT * FROM ( SELECT * FROM (</sql>
+    <sql id="pageFooter"><![CDATA[) WHERE RN  <=  (#{ps} + #{ct})) a  WHERE a.RN > #{ps}]]></sql>
+    <sql id="nvlifnull"><if test="_databaseId == 'oracle' ">NVL</if><if test="_databaseId == 'mysql' ">IFNULL</if></sql>
+    <sql id="prefixToDate"><if test="_databaseId == 'oracle' ">TO_DATE(</if><if test="_databaseId == 'mysql' ">STR_TO_DATE(</if></sql>
+    <sql id="postfixToDate"><if test="_databaseId == 'oracle' ">, 'YYYY-MM-DD')</if><if test="_databaseId == 'mysql' ">, '%Y-%m-%d')</if></sql>
+    <sql id="sysdateNow"><if test="_databaseId == 'oracle' ">SYSDATE</if><if test="_databaseId == 'mysql' ">now()</if></sql>
+
+    <sql id="authorCondition">
+        and RU.GUBUN != 'S'
+        <if test="topNm != null and topNm != '' ">
+            <choose>
+                <when test="topNm == 'department'">
+                    <if test=" isTrack == null or isTrack == '' or trackId == null or trackId == ''">
+                        <choose>
+                            <when test="deptField != null and deptField == 'GROUP_DEPT'">
+                                and RU.GROUP_DEPT = #{deptKor, jdbcType=VARCHAR}
+                            </when>
+                            <otherwise>
+                                and ( RU.DEPT_KOR = #{deptKor, jdbcType=VARCHAR} or RU.DEPT_CODE = #{deptKor, jdbcType=VARCHAR} )
+                            </otherwise>
+                        </choose>
+                    </if>
+                    <if test="isTrack != null and isTrack != '' and trackId != null and trackId != ''">
+                        and RU.USER_ID in (select USER_ID from RI_TRACK_USER where TRACK_ID = #{trackId, jdbcType=VARCHAR} and GRADE = 'G')
+                    </if>
+                </when>
+                <when test="topNm == 'college'">
+                    <choose>
+                        <when test="clgField != null and clgField == 'GROUP_CLG'">
+                            and RU.GROUP_CLG = #{clgCd, jdbcType=VARCHAR}
+                        </when>
+                        <otherwise>
+                            and RU.CLG_CD = #{clgCd, jdbcType=VARCHAR}
+                        </otherwise>
+                    </choose>
+                </when>
+                <when test="topNm == 'researcher'">
+                    <if test="userId != null and userId != ''">
+                        and (RU.USER_ID = #{userId, jdbcType=VARCHAR}
+                        <if test="srchUId != null and srchUId != ''">
+                            or RU.USER_ID in (select USER_ID from RI_USER where U_ID = #{srchUId} and <include refid="nvlifnull"/>(DEL_DVS_CD, 'N') != 'Y')
+                        </if>
+                        )
+                    </if>
+                </when>
+            </choose>
+        </if>
+        <if test="hldofYn != null and hldofYn != '' and hldofYn != 'ALL' ">
+            and <include refid="nvlifnull"/>(RU.HLDOF_YN, '0') = #{hldofYn, jdbcType=VARCHAR}
+        </if>
+        <if test="isFulltime != null and isFulltime != '' and isFulltime == 'ALL'">
+            and RU.GUBUN in ('M', 'U')
+        </if>
+        <if test="isFulltime != null and isFulltime != '' and isFulltime != 'ALL'">
+            and RU.GUBUN = #{isFulltime, jdbcType=VARCHAR}
+        </if>
+        <if test="searchDept != null and searchDept != '' and searchDept != 'ALL' ">
+            <choose>
+                <when test="deptField != null and deptField == 'GROUP_DEPT'">
+                    and RU.GROUP_DEPT = #{searchDept, jdbcType=VARCHAR}
+                </when>
+                <otherwise>
+                    and ( RU.DEPT_KOR = #{searchDept, jdbcType=VARCHAR} or RU.DEPT_CODE = #{searchDept, jdbcType=VARCHAR} )
+                </otherwise>
+            </choose>
+        </if>
+        <if test="posiNm != null and posiNm != '' and posiNm != 'ALL' ">
+            and RU.POSI_NM = #{posiNm, jdbcType=VARCHAR}
+        </if>
+
+        <if test="deptList != null">
+            and
+            <foreach collection="deptList" item="dept" separator="or" open="(" close=")">
+                RU.DEPT_CODE = #{dept}
+            </foreach>
+        </if>
+
+        <if test="colList != null">
+            and RU.CLG_CD in
+            <foreach collection="colList" item="col" separator="," open="(" close=")">
+                #{col}
+            </foreach>
+        </if>
+
+        <if test="posiList != null">
+            and
+            <foreach collection="posiList" item="posi" separator=" OR " open="(" close=")">
+                <choose>
+                    <when test="posi == 'ETC'">
+                        RU.POSI_NM not in
+                        <foreach collection="allPosiList" item="allPosi" separator="," open="(" close=")">
+                            #{allPosi}
+                        </foreach>
+                    </when>
+                    <otherwise>RU.POSI_NM = #{posi}</otherwise>
+                </choose>
+            </foreach>
+        </if>
+    </sql>
+
+    <sql id="articleCondition">
+        and RA.APPR_DVS_CD = '3'
+        and RA.PBLC_YM NOT LIKE 'ACC%'
+        <if test="fromYear != null and fromYear != ''">
+            <![CDATA[ and SUBSTR(RA.PBLC_YM,1,4) >= #{fromYear, jdbcType=VARCHAR} ]]>
+        </if>
+        <if test="toYear != null and toYear != ''">
+            <![CDATA[ and SUBSTR(RA.PBLC_YM,1,4) <= #{toYear, jdbcType=VARCHAR} ]]>
+        </if>
+    </sql>
+
+    <!-- article_parti 조건-->
+    <sql id="articlePartiCondition">
+        <if test="tpiDispDvsCd  != null and tpiDispDvsCd  != '' ">
+            and
+            <choose>
+                <when test="tpiDispDvsCd  == '11' ">
+                    RAP.TPI_DVS_CD in ('1','2','3','5')
+                </when>
+                <otherwise>
+                    (RAP.TPI_DVS_CD not in ('1','2','3','5') or RAP.TPI_DVS_CD is null)
+                </otherwise>
+            </choose>
+        </if>
+    </sql>
+
+    <sql id="articleOrderBy">
+        order by
+        <if test="page == null or page == '' ">
+            <if test="gubun != null and gubun != '' and (gubun == 'SCI' or gubun == 'ALL') ">
+                <include refid="nvlifnull"/>(RA.TC,0) DESC,
+            </if>
+            <if test="gubun != null and gubun != '' and gubun == 'SCOPUS' ">
+                <include refid="nvlifnull"/>(RA.SCP_TC,0) DESC,
+            </if>
+            <if test="gubun != null and gubun != '' and gubun == 'KCI' ">
+                <include refid="nvlifnull"/>(RA.KCI_TC,0) DESC,
+            </if>
+            SUBSTR(RA.PBLC_YM,1,4) DESC
+        </if>
+        <if test="page != null and page != '' and page == 'publication' ">
+            SUBSTR(CONCAT(TRIM(RA.PBLC_YM),'0101'),1,8) DESC
+        </if>
+    </sql>
+
+
+    <select id="findPublicationGroup" resultType="kr.co.argonet.r2rims.core.vo.AnalysisVo">
+        select *
+        from
+        (
+        select
+        <if test="groupKey1 == 'college' and groupKey1 != null and groupKey1 != '' ">
+            TA.CLG_NM as clgNm,
+            TA.CLG_CD as clgCd,
+        </if>
+        <if test="groupKey1 == 'department' and groupKey1 != null and groupKey1 != '' ">
+            TA.DEPT_KOR as deptKor,
+            TA.DEPT_CODE as deptCode,
+        </if>
+        <if test="groupKey1 == 'researcher' and groupKey1 != null and groupKey1 != '' ">
+            TA.KOR_NM as korNm,
+            TA.USER_ID as userId,
+            TA.CLG_NM as clgNm,
+            TA.CLG_CD as clgCd,
+            TA.DEPT_KOR as deptKor,
+            TA.DEPT_CODE as deptCode,
+        </if>
+        <if test="(groupKey2 == 'pubYear' or groupKey2 == 'pubMonthYear') and groupKey2 != null and groupKey2 != '' ">
+            TA.pubYear,
+        </if>
+        sum(TA.cnt) as artsTotal
+        ,sum(TA.sciArt) as sciArtsCo
+        ,sum(TA.scpArt) as scpArtsCo
+        ,sum(TA.kciArt) as kciArtsCo
+        ,sum(TA.etcArt) as etcArtsCo
+        ,sum(TA.sciArt)+sum(TA.scpArt)+sum(TA.kciArt)+sum(TA.etcArt) as allArtsCo
+        ,sum(TA.SCI_TC) as wosCitedSum
+        ,sum(TA.SCP_TC) as scpCitedSum
+        ,sum(TA.KCI_TC) as kciCitedSum
+        ,sum(TA.impctFctr) as impctFctrSum
+        ,sum(TA.hasImpctFactr) as impctFctrExsArtsCo
+        ,sum(TA.sjr) as sjrSum
+        ,sum(TA.hasSjr) as sjrExsArtsCo
+        ,sum(TA.kciIF) as kciIFSum
+        ,sum(TA.hasKciIF) as kciIFExsArtsCo
+        ,<include refid="nvlifnull"/>(sum(TA.impctFctr) / case when sum(TA.sciArt) = 0 then null else sum(TA.sciArt) end , 0) as  impctFctrAvrg
+        ,<include refid="nvlifnull"/>(sum(TA.impctFctr) / case when sum(TA.hasImpctFactr) = 0 then null else sum(TA.hasImpctFactr) end , 0) as  impctFctrExsAvrg
+        ,<include refid="nvlifnull"/>(sum(TA.sjr) / case when sum(TA.scpArt) = 0 then null else sum(TA.scpArt) end , 0) as  sjrAvrg
+        ,<include refid="nvlifnull"/>(sum(TA.sjr) / case when sum(TA.hasSjr) = 0 then null else sum(TA.hasSjr) end , 0) as  sjrExsAvrg
+        ,<include refid="nvlifnull"/>(sum(TA.kciIF) / case when sum(TA.kciArt) = 0 then null else sum(TA.kciArt) end , 0) as  kciIFAvrg
+        ,<include refid="nvlifnull"/>(sum(TA.kciIF) / case when sum(TA.hasKciIF) = 0 then null else sum(TA.hasKciIF) end , 0) as  kciIFExsAvrg
+        ,<include refid="nvlifnull"/>(sum(TA.SCI_TC) / case when sum(TA.sciArt) = 0 then null else sum(TA.sciArt) end , 0) as  wosCitedAvrg
+        ,<include refid="nvlifnull"/>(sum(TA.SCP_TC) / case when sum(TA.scpArt) = 0 then null else sum(TA.scpArt) end , 0) as  scpCitedAvrg
+        ,<include refid="nvlifnull"/>(sum(TA.KCI_TC) / case when sum(TA.kciArt) = 0 then null else sum(TA.kciArt) end , 0) as  kciCitedAvrg
+        ,TA.sci_hindex as sciHindex
+        ,TA.scopus_hindex as scopusHindex
+        ,TA.kci_hindex as kciHindex
+        from (
+        select RA.ARTICLE_ID
+        <if test="groupKey1 == 'college' and groupKey1 != null and groupKey1 != '' ">
+            ,RU.CLG_NM as CLG_NM
+            ,RU.CLG_CD as CLG_CD
+            <!--,(
+            select MAX(CLG_CODE) from DEPT_CLG_MAP
+            where CLG_NM = RU.CLG_NM
+            and IS_USED = 'Y'
+            ) as CLG_CD-->
+        </if>
+        <if test="groupKey1 == 'department' and groupKey1 != null and groupKey1 != '' ">
+            <choose><when test="deptField != null and deptField == 'GROUP_DEPT'">,RU.GROUP_DEPT</when><otherwise>,RU.DEPT_KOR</otherwise></choose> as DEPT_KOR
+            ,RU.DEPT_CODE as DEPT_CODE
+            <!--,(
+            select MIN(DEPT_CODE) from DEPT_CLG_MAP
+            where DEPT_KOR_NM =  <choose><when test="deptField != null and deptField == 'GROUP_DEPT'">RU.GROUP_DEPT</when><otherwise>RU.DEPT_KOR</otherwise></choose>
+            and IS_USED = 'Y'
+            ) as DEPT_CODE-->
+        </if>
+        <if test="groupKey1 == 'researcher' and groupKey1 != null and groupKey1 != '' ">
+            ,RU.KOR_NM as KOR_NM
+            ,RU.USER_ID as USER_ID
+            ,RU.CLG_NM as CLG_NM
+            ,RU.CLG_CD as CLG_CD
+            <choose><when test="deptField != null and deptField == 'GROUP_DEPT'">,RU.GROUP_DEPT</when><otherwise>,RU.DEPT_KOR</otherwise></choose> as DEPT_KOR
+            ,RU.DEPT_CODE as DEPT_CODE
+        </if>
+        <if test="groupKey2 == 'pubYear' and groupKey2 != null and groupKey2 != '' ">
+            ,SUBSTR(MAX(RA.PBLC_YM),1,4) as pubYear
+        </if>
+        <if test="groupKey2 == 'pubMonthYear' and groupKey2 != null and groupKey2 != '' ">
+            ,SUBSTR(MAX(RA.PBLC_YM),1,6) as pubYear
+        </if>
+        ,1 as cnt
+        ,<include refid="nvlifnull"/>(MAX(RA.IMPCT_FCTR),0) as impctFctr
+        ,<include refid="nvlifnull"/>(MAX(RA.SJR),0) as sjr
+        ,<include refid="nvlifnull"/>(MAX(RA.KCI_IF),0) as kciIF
+        ,case when <include refid="nvlifnull"/>(MAX(RA.IMPCT_FCTR),0) > 0 then 1 else 0 end as  hasImpctFactr
+        ,case when <include refid="nvlifnull"/>(MAX(RA.SJR),0) > 0 then 1 else 0 end as  hasSjr
+        ,case when <include refid="nvlifnull"/>(MAX(RA.KCI_IF),0) > 0 then 1 else 0 end as  hasKciIF
+        ,<include refid="nvlifnull"/>(MAX(RA.TC),0) as SCI_TC
+        ,<include refid="nvlifnull"/>(MAX(RA.SCP_TC),0) as SCP_TC
+        ,<include refid="nvlifnull"/>(MAX(RA.KCI_TC),0) as KCI_TC
+        ,case when <include refid="nvlifnull"/>(MAX(RA.TC),0) > 0 then 1 else 0 end as  wosCited
+        ,case when <include refid="nvlifnull"/>(MAX(RA.SCP_TC), 0) > 0 then 1 else 0 end as  scpCited
+        ,case when <include refid="nvlifnull"/>(MAX(RA.KCI_TC), 0) > 0 then 1 else 0 end as  kciCited
+        ,case when NULLIF(TRIM(RA.ID_SCI),'') is not null then 1 else 0 end as  sciArt
+        ,case when NULLIF(TRIM(RA.ID_SCOPUS),'') is not null then 1 else 0 end as  scpArt
+        ,case when NULLIF(TRIM(RA.ID_KCI),'') is not null then 1 else 0 end as  kciArt
+        ,case when NULLIF(TRIM(RA.ID_SCI),'') is null and NULLIF(TRIM(RA.ID_SCOPUS),'') is null and NULLIF(TRIM(RA.ID_KCI),'') is null then 1 else 0 end as  etcArt
+        ,RU.sci_hindex
+        ,RU.scopus_hindex
+        ,RU.kci_hindex
+        from RI_ARTICLE RA  left join  RI_ARTICLE_PARTI RAP on (RA.ARTICLE_ID = RAP.ARTICLE_ID)
+        left join RI_USER RU on (RAP.PRTCPNT_ID = RU.USER_ID)
+        where <include refid="nvlifnull"/>(RA.DEL_DVS_CD, 'N') != 'Y'
+        and <include refid="nvlifnull"/>(RAP.DEL_DVS_CD, 'N') != 'Y'
+        and <include refid="nvlifnull"/>(RU.DEL_DVS_CD, 'N') != 'Y'
+        and NULLIF(TRIM(RAP.PRTCPNT_ID),'') is not null
+        <if test="(groupKey2 == 'pubYear' or groupKey2 == 'pubMonthYear') and groupKey2 != null and groupKey2 != '' ">
+            and NULLIF(TRIM(RA.PBLC_YM),'') is not null
+        </if>
+        <if test="groupKey1 == 'college' and groupKey1 != null and groupKey1 != '' ">
+            and NULLIF(TRIM(RU.CLG_NM),'') is not null
+        </if>
+        <if test="groupKey1 == 'department' and groupKey1 != null and groupKey1 != '' ">
+            and NULLIF(TRIM(RU.DEPT_KOR),'') is not null
+        </if>
+        <if test="groupKey1 == 'researcher' and groupKey1 != null and groupKey1 != '' ">
+            and NULLIF(TRIM(RU.KOR_NM),'') is not null
+        </if>
+        and RU.USER_ID not in (select TRGET_IDNTFR from RA_ANALS_EXCL_TRGET where GROUP_TY = 'U')
+        <include refid="authorCondition"/>
+        <include refid="articleCondition"/>
+        group by RA.ARTICLE_ID
+        <if test="groupKey1 == 'college' and groupKey1 != null and groupKey1 != '' ">
+            , RU.CLG_NM
+        </if>
+        <if test="groupKey1 == 'department' and groupKey1 != null and groupKey1 != '' ">
+            ,<choose><when test="deptField != null and deptField == 'GROUP_DEPT'">RU.GROUP_DEPT</when><otherwise>RU.DEPT_KOR</otherwise></choose>
+        </if>
+        <if test="groupKey1 == 'researcher' and groupKey1 != null and groupKey1 != '' ">
+            , RU.KOR_NM
+        </if>
+        ) TA
+        <if test="(groupKey1 != null and groupKey1 != '') or (groupKey2 != null and groupKey2 != '') ">
+            group by
+        </if>
+        <if test="groupKey1 == 'college' and groupKey1 != null and groupKey1 != '' ">
+            TA.CLG_NM
+        </if>
+        <if test="groupKey1 == 'department' and groupKey1 != null and groupKey1 != '' ">
+            TA.DEPT_KOR
+        </if>
+        <if test="groupKey1 == 'researcher' and groupKey1 != null and groupKey1 != '' ">
+            TA.KOR_NM
+        </if>
+        <if test="groupKey1 != null and groupKey1 != '' and groupKey2 != null and groupKey2 != '' ">,</if>
+        <if test="groupKey2 == 'pubYear' and groupKey2 != null and groupKey2 != '' ">
+            <if test="_databaseId == 'oracle' "> ROLLUP(TA.pubYear)</if><if test="_databaseId == 'mysql' "> TA.pubYear WITH ROLLUP</if>
+        </if>
+        <if test="groupKey2 == 'pubMonthYear' and groupKey2 != null and groupKey2 != '' ">
+            TA.pubYear
+        </if>
+        ) TT
+        order by TT.pubYear ASC
+    </select>
+
+    <select id="findArticleCitationByUserId"  resultType="kr.co.argonet.r2rims.core.vo.AnalysisVo">
+        select DISTINCT (<include refid="nvlifnull"/>(RA.TC, 0)) tc
+        from RI_ARTICLE RA
+        left join RI_ARTICLE_PARTI RAP on (RA.ARTICLE_ID = RAP.ARTICLE_ID)
+        where ( RAP.PRTCPNT_ID = #{userId, jdbcType=VARCHAR}
+        <if test="srchUId != null and srchUId != ''">
+            or RAP.PRTCPNT_ID in (select USER_ID from RI_USER where U_ID = #{srchUId} and <include refid="nvlifnull"/>(DEL_DVS_CD, 'N') != 'Y')
+        </if>
+        )
+        and<include refid="nvlifnull"/>(RA.DEL_DVS_CD, 'N') != 'Y'
+        and <include refid="nvlifnull"/>(RAP.DEL_DVS_CD, 'N') != 'Y'
+        <include refid="articleCondition"/>
+        order by tc DESC
+    </select>
+
+    <select id="findArticleListBySearchVo" resultType="kr.co.argonet.r2rims.core.vo.ArticleVo">
+        select TA.*
+        ,(select C.AUTHORS from RI_ARTICLE_AUTHORS C where C.ARTICLE_ID = TA.ARTICLE_ID ) as authors
+        ,(select C.AUTHORS_INFO from RI_ARTICLE_AUTHORS C where C.ARTICLE_ID = TA.ARTICLE_ID ) as authorsInfo
+        from (
+        select RA.*
+        <if test="_databaseId == 'oracle' and rownum != null and rownum != '' and rownum != 'ALL'">
+            ,row_number()over(<include refid="articleOrderBy"/>) AS RN
+        </if>
+        from RI_ARTICLE RA
+        right join
+        (
+        select <if test="_databaseId == 'mysql'">STRAIGHT_JOIN</if> TB.ARTICLE_ID
+        from RI_ARTICLE_PARTI TB
+        left join RI_USER RU on (TB.PRTCPNT_ID = RU.USER_ID)
+        <where>
+            and <include refid="nvlifnull"/>(TB.DEL_DVS_CD, 'N') != 'Y'
+            and <include refid="nvlifnull"/>(RU.DEL_DVS_CD, 'N') != 'Y'
+            <if test="tpiDvsCd != null and tpiDvsCd != '' and tpiDvsCd == 'main'">
+                and TB.TPI_DVS_CD in ('2','3')
+            </if>
+            <include refid="authorCondition"/>
+        </where>
+        group by TB.ARTICLE_ID <if test="_databaseId == 'mysql'">order by null</if>
+        ) RAP on (RA.ARTICLE_ID = RAP.ARTICLE_ID)
+        <where>
+            and <include refid="nvlifnull"/>(RA.DEL_DVS_CD, 'N') != 'Y'
+            <include refid="articleCondition"/>
+        </where>
+        <include refid="articleOrderBy"/>
+        <if test="_databaseId == 'mysql' and rownum != null and rownum != '' and rownum != 'ALL'">
+            LIMIT ${rownum}
+        </if>
+        ) TA
+        <if test="_databaseId == 'oracle' and rownum != null and rownum != '' and rownum != 'ALL'">
+            where TA.RN <![CDATA[ <= ]]>#{rownum, jdbcType=VARCHAR}
+        </if>
+    </select>
+
+</mapper>

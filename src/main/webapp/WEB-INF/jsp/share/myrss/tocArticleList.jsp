@@ -41,7 +41,7 @@
                     <c:forEach items="${articleList}" var="article">
                         <tr>
                             <td class='al_center' style="padding-left: 0px; padding-right: 0px">
-                                <span style="font-size: 13px">Vol.${article.VOLUME} No.${article.ISSUE}</span>
+                                <span style="font-size: 13px"><c:if test="${not empty article.VOLUME}">Vol.${article.VOLUME} </c:if><c:if test="${not empty article.ISSUE}">No.${article.ISSUE}</c:if></span>
                             </td>
                             <td class='al_center' style="padding-left: 0px; padding-right: 0px">
                                 <span style="font-size: 13px">${article.STR_PAGE}-${article.END_PAGE}</span>

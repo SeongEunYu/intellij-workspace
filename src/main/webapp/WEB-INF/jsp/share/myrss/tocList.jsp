@@ -115,7 +115,7 @@
                                     <tr>
                                         <td class='al_left'><a href="${pageContext.request.contextPath}/personal/toc/article.do?msgId=${mail.MSG_ID}&page=${page}&order=${order}&sort=${sort}">${mail.JOURNALNAME}</a></td>
                                         <td class='al_center' style="padding-left: 0px; padding-right: 0px"><span style="font-size: 13px">${mail.ISSN}</span></td>
-                                        <td class='al_center' style="padding-left: 0px; padding-right: 0px"><span style="font-size: 13px">VOL.${mail.VOLUME} NO.${mail.ISSUE}</span></td>
+                                        <td class='al_center' style="padding-left: 0px; padding-right: 0px"><span style="font-size: 13px"><c:if test="${not empty mail.VOLUME}">Vol.${mail.VOLUME} </c:if><c:if test="${not empty mail.ISSUE}">No.${mail.ISSUE}</c:if></span></td>
                                         <td class='al_center' style="padding-left: 0px; padding-right: 0px"><span style="font-size: 13px"><fmt:formatDate value="${mail.SENDDATE}" pattern="yyyy-MM-dd"/></span></td>
                                     </tr>
                                 </c:forEach>

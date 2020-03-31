@@ -149,27 +149,21 @@
                                         <td class='al_center' style="padding-left: 0px; padding-right: 0px">
                                                 <c:choose>
                                                     <c:when test="${favorite.svcgrp == 'VUSER'}">
-                                                        <%--<span class="l_researcher_t" style="font-size: 13px">연구자</span>--%>
-                                                        <span class="" style="font-size: 13px"><img src="<c:url value="/share/img/background_rss/modal_user02_icon.png"/>" style="width: 20%"></span>
+                                                        <span class="favoriteList l_researcher_t" style="font-size: 13px"></span>
                                                     </c:when>
                                                     <c:when test="${favorite.svcgrp == 'VART'}">
-                                                        <%--<span class="l_article_t" style="font-size: 13px">논문</span>--%>
                                                         <span class="favoriteList l_article_t" style="font-size: 13px"></span>
                                                     </c:when>
                                                     <c:when test="${favorite.svcgrp == 'VPROJ'}">
-                                                        <%--<span class="l_project_t" style="font-size: 13px">연구과제</span>--%>
                                                         <span class="favoriteList l_project_t" style="font-size: 13px"></span>
                                                     </c:when>
                                                     <c:when test="${favorite.svcgrp == 'VPAT'}">
-                                                        <%--<span class="l_patent_t" style="font-size: 13px">특허</span>--%>
                                                         <span class="favoriteList l_patent_t" style="font-size: 13px"></span>
                                                     </c:when>
                                                     <c:when test="${favorite.svcgrp == 'VCONF'}">
-                                                        <%--<span class="l_conference_t" style="font-size: 13px">학술활동</span>--%>
                                                         <span class="favoriteList l_conference_t" style="font-size: 13px"></span>
                                                     </c:when>
                                                     <c:when test="${favorite.svcgrp == 'VJOUR'}">
-                                                        <%--<span class="l_journal_t" style="font-size: 13px">저널</span>--%>
                                                         <span class="favoriteList l_journal_t" style="font-size: 13px"></span>
                                                     </c:when>
                                                 </c:choose>
