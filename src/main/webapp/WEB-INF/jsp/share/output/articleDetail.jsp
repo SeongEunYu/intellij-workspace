@@ -180,7 +180,7 @@
 		<div class="view_bt_area">
 			<div class="view_downbt">
 				<ul>
-					<li><a href="<c:url value=""></c:url>${pageContext.request.contextPath}/assets/ris/${resultMap.articleVo.articleId}" class="ris_download"><em>RIS Download</em></a></li>
+					<li><a href="${pageContext.request.contextPath}/assets/ris/${resultMap.articleVo.articleId}.do" class="ris_download"><em>RIS Download</em></a></li>
 				</ul>
 			</div>
 		</div>

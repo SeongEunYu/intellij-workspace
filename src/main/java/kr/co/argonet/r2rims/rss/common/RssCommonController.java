@@ -6,6 +6,7 @@ import org.apache.solr.client.solrj.SolrServerException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.io.InputStreamResource;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -55,9 +56,11 @@ public class RssCommonController {
 
         InputStream resource = null;
         File mfile = null;
+        String fileName = "";
         if(!articleMap.isEmpty()){
             log.info("file create");
             mfile = new File("C:/data/gotit/files/article_ris_" + stringDate + ".ris");
+            fileName = "article_ris_" + stringDate + ".ris";
             FileWriter writer = null;
             try{
                 mfile.createNewFile();
@@ -91,10 +94,15 @@ public class RssCommonController {
             resource = new FileInputStream(mfile);
         }
 
-		ResponseEntity.BodyBuilder r = ResponseEntity.ok();
-		if(mfile.length() > 0)
-			r.contentLength(mfile.length());
-		r.contentType(MediaType.parseMediaType("application/octet-stream"));
-		return r.body(new InputStreamResource(resource));
+//		ResponseEntity.BodyBuilder r = ResponseEntity.ok();
+//		if(mfile.length() > 0)
+//			r.contentLength(mfile.length());
+//		r.contentType(MediaType.parseMediaType("application/octet-stream"));
+//		return r.body(new InputStreamResource(resource));
+        return ResponseEntity.ok()
+                .header(HttpHeaders.CONTENT_DISPOSITION,
+                        "attachment;filename=\"" + new String(fileName.getBytes("EUC-KR"), "ISO-8859-1") + "\"")
+                .contentType(MediaType.parseMediaType("application/octet-stream"))
+                .body(new InputStreamResource(resource));
     }
 }
