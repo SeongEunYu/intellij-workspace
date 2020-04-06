@@ -34,9 +34,9 @@
     <script type="text/javascript" src="<c:url value="/js/jquery/jquery.modal.js"/>"></script>
 	<script type="text/javascript" src="<c:url value="/js/main_nav.js"/>"></script>
 
-	<script type="text/javascript" src="<c:url value="/js/chart/fusioncharts.js"/>"></script>
-	<script type="text/javascript" src="<c:url value="/js/chart/fusioncharts-jquery-plugin.min.js"/>"></script>
-	<script type="text/javascript" src="<c:url value="/js/chart/opts/fusioncharts.opts.js"/>"></script>
+	<%--<script type="text/javascript" src="<c:url value="/js/chart/fusioncharts.js"/>"></script>--%>
+	<%--<script type="text/javascript" src="<c:url value="/js/chart/fusioncharts-jquery-plugin.min.js"/>"></script>--%>
+	<%--<script type="text/javascript" src="<c:url value="/js/chart/opts/fusioncharts.opts.js"/>"></script>--%>
 
 	<link rel="stylesheet" href="<c:url value="/css/chartJS/Chart.min.css" />">
 	<script type="text/javascript" src="<c:url value="/js/chartJS/Chart.bundle.min.js" />"></script>
@@ -386,7 +386,7 @@
 			</div>
 			<div class="s_h_right_box">
 				<a href="#modal_layer12" class="top_icon_btn setting_btn modalSettingLink">설정</a>
-				<%--<a href="${pageContext.request.contextPath}/share/myRss/myDocument.do" class="top_icon_btn myfolder_btn">내보관함</a>--%>
+				<%--<a href="#" class="top_icon_btn setting_btn">설정</a>--%>
 				<div class="service_bt_wrap">
 					<a href="#" class="top_icon_btn service_btn">서비스 이동</a>
 					<div class="service_link_box">
@@ -749,7 +749,7 @@
 						</c:forEach>
 					</div>
 					<form id="form-setting1" action="${pageContext.request.contextPath}/widget/submit.do" method="post">
-						<div class="list_top_right_box col_row" style="width:60%;">
+						<div class="list_top_right_box col_row" style="width:60%; margin: 15px 5px 0 0;">
 							<c:forEach var="i" begin="0" end="5">
 								<div class="col_md_6_rss">
 									<div class="drag_div" id="div_drag${i+1}" ondrop="drop(event, 'div_drag${i+1}')" ondragover="allowDrop(event)">
