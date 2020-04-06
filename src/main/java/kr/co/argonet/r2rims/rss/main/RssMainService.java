@@ -8,8 +8,11 @@ import kr.co.argonet.r2rims.rss.mapper.MyAnalysisMapper;
 import kr.co.argonet.r2rims.rss.mapper.RssMainMapper;
 import kr.co.argonet.r2rims.rss.vo.RssBbsVo;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -85,5 +88,33 @@ public class RssMainService {
 
     public List<ArticleVo> findArticleListByUserId(RimsSearchVo searchVo){
         return myAnalysisMapper.findArticleListBySearchVo(searchVo);
+    }
+
+    public List<Map<String, String>> findWidgetList(){
+        return rssMainMapper.findWidgetList();
+    }
+
+    @Transactional(value = "rssTransactionManager", propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+    public void editWidget(List<String> widgetList, String userId){
+
+        String isWidget = rssMainMapper.findWidgetByUser(userId, "widget");
+        if(!isWidget.isEmpty())
+            rssMainMapper.delWidgetByUser(userId, "widget");
+
+        String replaceWidget = "";
+        int count = 0;
+        for (String widget:widgetList) {
+            String value = widget.replace("drag", "");
+            if(count > 0)
+                replaceWidget += ",";
+            replaceWidget += value;
+            count++;
+        }
+
+        rssMainMapper.insertWidgetByUser(replaceWidget, userId, "widget");
+    }
+
+    public String findWidgetByUser(String userId){
+        return rssMainMapper.findWidgetByUser(userId, "widget");
     }
 }

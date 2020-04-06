@@ -59,8 +59,7 @@
 					{
 						label: "논문수",
 						data: statics.count,
-						backgroundColor: 'rgba(018, 026, 068, 0.9)',
-						borderColor: 'rgba(153, 153, 153, 1)',
+						backgroundColor: 'rgba(214, 118, 18, 0.9)',
 						fill: false
 					}
 				]
@@ -110,13 +109,15 @@
 			</div>
 
 			<div class="sr_list" id="div_tc" style="display: none;">
-				<jsp:include page="widget/analysis_tc.jsp"/>
+				<%--<jsp:include page="widget/analysis_tc.jsp"/>--%>
+				<c:import url="widget/analysis_tc.jsp"/>
 			</div>
 			<%--<div class="sr_list" id="div_impact" style="display: none;">--%>
 				<%--<jsp:include page="widget/analysis_impact.jsp"/>--%>
 			<%--</div>--%>
 			<div class="sr_list" id="div_hindex" style="display: none;">
-				<jsp:include page="widget/analysis_hindex.jsp"/>
+				<%--<jsp:include page="widget/analysis_hindex.jsp"/>--%>
+				<c:import url="widget/analysis_hindex.jsp"/>
 			</div>
 		</div>
 	</div>

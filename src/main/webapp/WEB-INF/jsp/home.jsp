@@ -1,6 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"
 %>
 <%
+	String adminId = "";
+	adminId = request.getAttribute("adminId").toString();
+	if(adminId.equals("Y")){
+		response.sendRedirect("https://gotit.bwise.kr/auth/admin/main");
+	}
+
     pageContext.setAttribute("replaceChar", "\n");
 %>
 <!doctype html>
@@ -80,7 +86,31 @@
             getTopGotit();
 			getTocTop();
 			bindModalLink();
+			bindSettingModalLink();
+
+			// closeModal('12');
+			// fn_changeTab('1');
         });
+
+		function fn_changeTab(num){
+			if(num == '1'){
+				$("#receiver_tab").attr("class","on");
+				$("#msg_view_tab").attr("class","");
+				$("#modal12_user_div").css("display", "block");
+				$("#modal12_message_div").css("display", "none");
+			}
+		}
+
+		function closeModal(num){
+			$(".modalClose_btn").click(function(){
+				$("#modal_bg" + num).css("display", "none");
+				$("#modal_layer" + num).css("display", "none");
+			});
+			$("#modal_bg" + num).click(function(){
+				$("#modal_bg" + num).css("display", "none");
+				$("#modal_layer" + num).css("display", "none");
+			});
+		}
 
         $(window).resize(function(){
             effectBySize();
@@ -338,7 +368,6 @@
 
 	</script>
 
-
 	<c:set var="notStdn" value="${(sessionScope.auth.adminDvsCd ne 'R' or sessionScope.sess_user.gubun ne 'S') and (not sessMode or sessionScope.sess_user.gubun ne 'S') }"/>
 </head>
 	<body>
@@ -356,7 +385,7 @@
 				</form>
 			</div>
 			<div class="s_h_right_box">
-				<a href="#" class="top_icon_btn setting_btn">설정</a>
+				<a href="#modal_layer12" class="top_icon_btn setting_btn modalSettingLink">설정</a>
 				<%--<a href="${pageContext.request.contextPath}/share/myRss/myDocument.do" class="top_icon_btn myfolder_btn">내보관함</a>--%>
 				<div class="service_bt_wrap">
 					<a href="#" class="top_icon_btn service_btn">서비스 이동</a>
@@ -365,7 +394,7 @@
 							<li><a <c:if test="${RSS.admin eq 'Y' or RSS.user eq 'Y'}">href="javascript:location.href='${RSS.url}'"</c:if><c:if test="${RSS.admin eq 'N' and RSS.user eq 'N'}"> class="service_gray"</c:if>><em class="system_rss">RSS</em><span>RSS</span></a></li>
 							<li><a <c:if test="${RIMS.admin eq 'Y' or RIMS.user eq 'Y'}">href="javascript:location.href='${RIMS.url}'"</c:if><c:if test="${RIMS.admin eq 'N' and RIMS.user eq 'N'}"> class="service_gray"</c:if>><em>Rims</em><span>RIMS</span></a></li>
 							<li><a <c:if test="${DISCOVERY.admin eq 'Y' or DISCOVERY.user eq 'Y'}">href="javascript:location.href='${DISCOVERY.url}'"</c:if><c:if test="${DISCOVERY.admin eq 'N' and DISCOVERY.user eq 'N'}"> class="service_gray"</c:if>><em class="system_rd">Discovery</em><span>Discovery</span></a></li>
-							<li><a <c:if test="${S2JOURNAL.admin eq 'Y' or S2JOURNAL.user eq 'Y'}">href="javascript:location.href='${S2JOURNAL.url}'"</c:if><c:if test="${S2JOURNAL.admin eq 'N' and S2JOURNAL.user eq 'N'}"> class="service_gray"</c:if>><em class="system_s2">S2jJournal</em><span>S2jJournal</span></a></li>
+							<li><a <c:if test="${S2JOURNAL.admin eq 'Y' or S2JOURNAL.user eq 'Y'}">href="javascript:javascript:document.s2j.submit();"</c:if><c:if test="${S2JOURNAL.admin eq 'N' and S2JOURNAL.user eq 'N'}"> class="service_gray"</c:if>><em class="system_s2">S2jJournal</em><span>S2jJournal</span></a></li>
 							<li><a <c:if test="${GOTIT.admin eq 'Y' or GOTIT.user eq 'Y'}">href="javascript:location.href='${GOTIT.url}'"</c:if><c:if test="${GOTIT.admin eq 'N' and GOTIT.user eq 'N'}"> class="service_gray"</c:if>><em class="system_g">GotIt</em><span>GotIt</span></a></li>
 							<li><a <c:if test="${PRISM.admin eq 'Y' or PRISM.user eq 'Y'}">href="javascript:location.href='${PRISM.url}'"</c:if><c:if test="${PRISM.admin eq 'N' and PRISM.user eq 'N'}"> class="service_gray"</c:if>><em class="system_prism">PRISM</em><span>PRISM</span></a></li>
 							<li><a <c:if test="${SCHOLARWORKS.admin eq 'Y' or SCHOLARWORKS.user eq 'Y'}">href="javascript:location.href='${SCHOLARWORKS.url}'"</c:if><c:if test="${SCHOLARWORKS.admin eq 'N' and SCHOLARWORKS.user eq 'N'}"> class="service_gray"</c:if>><em class="system_sw">ScholarWorks</em><span>ScholarWorks</span></a></li>
@@ -528,6 +557,12 @@
 		</div><!-- left_col_box : e -->
 		<div class="u_contents">
 			<div class="col_row">
+				<%--<c:if test="${not empty myWidget}">--%>
+					<%--<c:forEach items="${myWidget}" var="mw" varStatus="stat">--%>
+						<%--<c:set var="includeValue" value="widget/${widgetList[mw-1].NAME}.jsp" />--%>
+						<%--<jsp:include page='${includeValue}' flush='true'/>--%>
+					<%--</c:forEach>--%>
+				<%--</c:if>--%>
 				<%@ include file="widget/myResearchOutput.jsp" %>
 				<div class="col_md_6">
 					<div class="dash_box box1">
@@ -567,14 +602,6 @@
 					</div>
 				</div>
                 <%@ include file="widget/myAnalysis.jsp" %>
-				<%--<div class="col_md_6">--%>
-					<%--<div class="dash_box box1">--%>
-						<%--<h3>연도별 논문 수</h3>--%>
-						<%--<div class="chart_img" style="margin: 40px 0px;">--%>
-							<%--<canvas id="chart_canvas" width="377" height="220" style="padding: 0 3px;"></canvas>--%>
-						<%--</div>--%>
-					<%--</div>--%>
-				<%--</div>--%>
 
 				<div class="col_md_6">
 					<div class="dash_box box1">
@@ -690,13 +717,61 @@
         </form>
     </div>
 
-	<div id="mailingDialog" class="popup_box modal2 modal_layer" style="font-size: 12px;padding:0; margin:0;width: 520px;height:350px; display: none;">
-		<div class="popup_header">
-			<h3>Resume</h3>
-			<a href="#" id="closeBtn2" class="close_bt closeBtn">닫기</a>
-		</div>
-		<div class="popup_inner2">
+	<div class="modal_layer modal_setting" id="modal_layer12" style="width: 800px;">
+		<div class="modal_top_title">
+			<h2>설정</h2>
+			<a href="javascript:void(0);" class="modal_close_btn modalClose_btn">닫기</a>
+		</div><!-- modal_top_title : e -->
+		<div class="modal_body_wrap">
+			<div class="modal_tab">
+				<ul>
+					<li><a href="javascript:fn_changeTab('1');" class="on" id="receiver_tab">위젯 설정</a></li>
+				</ul>
+			</div>
 
+			<div id="modal12_user_div">
+				<div class="list_top_box">
+					<div class="list_top_left_box col_row" style="width:40%; overflow-y: scroll; height: 555px;">
+						<c:forEach items="${widgetList}" var="widget" varStatus="stats">
+							<c:choose>
+								<c:when test="${fn:contains(myWidget, widget.WIDGET_ID)}">
+									<div class="col_md_12_rss widgetList list_drag${stats.index + 1}" style="display: none;">
+										<p class="arrow_box">${widget.CONTENT}</p>
+									</div>
+								</c:when>
+								<c:otherwise>
+									<div class="col_md_12_rss widgetList list_drag${stats.index + 1}">
+										<img class="widgetImg" id="drag${stats.index + 1}" src="<c:url value='/share/img/widget/${widget.NAME}.png' />" draggable="true" ondragstart="drag(event)" width="100%" height="100%">
+										<p class="arrow_box">${widget.CONTENT}</p>
+									</div>
+								</c:otherwise>
+							</c:choose>
+						</c:forEach>
+					</div>
+					<form id="form-setting1" action="${pageContext.request.contextPath}/widget/submit.do" method="post">
+						<div class="list_top_right_box col_row" style="width:60%;">
+							<c:forEach var="i" begin="0" end="5">
+								<div class="col_md_6_rss">
+									<div class="drag_div" id="div_drag${i+1}" ondrop="drop(event, 'div_drag${i+1}')" ondragover="allowDrop(event)">
+										<c:if test="${not empty myWidget[i]}">
+											<c:set var="widgetId" value="${myWidget[i]}"/>
+											<img class="widgetImg" id="drag${widgetId}" src="<c:url value='/share/img/widget/${widgetList[widgetId-1].NAME}.png' />" draggable="true" ondragstart="drag(event)" width="95%" height="95%" style="margin-left: 5px; padding-top: 5px;">
+											<img class="widget_minus_btn" src="<c:url value='/share/img/background_rss/minus_btn.png'/>" style="cursor:pointer;" onclick="minus_btn(event)" />
+											<input type="hidden" name="widget" value="drag${widgetId}" />
+										</c:if>
+									</div>
+								</div>
+							</c:forEach>
+						</div>
+					</form>
+				</div>
+			</div>
+
+			<div id="modal12_message_div"></div>
+		</div><!-- modal_body_wrap : e -->
+		<div class="popup_bottom_box"><!-- 팝업 버튼-->
+			<a href="javascript:widget_done('1');" class="line_bt"><span class="">적용</span></a>
+			<a href="#" class="gray_btn modalClose_btn">닫기</a>
 		</div>
 	</div>
 
@@ -723,6 +798,29 @@
 			<p class="fr_text">Copyright (C) 2019, ${sysConf['inst.name.eng.full']}, All Rights Reserved.</p>
 		</div>
 	</div>
+
+	<form name="s2j" id="s2j" action="https://s2journal.bwise.kr/rss.do" method=post>
+		<!-- 시스템 URL -->
+		<input type="hidden" name="rss_resources_url" value="https://rss.bwise.kr/share/" />
+		<input type="hidden" name="rss_rss_url" value="${RSS.url}" />
+		<input type="hidden" name="rss_rims_url" value="${RIMS.url}" />
+		<input type="hidden" name="rss_discovery_url" value="${DISCOVERY.url}" />
+		<input type="hidden" name="rss_gotit_url" value="${GOTIT.url}" />
+		<input type="hidden" name="rss_prism_url" value="${PRISM.url}" />
+		<input type="hidden" name="rss_scholarworks_url" value="${SCHOLARWORKS.url}" />
+		<input type="hidden" name="rss_board_url" value="${BOARD.url}" />
+		<!-- 사용 권한 -->
+		<input type="hidden" name="rss_rss_has" value="${RSS.user}" />
+		<input type="hidden" name="rss_rims_has" value="${RIMS.user}" />
+		<input type="hidden" name="rss_discovery_has" value="${DISCOVERY.user}" />
+		<input type="hidden" name="rss_gotit_has" value="${GOTIT.user}" />
+		<input type="hidden" name="rss_prism_has" value="${PRISM.user}" />
+		<input type="hidden" name="rss_scholarworks_has" value="${SCHOLARWORKS.user}" />
+		<input type="hidden" name="rss_board_has" value="${BOARD.user}" />
+
+		<input type="hidden" name="rss_user_name" value="${userInfo.korNm}" />
+		<input type="hidden" name="rss_logout_url" value="https://rss.bwise.kr/home/logout.do" />
+	</form>
 
 	<c:if test="${fn:length(popupList) > 0}">
 		<c:forEach items="${popupList}" var="popup" varStatus="stats">
@@ -778,92 +876,6 @@
 
 			$(".popup-box").draggable({'cancel':'.popup-body', containment:'parent', scroll:false});
 
-			// var topSearchbox = $('.u_s_int');
-			// topSearchbox.focus(function(){
-			// 	$(".user_search_wrap").addClass("u_s_shadow");
-			// });
-			// topSearchbox.blur(function(){
-			// 	$(".user_search_wrap").removeClass("u_s_shadow");
-			// });
-
-			<%--loadArticleChart();--%>
-
-			<%--function loadArticleChart(){--%>
-				<%--var statics = {--%>
-					<%--count : [],--%>
-					<%--label : []--%>
-				<%--};--%>
-
-				<%--<c:forEach items="${staticsArticle}" var="item">--%>
-					<%--statics.count.push(${item.count});--%>
-					<%--statics.label.push(${item.year});--%>
-				<%--</c:forEach>--%>
-				<%--updateStatics("chart_canvas", statics);--%>
-			<%--}--%>
-
-			<%--function updateStatics(id, statics) {--%>
-				<%--var div = $("#" + id);--%>
-				<%--var chart = div.data("chart");--%>
-				<%--if(chart) chart.distroy();--%>
-				<%--chart = drawStatics(div[0], statics);--%>
-				<%--div.data("chart", chart);--%>
-			<%--}--%>
-
-			<%--function drawStatics(target, statics) {--%>
-				<%--return new Chart(target, {--%>
-					<%--type: 'line',--%>
-					<%--data: {--%>
-						<%--labels: statics.label,--%>
-						<%--datasets: [--%>
-							<%--{--%>
-								<%--data: statics.count,--%>
-								<%--backgroundColor: 'rgb(000, 051, 102)',--%>
-								<%--borderColor: 'rgb(153, 153, 153)',--%>
-								<%--fill: false,--%>
-								<%--pointRadius: 4,--%>
-								<%--lineTension: 0.00000001--%>
-							<%--}--%>
-						<%--]--%>
-					<%--},--%>
-					<%--options: {--%>
-						<%--responsive: true,--%>
-						<%--title: {--%>
-							<%--display: false--%>
-						<%--},--%>
-						<%--tooltips: {--%>
-							<%--mode: 'index',--%>
-							<%--intersect: false,--%>
-						<%--},--%>
-						<%--hover: {--%>
-							<%--mode: 'nearest',--%>
-							<%--intersect: true--%>
-						<%--},--%>
-						<%--legend: {--%>
-							<%--display: false,--%>
-							<%--position: 'right'--%>
-						<%--},--%>
-						<%--scales: {--%>
-							<%--xAxes: [{--%>
-								<%--display: true,--%>
-								<%--scaleLabel: {--%>
-									<%--display: true,--%>
-									<%--labelString: 'Year'--%>
-								<%--}--%>
-							<%--}],--%>
-							<%--yAxes: [{--%>
-								<%--display: true,--%>
-								<%--ticks: {--%>
-									<%--beginAtZero: true--%>
-								<%--},--%>
-								<%--scaleLabel: {--%>
-									<%--display: true,--%>
-									<%--labelString: 'count'--%>
-								<%--}--%>
-							<%--}]--%>
-						<%--}--%>
-					<%--}--%>
-				<%--});--%>
-			<%--}--%>
 		});
 
 		function getStrNo(str) {
@@ -901,6 +913,95 @@
 				cookieValue = cookieData.substring(start, end);
 			}
 			return unescape(cookieValue);
+		}
+
+
+		function allowDrop(ev) {
+			ev.preventDefault();
+		}
+
+		function drag(ev) {
+			ev.dataTransfer.setData("text", ev.target.id);
+			var data = ev.dataTransfer.getData("text");
+			var parentId = $("#" + data).parent().attr("id");
+			$("#" + parentId).addClass("move");
+		}
+
+		function drop(ev, currentId) {
+			ev.preventDefault();
+			var data = ev.dataTransfer.getData("text");
+			var imglog = $("#" + currentId).find(".widgetImg").attr("id");
+			if(typeof imglog == 'undefined' || imglog == null){
+				// $("#" + currentId + " .widget_minus_btn").remove();
+				$("#" + currentId).removeClass("move");
+				ev.target.appendChild(document.getElementById(data));
+
+				$("#" + data).css("margin-left", '5px');
+				$("#" + data).css("padding-top", '5px');
+				$("#" + data).css("height", '95%');
+				$("#" + data).css("width", '95%');
+
+				var minusBtn = "<img class='widget_minus_btn' src='" + "<c:url value='/share/img/background_rss/minus_btn.png' />" + "' style='cursor:pointer;' onclick='minus_btn(event)'>";
+				var inputTag = "<input type='hidden' name='widget' value='" + data + "' />";
+				$("#" + currentId).append(minusBtn);
+				$("#" + currentId).append(inputTag);
+				$(".list_" + data).hide();
+
+				$('.list_top_right_box').find('.col_md_6_rss').each(function(index, item){
+					if(typeof $(this).find('.widgetImg').attr('id') == 'undefined'){
+						// $(this).find(".widget_minus_btn").remove();
+						// $(this).find("input").remove();
+						$(this).find('.drag_div').children().remove();
+					}
+				});
+			} else {
+				if($("#" + data).parent().hasClass("drag_div")){
+					console.log("dual change");
+					// drop의 div 내용
+					var imgHTML = $("#" + currentId).find(".widgetImg");
+					var inputVal = $("#" + currentId).find("input[name='widget']").val();
+
+					// drag div 내용
+					var evImg = $(".move").find(".widgetImg");
+
+					$("#" + currentId).prepend(evImg);
+					$(".move").find(".widgetImg").remove();
+					$("#" + currentId).find("input[name='widget']").val(data);
+
+					$(".move").prepend(imgHTML);
+					$(".move").find("input[name='widget']").val(inputVal);
+
+					$("#" + currentId).removeClass("move");
+				}
+			}
+		}
+
+		function minus_btn(ev){
+			var id = $(ev.currentTarget).parent().attr("id");
+			var imgId = $('#' + id).find('img').first().attr('id');
+			var img = $('#' + id).find('img').first();
+			$('.list_' + imgId).prepend(img);
+			$('#' + imgId).css("width", "100%");
+			$('#' + imgId).css("height", "100%");
+			$("#" + imgId).css("margin-left", '0px');
+			$("#" + imgId).css("padding-top", '0px');
+			$('.list_' + imgId).show();
+
+			$('#' + id).children().remove();
+		}
+
+		function widget_done(num){
+			// var $form = $("#form-setting" + num);
+			// var data = new FormData($form[0]);
+			console.log($("#form-setting" + num).serialize());
+			$.ajax({
+				url: $("#form-setting" + num).attr('action'),
+				data: $("#form-setting" + num).serialize(),
+				method: "POST",
+			}).done(function(){
+				location.reload();
+			});
+			// $("#form-setting" + num).submit();
 		}
 	</script>
 

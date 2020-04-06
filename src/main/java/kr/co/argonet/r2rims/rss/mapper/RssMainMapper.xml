@@ -93,4 +93,38 @@ order by A.PBLC_YM
         limit 5
     </select>
 
+    <select id="findWidgetList" resultType="java.util.HashMap">
+        select WIDGET_ID, NAME, CONTENT
+        from RI_RSS_WIDGET
+        where <include refid="nvlifnull"/>(DEL_YN, 'N') != 'Y'
+        order by WIDGET_ID asc
+    </select>
+
+    <select id="findWidgetByUser" resultType="java.lang.String">
+        select VALUE
+        from RI_RSS_CONFIG
+        where USER_ID = #{userId}
+        and NAME = #{name}
+    </select>
+
+    <delete id="delWidgetByUser">
+        delete from RI_RSS_CONFIG
+        where USER_ID = #{userId}
+        and NAME = #{name}
+    </delete>
+
+    <insert id="insertWidgetByUser" keyColumn="CONFIG_ID" keyProperty="config_id" useGeneratedKeys="true">
+        <selectKey keyProperty="config_id" resultType="int" order="AFTER">
+            <if test="_databaseId == 'oracle' ">select SEQ_RI_RSS_CONFIG.CURRVAL from dual</if>
+            <if test="_databaseId == 'mysql' ">select LAST_INSERT_ID()</if>
+        </selectKey>
+        insert into RI_RSS_CONFIG (
+        <if test="_databaseId == 'oracle' ">CONFIG_ID,</if>
+        USER_ID, NAME, VALUE
+        )
+        values(
+        <if test="_databaseId == 'oracle' ">SEQ_RI_RSS_CONFIG.NEXTVAL,</if>
+        #{userId}, #{name}, #{widget}
+        )
+    </insert>
 </mapper>

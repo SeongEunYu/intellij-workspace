@@ -59,7 +59,7 @@ public class RssCommonController {
         String fileName = "";
         if(!articleMap.isEmpty()){
             log.info("file create");
-            mfile = new File("C:/data/gotit/files/article_ris_" + stringDate + ".ris");
+            mfile = new File("/data/gotit/files/article_ris_" + stringDate + ".ris");
             fileName = "article_ris_" + stringDate + ".ris";
             FileWriter writer = null;
             try{

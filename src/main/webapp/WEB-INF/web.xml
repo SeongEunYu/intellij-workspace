@@ -11,10 +11,10 @@
 	</context-param>
 
 	<!-- fusionchart config file location -->
-	<context-param>
-		<param-name>fusionchartConfigLocation</param-name>
-		<param-value>file:/data/software/config/r2rims_rss/fusioncharts_export.properties</param-value>
-	</context-param>
+	<!--<context-param>-->
+		<!--<param-name>fusionchartConfigLocation</param-name>-->
+		<!--<param-value>file:/data/software/config/r2rims_rss/fusioncharts_export.properties</param-value>-->
+	<!--</context-param>-->
 
 	<!-- logbackconfig listener -->
 	<context-param>

@@ -48,29 +48,12 @@ public class RssLoginService {
         log.debug("RssLoginService : loginById");
         Map<String, Object> param = new HashMap<String, Object>();
         param.put("id", id);
-        UserVo retVo = userMapper.findByEncptUserId(id);
-        id = retVo.getUserId();
-        if(retVo == null){
-            log.debug("RssLoginService : retVo null");
-            MemberVo member = memberMapper.findByEncryptId(id);
-            id = member.getUserId();
-            if(member != null && member.getUserId() != null)
-            {
-                retVo = userMapper.findByUserId(id);
-                if(retVo == null) retVo = new UserVo();
-                retVo.setUserId(member.getUserId());
-                retVo.setKorNm(member.getKorNm());
-                retVo.setEngNm(member.getEngNm());
-                retVo.setDeptKor(member.getPsitnDeptNm());
-                retVo.setOfcTelno(member.getTelno());
-                retVo.setEmalAddr(member.getEmailAdres());
-                retVo.setMgtAt(member.getMgtAt());
-                retVo.setLanguageFlag(defaultLanguage);
-            }
-        }
-        else
-        {
+        UserVo retVo = null;
+        retVo = userMapper.findByEncptUserId(id);
+
+        if(retVo != null){
             log.debug("RssLoginService : retVo not null");
+            id = retVo.getUserId();
             retVo.setAdminDvsCd(R2Constant.RESEARCHER_DVS_CD);
         }
         return retVo;
@@ -84,26 +67,7 @@ public class RssLoginService {
         param.put("id", id);
         UserVo retVo = userMapper.findByUserId(id);
         id = retVo.getUserId();
-        if(retVo == null){
-            log.debug("RssLoginService : retVo null");
-            MemberVo member = memberMapper.findByUserId(id);
-            id = member.getUserId();
-            if(member != null && member.getUserId() != null)
-            {
-                retVo = userMapper.findByUserId(id);
-                if(retVo == null) retVo = new UserVo();
-                retVo.setUserId(member.getUserId());
-                retVo.setKorNm(member.getKorNm());
-                retVo.setEngNm(member.getEngNm());
-                retVo.setDeptKor(member.getPsitnDeptNm());
-                retVo.setOfcTelno(member.getTelno());
-                retVo.setEmalAddr(member.getEmailAdres());
-                retVo.setMgtAt(member.getMgtAt());
-                retVo.setLanguageFlag(defaultLanguage);
-            }
-        }
-        else
-        {
+        if(retVo != null){
             log.debug("RssLoginService : retVo not null");
             retVo.setAdminDvsCd(R2Constant.RESEARCHER_DVS_CD);
         }

@@ -4,6 +4,7 @@ import kr.co.argonet.r2rims.core.vo.*;
 import kr.co.argonet.r2rims.rss.vo.RssBbsVo;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Map;
@@ -32,5 +33,13 @@ public interface RssMainMapper {
     UserVo findSimilarUserList(@Param("userId") String userId);
 
     List<RssBbsVo> findLatestBBS();
+
+    List<Map<String, String>> findWidgetList();
+
+    String findWidgetByUser(@Param("userId") String userId, @Param("name") String name);
+
+    void delWidgetByUser(@Param("userId") String userId, @Param("name") String name);
+
+    void insertWidgetByUser(@Param("widget") String widget, @Param("userId") String userId, @Param("name") String name);
 
 }

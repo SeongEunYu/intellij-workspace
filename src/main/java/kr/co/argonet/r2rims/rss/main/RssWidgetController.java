@@ -23,10 +23,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
@@ -169,13 +166,11 @@ public class RssWidgetController {
 	}
 
 	@RequestMapping("/widget/hindexAjax")
-	public @ResponseBody Map<String,Object> hindexAjax(
-			@ModelAttribute RimsSearchVo searchVo,
-			HttpServletRequest req
-	){
+	public @ResponseBody Map<String,Object> hindexAjax(HttpServletRequest req){
+		RimsSearchVo searchVo = new RimsSearchVo();
 		UserVo sessionUser = (UserVo)req.getSession().getAttribute(R2Constant.SESSION_USER);
-		searchVo.setSrchUId(sessionUser.getuId());
-		searchVo.setUserId(sessionUser.getuId());
+		searchVo.setSrchUId(sessionUser.getUserId());
+		searchVo.setUserId(sessionUser.getUserId());
 		searchVo.setTopNm("researcher");
 		searchVo.setGubun("");
 
@@ -208,4 +203,21 @@ public class RssWidgetController {
 
 		return resultMap;
 	}
+
+	@RequestMapping(value = "/widget/submit", method = RequestMethod.POST)
+	@ResponseBody
+	public Object widgetSubmit(@RequestParam("widget") List<String> widgetList, HttpServletRequest req){
+
+		UserVo loginUser = (UserVo) req.getSession().getAttribute(R2Constant.LOGIN_USER);
+		String userId = loginUser.getUserId();
+
+		if(userId != null){
+			if(widgetList != null){
+				rssMainService.editWidget(widgetList, userId);
+			}
+		}
+
+		return rssMainService.findKeywordByUser(userId);
+	}
+
 }

@@ -126,8 +126,8 @@ input[type="checkbox"],input[type="radio"] { vertical-align: middle; }
 .system_header_inner .gotit_h1 a {line-height: 32px;  display: inline-block; font-size: 18px; padding: 0 0 0 34px;  background: url(../img/background_rss/circle_gotit.png) no-repeat 0 0px;  }
 .system_header_inner .admin_tag {  display: inline-block;font-size: 12px;  background: #ff761b; line-height: 22px; color: #fff; font-weight:bold;  padding: 0 15px; border-radius: 11px;  margin-left:10px; vertical-align: middle; }
 
-.system_header_inner .rss_logo { margin-top:9px }
-.system_header_inner .rss_logo a {line-height: 32px;  display: inline-block; font-size: 18px; padding: 0 0 0 34px;  background: url(../img/background_rss/rss_logo.png) no-repeat 0 0px;  width:180px; height: 23px; text-indent: -9999px; }
+.system_header_inner .rss_logo { margin-top:5px }
+.system_header_inner .rss_logo a {line-height: 32px;  display: inline-block; font-size: 18px; padding: 0 0 0 34px;  background: url(../img/background_rss/rsshome_logo.png) no-repeat 0 0px;  width:146px; height: 32px; text-indent: -9999px; padding-top: 8px;}
 
 
 
@@ -234,9 +234,9 @@ input[type="checkbox"],input[type="radio"] { vertical-align: middle; }
 .list_top_left_box ul li  { float: left;  margin-right: 3px; }
 
 
-.line_bt { display: inline-block; border:1px solid #c5c5c5; line-height: 28px;  color: #101010; padding: 0 10px;  text-align: center;  min-width: 70px; background: #fff;}
+.line_bt { display: inline-block; border:1px solid #c5c5c5; line-height: 28px;  color: #101010; padding: 0 10px;  text-align: center;  min-width: 70px; background: #394879;}
 .line_bt:hover {  border:1px solid #0f60af; /* box-shadow: 0 4px 8px #ccc */}
-.line_bt span{ display: inline-block; padding: 0 22px 0 0;  line-height: 28px; color: #101010;  }
+.line_bt span{ display: inline-block;  line-height: 28px; color: #ffffff;  }
 .btn_plus_icon { background: url(../img/background_rss/btn_plus_icon.png) no-repeat right 50%; }
 .btn_down_icon { background: url(../img/background_rss/bnt_down_icon.png) no-repeat right 50%; }
 .btn_mail_icon { background: url(../img/background_rss/btn_mail_icon.png) no-repeat right 50%; }
@@ -250,6 +250,7 @@ input[type="checkbox"],input[type="radio"] { vertical-align: middle; }
 
 
 .list_top_right_box {  float: right; }
+.list_top_left_box {  float: left; }
 
 .gray_btn { display: inline-block; font-size: 14px; background:#d3d3d3; padding: 0 15px; min-width: 70px; text-align: center; line-height: 28px; color: #222;  }
 .gray_btn:hover {   background:#b8b8b8;   }
@@ -330,7 +331,7 @@ th .des_type { background: url(../img/background_rss/tbl_des_arrow.png) no-repea
 .set_modal_title h2 {  font-size: 20px;  float: left; line-height: 30px; padding: 0 0 0 24px;background: url(../img/background_rss/gear_icon01.png) no-repeat 0 50%;  }
 .set_modal_title span  {  float: left;  display: inline-block; background: url(../img/background_rss/modal_title_line.png) no-repeat left 50%;     padding: 0 0 0 8px;margin-left: 10px;margin-top: 7px; }
 
-
+.modal_setting { left:50% !important; top:50px !important; }
 
 
 
@@ -951,3 +952,79 @@ td .line_bt {  line-height: 24px;}
 
 
 .favoriteList{ position:relative; top: 2px; width: 22px; height: 22px; text-indent: -9999px; overflow: hidden; border-radius: 2px; display: inline-block; }
+
+.drag_div {
+    padding: 2px;
+    height: 175px;
+    border: 1.5px dashed #aaaaaa;
+    margin-bottom: 10px;
+    background: url(../img/background_rss/plus_btn.png) no-repeat 50% 50%;
+}
+
+.col_md_6_rss {
+    float: left;
+    padding: 0 5px;
+    width: 50%;
+}
+
+.col_md_12_rss {
+    float: left;
+    padding: 10px 10px;
+    width: 90%;
+    margin-left: 12px;
+}
+
+.widget_plus_btn {
+    filter: opacity(0.5) drop-shadow(0 0 0 gray);
+    position: relative;
+    display: inline-block;
+    top: 60px;
+    left: 80px;
+}
+
+.widget_minus_btn {
+    position: relative;
+    width: 10%;
+    top: -174px;
+    right: -10px;
+    display: inline-block;
+    float: right;
+}
+
+
+.arrow_box {
+    display: none;
+    position: relative;
+    width: 170px;
+    padding: 8px;
+    top: -10px;
+    left: 35px;
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+    border-radius: 8px;
+    background: #333;
+    color: #fff;
+    font-size: 14px;
+    text-align: center;
+}
+
+.arrow_box:after {
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    margin-left: -10px;
+    border: solid transparent;
+    border-color: rgba(51, 51, 51, 0);
+    border-bottom-color: #333;
+    border-width: 10px;
+    pointer-events: none;
+    content: " ";
+}
+
+.widgetList img:hover + p.arrow_box {
+    display: block;
+}
+
+.widgetList img { border:1px solid gray; }
